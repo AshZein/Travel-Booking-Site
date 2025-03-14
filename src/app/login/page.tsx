@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Page = () => {
+const Page = () =>{
     return (
         <div className="page-container">
             <header className="header flex justify-between items-center bg-blue-800 text-white p-4">

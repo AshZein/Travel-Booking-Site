@@ -1,4 +1,18 @@
+"use client";
+import React, { useEffect } from 'react';
+import {useRouter} from "next/navigation";
+
 const Page = () => {
+    const router = useRouter();
+
+    const handleLoginClick = () => {
+        router.push('/login');
+    };
+
+    const handleRegisterClick = () => {
+        router.push('/register');
+    };
+
     return (
         <div className="page-container">
             <header className="header flex justify-between items-center bg-blue-800 text-white p-4">
@@ -8,11 +22,16 @@ const Page = () => {
                 </div>
                 
                 <div className="auth-buttons flex gap-4">
-                    <button className="register-button bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Register
-                    </button>
-                    <button className="login-button bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button 
+                        className="login-button bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={handleLoginClick}
+                    >
                         Login
+                    </button>
+                    <button className="register-button bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={handleRegisterClick}
+                    >
+                        Register
                     </button>
                 </div>
             </header>
