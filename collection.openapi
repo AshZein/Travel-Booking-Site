@@ -1,0 +1,2668 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CSC309_PP1",
+    "contact": {},
+    "version": "5.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:{PORTNUMBER}/api",
+      "variables": {
+        "PORTNUMBER": {
+          "default": "DefaultParameterValue"
+        }
+      }
+    },
+    {
+      "url": "http://localhost:3000/api",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/user/register": {
+      "post": {
+        "tags": [
+          "Setup a Hotel"
+        ],
+        "summary": "Step 1 Register User",
+        "operationId": "Step1RegisterUser",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Step1RegisterUserRequest"
+                  },
+                  {
+                    "example": {
+                      "firstName": "John",
+                      "lastName": "Doe",
+                      "email": "john@test.com",
+                      "password": "john123",
+                      "phoneNumber": "123-233-4455"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "firstName": "John",
+                "lastName": "Doe",
+                "email": "john@test.com",
+                "password": "john123",
+                "phoneNumber": "123-233-4455"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "Setup a Hotel"
+        ],
+        "summary": "Step 2 Login",
+        "operationId": "Step2Login",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Step2LoginRequest"
+                  },
+                  {
+                    "example": {
+                      "email": "john@test.com",
+                      "password": "john123"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "email": "john@test.com",
+                "password": "john123"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/hotel": {
+      "post": {
+        "tags": [
+          "Setup a Hotel"
+        ],
+        "summary": "Step 3 Create Hotel",
+        "operationId": "Step3CreateHotel",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Step3CreateHotelRequest"
+                  },
+                  {
+                    "example": {
+                      "name": "Sunshine Resort",
+                      "address": "123 Beachside Avenue, Toronto, ON, Canada, M5B 4R6",
+                      "city": "Toronto",
+                      "country": "Canada",
+                      "latitude": 37.1234,
+                      "longitude": -122.5678,
+                      "starRating": 5
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "name": "Sunshine Resort",
+                "address": "123 Beachside Avenue, Toronto, ON, Canada, M5B 4R6",
+                "city": "Toronto",
+                "country": "Canada",
+                "latitude": 37.1234,
+                "longitude": -122.5678,
+                "starRating": 5
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Hotel"
+        ],
+        "summary": "Get Detailed Hotel Info",
+        "operationId": "GetDetailedHotelInfo",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "{{hotelName}}"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "{{hotelAddress}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/hotel/room": {
+      "post": {
+        "tags": [
+          "Setup a Hotel"
+        ],
+        "summary": "Step 4 Create Hotel Room",
+        "operationId": "Step4CreateHotelRoom",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Step4CreateHotelRoomRequest"
+                  },
+                  {
+                    "example": {
+                      "hotelId": "undefined",
+                      "roomType": "single",
+                      "price": 100,
+                      "numberAvailable": 10,
+                      "amenities": ["tv", "bar"]
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "hotelId": "undefined",
+                "roomType": "single",
+                "price": 100,
+                "numberAvailable": 10,
+                "amenities": ["tv", "bar"]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Hotel room"
+        ],
+        "summary": "View availability of room",
+        "operationId": "Viewavailabilityofroom",
+        "parameters": [
+          {
+            "name": "hotelId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 7
+            }
+          },
+          {
+            "name": "checkIn",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "2025-03-10T14:00:00Z"
+            }
+          },
+          {
+            "name": "checkOut",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "2025-03-15T11:00:00Z"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Hotel room"
+        ],
+        "summary": "Change availability of room",
+        "operationId": "Changeavailabilityofroom",
+        "parameters": [
+          {
+            "name": "hotelId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 7
+            }
+          },
+          {
+            "name": "roomId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 5
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ChangeavailabilityofroomRequest"
+                  },
+                  {
+                    "example": {
+                      "newRoomCount": 1
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "newRoomCount": 1
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/hotel/amenities": {
+      "post": {
+        "tags": [
+          "Setup a Hotel"
+        ],
+        "summary": "Step 5 Add Amenity",
+        "operationId": "Step5AddAmenity",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Step5AddAmenityRequest"
+                  },
+                  {
+                    "example": {
+                      "name": "",
+                      "address": "",
+                      "amenities": [
+                        "pool",
+                        "sauna",
+                        "gym"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "name": "",
+                "address": "",
+                "amenities": [
+                  "pool",
+                  "sauna",
+                  "gym"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Hotel Amenity"
+        ],
+        "summary": "Get Amenities",
+        "operationId": "GetAmenities",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "{{hotelName}}"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "{{hotelAddress}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Hotel Amenity"
+        ],
+        "summary": "Remove Amenities",
+        "operationId": "RemoveAmenities",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/hotel/images": {
+      "post": {
+        "tags": [
+          "Setup a Hotel"
+        ],
+        "summary": "Add hotel Image",
+        "operationId": "AddhotelImage",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "encoding": {},
+              "schema": {
+                "required": [
+                  "type",
+                  "hotelId",
+                  "image"
+                ],
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "hotel_itself"
+                  },
+                  "hotelId": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/hotel/room/images": {
+      "post": {
+        "tags": [
+          "Setup a Hotel"
+        ],
+        "summary": "Add Hotel Room Image",
+        "operationId": "AddHotelRoomImage",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "encoding": {},
+              "schema": {
+                "required": [
+                  "type",
+                  "hotelId",
+                  "image",
+                  "roomId"
+                ],
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "hotel_room"
+                  },
+                  "hotelId": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "roomId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/user/images": {
+      "post": {
+        "tags": [
+          "Setup a Hotel"
+        ],
+        "summary": "Add User Profile Image",
+        "operationId": "AddUserProfileImage",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "encoding": {},
+              "schema": {
+                "required": [
+                  "type",
+                  "hotelId",
+                  "files"
+                ],
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "hotel_itself"
+                  },
+                  "hotelId": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/itinerary": {
+      "post": {
+        "tags": [
+          "Register Non Hotel User"
+        ],
+        "summary": "Create Itinerary",
+        "operationId": "CreateItinerary",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateItineraryRequest"
+                  },
+                  {
+                    "example": {
+                      "email": ""
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "email": ""
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Register Non Hotel User"
+        ],
+        "summary": "Add Forward Flight",
+        "operationId": "AddForwardFlight",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/AddForwardFlightRequest"
+                  },
+                  {
+                    "example": {
+                      "itineraryRef": "{{userItineraryRef}}",
+                      "data": {
+                        "forwardFlightBookingRef": ""
+                      }
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "itineraryRef": "{{userItineraryRef}}",
+                "data": {
+                  "forwardFlightBookingRef": ""
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/flight/booking": {
+      "post": {
+        "tags": [
+          "Register Non Hotel User"
+        ],
+        "summary": "Create Forward Flight Booking Copy",
+        "operationId": "CreateForwardFlightBookingCopy",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateForwardFlightBookingCopyRequest"
+                  },
+                  {
+                    "example": {
+                      "firstName": "",
+                      "lastName": "",
+                      "email": "",
+                      "passportNumber": "123239938",
+                      "flightIds": [
+                        "f6ff7f29-5d1e-465a-b948-912c26e25da5"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "firstName": "",
+                "lastName": "",
+                "email": "",
+                "passportNumber": "123239938",
+                "flightIds": [
+                  "f6ff7f29-5d1e-465a-b948-912c26e25da5"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "",
+            "headers": {},
+            "content": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Get Flight Booking",
+        "operationId": "GetFlightBooking",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "john@test.com"
+            }
+          },
+          {
+            "name": "bookingReference",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "{{flightBookRef}}"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "headers": {},
+            "content": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/hotel/booking": {
+      "post": {
+        "tags": [
+          "Register Non Hotel User"
+        ],
+        "summary": "Create Hotel Booking",
+        "operationId": "CreateHotelBooking",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateHotelBookingRequest"
+                  },
+                  {
+                    "example": {
+                      "email": "",
+                      "hotelId": "undefined",
+                      "roomId": "undefined",
+                      "price": "undefined",
+                      "checkIn": "2025-04-01",
+                      "checkOut": "2025-04-03"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "email": "",
+                "hotelId": "undefined",
+                "roomId": "undefined",
+                "price": "undefined",
+                "checkIn": "2025-04-01",
+                "checkOut": "2025-04-03"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Cancel booking",
+        "operationId": "Cancelbooking",
+        "parameters": [
+          {
+            "name": "referenceId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "HOTEL-00012"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Booking"
+        ],
+        "summary": "Get filtered bookings for manager",
+        "operationId": "Getfilteredbookingsformanager",
+        "parameters": [
+          {
+            "name": "hotelId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 7
+            }
+          },
+          {
+            "name": "roomType",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Deluxe"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "2025-03-10"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/itinerary/list": {
+      "get": {
+        "tags": [
+          "Register Non Hotel User"
+        ],
+        "summary": "Get List of Itineraries",
+        "operationId": "GetListofItineraries",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/flight/list": {
+      "get": {
+        "tags": [
+          "Flights"
+        ],
+        "summary": "Flights List",
+        "operationId": "FlightsList",
+        "parameters": [
+          {
+            "name": "origin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "toronto"
+            }
+          },
+          {
+            "name": "destination",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Zurich"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "2025-04-01"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "2025-04-03"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "headers": {},
+            "content": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/hotel/room/info": {
+      "get": {
+        "tags": [
+          "info"
+        ],
+        "summary": "Get detailed room info",
+        "operationId": "Getdetailedroominfo",
+        "parameters": [
+          {
+            "name": "hotelId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 5
+            }
+          },
+          {
+            "name": "checkIn",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "2025-03-08"
+            }
+          },
+          {
+            "name": "checkOut",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "2025-03-12"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/hotel/suggestions": {
+      "get": {
+        "tags": [
+          "Hotel Suggestions"
+        ],
+        "summary": "Hotel Suggestion",
+        "operationId": "HotelSuggestion",
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Toronto"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Canada"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/hotel/list": {
+      "get": {
+        "tags": [
+          "Hotel"
+        ],
+        "summary": "Hotel List",
+        "operationId": "HotelList",
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Toronto"
+            }
+          },
+          {
+            "name": "checkin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "2024-11-15"
+            }
+          },
+          {
+            "name": "checkout",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "2024-11-17"
+            }
+          },
+          {
+            "name": "minStarRating",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 1
+            }
+          },
+          {
+            "name": "maxStarRating",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 5
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startPrice",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 0
+            }
+          },
+          {
+            "name": "endPrice",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 1000000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/airport": {
+      "get": {
+        "tags": [
+          "Airport"
+        ],
+        "summary": "Airport Search",
+        "operationId": "AirportSearch",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "toronto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "http://localhost:3000/api",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/user/profile": {
+      "patch": {
+        "tags": [
+          "Update"
+        ],
+        "summary": "Update_All",
+        "operationId": "Update_All",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Update_All_Request"
+                  },
+                  {
+                    "example": {
+                      "firstName": "Johnny",
+                      "lastName": "Travolta",
+                      "newEmail": "john_new@test.com",
+                      "oldEmail": "john@test.com",
+                      "phoneNumber": "999-999-9643"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "firstName": "Johnny",
+                "lastName": "Travolta",
+                "newEmail": "john_new@test.com",
+                "oldEmail": "john@test.com",
+                "phoneNumber": "999-999-9643"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get User Profile",
+        "operationId": "GetUserProfile",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "{{email}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/itinerary/order": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Verify Order",
+        "operationId": "VerifyOrder",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string",
+                "example": "{\n    \"email\": \"john@test.com\", \n    \"itineraryRef\": {{itineraryRef}}, \n    \"creditCardNumber\": \"{{creditCardNumber}}\", \n    \"creditCardExpiry\": \"{{creditCardExpiry}}\", \n    \"creditCardCVC\": \"{{creditCardCVC}}\"\n}"
+              },
+              "example": "{\n    \"email\": \"john@test.com\", \n    \"itineraryRef\": {{itineraryRef}}, \n    \"creditCardNumber\": \"{{creditCardNumber}}\", \n    \"creditCardExpiry\": \"{{creditCardExpiry}}\", \n    \"creditCardCVC\": \"{{creditCardCVC}}\"\n}"
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/auth": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Reauthenticate Token",
+        "operationId": "ReauthenticateToken",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string",
+                "example": "{\n    \"refreshToken\": {{refreshToken}}\n}"
+              },
+              "example": "{\n    \"refreshToken\": {{refreshToken}}\n}"
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "http://localhost:{PORTNUMBER}/api",
+            "variables": {
+              "PORTNUMBER": {
+                "default": "DefaultParameterValue"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Step1RegisterUserRequest": {
+        "title": "Step1RegisterUserRequest",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "john@test.com",
+          "password": "john123",
+          "phoneNumber": "123-233-4455"
+        }
+      },
+      "Step2LoginRequest": {
+        "title": "Step2LoginRequest",
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "john@test.com",
+          "password": "john123"
+        }
+      },
+      "Step3CreateHotelRequest": {
+        "title": "Step3CreateHotelRequest",
+        "required": [
+          "name",
+          "address",
+          "city",
+          "country",
+          "latitude",
+          "longitude",
+          "starRating"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "starRating": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "example": {
+          "name": "Sunshine Resort",
+          "address": "123 Beachside Avenue, Toronto, ON, Canada, M5B 4R6",
+          "city": "Toronto",
+          "country": "Canada",
+          "latitude": 37.1234,
+          "longitude": -122.5678,
+          "starRating": 5
+        }
+      },
+      "Step4CreateHotelRoomRequest": {
+        "title": "Step4CreateHotelRoomRequest",
+        "required": [
+          "hotelId",
+          "roomType",
+          "price",
+          "numberAvailable"
+        ],
+        "type": "object",
+        "properties": {
+          "hotelId": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomType": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberAvailable": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Step5AddAmenityRequest": {
+        "title": "Step5AddAmenityRequest",
+        "required": [
+          "name",
+          "address",
+          "amenities"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "amenities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "name": "",
+          "address": "",
+          "amenities": [
+            "pool",
+            "sauna",
+            "gym"
+          ]
+        }
+      },
+      "CreateItineraryRequest": {
+        "title": "CreateItineraryRequest",
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": ""
+        }
+      },
+      "CreateForwardFlightBookingCopyRequest": {
+        "title": "CreateForwardFlightBookingCopyRequest",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "passportNumber",
+          "flightIds"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "passportNumber": {
+            "type": "string"
+          },
+          "flightIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "firstName": "",
+          "lastName": "",
+          "email": "",
+          "passportNumber": "123239938",
+          "flightIds": [
+            "f6ff7f29-5d1e-465a-b948-912c26e25da5"
+          ]
+        }
+      },
+      "CreateReturnFlightBookingCopyRequest": {
+        "title": "CreateReturnFlightBookingCopyRequest",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "passportNumber",
+          "flightIds"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "passportNumber": {
+            "type": "string"
+          },
+          "flightIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "firstName": "",
+          "lastName": "",
+          "email": "",
+          "passportNumber": "123239938",
+          "flightIds": [
+            "bc6c87de-d69b-43d1-a872-100849b21f78"
+          ]
+        }
+      },
+      "CreateHotelBookingRequest": {
+        "title": "CreateHotelBookingRequest",
+        "required": [
+          "email",
+          "hotelId",
+          "roomId",
+          "price",
+          "checkIn",
+          "checkOut"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "hotelId": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomId": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "string",
+            "nullable": true
+          },
+          "checkIn": {
+            "type": "string"
+          },
+          "checkOut": {
+            "type": "string"
+          }
+        }
+      },
+      "AddForwardFlightRequest": {
+        "title": "AddForwardFlightRequest",
+        "required": [
+          "itineraryRef",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "itineraryRef": {
+            "type": "string"
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Data"
+              },
+              {}
+            ]
+          }
+        },
+        "example": {
+          "itineraryRef": "{{userItineraryRef}}",
+          "data": {
+            "forwardFlightBookingRef": ""
+          }
+        }
+      },
+      "Data": {
+        "title": "Data",
+        "required": [
+          "forwardFlightBookingRef"
+        ],
+        "type": "object",
+        "properties": {
+          "forwardFlightBookingRef": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "forwardFlightBookingRef": ""
+        }
+      },
+      "AddReturnFlightRequest": {
+        "title": "AddReturnFlightRequest",
+        "required": [
+          "itineraryRef",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "itineraryRef": {
+            "type": "string"
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Data1"
+              },
+              {}
+            ]
+          }
+        },
+        "example": {
+          "itineraryRef": "{{userItineraryRef}}",
+          "data": {
+            "returnFlightBookingRef": ""
+          }
+        }
+      },
+      "Data1": {
+        "title": "Data1",
+        "required": [
+          "returnFlightBookingRef"
+        ],
+        "type": "object",
+        "properties": {
+          "returnFlightBookingRef": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "returnFlightBookingRef": ""
+        }
+      },
+      "AddHotelBookingCopyRequest": {
+        "title": "AddHotelBookingCopyRequest",
+        "required": [
+          "itineraryRef",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "itineraryRef": {
+            "type": "string"
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Data2"
+              },
+              {}
+            ]
+          }
+        },
+        "example": {
+          "itineraryRef": "{{userItineraryRef}}",
+          "data": {
+            "hotelBookingRef": ""
+          }
+        }
+      },
+      "Data2": {
+        "title": "Data2",
+        "required": [
+          "hotelBookingRef"
+        ],
+        "type": "object",
+        "properties": {
+          "hotelBookingRef": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "hotelBookingRef": ""
+        }
+      },
+      "CreateFlightBookingRequest": {
+        "title": "CreateFlightBookingRequest",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "passportNumber",
+          "flightIds"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "passportNumber": {
+            "type": "string"
+          },
+          "flightIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "john@test.com",
+          "passportNumber": "123239938",
+          "flightIds": [
+            "61f85d95-87ad-40d2-86ff-d7c2a5d907ad",
+            "2c66b99b-ae4a-45a2-a231-a883db2ee54c"
+          ]
+        }
+      },
+      "CreateForwardFlightBookingRequest": {
+        "title": "CreateForwardFlightBookingRequest",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "passportNumber",
+          "flightIds"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "passportNumber": {
+            "type": "string"
+          },
+          "flightIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "john@test.com",
+          "passportNumber": "123239938",
+          "flightIds": [
+            "61f85d95-87ad-40d2-86ff-d7c2a5d907ad",
+            "2c66b99b-ae4a-45a2-a231-a883db2ee54c"
+          ]
+        }
+      },
+      "CreateReturnFlightBookingRequest": {
+        "title": "CreateReturnFlightBookingRequest",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "passportNumber",
+          "flightIds"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "passportNumber": {
+            "type": "string"
+          },
+          "flightIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "john@test.com",
+          "passportNumber": "123239938",
+          "flightIds": [
+            "20b185f3-f801-4226-b1ef-c59b74b6b97c",
+            "ff89b041-d78a-40fc-9861-929a4fefa99b"
+          ]
+        }
+      },
+      "CreateHotelBookingRequest1": {
+        "title": "CreateHotelBookingRequest1",
+        "required": [
+          "email",
+          "hotelId",
+          "roomId",
+          "price",
+          "checkIn",
+          "checkOut"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "hotelId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roomId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "checkIn": {
+            "type": "string"
+          },
+          "checkOut": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "john@test.com",
+          "hotelId": 7,
+          "roomId": 5,
+          "price": 100,
+          "checkIn": "2025-04-08T00:00:00Z",
+          "checkOut": "2025-04-12T00:00:00Z"
+        }
+      },
+      "ChangeavailabilityofroomRequest": {
+        "title": "ChangeavailabilityofroomRequest",
+        "required": [
+          "newRoomCount"
+        ],
+        "type": "object",
+        "properties": {
+          "newRoomCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "example": {
+          "newRoomCount": 1
+        }
+      },
+      "CreateHotelRequest": {
+        "title": "CreateHotelRequest",
+        "required": [
+          "name",
+          "address",
+          "city",
+          "country",
+          "latitude",
+          "longitude",
+          "starRating"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "starRating": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "example": {
+          "name": "Sunshine Resort",
+          "address": "123 Beachside Avenue, Toronto, ON, Canada, M5B 4R6",
+          "city": "Toronto",
+          "country": "Canada",
+          "latitude": 37.1234,
+          "longitude": -122.5678,
+          "starRating": 5
+        }
+      },
+      "Update_All_Request": {
+        "title": "Update_All_Request",
+        "required": [
+          "firstName",
+          "lastName",
+          "newEmail",
+          "oldEmail",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "newEmail": {
+            "type": "string"
+          },
+          "oldEmail": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "firstName": "Johnny",
+          "lastName": "Travolta",
+          "newEmail": "john_new@test.com",
+          "oldEmail": "john@test.com",
+          "phoneNumber": "999-999-9643"
+        }
+      },
+      "Update_phone_number_Request": {
+        "title": "Update_phone_number_Request",
+        "required": [
+          "phoneNumber",
+          "oldEmail"
+        ],
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": "string"
+          },
+          "oldEmail": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "phoneNumber": "999-999-9643",
+          "oldEmail": "john@test.com"
+        }
+      },
+      "Update_email_Request": {
+        "title": "Update_email_Request",
+        "required": [
+          "email",
+          "oldEmail"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "oldEmail": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "john_new@test.com",
+          "oldEmail": "john@test.com"
+        }
+      },
+      "Update_Last_Name_Request": {
+        "title": "Update_Last_Name_Request",
+        "required": [
+          "lastName",
+          "oldEmail"
+        ],
+        "type": "object",
+        "properties": {
+          "lastName": {
+            "type": "string"
+          },
+          "oldEmail": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "lastName": "Travolta",
+          "oldEmail": "john@test.com"
+        }
+      },
+      "Update_First_Name_Request": {
+        "title": "Update_First_Name_Request",
+        "required": [
+          "firstName",
+          "oldEmail"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "oldEmail": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "firstName": "Johnny",
+          "oldEmail": "john@test.com"
+        }
+      },
+      "LoginRequest": {
+        "title": "LoginRequest",
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "john@test.com",
+          "password": "john123"
+        }
+      },
+      "RegisterRequest": {
+        "title": "RegisterRequest",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "john@test.com",
+          "password": "john123",
+          "phoneNumber": "123-233-4455"
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "basic": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [],
+  "tags": [
+    {
+      "name": "Setup a Hotel"
+    },
+    {
+      "name": "Register Non Hotel User"
+    },
+    {
+      "name": "Booking"
+    },
+    {
+      "name": "Flights"
+    },
+    {
+      "name": "info"
+    },
+    {
+      "name": "Hotel room"
+    },
+    {
+      "name": "Hotel Amenity"
+    },
+    {
+      "name": "Hotel Suggestions"
+    },
+    {
+      "name": "Hotel"
+    },
+    {
+      "name": "Airport"
+    },
+    {
+      "name": "Update"
+    },
+    {
+      "name": "User"
+    },
+    {
+      "name": "Order"
+    },
+    {
+      "name": "Itinerary"
+    },
+    {
+      "name": "auth"
+    }
+  ]
+}

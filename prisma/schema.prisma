@@ -1,0 +1,183 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev/db"
+}
+
+model User {
+  userId       Int       @id @default(autoincrement())
+  password     String
+  firstName    String
+  lastName     String
+  email        String    @unique
+  picture      String    @default("default.jpg")
+  phoneNumber  String
+  hotelBooking   HotelBooking[]
+  flightBooking  FlightBooking[]
+
+  hotelManagers HotelManager[]
+  notifications Notifications[]
+  itineraries   Itinerary[]
+}
+
+model Notifications {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [userId]) // Relation field
+  message   String
+  date      DateTime  @default(now())
+  read      Boolean   @default(false)
+  type      String    // USER or HOTEL_MANAGER notification
+}
+
+model Hotel {
+  hotelId      Int     @id @default(autoincrement())
+  name         String
+  logo         String  @default("default.jpg")
+  address      String
+  city         String
+  country      String 
+  latitude     Float
+  longitude    Float
+  starRating   Int
+
+  hotelBooking   HotelBooking[]
+
+  managers       HotelManager[]
+  images         HotelImage[]
+  rooms          HotelRoomType[]
+  amenities      Amenity[]
+
+  @@unique([name, address])
+}
+
+model HotelManager {
+  managerId Int   @id @default(autoincrement())
+  userId    Int
+  hotelId   Int
+  user      User  @relation(fields: [userId], references: [userId]) // Relation field
+  hotel     Hotel @relation(fields: [hotelId], references: [hotelId]) // Relation field
+
+  @@unique([userId, hotelId])
+}
+
+model HotelImage {
+  imageId Int    @id @default(autoincrement())
+  image   String
+  hotelId Int
+  hotel   Hotel  @relation(fields: [hotelId], references: [hotelId]) // Relation field
+}
+
+model HotelRoomType {
+  roomId          Int    @id @default(autoincrement())
+  hotelId         Int
+  roomType        String
+  price           Float
+  numberAvailable Int
+
+  hotel             Hotel   @relation(fields: [hotelId], references: [hotelId]) // Relation field
+  hotelBooking   HotelBooking[]
+  images            RoomImage[]
+  amenities      RoomAmenity[] 
+  @@unique([hotelId, roomType])
+}
+
+model RoomImage {
+  imageId Int           @id @default(autoincrement())
+  image   String
+  roomId  Int
+  room    HotelRoomType @relation(fields: [roomId], references: [roomId]) // Relation field
+}
+
+model Amenity {
+  id       Int           @id @default(autoincrement())
+  hotelId  Int
+  hotel    Hotel        @relation(fields: [hotelId], references: [hotelId]) // Relation field
+  amenity String
+}
+
+model RoomAmenity {
+  id       Int           @id @default(autoincrement())
+  roomId  Int
+  room    HotelRoomType        @relation(fields: [roomId], references: [roomId]) // Relation field
+  amenity String
+}
+
+model HotelBooking {
+  id              Int       @id @default(autoincrement())
+  userId          Int
+  referenceId     String    @unique
+  hotelId         Int
+  roomId          Int
+  price           Float
+  checkIn         DateTime
+  checkOut        DateTime
+  bookingMade     DateTime
+  bookingCanceled Boolean   @default(false)
+  canceledDate    DateTime?
+
+  user          User          @relation(fields: [userId], references: [userId]) // Relation field
+  hotel         Hotel         @relation(fields: [hotelId], references: [hotelId]) // Relation field
+  hotelRoomType HotelRoomType @relation(fields: [roomId], references: [roomId]) // Relation field
+  itineraries     Itinerary[]
+}
+
+model FlightBooking {
+  id               Int       @id @default(autoincrement())
+  userId           Int
+  bookingReference String    @unique
+  bookingMade      DateTime
+  bookingCanceled  Boolean   @default(false)
+  canceledDate     DateTime?
+
+  user User @relation(fields: [userId], references: [userId]) // Relation field
+
+  forwardItineraries Itinerary[] @relation("forward")
+  returnItineraries Itinerary[] @relation("return")
+}
+
+model Itinerary {
+  itineraryId                Int             @id @default(autoincrement())
+  userId                     Int
+  forwardFlightBookingRef    String?          
+  returnFlightBookingRef     String?         
+  hotelBookingRef            String?          
+  itineraryRef               String          @unique
+
+  forwardFlightBooking       FlightBooking?   @relation(name: "forward", fields: [forwardFlightBookingRef], references: [bookingReference])
+  returnFlightBooking        FlightBooking?  @relation(name: "return", fields: [returnFlightBookingRef], references: [bookingReference])
+  hotelBooking               HotelBooking?    @relation(fields: [hotelBookingRef], references: [referenceId])
+  user                       User            @relation(fields: [userId], references: [userId])
+}
+
+model Airport {
+  id      String @id
+  code    String @unique
+  name    String
+  city    String
+  country String
+
+  @@unique([city, country, name])
+}
+
+model City {
+  id      Int    @id @default(autoincrement())
+  city    String
+  country String
+
+  @@unique([city, country])
+}
+
+model LastGeneratedId {
+  type    String    @id
+  value   Int       
+}
