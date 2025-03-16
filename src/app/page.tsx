@@ -13,12 +13,16 @@ const Page = () => {
         router.push('/register');
     };
 
+    const handleLogoClick = () => {
+        router.push('/');
+    };
+
     return (
         <div className="page-container">
             <header className="header flex justify-between items-center bg-blue-800 text-white p-4">
                 <div className="items-center flex gap-2">
-                    <img src="logo_no_back.png" alt="FlyNext Logo" className="h-8" />
-                    <h1 className="text-2xl">FlyNext</h1>
+                    <img src="logo_no_back.png" alt="FlyNext Logo" className="h-8" onClick={handleLogoClick}/>
+                    <h1 className="text-2xl" onClick={handleLogoClick}>FlyNext</h1>
                 </div>
                 
                 <div className="auth-buttons flex gap-4">
@@ -36,7 +40,10 @@ const Page = () => {
                 </div>
             </header>
             <main>
-                {/* Add your main content here */}
+                <div>
+                    <h1 className="text-2xl text-center mt-4">Welcome to FlyNext</h1>
+                    <p className="text-center mt-4">The best place to book your next flight.</p>
+                </div>
             </main>
             <footer className="footer bg-white text-white p-4 text-center">
                 <p className="text-black">&copy; 2025 FlyNext</p>
