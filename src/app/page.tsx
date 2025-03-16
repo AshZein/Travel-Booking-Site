@@ -54,6 +54,63 @@ const Page = () => {
                                 <img src="hotelplane.png" className="h-8"/>Hotel + Flight
                             </li>
                         </ul>
+                        {selectedOption === 'flight' && (
+                            <div className="flex items-center gap-4">
+                                <div className="search-box">
+                                    <label htmlFor="source-location" className="text-white">Source Location:</label>
+                                    <input 
+                                        type="text" 
+                                        id="source-location" 
+                                        className="text-black p-2 rounded" 
+                                        placeholder="Enter source location"
+                                    />
+                                </div>
+                                <div className="search-box">
+                                    <label htmlFor="destination-location" className="text-white">Destination Location:</label>
+                                    <input 
+                                        type="text" 
+                                        id="destination-location" 
+                                        className="text-black p-2 rounded" 
+                                        placeholder="Enter destination location"
+                                    />
+                                </div>
+                            </div>
+                        )}
+                        {selectedOption === 'hotel' && (
+                            <div className="flex items-center gap-4">
+                                <div className="search-box">
+                                    <label htmlFor="hotel-location" className="text-white">Location:</label>
+                                    <input 
+                                        type="text" 
+                                        id="hotel-location" 
+                                        className="text-black p-2 rounded" 
+                                        placeholder="Enter location"
+                                    />
+                                </div>
+                            </div>
+                        )}
+                        {selectedOption === 'hotel-flight' && (
+                            <div className="flex items-center gap-4">
+                                <div className="search-box">
+                                    <label htmlFor="source-location" className="text-white">Source Location:</label>
+                                    <input 
+                                        type="text" 
+                                        id="source-location" 
+                                        className="text-black p-2 rounded" 
+                                        placeholder="Enter source location"
+                                    />
+                                </div>
+                                <div className="search-box">
+                                    <label htmlFor="destination-location" className="text-white">Destination Location:</label>
+                                    <input 
+                                        type="text" 
+                                        id="destination-location" 
+                                        className="text-black p-2 rounded" 
+                                        placeholder="Enter destination location"
+                                    />
+                                </div>
+                            </div>
+                        )}
                     </div>
                     <div> {/* search boxes should update based on booking selection type */}</div>
                 </div>
