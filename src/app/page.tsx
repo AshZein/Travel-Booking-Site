@@ -44,16 +44,22 @@ const Page = () => {
                 <div>
                     <div> 
                         <ul className="flex items-center gap-4">
-                            <li className={`hotel-flight-button ${selectedOption === 'hotel' ? 'border border-white' : ''}`} onClick={() => setSelectedOption('hotel')}>Hotel</li>
-                            <li className={`hotel-flight-button ${selectedOption === 'flight' ? 'border border-white' : ''}`} onClick={() => setSelectedOption('flight')}>Flight</li>
-                            <li className={`hotel-flight-button ${selectedOption === 'hotel-flight' ? 'border border-white' : ''}`} onClick={() => setSelectedOption('hotel-flight')}>Hotel + Flight</li>
+                            <li className={`hotel-flight-button flex items-center justify-center ${selectedOption === 'hotel' ? 'border border-white' : ''}`} onClick={() => setSelectedOption('hotel')}>
+                                <img src="hotel.png" className="h-8"/>Hotel
+                            </li>
+                            <li className={`hotel-flight-button flex items-center justify-center ${selectedOption === 'flight' ? 'border border-white' : ''}`} onClick={() => setSelectedOption('flight')}>
+                                <img src="airplane.png" className="h-8"/>Flight
+                            </li>
+                            <li className={`hotel-flight-button flex items-center justify-center ${selectedOption === 'hotel-flight' ? 'border border-white' : ''}`} onClick={() => setSelectedOption('hotel-flight')}>
+                                <img src="hotelplane.png" className="h-8"/>Hotel + Flight
+                            </li>
                         </ul>
                     </div>
                     <div> {/* search boxes  should update based on booking selection type*/}</div>
                 </div>
             </main>
             <footer className="footer bg-white text-white p-4 text-center">
-                <p className="text-black">&copy; 2025 FlyNext</p>
+                <p className="text-black">&copy; 225 FlyNext</p>
             </footer>
         </div>
     );
