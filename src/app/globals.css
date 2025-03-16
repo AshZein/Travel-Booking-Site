@@ -4,13 +4,15 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1DB4B0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #1DB4B0;
     --foreground: #ededed;
+    --home-button-bg: #1DB4B0;
+    --home-button-selected: #163736;
   }
 }
 
@@ -18,4 +20,43 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  background-color: var(--home-button-bg); /* Use the CSS variable for background color */
+  color: white; /* Ensure text color is white */
+  padding: 0.5rem 1rem; /* Add some padding */
+  border: none; /* Remove default border */
+  border-radius: 0.25rem; /* Add rounded corners */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+button:hover {
+  background-color: var(--home-button-selected); /* Change background color on hover */
+}
+
+.hotel-flight-button {
+  background-color: var(--home-button-bg); /* Use the CSS variable for background color */
+  color: white; /* Ensure text color is white */
+  padding: 0.5rem 1rem; /* Add some padding */
+  border: none; /* Remove default border */
+  border-radius: 0.25rem; /* Add rounded corners */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.hotel-flight-button:hover {
+  background-color: var(--home-button-selected); /* Change background color on hover */
+}
+
+.auth-button {
+  background-color: #188480e9; /* Use the CSS variable for background color */
+  color: white; /* Ensure text color is white */
+  padding: 0.5rem 1rem; /* Add some padding */
+  border: none; /* Remove default border */
+  border-radius: 0.25rem; /* Add rounded corners */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.auth-button:hover {
+  background-color: var(--home-button-selected); /* Change background color on hover */
 }
