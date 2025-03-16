@@ -3,16 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #1DB4B0;
+  --background: #1DB4B0;
+  --foreground: #ededed;
+  --home-button-bg: #1DB4B0; /* Define this variable outside the media query */
+  --home-button-selected: #163736; /* Define this variable outside the media query */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #1DB4B0;
     --foreground: #ededed;
-    --home-button-bg: #1DB4B0;
-    --home-button-selected: #163736;
+    --home-button-bg: #1DB4B0; /* Ensure this variable is also defined in dark mode */
+    --home-button-selected: #163736; /* Ensure this variable is also defined in dark mode */
   }
 }
 
@@ -49,7 +51,7 @@ button:hover {
 }
 
 .auth-button {
-  background-color: #188480e9; /* Use the CSS variable for background color */
+  background-color: var(--home-button-bg); /* Use the CSS variable for background color */
   color: white; /* Ensure text color is white */
   padding: 0.5rem 1rem; /* Add some padding */
   border: none; /* Remove default border */
