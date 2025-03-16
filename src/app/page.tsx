@@ -59,7 +59,7 @@ const Page = () => {
                 </div>
             </main>
             <footer className="footer bg-white text-white p-4 text-center">
-                <p className="text-black">&copy; 225 FlyNext</p>
+                <p className="text-black">&copy; 2025 FlyNext</p>
             </footer>
         </div>
     );
