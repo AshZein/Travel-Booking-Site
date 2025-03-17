@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { searchSuggestAirports, searchSuggestCities } from '@/utils/cleanSearch';
 
 const Page = () => {
     const router = useRouter();
@@ -27,6 +28,42 @@ const Page = () => {
         setTripType((prevTripType) => (prevTripType === 'round-trip' ? 'one-way' : 'round-trip'));
     };
 
+    const [sourceLocation, setSourceLocation] = useState('');
+    const [sourceSuggestions, setSourceSuggestions] = useState<string[]>([]);
+
+    const handleSourceLocationChange = async (value: string) => {
+        setSourceLocation(value);
+
+        const citySuggestions = await searchSuggestCities(value);
+        const airportSuggestions = await searchSuggestAirports(value);
+        const suggestions = [...citySuggestions, ...airportSuggestions];
+        
+        setSourceSuggestions(suggestions);
+    };
+
+    const handleSourceSuggestionClick = (suggestion: string) => {
+        setSourceLocation(suggestion);
+        setSourceSuggestions([]);
+    };
+
+    const [destinationLocation, setDestinationLocation] = useState('');
+    const [destinationSuggestions, setDestinationSuggestions] = useState<string[]>([]);
+
+    const handleDestinationLocationChange = async (value: string) => {
+        setDestinationLocation(value);
+
+        const citySuggestions = await searchSuggestCities(value);
+        const airportSuggestions = await searchSuggestAirports(value);
+        const suggestions = [...citySuggestions, ...airportSuggestions];
+        
+        setDestinationSuggestions(suggestions);
+    };
+
+    const handleDestinationSuggestionClick = (suggestion: string) => {
+        setDestinationLocation(suggestion);
+        setDestinationSuggestions([]);
+    };
+    
     return (
         <div className="page-container">
             <header className="header flex justify-between items-center text-white p-4">
@@ -81,7 +118,22 @@ const Page = () => {
                                             id="source-location" 
                                             className="text-black p-2 rounded" 
                                             placeholder="Enter source location"
+                                            onChange={(e) => handleSourceLocationChange(e.target.value)}
+                                            value={sourceLocation}
                                         />
+                                        {sourceSuggestions.length > 0 && (
+                                            <ul className="suggestions-list">
+                                                {sourceSuggestions.map((suggestion, index) => (
+                                                    <li 
+                                                        key={index} 
+                                                        className="suggestion-item"
+                                                        onClick={() => handleSourceSuggestionClick(suggestion)}
+                                                    >
+                                                        {suggestion}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
                                     </div>
                                     <div className="search-box">
                                         <label htmlFor="destination-location" className="text-white">Destination Location:</label>
@@ -90,7 +142,22 @@ const Page = () => {
                                             id="destination-location" 
                                             className="text-black p-2 rounded" 
                                             placeholder="Enter destination location"
+                                            onChange={(e) => handleDestinationLocationChange(e.target.value)}
+                                            value={destinationLocation}
                                         />
+                                        {destinationSuggestions.length > 0 && (
+                                            <ul className="suggestions-list">
+                                                {destinationSuggestions.map((suggestion, index) => (
+                                                    <li 
+                                                        key={index} 
+                                                        className="suggestion-item"
+                                                        onClick={() => handleDestinationSuggestionClick(suggestion)}
+                                                    >
+                                                        {suggestion}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
                                     </div>
                                     <div className="search-box">
                                         <label htmlFor="start-date" className="text-white">Start Date:</label>
@@ -190,7 +257,6 @@ const Page = () => {
                             </div>
                         )}
                     </div>
-                    <div> {/* search boxes should update based on booking selection type */}</div>
                 </div>
             </main>
             <footer className="footer bg-white text-white p-4 text-center">
