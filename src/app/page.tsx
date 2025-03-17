@@ -11,17 +11,8 @@ import Hotel from './components/homePage/hotel';
 import HotelFlight from './components/homePage/hotelFlight';
 
 const Page = () => {
-    const router = useRouter();
     const [selectedOption, setSelectedOption] = useState('hotel');
-    // const [startDate, setStartDate] = useState(new Date());
-    // const [endDate, setEndDate] = useState(new Date());
-    const [tripType, setTripType] = useState('round-trip'); // State for trip type
 
-    const toggleTripType = () => {
-        setTripType((prevTripType) => (prevTripType === 'round-trip' ? 'one-way' : 'round-trip'));
-    };
-
-    
     return (
         <div className="page-container">
             <HomeHeader />
