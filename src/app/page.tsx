@@ -1,9 +1,6 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { useRouter } from "next/navigation";
-import DatePicker from 'react-datepicker';
+import React, { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import { searchSuggestAirports, searchSuggestCities } from '@/utils/cleanSearch';
 import HomeHeader from './components/HomeHeader';
 import Footer from '@/components/Footer';
 import Flight from './components/homePage/flight';
