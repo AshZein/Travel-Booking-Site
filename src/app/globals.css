@@ -105,3 +105,10 @@ button:hover {
   margin-top: 8rem;
   margin-left: 4rem;
 }
+.search-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  margin-top: 1rem;
+}
