@@ -4,6 +4,9 @@ import { useRouter } from "next/navigation";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { searchSuggestAirports, searchSuggestCities } from '@/utils/cleanSearch';
+import HomeHeader from './components/HomeHeader';
+import Footer from '@/components/Footer';
+
 
 const Page = () => {
     const router = useRouter();
@@ -11,18 +14,6 @@ const Page = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [tripType, setTripType] = useState('round-trip'); // State for trip type
-
-    const handleLoginClick = () => {
-        router.push('/login');
-    };
-
-    const handleRegisterClick = () => {
-        router.push('/register');
-    };
-
-    const handleLogoClick = () => {
-        router.push('/');
-    };
 
     const toggleTripType = () => {
         setTripType((prevTripType) => (prevTripType === 'round-trip' ? 'one-way' : 'round-trip'));
@@ -70,26 +61,7 @@ const Page = () => {
     
     return (
         <div className="page-container">
-            <header className="header flex justify-between items-center text-white p-4">
-                <div className="items-center flex gap-2">
-                    <img src="logo_no_back.png" alt="FlyNext Logo" className="h-8" onClick={handleLogoClick}/>
-                    <h1 className="text-2xl" onClick={handleLogoClick}>FlyNext</h1>
-                </div>
-                
-                <div className="auth-buttons flex gap-4">
-                    <button 
-                        className="auth-button text-white font-bold py-2 px-4 rounded"
-                        onClick={handleLoginClick}
-                    >
-                        Login
-                    </button>
-                    <button className="auth-button text-white font-bold py-2 px-4 rounded"
-                        onClick={handleRegisterClick}
-                    >
-                        Register
-                    </button>
-                </div>
-            </header>
+            <HomeHeader />
             <main>
                 <div className="home-center w-full h-[66vh]">
                     <div className="search-box-container">
@@ -263,9 +235,7 @@ const Page = () => {
                     </div>
                 </div>
             </main>
-            <footer className="footer bg-white text-white p-4 text-center">
-                <p className="text-black">&copy; 2025 FlyNext</p>
-            </footer>
+            <Footer />
         </div>
     );
 }
