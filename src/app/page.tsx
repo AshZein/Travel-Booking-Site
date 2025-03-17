@@ -63,6 +63,10 @@ const Page = () => {
         setDestinationLocation(suggestion);
         setDestinationSuggestions([]);
     };
+
+    const handleFlightSearchClick = () => {
+        router.push(`/flightsearch?sourceLocation=${sourceLocation}&destinationLocation=${destinationLocation}&startDate=${startDate}&endDate=${endDate}`);
+    }
     
     return (
         <div className="page-container">
@@ -179,7 +183,7 @@ const Page = () => {
                                             />
                                         </div>
                                     )}
-                                    <button className="tripType-button">Search</button>
+                                    <button className="tripType-button" onClick={handleFlightSearchClick}>Search</button>
                                 </div>
                             </div>
                         )}
