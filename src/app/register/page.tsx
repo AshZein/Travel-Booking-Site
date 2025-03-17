@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import {useRouter} from "next/navigation";
+import Footer from '@/components/Footer';
 
 const Page = () => {
      const router = useRouter();
@@ -22,9 +23,7 @@ const Page = () => {
                     {/* login form box goes here */}
                 </div>
             </main>
-            <footer className="footer bg-white text-white p-4 text-center">
-                <p className="text-black">&copy; 2025 FlyNext</p>
-            </footer>
+            <Footer />
         </div>
     );
 }
