@@ -91,9 +91,9 @@ const Page = () => {
                 </div>
             </header>
             <main>
-                <div>
-                    <div> 
-                        <ul className="flex items-center gap-4">
+                <div className="home-center w-full h-[66vh]">
+                    <div className="search-box-container">
+                        <ul className="flex items-left gap-4 pb-8">
                             <li className={`hotel-flight-button flex items-center justify-center ${selectedOption === 'hotel' ? 'selected border border-white' : 'border border-black'}`} onClick={() => setSelectedOption('hotel')}>
                                 <img src="hotel.png" className="h-8"/>Hotel
                             </li>

@@ -87,3 +87,21 @@ button:hover {
   border-radius: 0.25rem;
   cursor: pointer;
 }
+
+.home-center {
+  background-color: #136f6c;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: left;
+  height: 100vh;
+}
+
+.search-box-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  margin-top: 8rem;
+  margin-left: 4rem;
+}
