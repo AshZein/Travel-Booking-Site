@@ -112,6 +112,7 @@ const Page = () => {
                                             />
                                         </div>
                                     )}
+                                    <button className="tripType-button">Search</button>
                                 </div>
                             </div>
                         )}
@@ -144,6 +145,7 @@ const Page = () => {
                                         id="end-date"
                                     />
                                 </div>
+                                <button className="tripType-button">Search</button>
                             </div>
                         )}
                         {selectedOption === 'hotel-flight' && (
@@ -184,6 +186,7 @@ const Page = () => {
                                         id="end-date"
                                     />
                                 </div>
+                                <button className="tripType-button">Search</button>
                             </div>
                         )}
                     </div>
