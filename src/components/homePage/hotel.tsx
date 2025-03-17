@@ -26,6 +26,10 @@ const Hotel: React.FC = () => {
         setDestinationSuggestions([]);
     };
 
+    const handleHotelSearchClick = () => {
+        hotelRouter.push(`/hotelsearch?destinationLocation=${destinationLocation}&startDate=${startDate}&endDate=${endDate}`);
+    }
+
     return (
         <div className="flex items-center gap-4">
             <div className="search-box">
@@ -70,7 +74,7 @@ const Hotel: React.FC = () => {
                     id="end-date"
                 />
             </div>
-            <button className="tripType-button">Search</button>
+            <button className="tripType-button" onClick={handleHotelSearchClick}>Search</button>
         </div>
     );
 }
