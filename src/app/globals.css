@@ -97,6 +97,15 @@ button:hover {
   height: 100vh;
 }
 
+.auth-page {
+  background-color: #136f6c;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: left;
+  height: 100vh;
+}
+
 .search-box-container {
   display: flex;
   flex-direction: column;
