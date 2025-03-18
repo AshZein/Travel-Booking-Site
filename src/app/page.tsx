@@ -28,7 +28,12 @@ const Page = () => {
                             </li>
                         </ul>
                         {selectedOption === 'flight' && (
-                            <Flight />
+                            <Flight 
+                                sourceLocation="" 
+                                destinationLocation="" 
+                                startDate={new Date().toISOString()} 
+                                endDate={new Date().toISOString()} 
+                            />
                         )}
                         {selectedOption === 'hotel' && (
                             <Hotel />
