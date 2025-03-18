@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import Footer from '@/components/Footer';
 import Flight from '@/components/homePage/flight';
 import HomeHeader from '@/components/HomeHeader';
+import FlightResults from '@/components/flightSearch/FlightResults';
 
 const Page = () => {
     const router = useRouter();
@@ -30,9 +31,7 @@ const Page = () => {
                     startDate={startDate}
                     endDate={endDate}
                 />
-                <div>
-                    {/* Additional content */}
-                </div>
+                < FlightResults />
             </main>
             <Footer />
         </div>
