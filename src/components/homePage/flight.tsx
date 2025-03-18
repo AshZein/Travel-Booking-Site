@@ -4,22 +4,29 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { searchSuggestAirports, searchSuggestCities } from '@/utils/cleanSearch';
 
-const Flight: React.FC = () => {
+interface FlightProps {
+    sourceLocation: string;
+    destinationLocation: string;
+    startDate: string;
+    endDate: string;
+}
+
+const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, startDate, endDate }) => {
     const flightRouter = useRouter();
     const [selectedOption, setSelectedOption] = useState('hotel');
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [start, setStart] = useState<Date | null>(startDate ? new Date(startDate) : null);
+    const [end, setEnd] = useState<Date | null>(endDate ? new Date(endDate) : null);
     const [tripType, setTripType] = useState('round-trip'); // State for trip type
 
     const toggleTripType = () => {
         setTripType((prevTripType) => (prevTripType === 'round-trip' ? 'one-way' : 'round-trip'));
     };
 
-    const [sourceLocation, setSourceLocation] = useState('');
+    const [source, setSource] = useState(sourceLocation || '');
     const [sourceSuggestions, setSourceSuggestions] = useState<string[]>([]);
 
     const handleSourceLocationChange = async (value: string) => {
-        setSourceLocation(value);
+        setSource(value);
 
         const citySuggestions = await searchSuggestCities(value);
         const airportSuggestions = await searchSuggestAirports(value);
@@ -29,15 +36,15 @@ const Flight: React.FC = () => {
     };
 
     const handleSourceSuggestionClick = (suggestion: string) => {
-        setSourceLocation(suggestion);
+        setSource(suggestion);
         setSourceSuggestions([]);
     };
 
-    const [destinationLocation, setDestinationLocation] = useState('');
+    const [destination, setDestination] = useState(destinationLocation || '');
     const [destinationSuggestions, setDestinationSuggestions] = useState<string[]>([]);
 
     const handleDestinationLocationChange = async (value: string) => {
-        setDestinationLocation(value);
+        setDestination(value);
 
         const citySuggestions = await searchSuggestCities(value);
         const airportSuggestions = await searchSuggestAirports(value);
@@ -47,13 +54,20 @@ const Flight: React.FC = () => {
     };
 
     const handleDestinationSuggestionClick = (suggestion: string) => {
-        setDestinationLocation(suggestion);
+        setDestination(suggestion);
         setDestinationSuggestions([]);
     };
 
     const handleFlightSearchClick = () => {
-        flightRouter.push(`/flightsearch?sourceLocation=${sourceLocation}&destinationLocation=${destinationLocation}&startDate=${startDate}&endDate=${endDate}`);
+        flightRouter.push(`/flightsearch?sourceLocation=${source}&destinationLocation=${destination}&startDate=${start?.toISOString()}&endDate=${end?.toISOString()}`);
     }
+
+    useEffect(() => {
+        setSource(sourceLocation || '');
+        setDestination(destinationLocation || '');
+        setStart(startDate ? new Date(startDate) : null);
+        setEnd(endDate ? new Date(endDate) : null);
+    }, [sourceLocation, destinationLocation, startDate, endDate]);
 
     return (
         <div>
@@ -62,7 +76,7 @@ const Flight: React.FC = () => {
                     className={`tripType-button ${tripType === 'round-trip' ? 'bg-blue-700' : 'bg-blue-600'}`}
                     onClick={toggleTripType}
                 >
-                                                        {tripType === 'round-trip' ? 'Round Trip' : 'One Way'}
+                    {tripType === 'round-trip' ? 'Round Trip' : 'One Way'}
                 </button>
             </div>
             <div className="flex items-center gap-4">
@@ -74,7 +88,7 @@ const Flight: React.FC = () => {
                         className="text-black p-2 rounded" 
                         placeholder="Enter source location"
                         onChange={(e) => handleSourceLocationChange(e.target.value)}
-                        value={sourceLocation}
+                        value={source}
                     />
                     {sourceSuggestions.length > 0 && (
                         <ul className="suggestions-list">
@@ -98,7 +112,7 @@ const Flight: React.FC = () => {
                         className="text-black p-2 rounded" 
                         placeholder="Enter destination location"
                         onChange={(e) => handleDestinationLocationChange(e.target.value)}
-                        value={destinationLocation}
+                        value={destination}
                     />
                     {destinationSuggestions.length > 0 && (
                         <ul className="suggestions-list">
@@ -117,8 +131,8 @@ const Flight: React.FC = () => {
                 <div className="search-box">
                     <label htmlFor="start-date" className="text-white">Start Date:</label>
                     <DatePicker
-                        selected={startDate}
-                        onChange={(date) => date && setStartDate(date)}
+                        selected={start}
+                        onChange={(date) => date && setStart(date)}
                         className="text-black p-2 rounded"
                         id="start-date"
                     />
@@ -127,8 +141,8 @@ const Flight: React.FC = () => {
                     <div className="search-box">
                         <label htmlFor="end-date" className="text-white">End Date:</label>
                         <DatePicker
-                            selected={endDate}
-                            onChange={(date) => date && setEndDate(date)}
+                            selected={end}
+                            onChange={(date) => date && setEnd(date)}
                             className="text-black p-2 rounded"
                             id="end-date"
                         />
@@ -137,7 +151,6 @@ const Flight: React.FC = () => {
                 <button className="tripType-button" onClick={handleFlightSearchClick}>Search</button>
             </div>
         </div>
-
     );
 }
 

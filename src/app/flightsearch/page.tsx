@@ -1,26 +1,37 @@
 "use client";
-import React from 'react';
-import {useRouter} from "next/navigation";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Footer from '@/components/Footer';
+import Flight from '@/components/homePage/flight';
+import HomeHeader from '@/components/HomeHeader';
 
-const Page = () =>{
+const Page = () => {
     const router = useRouter();
+    const [sourceLocation, setSourceLocation] = useState('');
+    const [destinationLocation, setDestinationLocation] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
 
-    const handleLogoClick = () => {
-        router.push('/');
-    };
+    useEffect(() => {
+        const searchParams = new URLSearchParams(window.location.search);
+        setSourceLocation(searchParams.get('sourceLocation') || '');
+        setDestinationLocation(searchParams.get('destinationLocation') || '');
+        setStartDate(searchParams.get('startDate') || '');
+        setEndDate(searchParams.get('endDate') || '');
+    }, []);
 
     return (
         <div className="page-container">
-            <header className="header flex justify-between items-center bg-blue-800 text-white p-4">
-                <div className="items-center flex gap-2">
-                    <img src="logo_no_back.png" alt="FlyNext Logo" className="h-8" onClick={handleLogoClick}/>
-                    <h1 className="text-2xl" onClick={handleLogoClick}>FlyNext</h1>
-                </div>
-            </header>
+            <HomeHeader />
             <main>
-                <div className="loginBox">
-                    {/* login form box goes here */}
+                <Flight 
+                    sourceLocation={sourceLocation}
+                    destinationLocation={destinationLocation}
+                    startDate={startDate}
+                    endDate={endDate}
+                />
+                <div>
+                    {/* Additional content */}
                 </div>
             </main>
             <Footer />
