@@ -67,15 +67,16 @@ interface Flight {
 interface FlightCardProps {
     legs: number;
     flights: Flight[];
+    onClick: () => void; // Add onClick prop
 }
 
-const FlightCard: React.FC<FlightCardProps> = ({ legs, flights }) => {
+const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick }) => {
     const renderFlight = (outBoundFlight: Flight, inBoundFlight: Flight) => {
         const departurePieces = dateSplitter(outBoundFlight.departureTime);
         const arrivalPieces = dateSplitter(inBoundFlight.arrivalTime);
         
         return (
-            <div key={outBoundFlight.id} className="flight-details flex items-center gap-20">
+            <div key={outBoundFlight.id} className="flight-details flex items-center gap-20" onClick={onClick}>
                 <div className="flex flex-col items-center gap-1">
                     <p>{departurePieces.hour}:{departurePieces.minute}</p>
                     <p>{outBoundFlight.origin.code} - {departurePieces.day} {departurePieces.month}</p>

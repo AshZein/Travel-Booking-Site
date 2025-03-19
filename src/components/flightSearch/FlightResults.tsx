@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import FlightCard from './FlightCard';
+import FlightDetailPopUp from './FlightDetailPopUp';
 
 async function searchFlights(source: string, destination: string, startDate: string, endDate: string) {
     try {
@@ -16,11 +17,42 @@ async function searchFlights(source: string, destination: string, startDate: str
     }
 }
 
+interface Flight {
+    id: string;
+    flightNumber: string;
+    departureTime: string;
+    arrivalTime: string;
+    origin: {
+        code: string;
+        name: string;
+        city: string;
+        country: string;
+    };
+    destination: {
+        code: string;
+        name: string;
+        city: string;
+        country: string;
+    };
+    duration: number;
+    price: number;
+    currency: string;
+    availableSeats: number;
+    status: string;
+    airline: {
+        code: string;
+        name: string;
+    };
+}
+
+
 const FlightResults: React.FC = () => {
     const [outboundFlights, setOutboundFlights] = useState<any[]>([]);
     const [inboundFlights, setInboundFlights] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [tripType, setTripType] = useState('one-way');
+    const [selectedFlight, setSelectedFlight] = useState<Flight[] | null>(null); // State for selected flight
+    const [showPopup, setShowPopup] = useState(false); // State for showing popup
 
     useEffect(() => {
         console.log("useEffect is running"); // Debugging statement
@@ -31,7 +63,6 @@ const FlightResults: React.FC = () => {
         const startDate = searchParams.get('startDate') || '';
         const endDate = searchParams.get('endDate') || '';
         const tripType = searchParams.get('tripType') || 'one-way';
-        
 
         console.log("Search Params:", sourceLocation, destinationLocation, startDate, endDate); // Debugging statement
 
@@ -47,6 +78,16 @@ const FlightResults: React.FC = () => {
         });
     }, []);
 
+    const handleFlightClick = (flights: Flight[]) => {
+        setSelectedFlight(flights);
+        setShowPopup(true);
+    };
+
+    const closePopup = () => {
+        setShowPopup(false);
+        setSelectedFlight(null);
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -54,20 +95,28 @@ const FlightResults: React.FC = () => {
     return (
         <div className="flight-results flex justify-between">
             <div className="flex-1 mr-2.5">
-            {outboundFlights.map((flightGroup, index) => (
-                <FlightCard key={index} legs={flightGroup.legs} flights={flightGroup.flights} />
-            ))}
+                {outboundFlights.map((flightGroup, index) => (
+                    <FlightCard key={index} legs={flightGroup.legs} flights={flightGroup.flights} onClick={() => handleFlightClick(flightGroup.flights)} />
+                ))}
             </div>
             {tripType === 'round-trip' && (
-            <div className="flex-1 ml-2.5">
-                {inboundFlights.length > 0 ? (
-                inboundFlights.map((flightGroup, index) => (
-                    <FlightCard key={index} legs={flightGroup.legs} flights={flightGroup.flights} />
-                ))
-                ) : (
-                <div>No return flights found for selected date</div>
-                )}
-            </div>
+                <div className="flex-1 ml-2.5">
+                    {inboundFlights.length > 0 ? (
+                        inboundFlights.map((flightGroup, index) => (
+                            <FlightCard key={index} legs={flightGroup.legs} flights={flightGroup.flights} onClick={() => handleFlightClick(flightGroup.flights)} />
+                        ))
+                    ) : (
+                        <div>No return flights found for selected date</div>
+                    )}
+                </div>
+            )}
+            {showPopup && selectedFlight && (
+                <div className="popup">
+                    <div className="popup-content">
+                        <button onClick={closePopup}>Close</button>
+                        <FlightDetailPopUp legs={selectedFlight.length} flights={selectedFlight} />
+                    </div>
+                </div>
             )}
         </div>
     );
