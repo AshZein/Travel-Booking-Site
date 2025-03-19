@@ -33,6 +33,7 @@ const Page = () => {
                                 destinationLocation="" 
                                 startDate={new Date().toISOString()} 
                                 endDate={new Date().toISOString()} 
+                                tType="" 
                             />
                         )}
                         {selectedOption === 'hotel' && (
