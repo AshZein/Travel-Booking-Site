@@ -17,8 +17,10 @@ async function searchFlights(source: string, destination: string, startDate: str
 }
 
 const FlightResults: React.FC = () => {
-    const [flights, setFlights] = useState<any[]>([]);
+    const [outboundFlights, setOutboundFlights] = useState<any[]>([]);
+    const [inboundFlights, setInboundFlights] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [tripType, setTripType] = useState('round-trip');
 
     useEffect(() => {
         console.log("useEffect is running"); // Debugging statement
@@ -33,7 +35,11 @@ const FlightResults: React.FC = () => {
 
         searchFlights(sourceLocation, destinationLocation, startDate, endDate).then((flights) => {
             console.log('Fetched Flights:', flights); // Debugging statement
-            setFlights(flights);
+            setOutboundFlights(flights);
+        });
+        searchFlights(destinationLocation, sourceLocation, endDate, startDate).then((flights) => {
+            console.log('Fetched Flights:', flights); // Debugging statement
+            setInboundFlights(flights);
             setLoading(false);
         });
     }, []);
@@ -43,10 +49,19 @@ const FlightResults: React.FC = () => {
     }
 
     return (
-        <div className="flight-results">
-            {flights.map((flightGroup, index) => (
+        <div className="flight-results" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ flex: 1, marginRight: '10px' }}>
+            {outboundFlights.map((flightGroup, index) => (
                 <FlightCard key={index} legs={flightGroup.legs} flights={flightGroup.flights} />
             ))}
+            </div>
+            { tripType === 'round-trip' && inboundFlights.length > 0 && (
+            <div style={{ flex: 1, marginLeft: '10px' }}>
+                {inboundFlights.map((flightGroup, index) => (
+                <FlightCard key={index} legs={flightGroup.legs} flights={flightGroup.flights} />
+                ))}
+            </div>
+            )}
         </div>
     );
 }

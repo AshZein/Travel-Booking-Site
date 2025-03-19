@@ -66,27 +66,27 @@ interface FlightCardProps {
 }
 
 const FlightCard: React.FC<FlightCardProps> = ({ legs, flights }) => {
-    const renderFlight = (flight: Flight) => {
-        const departurePieces = dateSplitter(flight.departureTime);
-        const arrivalPieces = dateSplitter(flight.arrivalTime);
+    const renderFlight = (outBoundFlight: Flight, inBoundFlight: Flight) => {
+        const departurePieces = dateSplitter(outBoundFlight.departureTime);
+        const arrivalPieces = dateSplitter(inBoundFlight.arrivalTime);
         return (
-            <div key={flight.id} className="flight-details flex items-center gap-20">
+            <div key={outBoundFlight.id} className="flight-details flex items-center gap-20">
                 <div>
                     <p>{departurePieces.hour}:{departurePieces.minute}</p>
-                    <p>{flight.origin.code} - {departurePieces.day} {departurePieces.month}</p>
+                    <p>{outBoundFlight.origin.code} - {departurePieces.day} {departurePieces.month}</p>
                 </div>
                 <div>
                     {legs - 1 > 1 ? (
                         <>{legs - 1} Stops</>
                     ) : legs - 1 === 1 ? (
-                        <>1 Stop</>
+                        <>1 Stop  </>
                     ) : (
                         <>DIRECT</>
                     )}
                 </div>
                 <div>
                     <p>{arrivalPieces.hour}:{arrivalPieces.minute}</p>
-                    <p>{flight.destination.code} - {arrivalPieces.day} {arrivalPieces.month}</p>
+                    <p>{inBoundFlight.destination.code} - {arrivalPieces.day} {arrivalPieces.month}</p>
                 </div>
             </div>
         );
@@ -94,14 +94,9 @@ const FlightCard: React.FC<FlightCardProps> = ({ legs, flights }) => {
 
     return (
         <div className="flight-card bg-gray-200 p-4 text-black">
-            {legs > 1 ? (
-                <>
-                    {renderFlight(flights[0])}
-                    {renderFlight(flights[flights.length - 1])} 
-                </>
-            ) : (
-                flights.map((flight) => renderFlight(flight)) 
-            )}
+            <>
+                {renderFlight(flights[0], flights[flights.length - 1])}
+            </>
         </div>
     );
 }
