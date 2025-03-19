@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import FlightCard from './FlightCard';
 import FlightDetailPopUp from './FlightDetailPopUp';
+import { useItinerary } from '@/context/ItineraryContext';
 
 async function searchFlights(source: string, destination: string, startDate: string, endDate: string) {
     try {
@@ -54,6 +55,7 @@ interface FlightResultsProps {
 }
 
 const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinationLocation, startDate, endDate, tripType }) => {
+    const { state, dispatch } = useItinerary();
     const [outboundFlights, setOutboundFlights] = useState<any[]>([]);
     const [inboundFlights, setInboundFlights] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
@@ -98,6 +100,10 @@ const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinati
         setShowPopup(true);
     };
 
+    const addFlightToItinerary = (flight: Flight) => {
+        dispatch({ type: 'ADD_FLIGHT', payload: flight });
+    };
+
     const closePopup = () => {
         setShowPopup(false);
         setSelectedFlight(null);
@@ -122,6 +128,7 @@ const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinati
                             legs={flightGroup.legs} 
                             flights={flightGroup.flights} 
                             onClick={() => handleFlightClick(flightGroup.flights)} 
+                            onAddToItinerary={() => addFlightToItinerary(flightGroup.flights[0])} // Example: Add the first flight in the group
                         />
                     ))
                 ) : (
@@ -138,6 +145,7 @@ const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinati
                                 legs={flightGroup.legs} 
                                 flights={flightGroup.flights} 
                                 onClick={() => handleFlightClick(flightGroup.flights)} 
+                                onAddToItinerary={() => addFlightToItinerary(flightGroup.flights[0])} // Example: Add the first flight in the group
                             />
                         ))
                     ) : (

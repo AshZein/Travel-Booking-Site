@@ -1,5 +1,6 @@
 import React from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useItinerary } from '@/context/ItineraryContext';
 
 const dateCache: { [key: string]: { [key: string]: string } } = {};
 
@@ -68,9 +69,21 @@ interface FlightCardProps {
     legs: number;
     flights: Flight[];
     onClick: () => void; // Add onClick prop
+    onAddToItinerary: () => void;
 }
 
 const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick }) => {
+    const { state, dispatch } = useItinerary();
+    const isSelected = state.selectedFlight && state.selectedFlight.id === flights[0].id;
+
+    const handleSelectClick = (flight: Flight) => {
+        if (isSelected) {
+            dispatch({ type: 'SELECT_FLIGHT', payload: null });
+        } else {
+            dispatch({ type: 'SELECT_FLIGHT', payload: flight });
+        }
+    };
+
     const renderFlight = (outBoundFlight: Flight, inBoundFlight: Flight) => {
         const departurePieces = dateSplitter(outBoundFlight.departureTime);
         const arrivalPieces = dateSplitter(inBoundFlight.arrivalTime);
@@ -99,6 +112,16 @@ const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick }) => {
                     <p><strong>{totalFlightCost(flights)}</strong></p>
                     <p>currency: {outBoundFlight.currency}</p>
                 </div>
+                <button 
+                    className={`select-button ${isSelected ? 'bg-green-500' : 'bg-blue-500'} text-white p-2 rounded`}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleSelectClick(outBoundFlight);
+                        console.log("selected flight", outBoundFlight); 
+                    }}
+                >
+                    {isSelected ? 'Selected' : 'Select'}
+                </button>
             </div>
         );
     };

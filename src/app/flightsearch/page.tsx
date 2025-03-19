@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import Flight from '@/components/homePage/flight';
 import HomeHeader from '@/components/HomeHeader';
 import FlightResults from '@/components/flightSearch/FlightResults';
+import { ItineraryProvider } from '@/context/ItineraryContext';
 
 const Page = () => {
     const router = useRouter();
@@ -24,26 +25,28 @@ const Page = () => {
     }, []);
 
     return (
-        <div className="page-container">
-            <HomeHeader />
-            <main>
-                <Flight 
-                    sourceLocation={sourceLocation}
-                    destinationLocation={destinationLocation}
-                    startDate={startDate}
-                    endDate={endDate}
-                    tType={tripType}
-                />
-                <FlightResults 
-                    sourceLocation={sourceLocation}
-                    destinationLocation={destinationLocation}
-                    startDate={startDate}
-                    endDate={endDate}
-                    tripType={tripType}
-                />
-            </main>
-            <Footer />
-        </div>
+        <ItineraryProvider>
+            <div className="page-container">
+                <HomeHeader />
+                <main>
+                    <Flight 
+                        sourceLocation={sourceLocation}
+                        destinationLocation={destinationLocation}
+                        startDate={startDate}
+                        endDate={endDate}
+                        tType={tripType}
+                    />
+                    <FlightResults 
+                        sourceLocation={sourceLocation}
+                        destinationLocation={destinationLocation}
+                        startDate={startDate}
+                        endDate={endDate}
+                        tripType={tripType}
+                    />
+                </main>
+                <Footer />
+            </div>
+        </ItineraryProvider>
     );
 }
 

@@ -30,15 +30,17 @@ interface Flight {
 
 interface ItineraryState {
     flights: Flight[];
+    selectedFlight: Flight | null;
 }
 
 interface ItineraryAction {
-    type: 'ADD_FLIGHT' | 'REMOVE_FLIGHT';
-    payload: Flight;
+    type: 'ADD_FLIGHT' | 'REMOVE_FLIGHT' | 'SELECT_FLIGHT';
+    payload: Flight | null;
 }
 
 const initialState: ItineraryState = {
     flights: [],
+    selectedFlight: null,
 };
 
 const ItineraryContext = createContext<{
@@ -52,9 +54,20 @@ const ItineraryContext = createContext<{
 const itineraryReducer = (state: ItineraryState, action: ItineraryAction): ItineraryState => {
     switch (action.type) {
         case 'ADD_FLIGHT':
-            return { ...state, flights: [...state.flights, action.payload] };
+            if (action.payload) {
+                return { ...state, flights: [...state.flights, action.payload] };
+            }
+            return state;
         case 'REMOVE_FLIGHT':
-            return { ...state, flights: state.flights.filter(flight => flight.id !== action.payload.id) };
+            if (action.payload) {
+                if (action.payload) {
+                    return { ...state, flights: state.flights.filter(flight => flight.id !== action.payload.id) };
+                }
+                return state;
+            }
+            return state;
+        case 'SELECT_FLIGHT':
+            return { ...state, selectedFlight: action.payload };
         default:
             return state;
     }
