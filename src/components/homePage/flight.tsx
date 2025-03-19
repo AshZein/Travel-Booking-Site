@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { searchSuggestAirports, searchSuggestCities } from '@/utils/cleanSearch';
@@ -60,8 +60,9 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
     };
 
     const handleFlightSearchClick = () => {
-        flightRouter.push(`/flightsearch?tripType=${tripType}&sourceLocation=${source}&destinationLocation=${destination}&startDate=${start?.toISOString()}&endDate=${end?.toISOString()}`);
-    }
+        // Use window.location.href to force a full page refresh
+        window.location.href = `/flightsearch?tripType=${tripType}&sourceLocation=${source}&destinationLocation=${destination}&startDate=${start?.toISOString()}&endDate=${end?.toISOString()}`;
+    };
 
     useEffect(() => {
         setSource(sourceLocation || '');
@@ -134,7 +135,14 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
                     <label htmlFor="start-date" className="text-white">Start Date:</label>
                     <DatePicker
                         selected={start}
-                        onChange={(date) => date && setStart(date)}
+                        onChange={(date) => {
+                            if (date) {
+                                setStart(date);
+                                if (tripType === 'one-way') {
+                                    setEnd(date);
+                                }
+                            }
+                        }}
                         className="text-black p-2 rounded"
                         id="start-date"
                     />
@@ -150,7 +158,7 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
                         />
                     </div>
                 )}
-                <button className="tripType-button mt-10" onClick={handleFlightSearchClick}>Search</button>
+                <button className="tripType-button search-button mt-10" onClick={handleFlightSearchClick}>Search</button>
             </div>
         </div>
     );

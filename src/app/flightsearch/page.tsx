@@ -34,7 +34,13 @@ const Page = () => {
                     endDate={endDate}
                     tType={tripType}
                 />
-                < FlightResults />
+                <FlightResults 
+                    sourceLocation={sourceLocation}
+                    destinationLocation={destinationLocation}
+                    startDate={startDate}
+                    endDate={endDate}
+                    tripType={tripType}
+                />
             </main>
             <Footer />
         </div>

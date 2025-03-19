@@ -9,8 +9,8 @@ async function searchFlights(source: string, destination: string, startDate: str
         const data = await response.json();
         console.log('API Response:', data); // Debugging statement
 
-        // Assuming the API response is an array of flight groups
-        return data;
+        // Ensure we always return an array
+        return Array.isArray(data) ? data : [];
     } catch (error) {
         console.error('Error fetching flights:', error);
         return [];
@@ -45,38 +45,60 @@ interface Flight {
     };
 }
 
+interface FlightResultsProps {
+    sourceLocation: string;
+    destinationLocation: string;
+    startDate: string;
+    endDate: string;
+    tripType: string;
+}
 
-const FlightResults: React.FC = () => {
+const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinationLocation, startDate, endDate, tripType }) => {
     const [outboundFlights, setOutboundFlights] = useState<any[]>([]);
     const [inboundFlights, setInboundFlights] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-    const [tripType, setTripType] = useState('one-way');
     const [selectedFlight, setSelectedFlight] = useState<Flight[] | null>(null); // State for selected flight
     const [showPopup, setShowPopup] = useState(false); // State for showing popup
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        console.log("useEffect is running"); // Debugging statement
-
-        const searchParams = new URLSearchParams(window.location.search);
-        const sourceLocation = searchParams.get('sourceLocation') || '';
-        const destinationLocation = searchParams.get('destinationLocation') || '';
-        const startDate = searchParams.get('startDate') || '';
-        const endDate = searchParams.get('endDate') || '';
-        const tripType = searchParams.get('tripType') || 'one-way';
-
-        console.log("Search Params:", sourceLocation, destinationLocation, startDate, endDate); // Debugging statement
-
-        searchFlights(sourceLocation, destinationLocation, startDate, endDate).then((flights) => {
-            console.log('Fetched Flights:', flights); // Debugging statement
-            setOutboundFlights(flights);
-            setTripType(tripType);
-        });
-        searchFlights(destinationLocation, sourceLocation, endDate, startDate).then((flights) => {
-            console.log('Fetched Flights:', flights); // Debugging statement
-            setInboundFlights(flights);
+        console.log("useEffect is running");
+        console.log("Search parameters:", { sourceLocation, destinationLocation, startDate, endDate, tripType });
+        
+        if (!sourceLocation || !destinationLocation) {
+            setOutboundFlights([]);
+            setInboundFlights([]);
             setLoading(false);
-        });
-    }, []);
+            return;
+        }
+
+        setLoading(true);
+        setError(null);
+        console.log(sourceLocation, destinationLocation, startDate, endDate);
+        searchFlights(sourceLocation, destinationLocation, startDate, endDate)
+            .then((flights) => {
+                console.log('Fetched Outbound Flights:', flights);
+                setOutboundFlights(Array.isArray(flights) ? flights : []);
+                
+                if (tripType === 'round-trip') {
+                    return searchFlights(destinationLocation, sourceLocation, endDate, startDate);
+                }
+                return [];
+            })
+            .then((flights) => {
+                if (tripType === 'round-trip') {
+                    console.log('Fetched Inbound Flights:', flights);
+                    setInboundFlights(Array.isArray(flights) ? flights : []);
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching flights:', error);
+                setError('Failed to fetch flights. Please try again.');
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, [sourceLocation, destinationLocation, startDate, endDate, tripType]);
 
     const handleFlightClick = (flights: Flight[]) => {
         setSelectedFlight(flights);
@@ -89,31 +111,51 @@ const FlightResults: React.FC = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="text-center p-8">Loading flights...</div>;
+    }
+
+    if (error) {
+        return <div className="text-center p-8 text-red-500">{error}</div>;
     }
 
     return (
-        <div className="flight-results flex justify-between">
-            <div className="flex-1 mr-2.5">
-                {outboundFlights.map((flightGroup, index) => (
-                    <FlightCard key={index} legs={flightGroup.legs} flights={flightGroup.flights} onClick={() => handleFlightClick(flightGroup.flights)} />
-                ))}
+        <div className="flight-results flex flex-col md:flex-row justify-between">
+            <div className="flex-1 mr-0 md:mr-2.5 mb-4 md:mb-0">
+                <h2 className="text-xl font-bold mb-4">Outbound Flights</h2>
+                {outboundFlights && outboundFlights.length > 0 ? (
+                    outboundFlights.map((flightGroup, index) => (
+                        <FlightCard 
+                            key={index} 
+                            legs={flightGroup.legs} 
+                            flights={flightGroup.flights} 
+                            onClick={() => handleFlightClick(flightGroup.flights)} 
+                        />
+                    ))
+                ) : (
+                    <div className="p-4 bg-white text-black rounded">No outbound flights found for selected criteria.</div>
+                )}
             </div>
             {tripType === 'round-trip' && (
-                <div className="flex-1 ml-2.5">
-                    {inboundFlights.length > 0 ? (
+                <div className="flex-1 ml-0 md:ml-2.5">
+                    <h2 className="text-xl font-bold mb-4">Return Flights</h2>
+                    {inboundFlights && inboundFlights.length > 0 ? (
                         inboundFlights.map((flightGroup, index) => (
-                            <FlightCard key={index} legs={flightGroup.legs} flights={flightGroup.flights} onClick={() => handleFlightClick(flightGroup.flights)} />
+                            <FlightCard 
+                                key={index} 
+                                legs={flightGroup.legs} 
+                                flights={flightGroup.flights} 
+                                onClick={() => handleFlightClick(flightGroup.flights)} 
+                            />
                         ))
                     ) : (
-                        <div>No return flights found for selected date</div>
+                        <div className="p-4 bg-white text-black rounded">No return flights found for selected criteria.</div>
                     )}
                 </div>
             )}
             {showPopup && selectedFlight && (
                 <div className="popup">
                     <div className="popup-content">
-                        <button onClick={closePopup}>Close</button>
+                        <button onClick={closePopup} className="absolute top-2 right-2 p-2">✕</button>
                         <FlightDetailPopUp legs={selectedFlight.length} flights={selectedFlight} />
                     </div>
                 </div>
