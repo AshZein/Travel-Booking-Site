@@ -20,7 +20,7 @@ const FlightResults: React.FC = () => {
     const [outboundFlights, setOutboundFlights] = useState<any[]>([]);
     const [inboundFlights, setInboundFlights] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-    const [tripType, setTripType] = useState('round-trip');
+    const [tripType, setTripType] = useState('one-way');
 
     useEffect(() => {
         console.log("useEffect is running"); // Debugging statement
@@ -30,12 +30,15 @@ const FlightResults: React.FC = () => {
         const destinationLocation = searchParams.get('destinationLocation') || '';
         const startDate = searchParams.get('startDate') || '';
         const endDate = searchParams.get('endDate') || '';
+        const tripType = searchParams.get('tripType') || 'one-way';
+        
 
         console.log("Search Params:", sourceLocation, destinationLocation, startDate, endDate); // Debugging statement
 
         searchFlights(sourceLocation, destinationLocation, startDate, endDate).then((flights) => {
             console.log('Fetched Flights:', flights); // Debugging statement
             setOutboundFlights(flights);
+            setTripType(tripType);
         });
         searchFlights(destinationLocation, sourceLocation, endDate, startDate).then((flights) => {
             console.log('Fetched Flights:', flights); // Debugging statement

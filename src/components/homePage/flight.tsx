@@ -9,14 +9,15 @@ interface FlightProps {
     destinationLocation: string;
     startDate: string;
     endDate: string;
+    tType: string;
 }
 
-const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, startDate, endDate }) => {
+const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, startDate, endDate, tType }) => {
     const flightRouter = useRouter();
     const [selectedOption, setSelectedOption] = useState('hotel');
     const [start, setStart] = useState<Date | null>(new Date());
     const [end, setEnd] = useState<Date | null>(new Date());
-    const [tripType, setTripType] = useState('round-trip'); // State for trip type
+    const [tripType, setTripType] = useState('one-way'); // State for trip type
 
     const toggleTripType = () => {
         setTripType((prevTripType) => (prevTripType === 'round-trip' ? 'one-way' : 'round-trip'));
@@ -59,7 +60,7 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
     };
 
     const handleFlightSearchClick = () => {
-        flightRouter.push(`/flightsearch?sourceLocation=${source}&destinationLocation=${destination}&startDate=${start?.toISOString()}&endDate=${end?.toISOString()}`);
+        flightRouter.push(`/flightsearch?tripType=${tripType}&sourceLocation=${source}&destinationLocation=${destination}&startDate=${start?.toISOString()}&endDate=${end?.toISOString()}`);
     }
 
     useEffect(() => {
@@ -67,6 +68,7 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
         setDestination(destinationLocation || '');
         setStart(startDate ? new Date(startDate) : new Date());
         setEnd(endDate ? new Date(startDate) : new Date());
+        setTripType(tType || 'one-way');
     }, [sourceLocation, destinationLocation, startDate, endDate]);
 
     return (

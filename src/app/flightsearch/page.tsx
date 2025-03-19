@@ -12,6 +12,7 @@ const Page = () => {
     const [destinationLocation, setDestinationLocation] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [tripType, setTripType] = useState('one-way');
 
     useEffect(() => {
         const searchParams = new URLSearchParams(window.location.search);
@@ -19,6 +20,7 @@ const Page = () => {
         setDestinationLocation(searchParams.get('destinationLocation') || '');
         setStartDate(searchParams.get('startDate') || '');
         setEndDate(searchParams.get('endDate') || '');
+        setTripType(searchParams.get('tripType') || 'one-way');
     }, []);
 
     return (
@@ -30,6 +32,7 @@ const Page = () => {
                     destinationLocation={destinationLocation}
                     startDate={startDate}
                     endDate={endDate}
+                    tType={tripType}
                 />
                 < FlightResults />
             </main>
