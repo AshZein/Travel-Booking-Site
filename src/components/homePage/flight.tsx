@@ -68,7 +68,7 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
         setSource(sourceLocation || '');
         setDestination(destinationLocation || '');
         setStart(startDate ? new Date(startDate) : new Date());
-        setEnd(endDate ? new Date(startDate) : new Date());
+        setEnd(endDate ? new Date(endDate) : new Date());
         setTripType(tType || 'one-way');
     }, [sourceLocation, destinationLocation, startDate, endDate]);
 
