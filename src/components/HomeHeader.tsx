@@ -27,7 +27,9 @@ const HomeHeader: React.FC = () => {
                 <img src="logo_no_back.png" alt="FlyNext Logo" className="h-8 cursor-pointer" onClick={handleLogoClick}/>
                 <h1 className="text-2xl cursor-pointer" onClick={handleLogoClick}>FlyNext</h1>
             </div>
-
+            <div className=''>
+                <img src="itinerarysymbol_white.png" alt="Itinerary" className="h-8 cursor-pointer" onClick={() => HomeRouter.push('/itinerary')}/>
+            </div>
             <div className="auth-buttons flex gap-4">
                 <button 
                     className="auth-button text-white font-bold py-2 px-4 rounded bg-blue-500"
