@@ -52,17 +52,21 @@ const FlightResults: React.FC = () => {
     }
 
     return (
-        <div className="flight-results" style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div style={{ flex: 1, marginRight: '10px' }}>
+        <div className="flight-results flex justify-between">
+            <div className="flex-1 mr-2.5">
             {outboundFlights.map((flightGroup, index) => (
                 <FlightCard key={index} legs={flightGroup.legs} flights={flightGroup.flights} />
             ))}
             </div>
-            { tripType === 'round-trip' && inboundFlights.length > 0 && (
-            <div style={{ flex: 1, marginLeft: '10px' }}>
-                {inboundFlights.map((flightGroup, index) => (
-                <FlightCard key={index} legs={flightGroup.legs} flights={flightGroup.flights} />
-                ))}
+            {tripType === 'round-trip' && (
+            <div className="flex-1 ml-2.5">
+                {inboundFlights.length > 0 ? (
+                inboundFlights.map((flightGroup, index) => (
+                    <FlightCard key={index} legs={flightGroup.legs} flights={flightGroup.flights} />
+                ))
+                ) : (
+                <div>No return flights found for selected date</div>
+                )}
             </div>
             )}
         </div>

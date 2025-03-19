@@ -121,3 +121,20 @@ button:hover {
   align-items: left;
   margin-top: 1rem;
 }
+
+.flight-results{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  margin-top: 1rem;
+  background-color: #136f6c;
+}
+
+.flight-card {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 2rem;
+  border: #000000;
+  margin-bottom: 1rem; /* Add margin-bottom to create a gap between flight cards */
+}

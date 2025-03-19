@@ -32,6 +32,10 @@ function dateSplitter(dateString: string) {
     return pieces;
 }
 
+function totalFlightCost(flights: Flight[]) {
+    return flights.reduce((total, flight) => total + flight.price, 0);
+}
+
 interface Flight {
     id: string;
     flightNumber: string;
@@ -69,9 +73,10 @@ const FlightCard: React.FC<FlightCardProps> = ({ legs, flights }) => {
     const renderFlight = (outBoundFlight: Flight, inBoundFlight: Flight) => {
         const departurePieces = dateSplitter(outBoundFlight.departureTime);
         const arrivalPieces = dateSplitter(inBoundFlight.arrivalTime);
+        
         return (
             <div key={outBoundFlight.id} className="flight-details flex items-center gap-20">
-                <div>
+                <div className="flex flex-col items-center gap-1">
                     <p>{departurePieces.hour}:{departurePieces.minute}</p>
                     <p>{outBoundFlight.origin.code} - {departurePieces.day} {departurePieces.month}</p>
                 </div>
@@ -84,16 +89,21 @@ const FlightCard: React.FC<FlightCardProps> = ({ legs, flights }) => {
                         <>DIRECT</>
                     )}
                 </div>
-                <div>
+                <div className="flex flex-col items-center gap-1">
                     <p>{arrivalPieces.hour}:{arrivalPieces.minute}</p>
                     <p>{inBoundFlight.destination.code} - {arrivalPieces.day} {arrivalPieces.month}</p>
+                </div>
+                
+                <div className="vertical-line border-l-2 border-black h-full pl-4">
+                    <p><strong>{totalFlightCost(flights)}</strong></p>
+                    <p>currency: {outBoundFlight.currency}</p>
                 </div>
             </div>
         );
     };
 
     return (
-        <div className="flight-card bg-gray-200 p-4 text-black">
+        <div className="flight-card">
             <>
                 {renderFlight(flights[0], flights[flights.length - 1])}
             </>
