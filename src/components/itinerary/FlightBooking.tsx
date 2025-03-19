@@ -32,7 +32,7 @@ interface FlightBookingProps {
     flights: Flight[];
     outBoundFlight: boolean;
 }
-const FlightBooking: React.FC = () => {
+const FlightBooking: React.FC = (flights) => {
     return (
         <div>
             <p>TEST ONE</p>
