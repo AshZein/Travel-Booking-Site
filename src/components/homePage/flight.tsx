@@ -83,7 +83,7 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
                 </button>
             </div>
             <div className="flex items-center gap-4">
-                <div className="search-box">
+                <div className="search-box relative">
                     <label htmlFor="source-location" className="text-white">Source Location:</label>
                     <input 
                         type="text" 
@@ -94,11 +94,11 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
                         value={source}
                     />
                     {sourceSuggestions.length > 0 && (
-                        <ul className="suggestions-list">
+                        <ul className="suggestions-list absolute bg-white border border-gray-300 mt-1 w-full z-15">
                             {sourceSuggestions.map((suggestion, index) => (
                                 <li 
                                     key={index} 
-                                    className="suggestion-item"
+                                    className="suggestion-item p-2 cursor-pointer hover:bg-gray-200"
                                     onClick={() => handleSourceSuggestionClick(suggestion)}
                                 >
                                     {suggestion}
@@ -107,7 +107,7 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
                         </ul>
                     )}
                 </div>
-                <div className="search-box">
+                <div className="search-box relative">
                     <label htmlFor="destination-location" className="text-white">Destination Location:</label>
                     <input 
                         type="text" 
@@ -118,11 +118,11 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
                         value={destination}
                     />
                     {destinationSuggestions.length > 0 && (
-                        <ul className="suggestions-list">
+                        <ul className="suggestions-list absolute bg-white border border-gray-300 mt-1 w-full z-10">
                             {destinationSuggestions.map((suggestion, index) => (
                                 <li 
                                     key={index} 
-                                    className="suggestion-item"
+                                    className="suggestion-item p-2 cursor-pointer hover:bg-gray-200"
                                     onClick={() => handleDestinationSuggestionClick(suggestion)}
                                 >
                                     {suggestion}
