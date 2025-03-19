@@ -150,7 +150,7 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
                         />
                     </div>
                 )}
-                <button className="tripType-button" onClick={handleFlightSearchClick}>Search</button>
+                <button className="tripType-button mt-10" onClick={handleFlightSearchClick}>Search</button>
             </div>
         </div>
     );

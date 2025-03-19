@@ -74,7 +74,7 @@ const Hotel: React.FC = () => {
                     id="end-date"
                 />
             </div>
-            <button className="tripType-button" onClick={handleHotelSearchClick}>Search</button>
+            <button className="tripType-button mt-10" onClick={handleHotelSearchClick}>Search</button>
         </div>
     );
 }

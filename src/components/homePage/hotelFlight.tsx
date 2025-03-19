@@ -113,7 +113,7 @@ const [sourceLocation, setSourceLocation] = useState('');
                     id="end-date"
                 />
             </div>
-            <button className="tripType-button">Search</button>
+            <button className="tripType-button mt-10">Search</button>
         </div>
     );
 }
