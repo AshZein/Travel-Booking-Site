@@ -75,29 +75,22 @@ const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinati
         setLoading(true);
         setError(null);
         console.log(sourceLocation, destinationLocation, startDate, endDate);
-        searchFlights(sourceLocation, destinationLocation, startDate, endDate)
-            .then((flights) => {
-                console.log('Fetched Outbound Flights:', flights);
-                setOutboundFlights(Array.isArray(flights) ? flights : []);
-                
-                if (tripType === 'round-trip') {
-                    return searchFlights(destinationLocation, sourceLocation, endDate, startDate);
-                }
-                return [];
-            })
-            .then((flights) => {
-                if (tripType === 'round-trip') {
-                    console.log('Fetched Inbound Flights:', flights);
-                    setInboundFlights(Array.isArray(flights) ? flights : []);
-                }
-            })
-            .catch((error) => {
-                console.error('Error fetching flights:', error);
-                setError('Failed to fetch flights. Please try again.');
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+        const fetchFlights = async () => {
+            const outBoundFlight = await searchFlights(sourceLocation, destinationLocation, startDate, startDate);
+            setOutboundFlights(Array.isArray(outBoundFlight) ? outBoundFlight : []);
+            
+            if (tripType === 'round-trip') {
+                const inBoundFlight = await searchFlights(destinationLocation, sourceLocation, endDate, endDate);
+                setInboundFlights(Array.isArray(inBoundFlight) ? inBoundFlight : []);
+            }
+        };
+
+        fetchFlights().catch((error) => {
+            console.error('Error fetching flights:', error);
+            setError('Failed to fetch flights. Please try again.');
+        }).finally(() => {
+            setLoading(false);
+        });
     }, [sourceLocation, destinationLocation, startDate, endDate, tripType]);
 
     const handleFlightClick = (flights: Flight[]) => {
