@@ -148,7 +148,7 @@ const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinati
             {showPopup && selectedFlight && (
                 <div className="popup">
                     <div className="popup-content">
-                        <button onClick={closePopup} className="absolute top-2 right-2 p-2">✕</button>
+                        <button onClick={closePopup} className="p-2">✕</button>
                         <FlightDetailPopUp legs={selectedFlight.length} flights={selectedFlight} />
                     </div>
                 </div>
