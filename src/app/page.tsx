@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import HomeHeader from '../components/HomeHeader';
+import HomeHeader from '@/components/HomeHeader';
 import Footer from '@/components/Footer';
 import Flight from '@/components/homePage/flight';
 import Hotel from '@/components/homePage/hotel';
