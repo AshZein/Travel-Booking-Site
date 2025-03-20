@@ -76,10 +76,10 @@ const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick }) => {
     const { state, dispatch } = useItinerary();
     const firstFlightId = flights[0].id;
     const lastFlightId = flights[flights.length - 1].id;
-    // const isSelected = state.selectedFlights.some(
-    //     selectedFlight => selectedFlight.id === firstFlightId || selectedFlight.id === lastFlightId
-    // );
-    const isSelected = state.selectedFlights.length > 0 && state.selectedFlights[0].id === firstFlightId && state.selectedFlights[state.selectedFlights.length - 1].id === lastFlightId;
+    // a flight is selected if the state has a flight selected, and the flight id of the first leg is the same, and the flight of the last leg is the same as the one selected
+    const isSelected = state.selectedFlights.length > 0 && 
+                        state.selectedFlights[0].id === firstFlightId && 
+                        state.selectedFlights[state.selectedFlights.length - 1].id === lastFlightId;
 
     const handleSelectClick = (flights: Flight[]) => {
         if (isSelected) {
