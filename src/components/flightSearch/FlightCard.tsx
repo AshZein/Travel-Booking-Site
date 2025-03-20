@@ -74,13 +74,22 @@ interface FlightCardProps {
 
 const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick }) => {
     const { state, dispatch } = useItinerary();
-    const isSelected = state.selectedFlight && state.selectedFlight.id === flights[0].id;
+    const firstFlightId = flights[0].id;
+    const lastFlightId = flights[flights.length - 1].id;
+    // const isSelected = state.selectedFlights.some(
+    //     selectedFlight => selectedFlight.id === firstFlightId || selectedFlight.id === lastFlightId
+    // );
+    const isSelected = state.selectedFlights.length > 0 && state.selectedFlights[0].id === firstFlightId && state.selectedFlights[state.selectedFlights.length - 1].id === lastFlightId;
 
-    const handleSelectClick = (flight: Flight) => {
+    const handleSelectClick = (flights: Flight[]) => {
         if (isSelected) {
-            dispatch({ type: 'SELECT_FLIGHT', payload: null });
+            flights.forEach(flight =>{
+                dispatch({ type: 'UNSELECT_FLIGHT', payload: flight });
+            });
         } else {
-            dispatch({ type: 'SELECT_FLIGHT', payload: flight });
+            flights.forEach(flight => {
+                dispatch({ type: 'SELECT_FLIGHT', payload: flight });
+            });
         }
     };
 
@@ -116,8 +125,8 @@ const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick }) => {
                     className={`select-button ${isSelected ? 'bg-green-500' : 'bg-blue-500'} text-white p-2 rounded`}
                     onClick={(e) => {
                         e.stopPropagation();
-                        handleSelectClick(outBoundFlight);
-                        console.log("selected flight", outBoundFlight); 
+                        handleSelectClick(flights);
+                        console.log("selected flight", flights); 
                     }}
                 >
                     {isSelected ? 'Selected' : 'Select'}
