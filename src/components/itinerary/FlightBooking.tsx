@@ -11,13 +11,16 @@ interface FlightBookingProps {
     outBoundFlight: boolean;
     onClick: () => void;
 }
-const FlightBooking: React.FC<FlightBookingProps> = ({legs, flights, outBoundFlight, onClick}) => {
-    const { state, dispatch } = useItinerary();
+
+const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFlight, onClick }) => {
+    // const { state, dispatch } = useItinerary();
 
     const renderFlight = (outBoundFlight: Flight, inBoundFlight: Flight) => {
+        console.log("OUTBOUND FLIGHT:", outBoundFlight);
+        console.log("INBOUND FLIGHT:", inBoundFlight);
         const departurePieces = dateSplitter(outBoundFlight.departureTime, dateCache);
         const arrivalPieces = dateSplitter(inBoundFlight.arrivalTime, dateCache);
-        
+
         return (
             <div key={outBoundFlight.id} className="flight-details flex items-center gap-20" onClick={onClick}>
                 <div className="flex flex-col items-center gap-1">
@@ -37,7 +40,7 @@ const FlightBooking: React.FC<FlightBookingProps> = ({legs, flights, outBoundFli
                     <p>{arrivalPieces.hour}:{arrivalPieces.minute}</p>
                     <p>{inBoundFlight.destination.code} - {arrivalPieces.day} {arrivalPieces.month}</p>
                 </div>
-                
+
                 <div className="vertical-line border-l-2 border-black h-full pl-4">
                     <p><strong>{totalFlightCost(flights)}</strong></p>
                     <p>currency: {outBoundFlight.currency}</p>
@@ -48,17 +51,13 @@ const FlightBooking: React.FC<FlightBookingProps> = ({legs, flights, outBoundFli
 
     return (
         <div className="flight-card">
-            <>
-                {renderFlight(flights[0], flights[flights.length - 1])}
-            </>
+            {flights.length > 0 && flights[0] && flights[flights.length - 1] ? (
+                renderFlight(flights[0], flights[flights.length - 1])
+            ) : (
+                <p>No flights available</p>
+            )}
         </div>
     );
-}
-    // return (
-    //     <div>
-    //         <p>TEST ONE</p>
-    //     </div>
-    // );
-
+};
 
 export default FlightBooking;

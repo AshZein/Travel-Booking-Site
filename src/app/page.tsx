@@ -7,6 +7,7 @@ import Flight from '@/components/homePage/flight';
 import Hotel from '@/components/homePage/hotel';
 import HotelFlight from '@/components/homePage/hotelFlight';
 import { ItineraryProvider } from '@/context/ItineraryContext';
+import withItineraryProvider from '@/HOC/withItineraryProvider';
 
 const Page = () => {
     const [selectedOption, setSelectedOption] = useState('hotel');
@@ -53,4 +54,4 @@ const Page = () => {
     );
 }
 
-export default Page;
+export default withItineraryProvider(Page);

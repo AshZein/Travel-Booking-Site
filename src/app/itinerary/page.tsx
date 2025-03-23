@@ -4,15 +4,26 @@ import HomeHeader from '@/components/HomeHeader';
 import Footer from '@/components/Footer';
 import FlightBooking from '@/components/itinerary/FlightBooking';
 import HotelBooking from '@/components/itinerary/HotelBooking';
+import { useItinerary } from '@/context/ItineraryContext';
+import withItineraryProvider from '@/HOC/withItineraryProvider';
 
 const Page = () => {
+    const { state, dispatch } = useItinerary();
+
     return (
         <div>
             
             <HomeHeader />
 
             <main>
-                <FlightBooking />
+                {state.selectedOutboundFlights && (
+                    <FlightBooking 
+                    flights={state.selectedOutboundFlights}
+                    legs={state.selectedOutboundFlights.length}
+                    outBoundFlight={true}
+                    onClick={() => {}}
+                    />
+                )}
             </main>
 
             <Footer />
@@ -20,4 +31,4 @@ const Page = () => {
     );
 }
 
-export default Page;
+export default withItineraryProvider(Page);
