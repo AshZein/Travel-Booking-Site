@@ -1,6 +1,3 @@
-import React from 'react';
-import { useItinerary } from '@/context/ItineraryContext';
-
 interface Flight {
     id: string;
     flightNumber: string;
@@ -29,16 +26,4 @@ interface Flight {
     };
 }
 
-interface FlightBookingProps {
-    flights: Flight[];
-    outBoundFlight: boolean;
-}
-const FlightBooking: React.FC = (flights) => {
-    return (
-        <div>
-            <p>TEST ONE</p>
-        </div>
-    );
-}
-
-export default FlightBooking;
+export type { Flight };
