@@ -129,6 +129,7 @@ const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinati
                             flights={flightGroup.flights} 
                             onClick={() => handleFlightClick(flightGroup.flights)} 
                             onAddToItinerary={() => addFlightToItinerary(flightGroup.flights[0])} // Example: Add the first flight in the group
+                            type={"outbound"}
                         />
                     ))
                 ) : (
@@ -146,6 +147,7 @@ const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinati
                                 flights={flightGroup.flights} 
                                 onClick={() => handleFlightClick(flightGroup.flights)} 
                                 onAddToItinerary={() => addFlightToItinerary(flightGroup.flights[0])} // Example: Add the first flight in the group
+                                type={"inbound"}
                             />
                         ))
                     ) : (

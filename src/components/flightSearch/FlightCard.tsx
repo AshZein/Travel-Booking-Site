@@ -70,26 +70,47 @@ interface FlightCardProps {
     flights: Flight[];
     onClick: () => void; // Add onClick prop
     onAddToItinerary: () => void;
+    type: string;
 }
 
-const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick }) => {
+const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick, type }) => {
     const { state, dispatch } = useItinerary();
     const firstFlightId = flights[0].id;
     const lastFlightId = flights[flights.length - 1].id;
+    var isSelected = false;
     // a flight is selected if the state has a flight selected, and the flight id of the first leg is the same, and the flight of the last leg is the same as the one selected
-    const isSelected = state.selectedOutboundFlights.length > 0 && 
-                        state.selectedOutboundFlights[0].id === firstFlightId && 
-                        state.selectedOutboundFlights[state.selectedOutboundFlights.length - 1].id === lastFlightId;
+    if (type === 'outbound') {
+        isSelected = state.selectedOutboundFlights.length > 0 && 
+                            state.selectedOutboundFlights[0].id === firstFlightId && 
+                            state.selectedOutboundFlights[state.selectedOutboundFlights.length - 1].id === lastFlightId;
+    }
+    else {
+        isSelected = state.selectedReturnFlights.length > 0 &&
+                            state.selectedReturnFlights[0].id === firstFlightId &&
+                            state.selectedReturnFlights[state.selectedReturnFlights.length - 1].id === lastFlightId;
+    }
 
     const handleSelectClick = (flights: Flight[]) => {
         if (isSelected) {
-            flights.forEach(flight =>{
-                dispatch({ type: 'UNSELECT_OUTBOUND_FLIGHT', payload: flight });
-            });
+            if (type === 'outbound') {
+                flights.forEach(flight => {
+                    dispatch({ type: 'UNSELECT_OUTBOUND_FLIGHT', payload: flight });
+                });
+            } else {
+                flights.forEach(flight => {
+                    dispatch({ type: 'UNSELECT_RETURN_FLIGHT', payload: flight });
+                });
+            }
         } else {
-            flights.forEach(flight => {
-                dispatch({ type: 'SELECT_OUTBOUND_FLIGHT', payload: flight });
-            });
+            if (type === 'outbound') {
+                flights.forEach(flight => {
+                    dispatch({ type: 'SELECT_OUTBOUND_FLIGHT', payload: flight });
+                });
+            } else {
+                flights.forEach(flight => {
+                    dispatch({ type: 'SELECT_RETURN_FLIGHT', payload: flight });
+                });
+            }
         }
     };
 
