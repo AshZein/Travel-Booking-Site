@@ -31,18 +31,18 @@ interface Flight {
 interface ItineraryState {
     // flights: Flight[];
     selectedOutboundFlights: Flight[];
-    selectedInboundFlights: Flight[];
+    selectedReturnFlights: Flight[];
 }
 
 interface ItineraryAction {
-    type:  'SELECT_OUTBOUND_FLIGHT' | 'UNSELECT_OUTBOUND_FLIGHT' | 'SELECT_INBOUND_FLIGHT' | 'UNSELECT_INBOUND_FLIGHT';
+    type:  'SELECT_OUTBOUND_FLIGHT' | 'UNSELECT_OUTBOUND_FLIGHT' | 'SELECT_Return_FLIGHT' | 'UNSELECT_Return_FLIGHT';
     payload: Flight;
 }
 
 const initialState: ItineraryState = {
     // flights: [],
     selectedOutboundFlights: [],
-    selectedInboundFlights: [],
+    selectedReturnFlights: [],
 };
 
 const ItineraryContext = createContext<{
@@ -59,10 +59,10 @@ const itineraryReducer = (state: ItineraryState, action: ItineraryAction): Itine
             return { ...state, selectedOutboundFlights: [...state.selectedOutboundFlights, action.payload] };
         case 'UNSELECT_OUTBOUND_FLIGHT':
             return { ...state, selectedOutboundFlights: state.selectedOutboundFlights.filter(flight => flight.id !== action.payload.id) };
-        case 'SELECT_INBOUND_FLIGHT':
-            return { ...state, selectedInboundFlights: [...state.selectedInboundFlights, action.payload] };
-        case 'UNSELECT_INBOUND_FLIGHT':
-            return { ...state, selectedInboundFlights: state.selectedInboundFlights.filter(flight => flight.id !== action.payload.id) };
+        case 'SELECT_Return_FLIGHT':
+            return { ...state, selectedReturnFlights: [...state.selectedReturnFlights, action.payload] };
+        case 'UNSELECT_Return_FLIGHT':
+            return { ...state, selectedReturnFlights: state.selectedReturnFlights.filter(flight => flight.id !== action.payload.id) };
         default:
             return state;
     }
