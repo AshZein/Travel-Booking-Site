@@ -29,18 +29,20 @@ interface Flight {
 }
 
 interface ItineraryState {
-    flights: Flight[];
-    selectedFlights: Flight[];
+    // flights: Flight[];
+    selectedOutboundFlights: Flight[];
+    selectedInboundFlights: Flight[];
 }
 
 interface ItineraryAction {
-    type: 'ADD_FLIGHT' | 'REMOVE_FLIGHT' | 'SELECT_FLIGHT' | 'UNSELECT_FLIGHT';
+    type:  'SELECT_OUTBOUND_FLIGHT' | 'UNSELECT_OUTBOUND_FLIGHT' | 'SELECT_INBOUND_FLIGHT' | 'UNSELECT_INBOUND_FLIGHT';
     payload: Flight;
 }
 
 const initialState: ItineraryState = {
-    flights: [],
-    selectedFlights: [],
+    // flights: [],
+    selectedOutboundFlights: [],
+    selectedInboundFlights: [],
 };
 
 const ItineraryContext = createContext<{
@@ -53,14 +55,14 @@ const ItineraryContext = createContext<{
 
 const itineraryReducer = (state: ItineraryState, action: ItineraryAction): ItineraryState => {
     switch (action.type) {
-        case 'ADD_FLIGHT':
-            return { ...state, flights: [...state.flights, action.payload] };
-        case 'REMOVE_FLIGHT':
-            return { ...state, flights: state.flights.filter(flight => flight.id !== action.payload.id) };
-        case 'SELECT_FLIGHT':
-            return { ...state, selectedFlights: [...state.selectedFlights, action.payload] };
-        case 'UNSELECT_FLIGHT':
-            return { ...state, selectedFlights: state.selectedFlights.filter(flight => flight.id !== action.payload.id) };
+        case 'SELECT_OUTBOUND_FLIGHT':
+            return { ...state, selectedOutboundFlights: [...state.selectedOutboundFlights, action.payload] };
+        case 'UNSELECT_OUTBOUND_FLIGHT':
+            return { ...state, selectedOutboundFlights: state.selectedOutboundFlights.filter(flight => flight.id !== action.payload.id) };
+        case 'SELECT_INBOUND_FLIGHT':
+            return { ...state, selectedInboundFlights: [...state.selectedInboundFlights, action.payload] };
+        case 'UNSELECT_INBOUND_FLIGHT':
+            return { ...state, selectedInboundFlights: state.selectedInboundFlights.filter(flight => flight.id !== action.payload.id) };
         default:
             return state;
     }
