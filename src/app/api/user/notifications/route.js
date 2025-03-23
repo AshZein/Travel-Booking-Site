@@ -8,7 +8,7 @@ export async function GET(request) {
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    const notifications = await prisma.Notification.findMany({
+    const notifications = await prisma.Notifications.findMany({
         where: { userId: userToken.id },
         select: { id: true, message: true, read: true, date: true },
         orderBy: { date: "desc" },
@@ -27,7 +27,7 @@ export async function PATCH(request) {
     const { id, read, cleared } = await request.json();
 
     if ( cleared ){
-        await prisma.Notification.delete({
+        await prisma.Notifications.delete({
             where: { id: id },
         });
 
@@ -35,7 +35,7 @@ export async function PATCH(request) {
     }
 
     if(read) {
-        const notification = await prisma.Notification.update({
+        const notification = await prisma.Notifications.update({
             where: { id },
             data: { read: true },
             select: { message: true, read: true, date: true },
@@ -44,7 +44,7 @@ export async function PATCH(request) {
         return NextResponse.json({ notification });
     }
 
-    const notification = await prisma.Notification.update({
+    const notification = await prisma.Notifications.update({
         where: { id },
         data: { read: true },
         select: { message: true, read: true, date: true },
