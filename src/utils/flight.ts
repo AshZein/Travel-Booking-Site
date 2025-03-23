@@ -59,6 +59,7 @@ async function bookFlights(firstName: string, lastName: string, email: string, p
 
         const result = await response.json();
         console.log('Booking successful:', result);
+        return result;
     } catch (error) {
         console.error('Booking failed:', error);
     }
