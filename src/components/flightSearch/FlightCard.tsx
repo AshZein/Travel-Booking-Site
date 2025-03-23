@@ -9,7 +9,7 @@ const dateCache: { [key: string]: { [key: string]: string } } = {};
 interface FlightCardProps {
     legs: number;
     flights: Flight[];
-    onClick: () => void; // Add onClick prop
+    onClick: () => void;
     onAddToItinerary: () => void;
     type: string;
 }
