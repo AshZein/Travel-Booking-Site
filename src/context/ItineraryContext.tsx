@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 
 interface Flight {
     id: string;
@@ -29,18 +29,16 @@ interface Flight {
 }
 
 interface ItineraryState {
-    // flights: Flight[];
     selectedOutboundFlights: Flight[];
     selectedReturnFlights: Flight[];
 }
 
 interface ItineraryAction {
-    type:  'SELECT_OUTBOUND_FLIGHT' | 'UNSELECT_OUTBOUND_FLIGHT' | 'SELECT_RETURN_FLIGHT' | 'UNSELECT_RETURN_FLIGHT';
+    type: 'SELECT_OUTBOUND_FLIGHT' | 'UNSELECT_OUTBOUND_FLIGHT' | 'SELECT_RETURN_FLIGHT' | 'UNSELECT_RETURN_FLIGHT';
     payload: Flight;
 }
 
 const initialState: ItineraryState = {
-    // flights: [],
     selectedOutboundFlights: [],
     selectedReturnFlights: [],
 };
@@ -69,7 +67,19 @@ const itineraryReducer = (state: ItineraryState, action: ItineraryAction): Itine
 };
 
 export const ItineraryProvider = ({ children }: { children: ReactNode }) => {
-    const [state, dispatch] = useReducer(itineraryReducer, initialState);
+    const [state, dispatch] = useReducer(itineraryReducer, initialState, (initial) => {
+        if (typeof window !== 'undefined') {
+            const persistedState = localStorage.getItem('itineraryState');
+            return persistedState ? JSON.parse(persistedState) : initial;
+        }
+        return initial;
+    });
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('itineraryState', JSON.stringify(state));
+        }
+    }, [state]);
 
     return (
         <ItineraryContext.Provider value={{ state, dispatch }}>
