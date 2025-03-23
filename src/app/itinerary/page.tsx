@@ -38,6 +38,15 @@ const Page = () => {
                     />
                 )}
 
+                {state.selectedReturnFlights && (
+                    <FlightBooking 
+                    flights={state.selectedReturnFlights}
+                    legs={state.selectedReturnFlights.length}
+                    outBoundFlight={false}
+                    onClick={() => handleFlightClick(state.selectedReturnFlights)}
+                    />
+                )}
+
             {showPopup && selectedFlight && (
                 <div className="popup">
                     <div className="popup-content">
