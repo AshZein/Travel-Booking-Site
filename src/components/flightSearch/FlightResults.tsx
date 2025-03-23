@@ -101,7 +101,7 @@ const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinati
     };
 
     const addFlightToItinerary = (flight: Flight) => {
-        dispatch({ type: 'ADD_FLIGHT', payload: flight });
+        dispatch({ type: 'SELECT_OUTBOUND_FLIGHT', payload: flight });
     };
 
     const closePopup = () => {
