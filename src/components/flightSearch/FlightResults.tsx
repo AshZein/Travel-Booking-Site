@@ -3,6 +3,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import FlightCard from './FlightCard';
 import FlightDetailPopUp from './FlightDetailPopUp';
 import { useItinerary } from '@/context/ItineraryContext';
+import { Flight } from '@/types/flight';
 
 async function searchFlights(source: string, destination: string, startDate: string, endDate: string) {
     try {
@@ -16,34 +17,6 @@ async function searchFlights(source: string, destination: string, startDate: str
         console.error('Error fetching flights:', error);
         return [];
     }
-}
-
-interface Flight {
-    id: string;
-    flightNumber: string;
-    departureTime: string;
-    arrivalTime: string;
-    origin: {
-        code: string;
-        name: string;
-        city: string;
-        country: string;
-    };
-    destination: {
-        code: string;
-        name: string;
-        city: string;
-        country: string;
-    };
-    duration: number;
-    price: number;
-    currency: string;
-    availableSeats: number;
-    status: string;
-    airline: {
-        code: string;
-        name: string;
-    };
 }
 
 interface FlightResultsProps {

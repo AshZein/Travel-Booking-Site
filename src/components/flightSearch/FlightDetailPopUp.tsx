@@ -1,5 +1,6 @@
 import React from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Flight } from '@/types/flight';
 
 const dateCache: { [key: string]: { [key: string]: string } } = {};
 
@@ -36,33 +37,33 @@ function totalFlightCost(flights: Flight[]) {
     return flights.reduce((total, flight) => total + flight.price, 0);
 }
 
-interface Flight {
-    id: string;
-    flightNumber: string;
-    departureTime: string;
-    arrivalTime: string;
-    origin: {
-        code: string;
-        name: string;
-        city: string;
-        country: string;
-    };
-    destination: {
-        code: string;
-        name: string;
-        city: string;
-        country: string;
-    };
-    duration: number;
-    price: number;
-    currency: string;
-    availableSeats: number;
-    status: string;
-    airline: {
-        code: string;
-        name: string;
-    };
-}
+// interface Flight {
+//     id: string;
+//     flightNumber: string;
+//     departureTime: string;
+//     arrivalTime: string;
+//     origin: {
+//         code: string;
+//         name: string;
+//         city: string;
+//         country: string;
+//     };
+//     destination: {
+//         code: string;
+//         name: string;
+//         city: string;
+//         country: string;
+//     };
+//     duration: number;
+//     price: number;
+//     currency: string;
+//     availableSeats: number;
+//     status: string;
+//     airline: {
+//         code: string;
+//         name: string;
+//     };
+// }
 
 interface FlightCardProps {
     legs: number;
