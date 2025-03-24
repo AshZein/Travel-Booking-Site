@@ -30,6 +30,11 @@ const HomeHeader: React.FC = () => {
             <div className=''>
                 <img src="itinerarysymbol_white.png" alt="Itinerary" className="h-8 cursor-pointer" onClick={() => HomeRouter.push('/itinerary')}/>
             </div>
+            <div>
+            {isAuthenticated ? (
+                <img src="whiteNotificationBell.png" alt="NotificationBell" className="h-8 cursor-pointer"></img>
+                ):null}
+            </div>
             <div className="auth-buttons flex gap-4">
                 <button 
                     className="auth-button text-white font-bold py-2 px-4 rounded bg-blue-500"
