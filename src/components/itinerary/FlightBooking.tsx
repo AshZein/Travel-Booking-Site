@@ -71,8 +71,7 @@ const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFl
                 </div>
 
                 <div className="vertical-line border-l-2 border-black h-full pl-4">
-                    <p><strong>{totalFlightCost(flights)}</strong></p>
-                    <p>currency: {outBoundFlight.currency}</p>
+                    <p><strong>{outBoundFlight.currency} {totalFlightCost(flights)}</strong></p>
                 </div>
             </div>
         );

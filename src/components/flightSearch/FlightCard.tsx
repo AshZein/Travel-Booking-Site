@@ -80,8 +80,7 @@ const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick, type })
                 </div>
                 
                 <div className="vertical-line border-l-2 border-black h-full pl-4">
-                    <p><strong>{totalFlightCost(flights)}</strong></p>
-                    <p>currency: {outBoundFlight.currency}</p>
+                    <p><strong>{outBoundFlight.currency} {totalFlightCost(flights)}</strong></p>
                 </div>
                 <button 
                     className={`select-button ${isSelected ? 'bg-green-500' : 'bg-blue-500'} text-white p-2 rounded`}
