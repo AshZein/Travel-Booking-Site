@@ -2,6 +2,7 @@ import React from 'react';
 import { Flight } from '@/types/flight';
 import { useItinerary } from '@/context/ItineraryContext';
 import { dateSplitter, totalFlightCost } from '@/utils/flight';
+import { useRouter } from "next/navigation";
 
 const dateCache: { [key: string]: { [key: string]: string } } = {};
 
@@ -13,7 +14,12 @@ interface FlightBookingProps {
 }
 
 const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFlight, onClick }) => {
+    const router = useRouter();
     const { state, dispatch } = useItinerary();
+
+    const handleSearchClick = () => {
+        router.push('/flightsearch');
+    }
 
     const removeFlight = (flights: Flight[]) => {
         if (outBoundFlight){
@@ -73,7 +79,7 @@ const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFl
             ) : (
                 <div>
                 <p>No flights available</p>
-                <button>Search for Flights</button>
+                <button onClick={handleSearchClick}>Search for Flights</button>
                 </div>
             )}
             {flights.length > 0 && flights[0] && flights[flights.length - 1] ?(
