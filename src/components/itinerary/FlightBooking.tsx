@@ -13,7 +13,19 @@ interface FlightBookingProps {
 }
 
 const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFlight, onClick }) => {
-    // const { state, dispatch } = useItinerary();
+    const { state, dispatch } = useItinerary();
+
+    const removeFlight = (flights: Flight[]) => {
+        if (outBoundFlight){
+            flights.forEach(flight => {
+                dispatch({ type: 'UNSELECT_OUTBOUND_FLIGHT', payload: flight });
+            });
+        } else{
+            flights.forEach(flight => {
+                dispatch({ type: 'UNSELECT_RETURN_FLIGHT', payload: flight });
+            });
+        }
+    };
 
     const renderFlight = (outBoundFlight: Flight, inBoundFlight: Flight) => {
         console.log("OUTBOUND FLIGHT:", outBoundFlight);
@@ -57,6 +69,10 @@ const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFl
             ) : (
                 <p>No flights available</p>
             )}
+            {flights.length > 0 && flights[0] && flights[flights.length - 1] ?(
+            <button onClick={(e) => {
+                        e.stopPropagation();
+                        removeFlight(flights);}}>Remove</button>):null}
         </div>
     );
 };
