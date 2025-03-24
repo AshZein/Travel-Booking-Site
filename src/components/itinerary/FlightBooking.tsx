@@ -20,6 +20,9 @@ const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFl
             flights.forEach(flight => {
                 dispatch({ type: 'UNSELECT_OUTBOUND_FLIGHT', payload: flight });
             });
+            flights.forEach(flight => {
+                dispatch({ type: 'UNSELECT_RETURN_FLIGHT', payload: flight });
+            });
         } else{
             flights.forEach(flight => {
                 dispatch({ type: 'UNSELECT_RETURN_FLIGHT', payload: flight });
@@ -67,7 +70,10 @@ const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFl
             {flights.length > 0 && flights[0] && flights[flights.length - 1] ? (
                 renderFlight(flights[0], flights[flights.length - 1])
             ) : (
+                <div>
                 <p>No flights available</p>
+                <button>Search for Flights</button>
+                </div>
             )}
             {flights.length > 0 && flights[0] && flights[flights.length - 1] ?(
             <button className='tripType-button' onClick={(e) => {
