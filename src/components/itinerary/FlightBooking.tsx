@@ -51,6 +51,7 @@ const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFl
 
     return (
         <div className="flight-card">
+            {outBoundFlight ? <h3>Outbound Flight</h3> : <h3>Return Flight</h3>}
             {flights.length > 0 && flights[0] && flights[flights.length - 1] ? (
                 renderFlight(flights[0], flights[flights.length - 1])
             ) : (
