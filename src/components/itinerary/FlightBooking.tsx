@@ -70,7 +70,7 @@ const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFl
                 <p>No flights available</p>
             )}
             {flights.length > 0 && flights[0] && flights[flights.length - 1] ?(
-            <button onClick={(e) => {
+            <button className='tripType-button' onClick={(e) => {
                         e.stopPropagation();
                         removeFlight(flights);}}>Remove</button>):null}
         </div>
