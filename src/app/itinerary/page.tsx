@@ -37,8 +37,8 @@ const Page = () => {
                     onClick={() => handleFlightClick(state.selectedOutboundFlights)}
                     />
                 )}
-
-                {state.selectedReturnFlights && (
+                
+                {state.selectedReturnFlights.length > 0 && state.selectedOutboundFlights.length > 0 && (
                     <FlightBooking 
                     flights={state.selectedReturnFlights}
                     legs={state.selectedReturnFlights.length}
