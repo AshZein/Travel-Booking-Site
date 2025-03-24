@@ -27,8 +27,8 @@ const HomeHeader: React.FC = () => {
                 <img src="logo_no_back.png" alt="FlyNext Logo" className="h-8 cursor-pointer" onClick={handleLogoClick}/>
                 <h1 className="text-2xl cursor-pointer" onClick={handleLogoClick}>FlyNext</h1>
             </div>
-            <div className="auth-buttons flex gap-8">
-                <img src="itinerarysymbol_white.png" alt="Itinerary" className="h-8 cursor-pointer" onClick={() => HomeRouter.push('/itinerary')}/>
+            <div className="auth-buttons flex gap-8 items-center">
+                <img src="itinerarysymbol_white.png" alt="Itinerary" className="h-9 mt-1 cursor-pointer" onClick={() => HomeRouter.push('/itinerary')}/>
                 
                 {isAuthenticated ? (
                     <img src="whiteNotificationBell.png" alt="NotificationBell" className="h-8 cursor-pointer"></img>
