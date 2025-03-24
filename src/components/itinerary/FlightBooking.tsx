@@ -17,10 +17,11 @@ const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFl
 
     const removeFlight = (flights: Flight[]) => {
         if (outBoundFlight){
+            // remove both outbound and return flights
             flights.forEach(flight => {
                 dispatch({ type: 'UNSELECT_OUTBOUND_FLIGHT', payload: flight });
             });
-            flights.forEach(flight => {
+            state.selectedReturnFlights.forEach(flight => {
                 dispatch({ type: 'UNSELECT_RETURN_FLIGHT', payload: flight });
             });
         } else{
