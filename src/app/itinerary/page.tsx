@@ -38,7 +38,7 @@ const Page = () => {
                     />
                 )}
 
-                {state.selectedReturnFlights && (
+                { state.selectedOutboundFlights.length > 0 && (
                     <FlightBooking 
                     flights={state.selectedReturnFlights}
                     legs={state.selectedReturnFlights.length}

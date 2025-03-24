@@ -2,6 +2,7 @@ import React from 'react';
 import { Flight } from '@/types/flight';
 import { useItinerary } from '@/context/ItineraryContext';
 import { dateSplitter, totalFlightCost } from '@/utils/flight';
+import { useRouter } from "next/navigation";
 
 const dateCache: { [key: string]: { [key: string]: string } } = {};
 
@@ -13,12 +14,21 @@ interface FlightBookingProps {
 }
 
 const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFlight, onClick }) => {
+    const router = useRouter();
     const { state, dispatch } = useItinerary();
+
+    const handleSearchClick = () => {
+        router.push('/flightsearch');
+    }
 
     const removeFlight = (flights: Flight[]) => {
         if (outBoundFlight){
+            // remove both outbound and return flights
             flights.forEach(flight => {
                 dispatch({ type: 'UNSELECT_OUTBOUND_FLIGHT', payload: flight });
+            });
+            state.selectedReturnFlights.forEach(flight => {
+                dispatch({ type: 'UNSELECT_RETURN_FLIGHT', payload: flight });
             });
         } else{
             flights.forEach(flight => {
@@ -67,7 +77,10 @@ const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFl
             {flights.length > 0 && flights[0] && flights[flights.length - 1] ? (
                 renderFlight(flights[0], flights[flights.length - 1])
             ) : (
+                <div>
                 <p>No flights available</p>
+                <button onClick={handleSearchClick}>Search for Flights</button>
+                </div>
             )}
             {flights.length > 0 && flights[0] && flights[flights.length - 1] ?(
             <button className='tripType-button' onClick={(e) => {
