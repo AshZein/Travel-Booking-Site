@@ -34,8 +34,14 @@ const NotificationDrop: React.FC = () => {
 
     return (
         <div className="notification-dropdown">
+            <div className="notification-header">
+            <span>Notifications</span>
+            <span style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => router.push('/profile/notifications')}>
+                Show All ({notifications.filter((notif: any) => !notif.read).length} Unread)
+            </span>
+            </div>
             {notifications.slice(0, 5).map((notif: any, index: number) => (
-                <NotificationCard key={index} message={notif.message} date={notif.date} read={notif.read} />
+            <NotificationCard key={index} message={notif.message} date={notif.date} read={notif.read} />
             ))}
         </div>
     );
