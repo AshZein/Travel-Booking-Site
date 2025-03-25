@@ -30,7 +30,7 @@ const NotificationDrop: React.FC = () => {
                 console.error('Error fetching notifications:', error);
             });
         }
-    }, []); // Empty dependency array ensures this runs only once on mount
+    }, []);
 
     return (
         <div className="notification-dropdown">
@@ -41,7 +41,7 @@ const NotificationDrop: React.FC = () => {
             </span>
             </div>
             {notifications.slice(0, 5).map((notif: any, index: number) => (
-            <NotificationCard key={index} message={notif.message} date={notif.date} read={notif.read} />
+            <NotificationCard key={index} id={notif.id} message={notif.message} date={notif.date} read={notif.read} />
             ))}
         </div>
     );

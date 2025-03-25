@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import NotificationPopup from '@/components/Notification/NotificationPopup';
 
 interface NotificationCardProps {
+    id: number;
     message: string;
     date: string;
     read: boolean;
 }
 
-const NotificationCard: React.FC<NotificationCardProps> = ({ message, date, read }) => {
-    // Format the date
+const NotificationCard: React.FC<NotificationCardProps> = ({ id, message, date, read }) => {
+    const [showPopup, setShowPopup] = useState(false);
+
     const formatDate = (isoDate: string) => {
         const dateObj = new Date(isoDate);
         const year = dateObj.getFullYear();
-        const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const month = String(dateObj.getMonth() + 1).padStart(2, '0');
         const day = String(dateObj.getDate()).padStart(2, '0');
         const hours = String(dateObj.getHours()).padStart(2, '0');
         const minutes = String(dateObj.getMinutes()).padStart(2, '0');
@@ -19,13 +22,23 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ message, date, read
     };
 
     return (
-        <div 
-            className={`p-2 border rounded-md shadow-md ${read ? 'text-gray-500' : 'text-black'}`} 
-        >
-            <div className="text-sm text-left text-gray-400">{formatDate(date)}</div>
-            <div className="text-md font-semibold">{message}</div>
-        </div>
+        <>
+            <div
+                className={`bg-white p-2 border rounded-sm shadow-md cursor-pointer ${read ? 'text-gray-500' : 'text-black'}`}
+                onClick={() => setShowPopup(true)}
+            >
+                <div className="text-sm text-left text-gray-400">{formatDate(date)}</div>
+                <div className="text-md font-semibold">{message}</div>
+            </div>
+            {showPopup && (
+                <NotificationPopup
+                    message={message}
+                    date={formatDate(date)}
+                    onClose={() => setShowPopup(false)}
+                />
+            )}
+        </>
     );
-}
+};
 
 export default NotificationCard;
