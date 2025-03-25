@@ -6,7 +6,13 @@ import Footer from '@/components/Footer';
 
 const Page = () => {
     return (
-        <div></div>
+        <div>
+            <HomeHeader />
+            <main>
+                <h1>Notifications</h1>
+            </main>
+            <Footer />
+        </div>
     );  
 }
 
