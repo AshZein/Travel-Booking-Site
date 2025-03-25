@@ -10,6 +10,32 @@ interface NotificationCardProps {
 
 const NotificationCard: React.FC<NotificationCardProps> = ({id, message, date, read }) => {
     const [showPopup, setShowPopup] = useState(false);
+
+    const clickPopup = () => {
+        setShowPopup(true);
+        const accessToken = localStorage.getItem('accessToken');
+        fetch(`/api/user/notifications`, {
+            method: 'PATCH',
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify({
+            id,
+            read: true,
+            }),
+        })
+            .then((response) => {
+            if (!response.ok) {
+                throw new Error('Failed to update notification status');
+            }
+            return response.json();
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
+    };
+
     // Format the date
     const formatDate = (isoDate: string) => {
         const dateObj = new Date(isoDate);
@@ -25,7 +51,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({id, message, date, r
         <>
             <div 
                 className={`p-2 border rounded-md shadow-md ${read ? 'text-gray-500' : 'text-black'}`}
-                onClick={() => setShowPopup(true)}
+                onClick={clickPopup}
             
             >
                 <div className="text-sm text-left text-gray-400">{formatDate(date)}</div>
