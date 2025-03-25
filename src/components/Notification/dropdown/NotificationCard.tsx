@@ -8,9 +8,10 @@ interface NotificationCardProps {
     read: boolean;
 }
 
-const NotificationCard: React.FC<NotificationCardProps> = ({id, message, date, read }) => {
+const NotificationCard: React.FC<NotificationCardProps> = ({ id, message, date, read }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [readStatus, setRead] = useState(read);
+    const [cleared, setCleared] = useState(false);
 
     const clickPopup = () => {
         setShowPopup(true);
@@ -19,22 +20,50 @@ const NotificationCard: React.FC<NotificationCardProps> = ({id, message, date, r
         fetch(`/api/user/notifications`, {
             method: 'PATCH',
             headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`,
             },
             body: JSON.stringify({
-            id,
-            read: true,
+                id,
+                read: true,
             }),
         })
             .then((response) => {
-            if (!response.ok) {
-                throw new Error('Failed to update notification status');
-            }
-            return response.json();
+                if (!response.ok) {
+                    throw new Error('Failed to update notification status');
+                }
+                setRead(true);
+                return response.json();
             })
             .catch((error) => {
-            console.error('Error:', error);
+                console.error('Error:', error);
+            });
+    };
+
+    const clearNotification = () => {
+        const accessToken = localStorage.getItem('accessToken');
+        fetch(`/api/user/notifications`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify({
+                id,
+                cleared: true,
+                read: true
+            }),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Failed to clear notification');
+                }
+                setRead(true); // Mark the notification as read 
+                setCleared(true); // Mark the notification as cleared
+                return response.json();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
             });
     };
 
@@ -49,15 +78,25 @@ const NotificationCard: React.FC<NotificationCardProps> = ({id, message, date, r
         return `${year}-${month}-${day} ${hours}:${minutes}`;
     };
 
+    if (cleared) {
+        return null; // Do not render the notification if it is cleared
+    }
+
     return (
         <>
-            <div 
-                className={`p-2 border rounded-md shadow-md ${readStatus ? 'text-gray-500' : 'text-black'}`}
-                onClick={clickPopup}
-            
+            <div
+                className={`p-2 border rounded-md shadow-md flex items-center gap-2 relative ${readStatus ? 'text-gray-500' : 'text-black'}`}
             >
-                <div className="text-sm text-left text-gray-400">{formatDate(date)}</div>
-                <div className="text-md font-semibold">{message}</div>
+                <div className="flex-1 cursor-pointer" onClick={clickPopup}>
+                    <div className="text-sm text-left text-gray-400">{formatDate(date)}</div>
+                    <div className="text-md font-semibold">{message}</div>
+                </div>
+                <span
+                    className="absolute bottom-1 right-2 text-gray-400 text-xs underline hover:text-gray-600 cursor-pointer"
+                    onClick={clearNotification}
+                >
+                    Clear
+                </span>
             </div>
             {showPopup && (
                 <NotificationPopup
@@ -68,6 +107,6 @@ const NotificationCard: React.FC<NotificationCardProps> = ({id, message, date, r
             )}
         </>
     );
-}
+};
 
 export default NotificationCard;
