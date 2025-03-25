@@ -10,9 +10,12 @@ interface NotificationCardProps {
 
 const NotificationCard: React.FC<NotificationCardProps> = ({ id, message, date, read }) => {
     const [showPopup, setShowPopup] = useState(false);
+    const [readStatus, setRead] = useState(read);
 
     const clickPopup = () => {
         setShowPopup(true);
+        setRead(true);
+
         const accessToken = localStorage.getItem('accessToken');
         fetch(`/api/user/notifications`, {
             method: 'PATCH',
@@ -49,7 +52,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ id, message, date, 
     return (
         <>
             <div
-                className={`bg-white p-2 border rounded-sm shadow-md cursor-pointer ${read ? 'text-gray-500' : 'text-black'}`}
+                className={`bg-white p-2 border rounded-sm shadow-md cursor-pointer ${readStatus ? 'text-gray-500' : 'text-black'}`}
                 onClick={clickPopup}
             >
                 <div className="text-sm text-left text-gray-400">{formatDate(date)}</div>
