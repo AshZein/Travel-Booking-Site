@@ -20,10 +20,10 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ message, date, read
 
     return (
         <div 
-            className={`p-4 border rounded-md shadow-md ${read ? 'text-gray-500' : 'text-black'}`} 
+            className={`p-2 border rounded-md shadow-md ${read ? 'text-gray-500' : 'text-black'}`} 
         >
             <div className="text-sm text-left text-gray-400">{formatDate(date)}</div>
-            <div className="text-lg font-semibold">{message}</div>
+            <div className="text-md font-semibold">{message}</div>
         </div>
     );
 }
