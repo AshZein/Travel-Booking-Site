@@ -8,7 +8,7 @@ const NotificationDrop: React.FC = () => {
     const [notifications, setNotifications] = useState([]);
 
     useEffect(() => {
-        const token = localStorage.getItem('token'); // Retrieve the token inside useEffect
+        const token = localStorage.getItem('accessToken'); // Retrieve the token inside useEffect
         setIsAuthenticated(!!token);
 
         if (token) {
