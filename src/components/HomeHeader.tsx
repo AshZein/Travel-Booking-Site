@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
+import NotificationDrop from '@/components/Notification/dropdown/NotificationDrop';
 
 const HomeHeader: React.FC = () => {
     const HomeRouter = useRouter();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [showNotifications, setShowNotifications] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -20,6 +22,11 @@ const HomeHeader: React.FC = () => {
         else
             HomeRouter.push('/auth'); // Single auth page for both login and register
     };
+
+    const toggleNotifications = () => {
+        console.log('Toggling notifications', !showNotifications);
+        setShowNotifications((showNotifications) => !showNotifications); // Toggle the visibility of NotificationDrop
+    };
     
     return(
         <header className="header flex justify-between items-center text-white p-4">
@@ -31,8 +38,20 @@ const HomeHeader: React.FC = () => {
                 <img src="itinerarysymbol_white.png" alt="Itinerary" className="h-9 mt-1 cursor-pointer" onClick={() => HomeRouter.push('/itinerary')}/>
                 
                 {isAuthenticated ? (
-                    <img src="whiteNotificationBell.png" alt="NotificationBell" className="h-8 cursor-pointer"></img>
-                    ):null}
+                    <div className="relative">
+                        <img
+                            src="whiteNotificationBell.png"
+                            alt="NotificationBell"
+                            className="h-8 cursor-pointer"
+                            onClick={toggleNotifications}
+                        />
+                        {showNotifications && (
+                            <div className="absolute right-0 mt-2 w-64 bg-white text-black shadow-lg rounded">
+                                <NotificationDrop />
+                            </div>
+                        )}
+                    </div>
+                ) : null}
                 
                 <button 
                     className="auth-button text-white font-bold py-2 px-4 rounded bg-blue-500"

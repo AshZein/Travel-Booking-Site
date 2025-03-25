@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
+import NotificationCard from '@/components/Notification/dropdown/NotificationCard';
 
 const NotificationDrop: React.FC = () => {
     const router = useRouter();
@@ -12,7 +13,10 @@ const NotificationDrop: React.FC = () => {
         if (isAuthenticated) {
             fetch('/api/user/notifications', {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
             })
             .then(response => response.json())
             .then(data => {
@@ -22,11 +26,16 @@ const NotificationDrop: React.FC = () => {
             .catch((error) => {
             console.error('Error:', error);
             });
+            console.log(notification);
         }
     }, []);
     
     return(
-       <div></div> 
+        <div className="notification-dropdown">
+            {notification.slice(0, 5).map((notif: any, index: number) => (
+            <NotificationCard key={index} message={notif.message} date={notif.date} read={notif.read}/>
+            ))}
+        </div>
     );
 }
 
