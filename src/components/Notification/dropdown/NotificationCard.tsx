@@ -6,16 +6,16 @@ interface NotificationCardProps {
     message: string;
     date: string;
     read: boolean;
+    onMarkAsRead: (id: number) => void;
 }
 
-const NotificationCard: React.FC<NotificationCardProps> = ({ id, message, date, read }) => {
+const NotificationCard: React.FC<NotificationCardProps> = ({ id, message, date, read, onMarkAsRead }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [readStatus, setRead] = useState(read);
     const [cleared, setCleared] = useState(false);
 
     const clickPopup = () => {
         setShowPopup(true);
-        setRead(true);
         const accessToken = localStorage.getItem('accessToken');
         fetch(`/api/user/notifications`, {
             method: 'PATCH',
@@ -33,6 +33,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ id, message, date, 
                     throw new Error('Failed to update notification status');
                 }
                 setRead(true);
+                onMarkAsRead(id);
                 return response.json();
             })
             .catch((error) => {
@@ -60,6 +61,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ id, message, date, 
                 }
                 setRead(true); // Mark the notification as read 
                 setCleared(true); // Mark the notification as cleared
+                onMarkAsRead(id);
                 return response.json();
             })
             .catch((error) => {

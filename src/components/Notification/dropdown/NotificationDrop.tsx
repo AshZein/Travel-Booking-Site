@@ -5,7 +5,14 @@ import NotificationCard from '@/components/Notification/dropdown/NotificationCar
 const NotificationDrop: React.FC = () => {
     const router = useRouter();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [notifications, setNotifications] = useState([]);
+    interface Notification {
+        id: number;
+        message: string;
+        date: string;
+        read: boolean;
+    }
+
+    const [notifications, setNotifications] = useState<Notification[]>([]);
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken'); // Retrieve the token inside useEffect
@@ -25,26 +32,41 @@ const NotificationDrop: React.FC = () => {
                     (a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()
                 );
                 setNotifications(sortedNotifications);
-            })
-            .catch((error) => {
-                console.error('Error fetching notifications:', error);
             });
         }
     }, []);
 
+    const markAsRead = (id: number) => {
+        setNotifications((prevNotifications) =>
+            prevNotifications.map((notif) =>
+                notif.id === id ? { ...notif, read: true } : notif
+            )
+        );
+    };
+
     return (
         <div className="notification-dropdown">
             <div className="notification-header">
-            <span>Notifications</span>
-            <span style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => router.push('/profile/notifications')}>
-                Show All ({notifications.filter((notif: any) => !notif.read).length} Unread)
-            </span>
+                <span>Notifications</span>
+                <span
+                    style={{ textDecoration: 'underline', cursor: 'pointer' }}
+                    onClick={() => router.push('/profile/notifications')}
+                >
+                    Show All ({notifications.filter((notif: any) => !notif.read).length} Unread)
+                </span>
             </div>
             {notifications.slice(0, 5).map((notif: any, index: number) => (
-            <NotificationCard key={index} id={notif.id} message={notif.message} date={notif.date} read={notif.read} />
+                <NotificationCard
+                    key={index}
+                    id={notif.id}
+                    message={notif.message}
+                    date={notif.date}
+                    read={notif.read}
+                    onMarkAsRead={markAsRead} // Pass the markAsRead function
+                />
             ))}
         </div>
     );
-}
+};
 
 export default NotificationDrop;
