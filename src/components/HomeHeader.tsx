@@ -46,7 +46,7 @@ const HomeHeader: React.FC = () => {
                             onClick={toggleNotifications}
                         />
                         {showNotifications && (
-                            <div className="absolute right-0 mt-2 w-64 bg-white text-black shadow-lg rounded">
+                            <div className="absolute right-0 mt-2 w-64 bg-white text-black shadow-lg rounded border border-red-500">
                                 <NotificationDrop />
                             </div>
                         )}
