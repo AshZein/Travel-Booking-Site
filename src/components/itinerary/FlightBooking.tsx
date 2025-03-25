@@ -18,7 +18,14 @@ const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFl
     const { state, dispatch } = useItinerary();
 
     const handleSearchClick = () => {
-        router.push('/flightsearch');
+        if(outBoundFlight){
+            router.push('/flightsearch');
+        } else {
+            const firstFlight = state.selectedOutboundFlights[0];
+            const lastFlight = state.selectedOutboundFlights[state.selectedOutboundFlights.length - 1];
+
+            router.push(`/flightsearch?tripType=one-way&sourceLocation=${lastFlight.destination.city}&destinationLocation=${firstFlight.origin.city}&startDate=${firstFlight.arrivalTime}`);
+        }
     }
 
     const removeFlight = (flights: Flight[]) => {

@@ -15,7 +15,7 @@ const ProfilePage: React.FC = () => {
     const [updatedValue, setUpdatedValue] = useState('');
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('accessToken');
         if (!token) {
             router.push('/auth');
             return;
@@ -44,7 +44,7 @@ const ProfilePage: React.FC = () => {
     };
 
     const handleSave = async () => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('accessToken');
         if (!token) return;
 
         try {

@@ -60,7 +60,8 @@ const AuthPage: React.FC = () => {
             const data = await response.json();
             if (!response.ok) throw new Error(data.message || 'Something went wrong');
             
-            localStorage.setItem('token', data.token);
+            localStorage.setItem('accessToken', data.accessToken);
+            localStorage.setItem('refreshToken', data.refreshToken);
             router.push('/'); // Redirect to Profile Page instead of Home Page
         } catch (err: unknown) {
             if (err instanceof Error) {
