@@ -1,13 +1,11 @@
 import { fillAirport, fillCity } from './populateAirportCity.js';
-import { fillHotel } from './populateHotel.js';
-import { prisma } from "@/utils/db";
+import { fillHotel } from './populateHotels.js';
+import { prisma } from "./db.js";
+import { emptyDatabase } from './emptyDatabase.js';
+
+
 
 async function createAdmingUser() {
-    prisma.User.delete({
-        where: {
-            userId: 1
-        }});
-
     const admin = await prisma.user.create({
         data: {
             userId: 1,
@@ -23,6 +21,8 @@ async function createAdmingUser() {
 }
 
 async function run() {
+    await emptyDatabase();
+
     console.log('Starting to populate airports and cities...');
     await fillAirport();
     console.log('Finished populating airports.');
