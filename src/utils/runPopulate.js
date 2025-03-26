@@ -1,4 +1,5 @@
 import { fillAirport, fillCity } from './populateAirportCity.js';
+import { fillHotel } from './populateHotel.js';
 import { prisma } from "@/utils/db";
 
 async function createAdmingUser() {
@@ -27,6 +28,13 @@ async function run() {
     console.log('Finished populating airports.');
     await fillCity();
     console.log('Finished populating cities.');
+
+    console.log("created admin user");
+    createAdmingUser();
+
+    console.log('Starting to populate hotels...');
+    await fillHotel();
+    console.log('Finished populating hotels.');
 }
 
 run().catch(error => {
