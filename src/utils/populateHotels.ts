@@ -32,6 +32,7 @@ export async function fillHotel(){
             data: managerData
         });
 
+        // create hotel rooms
         for (let room of hotel.hotelRoomTypes){
             // create room entry
             const roomData = {
