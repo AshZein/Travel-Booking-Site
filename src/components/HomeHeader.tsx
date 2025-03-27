@@ -72,7 +72,7 @@ const HomeHeader: React.FC = () => {
     localStorage.removeItem("refreshToken");
     setIsAuthenticated(false);
     setShowDropdown(false);
-    HomeRouter.push("/auth");
+    HomeRouter.push("/");
   };
 
   // Notification bell click → toggle notifications
