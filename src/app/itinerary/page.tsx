@@ -42,6 +42,8 @@ const Page = () => {
                 });
             }
 
+            //  Add hotel to checkout context HERE!!!
+
             router.push('/checkout'); // Redirect to the checkout page
         }
     };
