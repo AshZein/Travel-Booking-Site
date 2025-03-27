@@ -14,10 +14,14 @@ const CreditCardInfo: React.FC = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setCreditCard((prev: CreditCard) => ({
-            ...prev,
+        const updatedCreditCard = {
+            ...creditCard,
             [name]: value,
-        }));
+        };
+        setCreditCard(updatedCreditCard);
+
+        // Dispatch the updated credit card info to the CheckoutContext
+        dispatch({ type: 'SET_CREDIT_CARD_INFO', payload: updatedCreditCard });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {

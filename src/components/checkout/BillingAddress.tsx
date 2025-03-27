@@ -16,25 +16,20 @@ const BillingAddress: React.FC = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setBillingAddress((prev: Billing) => ({
-            ...prev,
+        const updatedBillingAddress = {
+            ...billingAddress,
             [name]: value,
-        }));
-    };
+        };
+        setBillingAddress(updatedBillingAddress);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Dispatch the billing address to the CheckoutContext
-        dispatch({ type: 'SET_BILLING_ADDRESS', payload: billingAddress });
+        // Dispatch the updated billing address to the CheckoutContext
+        dispatch({ type: 'SET_BILLING_ADDRESS', payload: updatedBillingAddress });
     };
 
     return (
         <div>
             <h1 className="text-black bg-white">Billing Address</h1>
-            <form
-                className="flex flex-col gap-6 p-6 shadow-md bg-white"
-                onSubmit={handleSubmit}
-            >
+            <form className="flex flex-col gap-6 p-6 shadow-md bg-white">
                 <div>
                     <label htmlFor="firstName" className="block mb-1 font-medium text-black">First Name:</label>
                     <input
@@ -126,12 +121,6 @@ const BillingAddress: React.FC = () => {
                         className="w-full p-2 border border-black rounded text-black"
                     />
                 </div>
-                <button
-                    type="submit"
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                >
-                    Save Billing Address
-                </button>
             </form>
         </div>
     );

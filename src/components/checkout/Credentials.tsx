@@ -13,10 +13,14 @@ const FlightCredentials: React.FC = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFlightCred((prev) => ({
-            ...prev,
+        const updatedFlightCred = {
+            ...flightCred,
             [name]: value,
-        }));
+        };
+        setFlightCred(updatedFlightCred);
+
+        // Dispatch the updated flight credentials to the CheckoutContext
+        dispatch({ type: 'SET_FLIGHT_CREDENTIALS', payload: updatedFlightCred });
     };
 
     const handleSubmit = (e: React.FormEvent) => {
