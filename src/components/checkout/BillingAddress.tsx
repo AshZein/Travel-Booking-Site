@@ -12,6 +12,7 @@ const BillingAddress: React.FC = () => {
         province: '',
         postalCode: '',
         phoneNumber: '',
+        email: '', // Add email to the Billing object
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -117,6 +118,17 @@ const BillingAddress: React.FC = () => {
                         id="phoneNumber"
                         name="phoneNumber"
                         value={billingAddress.phoneNumber}
+                        onChange={handleChange}
+                        className="w-full p-2 border border-black rounded text-black"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="email" className="block mb-1 font-medium text-black">Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={billingAddress.email}
                         onChange={handleChange}
                         className="w-full p-2 border border-black rounded text-black"
                     />

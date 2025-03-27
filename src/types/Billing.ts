@@ -6,4 +6,5 @@ interface Billing {
     province: string;
     postalCode: string;
     phoneNumber: string;
+    email: string;
 }
