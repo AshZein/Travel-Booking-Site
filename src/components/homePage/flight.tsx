@@ -3,6 +3,10 @@ import { useRouter } from 'next/navigation';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { searchSuggestAirports, searchSuggestCities } from '@/utils/cleanSearch';
+import { normalizeLocationInput } from '@/utils/normalizeLocationInput';
+
+// function cleanSuggestion(suggestion: string): string {
+//     // Remove any unwanted characters or formatting from the suggestion
 
 interface FlightProps {
     sourceLocation: string;
@@ -29,10 +33,11 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
     const handleSourceLocationChange = async (value: string) => {
         setSource(value);
 
-        const citySuggestions = await searchSuggestCities(value);
-        const airportSuggestions = await searchSuggestAirports(value);
+        const normalizedSource = normalizeLocationInput(value); // Normalize the input
+        const citySuggestions = await searchSuggestCities(normalizedSource);
+        const airportSuggestions = await searchSuggestAirports(normalizedSource);
         const suggestions = [...citySuggestions, ...airportSuggestions];
-        
+
         setSourceSuggestions(suggestions);
     };
 
@@ -47,10 +52,11 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
     const handleDestinationLocationChange = async (value: string) => {
         setDestination(value);
 
-        const citySuggestions = await searchSuggestCities(value);
-        const airportSuggestions = await searchSuggestAirports(value);
+        const normalizedDestination = normalizeLocationInput(value); // Normalize the input
+        const citySuggestions = await searchSuggestCities(normalizedDestination);
+        const airportSuggestions = await searchSuggestAirports(normalizedDestination);
         const suggestions = [...citySuggestions, ...airportSuggestions];
-        
+
         setDestinationSuggestions(suggestions);
     };
 
@@ -60,8 +66,11 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
     };
 
     const handleFlightSearchClick = () => {
+        const normalizedSource = normalizeLocationInput(source);
+        const normalizedDestination = normalizeLocationInput(destination);
+
         // Use window.location.href to force a full page refresh
-        window.location.href = `/flightsearch?tripType=${tripType}&sourceLocation=${source}&destinationLocation=${destination}&startDate=${start?.toISOString()}&endDate=${end?.toISOString()}`;
+        window.location.href = `/flightsearch?tripType=${tripType}&sourceLocation=${normalizedSource}&destinationLocation=${normalizedDestination}&startDate=${start?.toISOString()}&endDate=${end?.toISOString()}`;
     };
 
     useEffect(() => {
