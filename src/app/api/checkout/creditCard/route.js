@@ -22,11 +22,11 @@ export async function POST(request){
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    const { creditCardNumber, creditCardExpiry, creditCardCVC } = await request.json();
-    if (!creditCardNumber || !creditCardExpiry || !creditCardCVC){
+    const { cardNumber, creditCardExpiry, cvc } = await request.json();
+    if (!creditCardNumber || !creditCardExpiry || !cvc){
         return NextResponse.json({ message: "creditCardNumber, creditCardExpiry, and creditCardCVC are required parameters" }, { status: 400 });
     }
-    if (typeof creditCardNumber !== 'string' || typeof creditCardExpiry !== 'string' || typeof creditCardCVC !== 'string'){
+    if (typeof cardNumber !== 'string' || typeof creditCardExpiry !== 'string' || typeof cvc !== 'string'){
         return NextResponse.json({ message: "creditCardNumber, creditCardExpiry, and creditCardCVC must be strings" }, { status: 400 });
     }
 

@@ -20,11 +20,30 @@ const CreditCardInfo: React.FC = () => {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         // Dispatch the credit card info to the CheckoutContext
-        dispatch({ type: 'SET_CREDIT_CARD_INFO', payload: creditCard });
-        alert('Credit card information saved to checkout!');
+        if (!creditCard.cardName || !creditCard.cardNumber || !creditCard.cvc || !creditCard.expiryMonth || !creditCard.expiryYear) {
+            alert('Please fill in all fields');
+            return;
+        }
+        const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
+        const response = await fetch('/api/checkout/creditCard', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, // Add the token to the Authorization header
+            },
+            body: JSON.stringify({
+            creditCardNumber: creditCard.cardNumber,
+            creditCardExpiry: `${creditCard.expiryMonth}/${creditCard.expiryYear}`,
+            creditCardCVC: creditCard.cvc,
+            }),
+        });
+        if (response.ok) {
+            dispatch({ type: 'SET_CREDIT_CARD_INFO', payload: creditCard });
+            alert('Credit card information saved to checkout!');
+        }
     };
 
     return (
