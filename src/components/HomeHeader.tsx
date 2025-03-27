@@ -95,19 +95,16 @@ const HomeHeader: React.FC = () => {
         </h1>
       </div>
 
-      {/* -- MIDDLE: Itinerary icon (optional) -- */}
-      <div>
-        <img
-          src="itinerarysymbol_white.png"
-          alt="Itinerary"
-          className="h-8 cursor-pointer"
-          onClick={() => HomeRouter.push("/itinerary")}
-        />
-      </div>
 
       {/* -- RIGHT: Notification + Auth Button + Dropdowns -- */}
       <div className="auth-buttons flex gap-4 relative" ref={dropdownRef}>
         {/* Show notification bell if logged in */}
+        <img
+            src="itinerarysymbol_white.png"
+            alt="Itinerary"
+            className="h-8 cursor-pointer"
+            onClick={() => HomeRouter.push("/itinerary")}
+          />
         {isAuthenticated && (
           <div className="relative">
             <img
