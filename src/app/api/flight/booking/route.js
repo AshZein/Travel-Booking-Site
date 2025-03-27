@@ -155,7 +155,7 @@ export async function POST(request){
         });
         
         // save booking to database
-        const booking = await prisma.FlightBooking.create({
+        const booking = await prisma.flightBooking.create({
             data: {
                 userId: userId.userId,
                 bookingReference: bookingInfo.bookingReference,
