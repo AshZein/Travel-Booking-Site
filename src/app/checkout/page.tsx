@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useCheckout } from '@/context/CheckoutContext';
 import CheckoutFlightCard from '@/components/checkout/CheckoutFlightCard';
 import CheckoutHeader from '@/components/checkout/CheckoutHeader';
