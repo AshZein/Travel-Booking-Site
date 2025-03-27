@@ -1,79 +1,63 @@
 import React from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useItinerary } from '@/context/ItineraryContext';
+import { dateSplitter, totalFlightCost } from '@/utils/flight';
+import { Flight } from '@/types/flight';
 
 const dateCache: { [key: string]: { [key: string]: string } } = {};
-
-function dateSplitter(dateString: string) {
-    if (dateCache[dateString]) {
-        return dateCache[dateString];
-    }
-
-    const pieces: { [key: string]: string } = {};
-
-    const splitDate = dateString.split('T');
-    if (splitDate.length !== 2) {
-        console.error('Invalid date format:', dateString);
-        return pieces;
-    }
-
-    const [datePart, timePart] = splitDate;
-    const [year, month, day] = datePart.split('-');
-    const [hour, minute] = timePart.split(':');
-
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    pieces.day = day;
-    pieces.month = monthNames[parseInt(month) - 1];
-    pieces.monthNumeric = month;
-    pieces.year = year;
-    pieces.hour = hour;
-    pieces.minute = minute;
-
-    dateCache[dateString] = pieces;
-    return pieces;
-}
-
-function totalFlightCost(flights: Flight[]) {
-    return flights.reduce((total, flight) => total + flight.price, 0);
-}
-
-interface Flight {
-    id: string;
-    flightNumber: string;
-    departureTime: string;
-    arrivalTime: string;
-    origin: {
-        code: string;
-        name: string;
-        city: string;
-        country: string;
-    };
-    destination: {
-        code: string;
-        name: string;
-        city: string;
-        country: string;
-    };
-    duration: number;
-    price: number;
-    currency: string;
-    availableSeats: number;
-    status: string;
-    airline: {
-        code: string;
-        name: string;
-    };
-}
 
 interface FlightCardProps {
     legs: number;
     flights: Flight[];
-    onClick: () => void; // Add onClick prop
+    onClick: () => void;
+    onAddToItinerary: () => void;
+    type: string;
 }
 
-const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick }) => {
+const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick, type }) => {
+    const { state, dispatch } = useItinerary();
+    const firstFlightId = flights[0].id;
+    const lastFlightId = flights[flights.length - 1].id;
+    var isSelected = false;
+    // a flight is selected if the state has a flight selected, and the flight id of the first leg is the same, and the flight of the last leg is the same as the one selected
+    if (type === 'outbound') {
+        isSelected = state.selectedOutboundFlights.length > 0 && 
+                            state.selectedOutboundFlights[0].id === firstFlightId && 
+                            state.selectedOutboundFlights[state.selectedOutboundFlights.length - 1].id === lastFlightId;
+    }
+    else {
+        isSelected = state.selectedReturnFlights.length > 0 &&
+                            state.selectedReturnFlights[0].id === firstFlightId &&
+                            state.selectedReturnFlights[state.selectedReturnFlights.length - 1].id === lastFlightId;
+    }
+
+    const handleSelectClick = (flights: Flight[]) => {
+        if (isSelected) {
+            if (type === 'outbound') {
+                flights.forEach(flight => {
+                    dispatch({ type: 'UNSELECT_OUTBOUND_FLIGHT', payload: flight });
+                });
+            } else {
+                flights.forEach(flight => {
+                    dispatch({ type: 'UNSELECT_RETURN_FLIGHT', payload: flight });
+                });
+            }
+        } else {
+            if (type === 'outbound') {
+                flights.forEach(flight => {
+                    dispatch({ type: 'SELECT_OUTBOUND_FLIGHT', payload: flight });
+                });
+            } else {
+                flights.forEach(flight => {
+                    dispatch({ type: 'SELECT_RETURN_FLIGHT', payload: flight });
+                });
+            }
+        }
+    };
+
     const renderFlight = (outBoundFlight: Flight, inBoundFlight: Flight) => {
-        const departurePieces = dateSplitter(outBoundFlight.departureTime);
-        const arrivalPieces = dateSplitter(inBoundFlight.arrivalTime);
+        const departurePieces = dateSplitter(outBoundFlight.departureTime, dateCache);
+        const arrivalPieces = dateSplitter(inBoundFlight.arrivalTime, dateCache);
         
         return (
             <div key={outBoundFlight.id} className="flight-details flex items-center gap-20" onClick={onClick}>
@@ -96,9 +80,18 @@ const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick }) => {
                 </div>
                 
                 <div className="vertical-line border-l-2 border-black h-full pl-4">
-                    <p><strong>{totalFlightCost(flights)}</strong></p>
-                    <p>currency: {outBoundFlight.currency}</p>
+                    <p><strong>{outBoundFlight.currency} {totalFlightCost(flights)}</strong></p>
                 </div>
+                <button 
+                    className={`select-button ${isSelected ? 'bg-green-500' : 'bg-blue-500'} text-white p-2 rounded`}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleSelectClick(flights);
+                        console.log("selected flight", flights); 
+                    }}
+                >
+                    {isSelected ? 'Selected' : 'Select'}
+                </button>
             </div>
         );
     };

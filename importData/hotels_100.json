@@ -1,0 +1,4536 @@
+{
+  "hotel1": {
+    "hotelInfo": {
+      "name": "Sunset Inn 1",
+      "address": "279 Random Street, New York, USA, 97255",
+      "city": "New York",
+      "country": "USA",
+      "latitude": 40.664623,
+      "longitude": -73.97479,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 1,
+        "roomType": "single",
+        "price": 107,
+        "numberAvailable": 19,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 1,
+        "roomType": "double",
+        "price": 250,
+        "numberAvailable": 15,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 1,
+        "roomType": "suite",
+        "price": 368,
+        "numberAvailable": 10,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel2": {
+    "hotelInfo": {
+      "name": "Cityscape Hotel 2",
+      "address": "975 Random Street, Bangkok, Thailand, 82669",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.694419,
+      "longitude": 100.516424,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 2,
+        "roomType": "single",
+        "price": 149,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 2,
+        "roomType": "double",
+        "price": 211,
+        "numberAvailable": 17,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 2,
+        "roomType": "suite",
+        "price": 375,
+        "numberAvailable": 14,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel3": {
+    "hotelInfo": {
+      "name": "Sunset Inn 3",
+      "address": "680 Random Street, Dubai, UAE, 10502",
+      "city": "Dubai",
+      "country": "UAE",
+      "latitude": 25.285825,
+      "longitude": 55.263424,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 3,
+        "roomType": "single",
+        "price": 159,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 3,
+        "roomType": "double",
+        "price": 164,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 3,
+        "roomType": "suite",
+        "price": 371,
+        "numberAvailable": 18,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel4": {
+    "hotelInfo": {
+      "name": "Sunset Inn 4",
+      "address": "401 Random Street, Miami, USA, 84606",
+      "city": "Miami",
+      "country": "USA",
+      "latitude": 25.7965,
+      "longitude": -80.217201,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 4,
+        "roomType": "single",
+        "price": 107,
+        "numberAvailable": 18,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 4,
+        "roomType": "double",
+        "price": 212,
+        "numberAvailable": 19,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 4,
+        "roomType": "suite",
+        "price": 400,
+        "numberAvailable": 8,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel5": {
+    "hotelInfo": {
+      "name": "Palm Grove Resort 5",
+      "address": "294 Random Street, Rio de Janeiro, Brazil, 87724",
+      "city": "Rio de Janeiro",
+      "country": "Brazil",
+      "latitude": -22.897445,
+      "longitude": -43.16586,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 5,
+        "roomType": "single",
+        "price": 162,
+        "numberAvailable": 20,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 5,
+        "roomType": "double",
+        "price": 179,
+        "numberAvailable": 13,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 5,
+        "roomType": "suite",
+        "price": 342,
+        "numberAvailable": 19,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel6": {
+    "hotelInfo": {
+      "name": "Palm Grove Resort 6",
+      "address": "730 Random Street, Dubai, UAE, 64748",
+      "city": "Dubai",
+      "country": "UAE",
+      "latitude": 25.260562,
+      "longitude": 55.251101,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 6,
+        "roomType": "single",
+        "price": 197,
+        "numberAvailable": 16,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 6,
+        "roomType": "double",
+        "price": 219,
+        "numberAvailable": 14,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 6,
+        "roomType": "suite",
+        "price": 319,
+        "numberAvailable": 17,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel7": {
+    "hotelInfo": {
+      "name": "Golden Sands Hotel 7",
+      "address": "200 Random Street, Los Angeles, USA, 45194",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 34.037656,
+      "longitude": -118.213568,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 7,
+        "roomType": "single",
+        "price": 171,
+        "numberAvailable": 11,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 7,
+        "roomType": "double",
+        "price": 209,
+        "numberAvailable": 18,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 7,
+        "roomType": "suite",
+        "price": 383,
+        "numberAvailable": 10,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel8": {
+    "hotelInfo": {
+      "name": "Mountain Lodge 8",
+      "address": "669 Random Street, Tokyo, Japan, 58876",
+      "city": "Tokyo",
+      "country": "Japan",
+      "latitude": 35.728272,
+      "longitude": 139.737783,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 8,
+        "roomType": "single",
+        "price": 106,
+        "numberAvailable": 17,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 8,
+        "roomType": "double",
+        "price": 216,
+        "numberAvailable": 10,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 8,
+        "roomType": "suite",
+        "price": 396,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel9": {
+    "hotelInfo": {
+      "name": "Skyline Towers 9",
+      "address": "38 Random Street, Los Angeles, USA, 63909",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 34.017598,
+      "longitude": -118.164307,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 9,
+        "roomType": "single",
+        "price": 191,
+        "numberAvailable": 11,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 9,
+        "roomType": "double",
+        "price": 195,
+        "numberAvailable": 16,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 9,
+        "roomType": "suite",
+        "price": 334,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel10": {
+    "hotelInfo": {
+      "name": "Royal Palace 10",
+      "address": "266 Random Street, Tokyo, Japan, 42053",
+      "city": "Tokyo",
+      "country": "Japan",
+      "latitude": 35.734494,
+      "longitude": 139.708137,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 10,
+        "roomType": "single",
+        "price": 83,
+        "numberAvailable": 18,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 10,
+        "roomType": "double",
+        "price": 167,
+        "numberAvailable": 16,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 10,
+        "roomType": "suite",
+        "price": 396,
+        "numberAvailable": 11,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      }
+    ]
+  },
+  "hotel11": {
+    "hotelInfo": {
+      "name": "Ocean Breeze 11",
+      "address": "210 Random Street, Toronto, Canada, 70429",
+      "city": "Toronto",
+      "country": "Canada",
+      "latitude": 43.680794,
+      "longitude": -79.355634,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 11,
+        "roomType": "single",
+        "price": 103,
+        "numberAvailable": 18,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 11,
+        "roomType": "double",
+        "price": 157,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 11,
+        "roomType": "suite",
+        "price": 340,
+        "numberAvailable": 5,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel12": {
+    "hotelInfo": {
+      "name": "Beachside Retreat 12",
+      "address": "493 Random Street, Paris, France, 77520",
+      "city": "Paris",
+      "country": "France",
+      "latitude": 48.883588,
+      "longitude": 2.38134,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 12,
+        "roomType": "single",
+        "price": 171,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 12,
+        "roomType": "double",
+        "price": 171,
+        "numberAvailable": 5,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 12,
+        "roomType": "suite",
+        "price": 303,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel13": {
+    "hotelInfo": {
+      "name": "Mountain Lodge 13",
+      "address": "370 Random Street, Dubai, UAE, 58463",
+      "city": "Dubai",
+      "country": "UAE",
+      "latitude": 25.344652,
+      "longitude": 55.268504,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 13,
+        "roomType": "single",
+        "price": 85,
+        "numberAvailable": 9,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 13,
+        "roomType": "double",
+        "price": 133,
+        "numberAvailable": 8,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 13,
+        "roomType": "suite",
+        "price": 293,
+        "numberAvailable": 9,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel14": {
+    "hotelInfo": {
+      "name": "Royal Palace 14",
+      "address": "34 Random Street, Paris, France, 20395",
+      "city": "Paris",
+      "country": "France",
+      "latitude": 48.904297,
+      "longitude": 2.383931,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 14,
+        "roomType": "single",
+        "price": 70,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 14,
+        "roomType": "double",
+        "price": 219,
+        "numberAvailable": 14,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 14,
+        "roomType": "suite",
+        "price": 353,
+        "numberAvailable": 6,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel15": {
+    "hotelInfo": {
+      "name": "Royal Palace 15",
+      "address": "490 Random Street, Toronto, Canada, 83051",
+      "city": "Toronto",
+      "country": "Canada",
+      "latitude": 43.72883,
+      "longitude": -79.369064,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 15,
+        "roomType": "single",
+        "price": 104,
+        "numberAvailable": 10,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 15,
+        "roomType": "double",
+        "price": 242,
+        "numberAvailable": 11,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 15,
+        "roomType": "suite",
+        "price": 380,
+        "numberAvailable": 6,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel16": {
+    "hotelInfo": {
+      "name": "Ocean Breeze 16",
+      "address": "263 Random Street, New York, USA, 56548",
+      "city": "New York",
+      "country": "USA",
+      "latitude": 40.742096,
+      "longitude": -73.998364,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 16,
+        "roomType": "single",
+        "price": 139,
+        "numberAvailable": 11,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 16,
+        "roomType": "double",
+        "price": 137,
+        "numberAvailable": 15,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 16,
+        "roomType": "suite",
+        "price": 365,
+        "numberAvailable": 13,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel17": {
+    "hotelInfo": {
+      "name": "Palm Grove Resort 17",
+      "address": "272 Random Street, Rio de Janeiro, Brazil, 92905",
+      "city": "Rio de Janeiro",
+      "country": "Brazil",
+      "latitude": -22.880651,
+      "longitude": -43.157848,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 17,
+        "roomType": "single",
+        "price": 100,
+        "numberAvailable": 17,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 17,
+        "roomType": "double",
+        "price": 242,
+        "numberAvailable": 10,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 17,
+        "roomType": "suite",
+        "price": 288,
+        "numberAvailable": 17,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel18": {
+    "hotelInfo": {
+      "name": "Beachside Retreat 18",
+      "address": "647 Random Street, Vancouver, Canada, 54895",
+      "city": "Vancouver",
+      "country": "Canada",
+      "latitude": 49.287,
+      "longitude": -123.096024,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 18,
+        "roomType": "single",
+        "price": 101,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 18,
+        "roomType": "double",
+        "price": 174,
+        "numberAvailable": 11,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 18,
+        "roomType": "suite",
+        "price": 275,
+        "numberAvailable": 7,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel19": {
+    "hotelInfo": {
+      "name": "Beachside Retreat 19",
+      "address": "472 Random Street, Bangkok, Thailand, 34794",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.713027,
+      "longitude": 100.496326,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 19,
+        "roomType": "single",
+        "price": 123,
+        "numberAvailable": 11,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 19,
+        "roomType": "double",
+        "price": 244,
+        "numberAvailable": 14,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 19,
+        "roomType": "suite",
+        "price": 326,
+        "numberAvailable": 18,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      }
+    ]
+  },
+  "hotel20": {
+    "hotelInfo": {
+      "name": "Royal Palace 20",
+      "address": "810 Random Street, London, UK, 87709",
+      "city": "London",
+      "country": "UK",
+      "latitude": 51.484313,
+      "longitude": -0.097579,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 20,
+        "roomType": "single",
+        "price": 143,
+        "numberAvailable": 12,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 20,
+        "roomType": "double",
+        "price": 165,
+        "numberAvailable": 8,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 20,
+        "roomType": "suite",
+        "price": 365,
+        "numberAvailable": 8,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel21": {
+    "hotelInfo": {
+      "name": "Mountain Lodge 21",
+      "address": "71 Random Street, Rio de Janeiro, Brazil, 37786",
+      "city": "Rio de Janeiro",
+      "country": "Brazil",
+      "latitude": -22.916838,
+      "longitude": -43.161251,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 21,
+        "roomType": "single",
+        "price": 198,
+        "numberAvailable": 14,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 21,
+        "roomType": "double",
+        "price": 223,
+        "numberAvailable": 16,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 21,
+        "roomType": "suite",
+        "price": 331,
+        "numberAvailable": 20,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      }
+    ]
+  },
+  "hotel22": {
+    "hotelInfo": {
+      "name": "Cityscape Hotel 22",
+      "address": "548 Random Street, Sydney, Australia, 82597",
+      "city": "Sydney",
+      "country": "Australia",
+      "latitude": -33.904501,
+      "longitude": 151.172309,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 22,
+        "roomType": "single",
+        "price": 81,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 22,
+        "roomType": "double",
+        "price": 173,
+        "numberAvailable": 5,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 22,
+        "roomType": "suite",
+        "price": 350,
+        "numberAvailable": 11,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel23": {
+    "hotelInfo": {
+      "name": "Skyline Towers 23",
+      "address": "904 Random Street, Bangkok, Thailand, 52687",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.749807,
+      "longitude": 100.531316,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 23,
+        "roomType": "single",
+        "price": 117,
+        "numberAvailable": 10,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 23,
+        "roomType": "double",
+        "price": 130,
+        "numberAvailable": 13,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 23,
+        "roomType": "suite",
+        "price": 391,
+        "numberAvailable": 15,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel24": {
+    "hotelInfo": {
+      "name": "Skyline Towers 24",
+      "address": "789 Random Street, Vancouver, Canada, 81027",
+      "city": "Vancouver",
+      "country": "Canada",
+      "latitude": 49.333537,
+      "longitude": -123.067306,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 24,
+        "roomType": "single",
+        "price": 106,
+        "numberAvailable": 19,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 24,
+        "roomType": "double",
+        "price": 128,
+        "numberAvailable": 17,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 24,
+        "roomType": "suite",
+        "price": 383,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel25": {
+    "hotelInfo": {
+      "name": "Grand Hotel 25",
+      "address": "215 Random Street, London, UK, 66266",
+      "city": "London",
+      "country": "UK",
+      "latitude": 51.510718,
+      "longitude": -0.13011,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 25,
+        "roomType": "single",
+        "price": 141,
+        "numberAvailable": 20,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 25,
+        "roomType": "double",
+        "price": 127,
+        "numberAvailable": 16,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 25,
+        "roomType": "suite",
+        "price": 388,
+        "numberAvailable": 19,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel26": {
+    "hotelInfo": {
+      "name": "Sunset Inn 26",
+      "address": "962 Random Street, London, UK, 42851",
+      "city": "London",
+      "country": "UK",
+      "latitude": 51.482839,
+      "longitude": -0.149435,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 26,
+        "roomType": "single",
+        "price": 143,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 26,
+        "roomType": "double",
+        "price": 148,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 26,
+        "roomType": "suite",
+        "price": 279,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel27": {
+    "hotelInfo": {
+      "name": "Grand Hotel 27",
+      "address": "251 Random Street, Dubai, UAE, 20754",
+      "city": "Dubai",
+      "country": "UAE",
+      "latitude": 25.345237,
+      "longitude": 55.3012,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 27,
+        "roomType": "single",
+        "price": 192,
+        "numberAvailable": 13,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 27,
+        "roomType": "double",
+        "price": 239,
+        "numberAvailable": 6,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 27,
+        "roomType": "suite",
+        "price": 312,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel28": {
+    "hotelInfo": {
+      "name": "Mountain Lodge 28",
+      "address": "74 Random Street, London, UK, 69019",
+      "city": "London",
+      "country": "UK",
+      "latitude": 51.483691,
+      "longitude": -0.134347,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 28,
+        "roomType": "single",
+        "price": 101,
+        "numberAvailable": 8,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 28,
+        "roomType": "double",
+        "price": 228,
+        "numberAvailable": 20,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 28,
+        "roomType": "suite",
+        "price": 323,
+        "numberAvailable": 5,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel29": {
+    "hotelInfo": {
+      "name": "Ocean Breeze 29",
+      "address": "183 Random Street, Dubai, UAE, 39132",
+      "city": "Dubai",
+      "country": "UAE",
+      "latitude": 25.333208,
+      "longitude": 55.267834,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 29,
+        "roomType": "single",
+        "price": 137,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 29,
+        "roomType": "double",
+        "price": 211,
+        "numberAvailable": 14,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 29,
+        "roomType": "suite",
+        "price": 343,
+        "numberAvailable": 5,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel30": {
+    "hotelInfo": {
+      "name": "Royal Palace 30",
+      "address": "173 Random Street, Los Angeles, USA, 31574",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 34.000254,
+      "longitude": -118.155286,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 30,
+        "roomType": "single",
+        "price": 123,
+        "numberAvailable": 8,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 30,
+        "roomType": "double",
+        "price": 189,
+        "numberAvailable": 12,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 30,
+        "roomType": "suite",
+        "price": 361,
+        "numberAvailable": 17,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel31": {
+    "hotelInfo": {
+      "name": "Cityscape Hotel 31",
+      "address": "705 Random Street, Bangkok, Thailand, 69043",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.692897,
+      "longitude": 100.487528,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 31,
+        "roomType": "single",
+        "price": 160,
+        "numberAvailable": 18,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 31,
+        "roomType": "double",
+        "price": 211,
+        "numberAvailable": 19,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 31,
+        "roomType": "suite",
+        "price": 276,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      }
+    ]
+  },
+  "hotel32": {
+    "hotelInfo": {
+      "name": "Royal Palace 32",
+      "address": "614 Random Street, Los Angeles, USA, 66406",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 33.997461,
+      "longitude": -118.168614,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 32,
+        "roomType": "single",
+        "price": 126,
+        "numberAvailable": 9,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 32,
+        "roomType": "double",
+        "price": 215,
+        "numberAvailable": 17,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 32,
+        "roomType": "suite",
+        "price": 280,
+        "numberAvailable": 8,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel33": {
+    "hotelInfo": {
+      "name": "Ocean Breeze 33",
+      "address": "454 Random Street, Bangkok, Thailand, 98306",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.686433,
+      "longitude": 100.45608,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 33,
+        "roomType": "single",
+        "price": 159,
+        "numberAvailable": 11,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 33,
+        "roomType": "double",
+        "price": 248,
+        "numberAvailable": 17,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 33,
+        "roomType": "suite",
+        "price": 376,
+        "numberAvailable": 13,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel34": {
+    "hotelInfo": {
+      "name": "Mountain Lodge 34",
+      "address": "396 Random Street, Sydney, Australia, 70165",
+      "city": "Sydney",
+      "country": "Australia",
+      "latitude": -33.929995,
+      "longitude": 151.165518,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 34,
+        "roomType": "single",
+        "price": 78,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 34,
+        "roomType": "double",
+        "price": 210,
+        "numberAvailable": 14,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 34,
+        "roomType": "suite",
+        "price": 395,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel35": {
+    "hotelInfo": {
+      "name": "Grand Hotel 35",
+      "address": "321 Random Street, Los Angeles, USA, 11854",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 34.040279,
+      "longitude": -118.169366,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 35,
+        "roomType": "single",
+        "price": 92,
+        "numberAvailable": 16,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 35,
+        "roomType": "double",
+        "price": 221,
+        "numberAvailable": 9,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 35,
+        "roomType": "suite",
+        "price": 343,
+        "numberAvailable": 20,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel36": {
+    "hotelInfo": {
+      "name": "Ocean Breeze 36",
+      "address": "432 Random Street, Tokyo, Japan, 85103",
+      "city": "Tokyo",
+      "country": "Japan",
+      "latitude": 35.721984,
+      "longitude": 139.670813,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 36,
+        "roomType": "single",
+        "price": 193,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 36,
+        "roomType": "double",
+        "price": 243,
+        "numberAvailable": 11,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 36,
+        "roomType": "suite",
+        "price": 272,
+        "numberAvailable": 15,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel37": {
+    "hotelInfo": {
+      "name": "Royal Palace 37",
+      "address": "500 Random Street, Los Angeles, USA, 39561",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 33.952799,
+      "longitude": -118.232795,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 37,
+        "roomType": "single",
+        "price": 128,
+        "numberAvailable": 10,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 37,
+        "roomType": "double",
+        "price": 221,
+        "numberAvailable": 7,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 37,
+        "roomType": "suite",
+        "price": 349,
+        "numberAvailable": 20,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel38": {
+    "hotelInfo": {
+      "name": "Ocean Breeze 38",
+      "address": "277 Random Street, Vancouver, Canada, 98869",
+      "city": "Vancouver",
+      "country": "Canada",
+      "latitude": 49.314944,
+      "longitude": -123.141105,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 38,
+        "roomType": "single",
+        "price": 125,
+        "numberAvailable": 7,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 38,
+        "roomType": "double",
+        "price": 178,
+        "numberAvailable": 8,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 38,
+        "roomType": "suite",
+        "price": 301,
+        "numberAvailable": 6,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel39": {
+    "hotelInfo": {
+      "name": "Cityscape Hotel 39",
+      "address": "330 Random Street, London, UK, 85635",
+      "city": "London",
+      "country": "UK",
+      "latitude": 51.51818,
+      "longitude": -0.061557,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 39,
+        "roomType": "single",
+        "price": 178,
+        "numberAvailable": 11,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 39,
+        "roomType": "double",
+        "price": 132,
+        "numberAvailable": 20,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 39,
+        "roomType": "suite",
+        "price": 377,
+        "numberAvailable": 11,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel40": {
+    "hotelInfo": {
+      "name": "Cityscape Hotel 40",
+      "address": "209 Random Street, New York, USA, 44713",
+      "city": "New York",
+      "country": "USA",
+      "latitude": 40.657252,
+      "longitude": -73.961028,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 40,
+        "roomType": "single",
+        "price": 146,
+        "numberAvailable": 19,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 40,
+        "roomType": "double",
+        "price": 135,
+        "numberAvailable": 15,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 40,
+        "roomType": "suite",
+        "price": 280,
+        "numberAvailable": 7,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel41": {
+    "hotelInfo": {
+      "name": "Beachside Retreat 41",
+      "address": "112 Random Street, Los Angeles, USA, 35182",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 33.964919,
+      "longitude": -118.192525,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 41,
+        "roomType": "single",
+        "price": 169,
+        "numberAvailable": 16,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 41,
+        "roomType": "double",
+        "price": 173,
+        "numberAvailable": 7,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 41,
+        "roomType": "suite",
+        "price": 328,
+        "numberAvailable": 16,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel42": {
+    "hotelInfo": {
+      "name": "Cityscape Hotel 42",
+      "address": "884 Random Street, London, UK, 50340",
+      "city": "London",
+      "country": "UK",
+      "latitude": 51.480022,
+      "longitude": -0.136792,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 42,
+        "roomType": "single",
+        "price": 80,
+        "numberAvailable": 18,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 42,
+        "roomType": "double",
+        "price": 160,
+        "numberAvailable": 8,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 42,
+        "roomType": "suite",
+        "price": 380,
+        "numberAvailable": 18,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel43": {
+    "hotelInfo": {
+      "name": "Royal Palace 43",
+      "address": "287 Random Street, Los Angeles, USA, 91902",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 34.028693,
+      "longitude": -118.209507,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 43,
+        "roomType": "single",
+        "price": 196,
+        "numberAvailable": 14,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 43,
+        "roomType": "double",
+        "price": 134,
+        "numberAvailable": 14,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 43,
+        "roomType": "suite",
+        "price": 291,
+        "numberAvailable": 12,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      }
+    ]
+  },
+  "hotel44": {
+    "hotelInfo": {
+      "name": "Beachside Retreat 44",
+      "address": "479 Random Street, Miami, USA, 96042",
+      "city": "Miami",
+      "country": "USA",
+      "latitude": 25.762672,
+      "longitude": -80.196738,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 44,
+        "roomType": "single",
+        "price": 196,
+        "numberAvailable": 19,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 44,
+        "roomType": "double",
+        "price": 177,
+        "numberAvailable": 13,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 44,
+        "roomType": "suite",
+        "price": 328,
+        "numberAvailable": 11,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel45": {
+    "hotelInfo": {
+      "name": "Royal Palace 45",
+      "address": "35 Random Street, Rio de Janeiro, Brazil, 26093",
+      "city": "Rio de Janeiro",
+      "country": "Brazil",
+      "latitude": -22.867186,
+      "longitude": -43.213605,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 45,
+        "roomType": "single",
+        "price": 135,
+        "numberAvailable": 17,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 45,
+        "roomType": "double",
+        "price": 143,
+        "numberAvailable": 10,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 45,
+        "roomType": "suite",
+        "price": 353,
+        "numberAvailable": 16,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel46": {
+    "hotelInfo": {
+      "name": "Skyline Towers 46",
+      "address": "247 Random Street, Rio de Janeiro, Brazil, 14307",
+      "city": "Rio de Janeiro",
+      "country": "Brazil",
+      "latitude": -22.881657,
+      "longitude": -43.231801,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 46,
+        "roomType": "single",
+        "price": 165,
+        "numberAvailable": 12,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 46,
+        "roomType": "double",
+        "price": 126,
+        "numberAvailable": 6,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 46,
+        "roomType": "suite",
+        "price": 365,
+        "numberAvailable": 13,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel47": {
+    "hotelInfo": {
+      "name": "Mountain Lodge 47",
+      "address": "14 Random Street, Sydney, Australia, 80893",
+      "city": "Sydney",
+      "country": "Australia",
+      "latitude": -33.945265,
+      "longitude": 151.211144,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 47,
+        "roomType": "single",
+        "price": 160,
+        "numberAvailable": 15,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 47,
+        "roomType": "double",
+        "price": 237,
+        "numberAvailable": 14,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 47,
+        "roomType": "suite",
+        "price": 352,
+        "numberAvailable": 5,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel48": {
+    "hotelInfo": {
+      "name": "Sunset Inn 48",
+      "address": "189 Random Street, Miami, USA, 92120",
+      "city": "Miami",
+      "country": "USA",
+      "latitude": 25.786846,
+      "longitude": -80.207079,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 48,
+        "roomType": "single",
+        "price": 189,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 48,
+        "roomType": "double",
+        "price": 139,
+        "numberAvailable": 20,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 48,
+        "roomType": "suite",
+        "price": 372,
+        "numberAvailable": 5,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel49": {
+    "hotelInfo": {
+      "name": "Mountain Lodge 49",
+      "address": "938 Random Street, London, UK, 88099",
+      "city": "London",
+      "country": "UK",
+      "latitude": 51.50809,
+      "longitude": -0.071381,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 49,
+        "roomType": "single",
+        "price": 148,
+        "numberAvailable": 13,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 49,
+        "roomType": "double",
+        "price": 237,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 49,
+        "roomType": "suite",
+        "price": 276,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel50": {
+    "hotelInfo": {
+      "name": "Golden Sands Hotel 50",
+      "address": "938 Random Street, London, UK, 24991",
+      "city": "London",
+      "country": "UK",
+      "latitude": 51.451501,
+      "longitude": -0.065792,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 50,
+        "roomType": "single",
+        "price": 145,
+        "numberAvailable": 16,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 50,
+        "roomType": "double",
+        "price": 189,
+        "numberAvailable": 16,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 50,
+        "roomType": "suite",
+        "price": 312,
+        "numberAvailable": 11,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel51": {
+    "hotelInfo": {
+      "name": "Royal Palace 51",
+      "address": "468 Random Street, Bangkok, Thailand, 96926",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.711324,
+      "longitude": 100.539101,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 51,
+        "roomType": "single",
+        "price": 135,
+        "numberAvailable": 13,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 51,
+        "roomType": "double",
+        "price": 225,
+        "numberAvailable": 13,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 51,
+        "roomType": "suite",
+        "price": 276,
+        "numberAvailable": 14,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel52": {
+    "hotelInfo": {
+      "name": "Palm Grove Resort 52",
+      "address": "570 Random Street, Miami, USA, 74200",
+      "city": "Miami",
+      "country": "USA",
+      "latitude": 25.813487,
+      "longitude": -80.245457,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 52,
+        "roomType": "single",
+        "price": 142,
+        "numberAvailable": 16,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 52,
+        "roomType": "double",
+        "price": 166,
+        "numberAvailable": 20,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 52,
+        "roomType": "suite",
+        "price": 305,
+        "numberAvailable": 16,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel53": {
+    "hotelInfo": {
+      "name": "Cityscape Hotel 53",
+      "address": "964 Random Street, New York, USA, 97245",
+      "city": "New York",
+      "country": "USA",
+      "latitude": 40.685469,
+      "longitude": -74.018195,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 53,
+        "roomType": "single",
+        "price": 127,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 53,
+        "roomType": "double",
+        "price": 200,
+        "numberAvailable": 14,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 53,
+        "roomType": "suite",
+        "price": 338,
+        "numberAvailable": 13,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      }
+    ]
+  },
+  "hotel54": {
+    "hotelInfo": {
+      "name": "Grand Hotel 54",
+      "address": "393 Random Street, Los Angeles, USA, 68148",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 34.042814,
+      "longitude": -118.230296,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 54,
+        "roomType": "single",
+        "price": 102,
+        "numberAvailable": 17,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 54,
+        "roomType": "double",
+        "price": 158,
+        "numberAvailable": 20,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 54,
+        "roomType": "suite",
+        "price": 330,
+        "numberAvailable": 18,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel55": {
+    "hotelInfo": {
+      "name": "Cityscape Hotel 55",
+      "address": "181 Random Street, Tokyo, Japan, 26099",
+      "city": "Tokyo",
+      "country": "Japan",
+      "latitude": 35.666538,
+      "longitude": 139.66852,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 55,
+        "roomType": "single",
+        "price": 142,
+        "numberAvailable": 15,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 55,
+        "roomType": "double",
+        "price": 240,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 55,
+        "roomType": "suite",
+        "price": 396,
+        "numberAvailable": 20,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel56": {
+    "hotelInfo": {
+      "name": "Golden Sands Hotel 56",
+      "address": "488 Random Street, Tokyo, Japan, 31028",
+      "city": "Tokyo",
+      "country": "Japan",
+      "latitude": 35.728902,
+      "longitude": 139.711327,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 56,
+        "roomType": "single",
+        "price": 188,
+        "numberAvailable": 8,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 56,
+        "roomType": "double",
+        "price": 215,
+        "numberAvailable": 19,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 56,
+        "roomType": "suite",
+        "price": 379,
+        "numberAvailable": 16,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel57": {
+    "hotelInfo": {
+      "name": "Golden Sands Hotel 57",
+      "address": "971 Random Street, Paris, France, 61621",
+      "city": "Paris",
+      "country": "France",
+      "latitude": 48.928436,
+      "longitude": 2.448247,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 57,
+        "roomType": "single",
+        "price": 85,
+        "numberAvailable": 17,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 57,
+        "roomType": "double",
+        "price": 136,
+        "numberAvailable": 11,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 57,
+        "roomType": "suite",
+        "price": 387,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel58": {
+    "hotelInfo": {
+      "name": "Royal Palace 58",
+      "address": "76 Random Street, Dubai, UAE, 50883",
+      "city": "Dubai",
+      "country": "UAE",
+      "latitude": 25.252451,
+      "longitude": 55.304793,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 58,
+        "roomType": "single",
+        "price": 174,
+        "numberAvailable": 19,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 58,
+        "roomType": "double",
+        "price": 188,
+        "numberAvailable": 6,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 58,
+        "roomType": "suite",
+        "price": 340,
+        "numberAvailable": 8,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      }
+    ]
+  },
+  "hotel59": {
+    "hotelInfo": {
+      "name": "Ocean Breeze 59",
+      "address": "671 Random Street, Vancouver, Canada, 45863",
+      "city": "Vancouver",
+      "country": "Canada",
+      "latitude": 49.305811,
+      "longitude": -123.148853,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 59,
+        "roomType": "single",
+        "price": 144,
+        "numberAvailable": 18,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 59,
+        "roomType": "double",
+        "price": 173,
+        "numberAvailable": 5,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 59,
+        "roomType": "suite",
+        "price": 336,
+        "numberAvailable": 13,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel60": {
+    "hotelInfo": {
+      "name": "Skyline Towers 60",
+      "address": "867 Random Street, Miami, USA, 46414",
+      "city": "Miami",
+      "country": "USA",
+      "latitude": 25.833947,
+      "longitude": -80.240582,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 60,
+        "roomType": "single",
+        "price": 167,
+        "numberAvailable": 15,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 60,
+        "roomType": "double",
+        "price": 241,
+        "numberAvailable": 17,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 60,
+        "roomType": "suite",
+        "price": 312,
+        "numberAvailable": 14,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel61": {
+    "hotelInfo": {
+      "name": "Mountain Lodge 61",
+      "address": "73 Random Street, New York, USA, 15092",
+      "city": "New York",
+      "country": "USA",
+      "latitude": 40.727505,
+      "longitude": -74.034247,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 61,
+        "roomType": "single",
+        "price": 184,
+        "numberAvailable": 19,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 61,
+        "roomType": "double",
+        "price": 240,
+        "numberAvailable": 19,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 61,
+        "roomType": "suite",
+        "price": 337,
+        "numberAvailable": 12,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      }
+    ]
+  },
+  "hotel62": {
+    "hotelInfo": {
+      "name": "Royal Palace 62",
+      "address": "753 Random Street, Vancouver, Canada, 30168",
+      "city": "Vancouver",
+      "country": "Canada",
+      "latitude": 49.271151,
+      "longitude": -123.148406,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 62,
+        "roomType": "single",
+        "price": 98,
+        "numberAvailable": 13,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 62,
+        "roomType": "double",
+        "price": 183,
+        "numberAvailable": 13,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 62,
+        "roomType": "suite",
+        "price": 356,
+        "numberAvailable": 14,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel63": {
+    "hotelInfo": {
+      "name": "Royal Palace 63",
+      "address": "855 Random Street, Vancouver, Canada, 75015",
+      "city": "Vancouver",
+      "country": "Canada",
+      "latitude": 49.319976,
+      "longitude": -123.100878,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 63,
+        "roomType": "single",
+        "price": 80,
+        "numberAvailable": 15,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 63,
+        "roomType": "double",
+        "price": 156,
+        "numberAvailable": 5,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 63,
+        "roomType": "suite",
+        "price": 370,
+        "numberAvailable": 16,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel64": {
+    "hotelInfo": {
+      "name": "Palm Grove Resort 64",
+      "address": "279 Random Street, New York, USA, 31565",
+      "city": "New York",
+      "country": "USA",
+      "latitude": 40.741454,
+      "longitude": -74.035457,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 64,
+        "roomType": "single",
+        "price": 94,
+        "numberAvailable": 13,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 64,
+        "roomType": "double",
+        "price": 245,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 64,
+        "roomType": "suite",
+        "price": 300,
+        "numberAvailable": 9,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel65": {
+    "hotelInfo": {
+      "name": "Golden Sands Hotel 65",
+      "address": "797 Random Street, Toronto, Canada, 40961",
+      "city": "Toronto",
+      "country": "Canada",
+      "latitude": 43.713374,
+      "longitude": -79.429378,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 65,
+        "roomType": "single",
+        "price": 92,
+        "numberAvailable": 15,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 65,
+        "roomType": "double",
+        "price": 199,
+        "numberAvailable": 11,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 65,
+        "roomType": "suite",
+        "price": 357,
+        "numberAvailable": 13,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel66": {
+    "hotelInfo": {
+      "name": "Golden Sands Hotel 66",
+      "address": "824 Random Street, Dubai, UAE, 47993",
+      "city": "Dubai",
+      "country": "UAE",
+      "latitude": 25.275122,
+      "longitude": 55.278471,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 66,
+        "roomType": "single",
+        "price": 93,
+        "numberAvailable": 19,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 66,
+        "roomType": "double",
+        "price": 239,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 66,
+        "roomType": "suite",
+        "price": 386,
+        "numberAvailable": 20,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel67": {
+    "hotelInfo": {
+      "name": "Cityscape Hotel 67",
+      "address": "307 Random Street, Bangkok, Thailand, 81637",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.657633,
+      "longitude": 100.54028,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 67,
+        "roomType": "single",
+        "price": 183,
+        "numberAvailable": 9,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 67,
+        "roomType": "double",
+        "price": 130,
+        "numberAvailable": 5,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 67,
+        "roomType": "suite",
+        "price": 270,
+        "numberAvailable": 14,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel68": {
+    "hotelInfo": {
+      "name": "Palm Grove Resort 68",
+      "address": "36 Random Street, Bangkok, Thailand, 27611",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.688883,
+      "longitude": 100.48666,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 68,
+        "roomType": "single",
+        "price": 200,
+        "numberAvailable": 12,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 68,
+        "roomType": "double",
+        "price": 170,
+        "numberAvailable": 12,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 68,
+        "roomType": "suite",
+        "price": 369,
+        "numberAvailable": 7,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel69": {
+    "hotelInfo": {
+      "name": "Grand Hotel 69",
+      "address": "53 Random Street, Tokyo, Japan, 25168",
+      "city": "Tokyo",
+      "country": "Japan",
+      "latitude": 35.729193,
+      "longitude": 139.679761,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 69,
+        "roomType": "single",
+        "price": 134,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 69,
+        "roomType": "double",
+        "price": 228,
+        "numberAvailable": 20,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 69,
+        "roomType": "suite",
+        "price": 281,
+        "numberAvailable": 10,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel70": {
+    "hotelInfo": {
+      "name": "Sunset Inn 70",
+      "address": "800 Random Street, New York, USA, 48351",
+      "city": "New York",
+      "country": "USA",
+      "latitude": 40.741006,
+      "longitude": -74.03526,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 70,
+        "roomType": "single",
+        "price": 185,
+        "numberAvailable": 19,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 70,
+        "roomType": "double",
+        "price": 170,
+        "numberAvailable": 7,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 70,
+        "roomType": "suite",
+        "price": 363,
+        "numberAvailable": 11,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel71": {
+    "hotelInfo": {
+      "name": "Beachside Retreat 71",
+      "address": "699 Random Street, Vancouver, Canada, 88611",
+      "city": "Vancouver",
+      "country": "Canada",
+      "latitude": 49.318432,
+      "longitude": -123.10025,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 71,
+        "roomType": "single",
+        "price": 87,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 71,
+        "roomType": "double",
+        "price": 230,
+        "numberAvailable": 9,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 71,
+        "roomType": "suite",
+        "price": 391,
+        "numberAvailable": 12,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel72": {
+    "hotelInfo": {
+      "name": "Skyline Towers 72",
+      "address": "415 Random Street, Los Angeles, USA, 16599",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 34.008753,
+      "longitude": -118.163655,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 72,
+        "roomType": "single",
+        "price": 89,
+        "numberAvailable": 15,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 72,
+        "roomType": "double",
+        "price": 244,
+        "numberAvailable": 8,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 72,
+        "roomType": "suite",
+        "price": 382,
+        "numberAvailable": 16,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel73": {
+    "hotelInfo": {
+      "name": "Golden Sands Hotel 73",
+      "address": "461 Random Street, Miami, USA, 60261",
+      "city": "Miami",
+      "country": "USA",
+      "latitude": 25.763923,
+      "longitude": -80.158363,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 73,
+        "roomType": "single",
+        "price": 76,
+        "numberAvailable": 13,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 73,
+        "roomType": "double",
+        "price": 178,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 73,
+        "roomType": "suite",
+        "price": 389,
+        "numberAvailable": 8,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel74": {
+    "hotelInfo": {
+      "name": "Skyline Towers 74",
+      "address": "398 Random Street, Tokyo, Japan, 41275",
+      "city": "Tokyo",
+      "country": "Japan",
+      "latitude": 35.70078,
+      "longitude": 139.669575,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 74,
+        "roomType": "single",
+        "price": 72,
+        "numberAvailable": 7,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 74,
+        "roomType": "double",
+        "price": 122,
+        "numberAvailable": 8,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 74,
+        "roomType": "suite",
+        "price": 400,
+        "numberAvailable": 18,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel75": {
+    "hotelInfo": {
+      "name": "Royal Palace 75",
+      "address": "587 Random Street, Los Angeles, USA, 97117",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 34.024042,
+      "longitude": -118.151682,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 75,
+        "roomType": "single",
+        "price": 116,
+        "numberAvailable": 10,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 75,
+        "roomType": "double",
+        "price": 157,
+        "numberAvailable": 11,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 75,
+        "roomType": "suite",
+        "price": 364,
+        "numberAvailable": 8,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel76": {
+    "hotelInfo": {
+      "name": "Skyline Towers 76",
+      "address": "395 Random Street, Rio de Janeiro, Brazil, 78320",
+      "city": "Rio de Janeiro",
+      "country": "Brazil",
+      "latitude": -22.898419,
+      "longitude": -43.214816,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 76,
+        "roomType": "single",
+        "price": 109,
+        "numberAvailable": 16,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 76,
+        "roomType": "double",
+        "price": 183,
+        "numberAvailable": 19,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 76,
+        "roomType": "suite",
+        "price": 319,
+        "numberAvailable": 7,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel77": {
+    "hotelInfo": {
+      "name": "Mountain Lodge 77",
+      "address": "340 Random Street, Bangkok, Thailand, 71167",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.671635,
+      "longitude": 100.46946,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 77,
+        "roomType": "single",
+        "price": 123,
+        "numberAvailable": 8,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 77,
+        "roomType": "double",
+        "price": 162,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 77,
+        "roomType": "suite",
+        "price": 396,
+        "numberAvailable": 10,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel78": {
+    "hotelInfo": {
+      "name": "Royal Palace 78",
+      "address": "856 Random Street, Dubai, UAE, 40139",
+      "city": "Dubai",
+      "country": "UAE",
+      "latitude": 25.254715,
+      "longitude": 55.288115,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 78,
+        "roomType": "single",
+        "price": 95,
+        "numberAvailable": 13,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 78,
+        "roomType": "double",
+        "price": 137,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 78,
+        "roomType": "suite",
+        "price": 365,
+        "numberAvailable": 5,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel79": {
+    "hotelInfo": {
+      "name": "Beachside Retreat 79",
+      "address": "423 Random Street, Toronto, Canada, 36828",
+      "city": "Toronto",
+      "country": "Canada",
+      "latitude": 43.707213,
+      "longitude": -79.355678,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 79,
+        "roomType": "single",
+        "price": 142,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 79,
+        "roomType": "double",
+        "price": 228,
+        "numberAvailable": 19,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 79,
+        "roomType": "suite",
+        "price": 339,
+        "numberAvailable": 17,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel80": {
+    "hotelInfo": {
+      "name": "Palm Grove Resort 80",
+      "address": "976 Random Street, Los Angeles, USA, 79161",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 34.045242,
+      "longitude": -118.211452,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 80,
+        "roomType": "single",
+        "price": 166,
+        "numberAvailable": 14,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 80,
+        "roomType": "double",
+        "price": 224,
+        "numberAvailable": 18,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 80,
+        "roomType": "suite",
+        "price": 301,
+        "numberAvailable": 16,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel81": {
+    "hotelInfo": {
+      "name": "Cityscape Hotel 81",
+      "address": "342 Random Street, Los Angeles, USA, 20752",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 34.038364,
+      "longitude": -118.243388,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 81,
+        "roomType": "single",
+        "price": 131,
+        "numberAvailable": 16,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 81,
+        "roomType": "double",
+        "price": 231,
+        "numberAvailable": 10,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 81,
+        "roomType": "suite",
+        "price": 298,
+        "numberAvailable": 9,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel82": {
+    "hotelInfo": {
+      "name": "Golden Sands Hotel 82",
+      "address": "243 Random Street, Bangkok, Thailand, 12879",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.695597,
+      "longitude": 100.514835,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 82,
+        "roomType": "single",
+        "price": 94,
+        "numberAvailable": 10,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 82,
+        "roomType": "double",
+        "price": 246,
+        "numberAvailable": 14,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 82,
+        "roomType": "suite",
+        "price": 293,
+        "numberAvailable": 8,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel83": {
+    "hotelInfo": {
+      "name": "Sunset Inn 83",
+      "address": "996 Random Street, Los Angeles, USA, 93586",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 34.005204,
+      "longitude": -118.246404,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 83,
+        "roomType": "single",
+        "price": 135,
+        "numberAvailable": 11,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 83,
+        "roomType": "double",
+        "price": 128,
+        "numberAvailable": 14,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 83,
+        "roomType": "suite",
+        "price": 280,
+        "numberAvailable": 17,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      }
+    ]
+  },
+  "hotel84": {
+    "hotelInfo": {
+      "name": "Skyline Towers 84",
+      "address": "271 Random Street, Bangkok, Thailand, 93591",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.703298,
+      "longitude": 100.453639,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 84,
+        "roomType": "single",
+        "price": 79,
+        "numberAvailable": 8,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 84,
+        "roomType": "double",
+        "price": 216,
+        "numberAvailable": 11,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 84,
+        "roomType": "suite",
+        "price": 333,
+        "numberAvailable": 11,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel85": {
+    "hotelInfo": {
+      "name": "Palm Grove Resort 85",
+      "address": "470 Random Street, Miami, USA, 64453",
+      "city": "Miami",
+      "country": "USA",
+      "latitude": 25.803949,
+      "longitude": -80.201641,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 85,
+        "roomType": "single",
+        "price": 139,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 85,
+        "roomType": "double",
+        "price": 158,
+        "numberAvailable": 18,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 85,
+        "roomType": "suite",
+        "price": 307,
+        "numberAvailable": 6,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel86": {
+    "hotelInfo": {
+      "name": "Skyline Towers 86",
+      "address": "29 Random Street, Toronto, Canada, 92874",
+      "city": "Toronto",
+      "country": "Canada",
+      "latitude": 43.693288,
+      "longitude": -79.434579,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 86,
+        "roomType": "single",
+        "price": 70,
+        "numberAvailable": 7,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 86,
+        "roomType": "double",
+        "price": 168,
+        "numberAvailable": 10,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 86,
+        "roomType": "suite",
+        "price": 340,
+        "numberAvailable": 6,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel87": {
+    "hotelInfo": {
+      "name": "Ocean Breeze 87",
+      "address": "257 Random Street, Sydney, Australia, 12133",
+      "city": "Sydney",
+      "country": "Australia",
+      "latitude": -33.901514,
+      "longitude": 151.242794,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 87,
+        "roomType": "single",
+        "price": 185,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 87,
+        "roomType": "double",
+        "price": 213,
+        "numberAvailable": 11,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 87,
+        "roomType": "suite",
+        "price": 384,
+        "numberAvailable": 8,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel88": {
+    "hotelInfo": {
+      "name": "Royal Palace 88",
+      "address": "700 Random Street, Los Angeles, USA, 52727",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 33.965484,
+      "longitude": -118.213928,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 88,
+        "roomType": "single",
+        "price": 76,
+        "numberAvailable": 14,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 88,
+        "roomType": "double",
+        "price": 236,
+        "numberAvailable": 13,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 88,
+        "roomType": "suite",
+        "price": 284,
+        "numberAvailable": 17,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel89": {
+    "hotelInfo": {
+      "name": "Skyline Towers 89",
+      "address": "107 Random Street, Vancouver, Canada, 67217",
+      "city": "Vancouver",
+      "country": "Canada",
+      "latitude": 49.319307,
+      "longitude": -123.108698,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 89,
+        "roomType": "single",
+        "price": 144,
+        "numberAvailable": 13,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 89,
+        "roomType": "double",
+        "price": 141,
+        "numberAvailable": 5,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 89,
+        "roomType": "suite",
+        "price": 356,
+        "numberAvailable": 8,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel90": {
+    "hotelInfo": {
+      "name": "Ocean Breeze 90",
+      "address": "573 Random Street, Los Angeles, USA, 47527",
+      "city": "Los Angeles",
+      "country": "USA",
+      "latitude": 34.049754,
+      "longitude": -118.153479,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 90,
+        "roomType": "single",
+        "price": 125,
+        "numberAvailable": 15,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 90,
+        "roomType": "double",
+        "price": 171,
+        "numberAvailable": 11,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 90,
+        "roomType": "suite",
+        "price": 379,
+        "numberAvailable": 8,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      }
+    ]
+  },
+  "hotel91": {
+    "hotelInfo": {
+      "name": "Golden Sands Hotel 91",
+      "address": "186 Random Street, Bangkok, Thailand, 47673",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "latitude": 13.703334,
+      "longitude": 100.545085,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 91,
+        "roomType": "single",
+        "price": 86,
+        "numberAvailable": 7,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 91,
+        "roomType": "double",
+        "price": 127,
+        "numberAvailable": 19,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      },
+      {
+        "hotelId": 91,
+        "roomType": "suite",
+        "price": 371,
+        "numberAvailable": 9,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel92": {
+    "hotelInfo": {
+      "name": "Golden Sands Hotel 92",
+      "address": "244 Random Street, Sydney, Australia, 48299",
+      "city": "Sydney",
+      "country": "Australia",
+      "latitude": -33.928134,
+      "longitude": 151.189738,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 92,
+        "roomType": "single",
+        "price": 103,
+        "numberAvailable": 12,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 92,
+        "roomType": "double",
+        "price": 219,
+        "numberAvailable": 7,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 92,
+        "roomType": "suite",
+        "price": 315,
+        "numberAvailable": 17,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel93": {
+    "hotelInfo": {
+      "name": "Sunset Inn 93",
+      "address": "892 Random Street, Paris, France, 32791",
+      "city": "Paris",
+      "country": "France",
+      "latitude": 48.935951,
+      "longitude": 2.379629,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 93,
+        "roomType": "single",
+        "price": 196,
+        "numberAvailable": 10,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 93,
+        "roomType": "double",
+        "price": 228,
+        "numberAvailable": 15,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 93,
+        "roomType": "suite",
+        "price": 278,
+        "numberAvailable": 20,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      }
+    ]
+  },
+  "hotel94": {
+    "hotelInfo": {
+      "name": "Grand Hotel 94",
+      "address": "691 Random Street, London, UK, 64584",
+      "city": "London",
+      "country": "UK",
+      "latitude": 51.450073,
+      "longitude": -0.059632,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 94,
+        "roomType": "single",
+        "price": 198,
+        "numberAvailable": 10,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 94,
+        "roomType": "double",
+        "price": 184,
+        "numberAvailable": 16,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 94,
+        "roomType": "suite",
+        "price": 349,
+        "numberAvailable": 18,
+        "amenities": [
+          "wifi"
+        ]
+      }
+    ]
+  },
+  "hotel95": {
+    "hotelInfo": {
+      "name": "Grand Hotel 95",
+      "address": "116 Random Street, New York, USA, 78198",
+      "city": "New York",
+      "country": "USA",
+      "latitude": 40.676696,
+      "longitude": -73.955502,
+      "starRating": 5
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 95,
+        "roomType": "single",
+        "price": 169,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 95,
+        "roomType": "double",
+        "price": 247,
+        "numberAvailable": 18,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 95,
+        "roomType": "suite",
+        "price": 335,
+        "numberAvailable": 5,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      }
+    ]
+  },
+  "hotel96": {
+    "hotelInfo": {
+      "name": "Grand Hotel 96",
+      "address": "68 Random Street, Tokyo, Japan, 11889",
+      "city": "Tokyo",
+      "country": "Japan",
+      "latitude": 35.695268,
+      "longitude": 139.74998,
+      "starRating": 3
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 96,
+        "roomType": "single",
+        "price": 125,
+        "numberAvailable": 7,
+        "amenities": [
+          "pool",
+          "wifi",
+          "beach access"
+        ]
+      },
+      {
+        "hotelId": 96,
+        "roomType": "double",
+        "price": 130,
+        "numberAvailable": 9,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      },
+      {
+        "hotelId": 96,
+        "roomType": "suite",
+        "price": 360,
+        "numberAvailable": 19,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel97": {
+    "hotelInfo": {
+      "name": "Cityscape Hotel 97",
+      "address": "278 Random Street, Sydney, Australia, 76092",
+      "city": "Sydney",
+      "country": "Australia",
+      "latitude": -33.908003,
+      "longitude": 151.179226,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 97,
+        "roomType": "single",
+        "price": 103,
+        "numberAvailable": 15,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 97,
+        "roomType": "double",
+        "price": 185,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 97,
+        "roomType": "suite",
+        "price": 272,
+        "numberAvailable": 14,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym"
+        ]
+      }
+    ]
+  },
+  "hotel98": {
+    "hotelInfo": {
+      "name": "Golden Sands Hotel 98",
+      "address": "192 Random Street, Tokyo, Japan, 33709",
+      "city": "Tokyo",
+      "country": "Japan",
+      "latitude": 35.696573,
+      "longitude": 139.655435,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 98,
+        "roomType": "single",
+        "price": 119,
+        "numberAvailable": 11,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 98,
+        "roomType": "double",
+        "price": 249,
+        "numberAvailable": 14,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 98,
+        "roomType": "suite",
+        "price": 313,
+        "numberAvailable": 6,
+        "amenities": [
+          "pool",
+          "wifi",
+          "gym",
+          "spa"
+        ]
+      }
+    ]
+  },
+  "hotel99": {
+    "hotelInfo": {
+      "name": "Royal Palace 99",
+      "address": "877 Random Street, Rio de Janeiro, Brazil, 80700",
+      "city": "Rio de Janeiro",
+      "country": "Brazil",
+      "latitude": -22.885508,
+      "longitude": -43.239116,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 99,
+        "roomType": "single",
+        "price": 105,
+        "numberAvailable": 17,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 99,
+        "roomType": "double",
+        "price": 158,
+        "numberAvailable": 18,
+        "amenities": [
+          "wifi",
+          "gym",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 99,
+        "roomType": "suite",
+        "price": 320,
+        "numberAvailable": 17,
+        "amenities": [
+          "wifi",
+          "parking"
+        ]
+      }
+    ]
+  },
+  "hotel100": {
+    "hotelInfo": {
+      "name": "Mountain Lodge 100",
+      "address": "694 Random Street, New York, USA, 83155",
+      "city": "New York",
+      "country": "USA",
+      "latitude": 40.675196,
+      "longitude": -73.979918,
+      "starRating": 4
+    },
+    "hotelRoomTypes": [
+      {
+        "hotelId": 100,
+        "roomType": "single",
+        "price": 110,
+        "numberAvailable": 14,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      },
+      {
+        "hotelId": 100,
+        "roomType": "double",
+        "price": 155,
+        "numberAvailable": 12,
+        "amenities": [
+          "wifi",
+          "gym",
+          "spa",
+          "parking"
+        ]
+      },
+      {
+        "hotelId": 100,
+        "roomType": "suite",
+        "price": 363,
+        "numberAvailable": 7,
+        "amenities": [
+          "pool",
+          "wifi"
+        ]
+      }
+    ]
+  }
+}

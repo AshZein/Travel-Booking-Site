@@ -36,6 +36,7 @@ model Notifications {
   message   String
   date      DateTime  @default(now())
   read      Boolean   @default(false)
+  cleared   Boolean   @default(false)
   type      String    // USER or HOTEL_MANAGER notification
 }
 
