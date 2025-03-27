@@ -69,7 +69,7 @@ const HomeHeader: React.FC = () => {
     // Remove tokens from localStorage. 
     // (Optionally call /api/user/logout if you have a backend route.)
     localStorage.removeItem("accessToken");
-    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
     setIsAuthenticated(false);
     setShowDropdown(false);
     HomeRouter.push("/auth");
