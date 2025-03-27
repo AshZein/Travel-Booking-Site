@@ -88,7 +88,7 @@ const Page = () =>{
                         key={hotel.hotelId}
                         className="border p-4 rounded-lg shadow-md bg-white"
                     >
-                        <h2 className="text-xl font-semibold">{hotel.name}</h2>
+                        <h2 className="text-xl font-semibold text-gray-800">{hotel.name}</h2>
                         <p className="text-gray-600">{hotel.address}</p>
                         <p className="text-yellow-500">⭐ {hotel.starRating} Stars</p>
                         <p className="text-green-600">Price: ${hotel.startingPrice}</p>
