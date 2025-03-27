@@ -2,51 +2,60 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import NotificationDrop from '@/components/Notification/dropdown/NotificationDrop';
+import NotificationDrop from "@/components/Notification/dropdown/NotificationDrop";
 
 const HomeHeader: React.FC = () => {
   const HomeRouter = useRouter();
+  
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // For the Notification dropdown
+  const [showNotifications, setShowNotifications] = useState(false);
+  
+  // For the Profile dropdown (Edit / Logout)
   const [showDropdown, setShowDropdown] = useState(false);
 
+  // Ref to detect outside clicks
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [showNotifications, setShowNotifications] = useState(false);
 
+  /**
+   * 1) Check local storage for tokens on mount:
+   *    If there's "token" or "accessToken", user is logged in.
+   */
   useEffect(() => {
-      const token = localStorage.getItem('accessToken');
-      setIsAuthenticated(!!token);
+    const accessToken = localStorage.getItem("accessToken");
+    const refreshtoken = localStorage.getItem("refreshtoken");
+    setIsAuthenticated(!!(accessToken));
   }, []);
 
+  /**
+   * 2) Close *all* dropdowns if clicking outside the dropdown area
+   */
   useEffect(() => {
-    // Check if there's a valid token in local storage:
-    const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token);
-  }, []);
-
-  // Close dropdown if clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setShowDropdown(false);
+        setShowNotifications(false);
       }
-    };
+    }
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Logo click → homepage
   const handleLogoClick = () => {
     HomeRouter.push("/");
   };
 
+  // Auth button click → toggle profile dropdown if logged in, else go /auth
   const handleAuthClick = () => {
     if (!isAuthenticated) {
-      // Not logged in, go to /auth
       HomeRouter.push("/auth");
     } else {
-      // Already logged in, toggle dropdown
       setShowDropdown(!showDropdown);
     }
   };
@@ -57,22 +66,23 @@ const HomeHeader: React.FC = () => {
   };
 
   const handleLogout = async () => {
-    // (Optional) call /api/user/logout here, passing refreshToken if you store that
-    // For now, just remove token from localStorage and redirect to /auth
+    // Remove tokens from localStorage. 
+    // (Optionally call /api/user/logout if you have a backend route.)
+    localStorage.removeItem("accessToken");
     localStorage.removeItem("token");
     setIsAuthenticated(false);
     setShowDropdown(false);
     HomeRouter.push("/auth");
   };
 
+  // Notification bell click → toggle notifications
   const toggleNotifications = () => {
-    console.log('Toggling notifications', !showNotifications);
-    setShowNotifications((showNotifications) => !showNotifications); // Toggle the visibility of NotificationDrop
+    setShowNotifications(!showNotifications);
   };
 
   return (
     <header className="header flex justify-between items-center text-white p-4">
-      {/* Left: logo and brand */}
+      {/* -- LEFT: Logo + Title -- */}
       <div className="items-center flex gap-2">
         <img
           src="logo_no_back.png"
@@ -85,7 +95,7 @@ const HomeHeader: React.FC = () => {
         </h1>
       </div>
 
-      {/* Middle: itinerary icon (optional) */}
+      {/* -- MIDDLE: Itinerary icon (optional) -- */}
       <div>
         <img
           src="itinerarysymbol_white.png"
@@ -95,8 +105,29 @@ const HomeHeader: React.FC = () => {
         />
       </div>
 
-      {/* Right: Auth button + (possibly) a dropdown */}
+      {/* -- RIGHT: Notification + Auth Button + Dropdowns -- */}
       <div className="auth-buttons flex gap-4 relative" ref={dropdownRef}>
+        {/* Show notification bell if logged in */}
+        {isAuthenticated && (
+          <div className="relative">
+            <img
+              src="whiteNotificationBell.png"
+              alt="NotificationBell"
+              className="h-8 cursor-pointer"
+              onClick={toggleNotifications}
+            />
+            {showNotifications && (
+              <div
+                className="absolute right-0 mt-2 w-64 bg-white text-black shadow-lg rounded border"
+                style={{ zIndex: 50 }}
+              >
+                <NotificationDrop />
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Auth / Profile button */}
         <button
           className="auth-button text-white font-bold py-2 px-4 rounded bg-blue-500"
           onClick={handleAuthClick}
@@ -104,7 +135,7 @@ const HomeHeader: React.FC = () => {
           {isAuthenticated ? "Profile" : "Login / Register"}
         </button>
 
-        {/* Only show dropdown if user is logged in AND showDropdown is true */}
+        {/* Profile dropdown (Edit Profile / Logout) */}
         {isAuthenticated && showDropdown && (
           <div className="absolute right-0 mt-12 w-40 bg-white text-black rounded shadow-md">
             <ul className="py-1">
