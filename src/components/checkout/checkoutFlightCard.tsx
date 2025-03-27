@@ -9,22 +9,15 @@ const dateCache: { [key: string]: { [key: string]: string } } = {};
 interface FlightCardProps {
     legs: number;
     flights: Flight[];
-    onClick: () => void;
-    onAddToItinerary: () => void;
-    type: string;
 }
 
-const CheckoutFlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick, onAddToItinerary, type }) => {
-    const { state, dispatch } = useItinerary();
-    const firstFlightId = flights[0].id;
-    const lastFlightId = flights[flights.length - 1].id;
-    
+const CheckoutFlightCard: React.FC<FlightCardProps> = ({ legs, flights }) => {
     const renderFlight = (outBoundFlight: Flight, inBoundFlight: Flight) => {
         const departurePieces = dateSplitter(outBoundFlight.departureTime, dateCache);
                 const arrivalPieces = dateSplitter(inBoundFlight.arrivalTime, dateCache);
                 
                 return (
-                    <div key={outBoundFlight.id} className="flight-details flex items-center gap-20" onClick={onClick}>
+                    <div key={outBoundFlight.id} className="flight-details flex items-center gap-20">
                         <div className="flex flex-col items-center gap-1">
                             <p>{departurePieces.hour}:{departurePieces.minute}</p>
                             <p>{outBoundFlight.origin.code} - {departurePieces.day} {departurePieces.month}</p>
