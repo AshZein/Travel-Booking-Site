@@ -5,22 +5,17 @@ import { useRouter } from "next/navigation";
 import NotificationDrop from '@/components/Notification/dropdown/NotificationDrop';
 
 const HomeHeader: React.FC = () => {
-<<<<<<< HEAD
   const HomeRouter = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-=======
-    const HomeRouter = useRouter();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [showNotifications, setShowNotifications] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
 
-    useEffect(() => {
-        const token = localStorage.getItem('accessToken');
-        setIsAuthenticated(!!token);
-    }, []);
->>>>>>> c658f742ec203665e58441b74db523db8e6abd43
+  useEffect(() => {
+      const token = localStorage.getItem('accessToken');
+      setIsAuthenticated(!!token);
+  }, []);
 
   useEffect(() => {
     // Check if there's a valid token in local storage:
@@ -40,7 +35,6 @@ const HomeHeader: React.FC = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-<<<<<<< HEAD
   }, []);
 
   const handleLogoClick = () => {
@@ -69,6 +63,11 @@ const HomeHeader: React.FC = () => {
     setIsAuthenticated(false);
     setShowDropdown(false);
     HomeRouter.push("/auth");
+  };
+
+  const toggleNotifications = () => {
+    console.log('Toggling notifications', !showNotifications);
+    setShowNotifications((showNotifications) => !showNotifications); // Toggle the visibility of NotificationDrop
   };
 
   return (
@@ -128,48 +127,5 @@ const HomeHeader: React.FC = () => {
     </header>
   );
 };
-=======
-
-    const toggleNotifications = () => {
-        console.log('Toggling notifications', !showNotifications);
-        setShowNotifications((showNotifications) => !showNotifications); // Toggle the visibility of NotificationDrop
-    };
-    
-    return(
-        <header className="header flex justify-between items-center text-white p-4">
-            <div className="items-center flex gap-2">
-                <img src="logo_no_back.png" alt="FlyNext Logo" className="h-8 cursor-pointer" onClick={handleLogoClick}/>
-                <h1 className="text-2xl cursor-pointer" onClick={handleLogoClick}>FlyNext</h1>
-            </div>
-            <div className="auth-buttons flex gap-8 items-center">
-                <img src="itinerarysymbol_white.png" alt="Itinerary" className="h-9 mt-1 cursor-pointer" onClick={() => HomeRouter.push('/itinerary')}/>
-                
-                {isAuthenticated ? (
-                    <div className="relative">
-                        <img
-                            src="whiteNotificationBell.png"
-                            alt="NotificationBell"
-                            className="h-8 cursor-pointer"
-                            onClick={toggleNotifications}
-                        />
-                        {showNotifications && (
-                            <div className="absolute right-1 mt-2 w-64 bg-white text-black shadow-lg rounded border" style={{ zIndex: 50 }}>
-                                <NotificationDrop />
-                            </div>
-                        )}
-                    </div>
-                ) : null}
-                
-                <button 
-                    className="auth-button text-white font-bold py-2 px-4 rounded bg-blue-500"
-                    onClick={handleAuthClick}
-                >
-                    {isAuthenticated ? 'Profile' : 'Login / Register'}
-                </button>
-            </div>
-        </header>
-    );
-}
->>>>>>> c658f742ec203665e58441b74db523db8e6abd43
 
 export default HomeHeader;
