@@ -4,6 +4,7 @@ import withItineraryProvider from '@/HOC/withItineraryProvider';
 import { useItinerary } from '@/context/ItineraryContext';
 import CheckoutFlightCard from '@/components/checkout/CheckoutFlightCard';
 import CheckoutHeader from '@/components/checkout/CheckoutHeader';
+import FlightCredentials from '@/components/checkout/Credentials';
 
 const Page = () => {
     const { state, dispatch } = useItinerary();
@@ -22,6 +23,8 @@ const Page = () => {
                 <CheckoutFlightCard legs={state.selectedReturnFlights.length} flights={state.selectedReturnFlights} type={"Return Flight"} /> 
             </>
             : null}
+
+            {state.selectedOutboundFlights.length > 0 ? <FlightCredentials /> : null}
         </div>
     );
 }
