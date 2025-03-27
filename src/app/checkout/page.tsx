@@ -1,15 +1,22 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import withItineraryProvider from '@/HOC/withItineraryProvider';
-import { useItinerary } from '@/context/ItineraryContext';
+import { useCheckout } from '@/context/CheckoutContext';
 import CheckoutFlightCard from '@/components/checkout/CheckoutFlightCard';
 import CheckoutHeader from '@/components/checkout/CheckoutHeader';
 import FlightCredentials from '@/components/checkout/Credentials';
 import BillingAddress from '@/components/checkout/BillingAddress';
 import CreditCardInfo from '@/components/checkout/CreditCardInfo';
+import withCheckoutProvider from '@/HOC/withCheckoutProvider';
 
 const Page = () => {
-    const { state, dispatch } = useItinerary();
+    const { state, dispatch } = useCheckout();
+
+    useEffect(() => {
+        // will NEED to check if hotels are also not filled in
+        if (state.selectedOutboundFlights.length === 0) {
+            window.location.href = '/itinerary';
+        }
+    }, [state.selectedOutboundFlights]);
 
     return(
         <div>
@@ -33,4 +40,4 @@ const Page = () => {
     );
 }
 
-export default withItineraryProvider(Page);
+export default withCheckoutProvider(Page);
