@@ -52,7 +52,7 @@ export async function GET(request){
     }
     
     try { 
-        const matchHotels = await prisma.Hotel.findMany({
+        const matchHotels = await prisma.hotel.findMany({
             where: {
                 city,
                 AND: [
@@ -91,7 +91,7 @@ export async function GET(request){
             const numRoomsAvailable = await numberRoomAvailable(hotelId, new Date(checkin), new Date(checkout), false);
             if (numRoomsAvailable.rooms && Object.keys(numRoomsAvailable.rooms).length > 0){ // the hotel has rooms available
                 // find starting price of hotel
-                const roomTypes = await prisma.HotelRoomType.findMany({
+                const roomTypes = await prisma.hotelRoomType.findMany({
                     where: {
                         hotelId,
                         AND : [
