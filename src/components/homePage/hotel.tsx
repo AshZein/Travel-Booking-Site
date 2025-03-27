@@ -7,8 +7,8 @@ import { searchSuggestCities } from '@/utils/cleanSearch';
 const Hotel: React.FC = () => {
     const hotelRouter = useRouter();
 
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [startDate, setStartDate] = useState<Date | null>(new Date());
+    const [endDate, setEndDate] = useState<Date | null>(new Date());
     const [minRating, setMinRating] = useState(1);
     const [maxRating, setMaxRating] = useState(5);
     const [minPrice, setMinPrice] = useState(1);
@@ -32,8 +32,9 @@ const Hotel: React.FC = () => {
     };
 
     const handleHotelSearchClick = () => {
-        hotelRouter.push(`/hotelsearch?destinationLocation=${destinationLocation}&startDate=${startDate}&endDate=${endDate}&minStarRating=${minRating}&maxStarRating=${maxRating}&name=${name}&startPrice=${minPrice}&endPrice=${maxPrice}`);
+        hotelRouter.push(`/hotelsearch?destinationLocation=${destinationLocation}&startDate=${startDate?.toISOString()}&endDate=${endDate?.toISOString()}&minStarRating=${minRating}&maxStarRating=${maxRating}&name=${name}&startPrice=${minPrice}&endPrice=${maxPrice}`);
     }
+
 
     return (
         <div>

@@ -68,7 +68,7 @@ export async function GET(request){
                     },
                     {
                         name: {
-                            contains: name
+                            equals: name
                         }
                     },
                 ]
@@ -87,10 +87,9 @@ export async function GET(request){
         // iterate over each hotel and check if it has rooms available
         const availableHotels = {};
         for (const hotel of matchHotels){
-            const hotelId = hotel.hotelId;
-            console.log(hotelId);   
+            const hotelId = hotel.hotelId; 
             const numRoomsAvailable = await numberRoomAvailable(hotelId, new Date(checkin), new Date(checkout), false);
-            if (numRoomsAvailable.room && Object.keys(numRoomsAvailable.room).length > 0){ // the hotel has rooms available
+            if (numRoomsAvailable.rooms && Object.keys(numRoomsAvailable.rooms).length > 0){ // the hotel has rooms available
                 // find starting price of hotel
                 const roomTypes = await prisma.HotelRoomType.findMany({
                     where: {
@@ -128,7 +127,7 @@ export async function GET(request){
                     starRating: hotel.starRating,
                     startingPrice: minPrice,
                 };
-            }
+            } 
         }
 
         // return should include hotel name, address, star rating, starting price, coordinates 
