@@ -14,7 +14,7 @@ const CreditCardInfo: React.FC = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setCreditCard((prev) => ({
+        setCreditCard((prev: CreditCard) => ({
             ...prev,
             [name]: value,
         }));
