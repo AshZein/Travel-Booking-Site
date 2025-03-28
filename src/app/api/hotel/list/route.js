@@ -120,6 +120,7 @@ export async function GET(request){
 
                 // add hotel to availableHotels
                 availableHotels[hotelId] = {
+                    hotelId: hotelId,
                     name: hotel.name,
                     address: hotel.address,
                     longitude: hotel.longitude,
