@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import HomeHeader from "@/components/HomeHeader"; // <-- Adjust import if path differs
+import HomeHeader from "@/components/HomeHeader";
 
 const ProfilePage: React.FC = () => {
   const router = useRouter();
@@ -33,7 +33,9 @@ const ProfilePage: React.FC = () => {
         });
         const data = await response.json();
         if (!response.ok) throw new Error(data.message || "Failed to fetch user data");
-        setUser(data);
+
+        // The backend now returns: { user: {...} }
+        setUser(data.user);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -63,6 +65,7 @@ const ProfilePage: React.FC = () => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Update failed");
 
+      // Update our local state with the new value
       setUser({ ...user, [editingField as string]: updatedValue });
       setEditingField(null);
     } catch (error) {
@@ -72,10 +75,8 @@ const ProfilePage: React.FC = () => {
 
   return (
     <>
-      {/* 1) Add Home Header at the top */}
       <HomeHeader />
 
-      {/* 2) Profile Content */}
       <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
         <h2 className="text-2xl font-bold mb-6">Profile</h2>
         <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
