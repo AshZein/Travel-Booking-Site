@@ -12,7 +12,7 @@ async function searchSuggestCities(search: string) {
 
 async function searchSuggestAirports(search: string) {
     try {
-        const response = await fetch(`http://localhost:3000/api/airport?query=${search}`);
+        const response = await fetch(`/api/airport?query=${search}`);
         const data = await response.json();
         const airports = data.data.airports.map((airport: { name: string; code: string; country: string }) => `${airport.name} (${airport.code}), ${airport.country}`);
         return airports;
