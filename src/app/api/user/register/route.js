@@ -1,6 +1,6 @@
 import { prisma } from "@/utils/db";
 import { NextResponse } from "next/server";
-import bcrypt from "bcrypt"
+import bcrypt from "bcryptjs"
 
 
 // User registration
@@ -24,7 +24,7 @@ export async function POST(request) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await prisma.User.create({
+    const newUser = await prisma.user.create({
       data: {
         firstName: firstName,
         lastName: lastName,
