@@ -21,11 +21,13 @@ services:
     container_name: nextjs_app
     restart: always
     environment:
-      DATABASE_URL: postgres://your_username:your_password@postgres:5432/your_database
+      DATABASE_URL: postgresql://flynextDB_user:fly123@postgres:5432/FlyNext
     ports:
       - "3000:3000"
     depends_on:
       - postgres
+    command: >
+      sh -c "npx prisma generate && npx prisma migrate deploy && npm start"
 
   nginx:
     image: nginx:latest
