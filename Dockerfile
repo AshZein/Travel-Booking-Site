@@ -1,5 +1,5 @@
 # Use an Alpine-based Node.js image
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 # Set the working directory
 WORKDIR /app
@@ -29,8 +29,11 @@ RUN npx prisma generate
 # Build the Next.js app
 RUN npm run build
 
+# Debugging: List the contents of /app after the build
+RUN ls -la /app
+
 # Use a lightweight Alpine-based Node.js image for production
-FROM node:18-alpine AS runner
+FROM node:20-alpine AS runner
 
 # Set the working directory
 WORKDIR /app
@@ -48,6 +51,8 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/src ./src
+COPY --from=builder /app/importData ./importData
 
 # Expose the port the app runs on
 EXPOSE 3000
