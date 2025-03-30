@@ -22,7 +22,7 @@ services:
       environment:
         DATABASE_URL: postgresql://flynextDB_user:fly123@postgres:5432/FlyNext
       command: >
-        sh -c "npx prisma generate && node ../utils/runPopulate.js"
+        sh -c "ls -la && pwd && npx prisma generate && node src/utils/runPopulate.js"
 
   app:
     build:
@@ -36,6 +36,7 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
+      - populate
     command: >
       sh -c "npx prisma generate && npx prisma migrate deploy && npm start"
 
