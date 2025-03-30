@@ -18,8 +18,8 @@ services:
       dockerfile: Dockerfile
     container_name: nextjs_app
     restart: always
-    environment:
-      DATABASE_URL: postgresql://flynextDB_user:fly123@postgres:5432/FlyNext
+    env_file:
+      - .env
     ports:
       - "3000:3000"
     depends_on:
