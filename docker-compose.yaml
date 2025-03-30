@@ -6,9 +6,9 @@ services:
     container_name: postgres
     restart: always
     environment:
-      POSTGRES_USER: your_username
-      POSTGRES_PASSWORD: your_password
-      POSTGRES_DB: your_database
+      POSTGRES_USER: flynextDB_user
+      POSTGRES_PASSWORD: fly123
+      POSTGRES_DB: FlyNext
     ports:
       - "5432:5432"
     volumes:
