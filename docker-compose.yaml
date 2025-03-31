@@ -13,16 +13,16 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   populate:
-      build:
-        context: .
-        dockerfile: Dockerfile
-      container_name: populate_service
-      depends_on:
-        - postgres
-      environment:
-        DATABASE_URL: postgresql://flynextDB_user:fly123@postgres:5432/FlyNext
-      command: >
-        sh -c "ls -l && npx prisma migrate deploy && npx prisma generate && node src/utils/runPopulate.js"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: populate_service
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://flynextDB_user:fly123@postgres:5432/FlyNext
+    command: >
+      sh -c "npx prisma migrate deploy && npx prisma generate && node src/utils/runPopulate.js"
 
   app:
     build:
