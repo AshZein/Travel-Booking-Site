@@ -7,7 +7,7 @@ const CreditCardInfo: React.FC = () => {
     const [creditCard, setCreditCard] = useState<CreditCard>({
         cardName: '',
         cardNumber: '',
-        cvc: '',
+        cvcNumber: '',
         expiryMonth: '',
         expiryYear: '',
     });
@@ -27,7 +27,7 @@ const CreditCardInfo: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         // Dispatch the credit card info to the CheckoutContext
-        if (!creditCard.cardName || !creditCard.cardNumber || !creditCard.cvc || !creditCard.expiryMonth || !creditCard.expiryYear) {
+        if (!creditCard.cardName || !creditCard.cardNumber || !creditCard.cvcNumber || !creditCard.expiryMonth || !creditCard.expiryYear) {
             alert('Please fill in all fields');
             return;
         }
@@ -41,7 +41,7 @@ const CreditCardInfo: React.FC = () => {
             body: JSON.stringify({
             creditCardNumber: creditCard.cardNumber,
             creditCardExpiry: `${creditCard.expiryMonth}/${creditCard.expiryYear}`,
-            creditCardCVC: creditCard.cvc,
+            creditCardCVC: creditCard.cvcNumber,
             }),
         });
         if (response.ok) {
@@ -85,7 +85,7 @@ const CreditCardInfo: React.FC = () => {
                         type="text"
                         id="cvc"
                         name="cvc"
-                        value={creditCard.cvc}
+                        value={creditCard.cvcNumber}
                         onChange={handleChange}
                         className="w-full p-2 border border-black rounded text-black"
                     />

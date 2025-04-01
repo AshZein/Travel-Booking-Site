@@ -1,6 +1,7 @@
-interface CreditCard {
-    NameOnCard: string;
+export interface CreditCard {
+    cardName: string;
     cardNumber: string;
     cvcNumber: string;
-    expiryDate: string;
+    expiryMonth: string;
+    expiryYear: string;
 }

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from 'react';
 import { useCheckout } from '@/context/CheckoutContext';
-import CheckoutFlightCard from '@/components/checkout/CheckoutFlightCard';
+import CheckoutFlightCard from '@/components/checkout/checkoutFlightCard';
 import CheckoutHeader from '@/components/checkout/CheckoutHeader';
 import FlightCredentials from '@/components/checkout/Credentials';
 import BillingAddress from '@/components/checkout/BillingAddress';

@@ -31,6 +31,7 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
     const [sourceSuggestions, setSourceSuggestions] = useState<string[]>([]);
 
     const handleSourceLocationChange = async (value: string) => {
+        console.log('Source location changed:', value);
         setSource(value);
 
         const normalizedSource = normalizeLocationInput(value); // Normalize the input
@@ -50,6 +51,7 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
     const [destinationSuggestions, setDestinationSuggestions] = useState<string[]>([]);
 
     const handleDestinationLocationChange = async (value: string) => {
+        console.log('Destination location changed:', value);
         setDestination(value);
 
         const normalizedDestination = normalizeLocationInput(value); // Normalize the input

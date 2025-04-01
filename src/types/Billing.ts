@@ -1,4 +1,4 @@
-interface Billing {
+export interface Billing {
     firstName: string;
     lastName: string;
     streetAddress: string;

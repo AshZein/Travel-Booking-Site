@@ -1,9 +1,9 @@
 "use client"
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { Flight } from '@/types/flight';
-import Billing from '@/types/Billing';
-import CreditCard from '@/types/CreditCard';
-import FlightCred from '@/types/FlightCred';
+import {Billing} from '@/types/Billing';
+import {CreditCard} from '@/types/CreditCard';
+import {FlightCred} from '@/types/FlightCred';
 
 interface CheckoutState {
     selectedOutboundFlights: Flight[];
