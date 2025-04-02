@@ -20,7 +20,15 @@ const Page = () =>{
                 startingPrice: number;
               }
 
+              interface Room {
+                roomId: number;
+                roomType: string;
+                price: number;
+                roomAvailability: number;
+              }
+
               const [hotels, setHotels] = useState<Hotel[]>([]);
+              const [room, setRoom] = useState<Room[]>([]);
 
                 const [destinationLocation, setDestinationLocation] = useState('');
                 const [startDate, setStartDate] = useState('');
@@ -30,6 +38,7 @@ const Page = () =>{
                 const [name, setName] = useState('');
                 const [minPrice, setMinPrice] = useState('');
                 const [maxPrice, setMaxPrice] = useState('');
+                const [detailedInfo, setDetailedInfo] = useState(false);
             
                 useEffect(() => {
                     const searchParams = new URLSearchParams(window.location.search);
@@ -47,11 +56,20 @@ const Page = () =>{
               const response = await fetch(`http://localhost:3000/api/hotel/list?city=${destinationLocation}&checkin=${startDate}&checkout=${endDate}&minStarRating=${minRating}&maxStarRating=${maxRating}&name=${name}&startPrice=${minPrice}&endPrice=${maxPrice}`);
               const data = await response.json();
               console.log("API response data:", data);
+              
               setHotels(Object.values(data) || []);
               console.log(data.hotels);
               console.log(data);
-              console.log(hotels);
+              console.log(hotels.length);
             };
+
+            const fetchRooms = async (hotelId: number) => {
+                console.log(hotelId);
+                const response = await fetch(`http://localhost:3000/api/hotel/room/info?hotelId=${hotelId}&checkin=${startDate}&checkout=${endDate}`);
+                const data = await response.json();
+                console.log("API response data:", data);
+                setRoom(Object.values(data) || []);
+                        }
 
             useEffect(() => {
                 if (
@@ -60,11 +78,19 @@ const Page = () =>{
                   endDate
                 ) {
                   fetchHotels();
+                  console.log("Hotels array lengthq: " + hotels.length);
                 }
-              }, [destinationLocation, startDate, endDate, minRating, maxRating, name, minPrice, maxPrice]);
-              
+              }, [destinationLocation, startDate, endDate]);
+              console.log("Hotels array length1: " + hotels.length);
 
-    return (
+              const handeHotelSearch = (hotelId: number) => {
+                console.log("hello" + hotelId)
+                setDetailedInfo(!detailedInfo);
+                fetchRooms(hotelId);
+            }
+              
+            console.log("Hotels array length: " + hotels.length);
+            return (
         <div className="page-container">
             <header className="header flex justify-between items-center bg-blue-800 text-white p-4">
                 <div className="items-center flex gap-2">
@@ -77,7 +103,6 @@ const Page = () =>{
                     {/* login form box goes here */}
                 </div>
                 <h1 className="text-3xl font-bold mb-4">Available Hotels</h1>
-
                 {/* Check if no hotels found */}
                 {hotels.length === 0 ? (
                 <p className="text-red-500">No hotels found.</p>
@@ -86,18 +111,48 @@ const Page = () =>{
                     {hotels.map((hotel) => (
                     <div
                         key={hotel.hotelId}
+                        
                         className="border p-4 rounded-lg shadow-md bg-white"
                     >
                         <h2 className="text-xl font-semibold text-gray-800">{hotel.name}</h2>
+                        <div className="flex justify-between">
+                        <div>
                         <p className="text-gray-600">{hotel.address}</p>
                         <p className="text-yellow-500">⭐ {hotel.starRating} Stars</p>
-                        <p className="text-green-600">Price: ${hotel.startingPrice}</p>
+                        <p className="text-green-600">Starting Price: ${hotel.startingPrice}</p>
+                        </div>
+                        <div>
+                        <button className="tripType-button" onClick={() => handeHotelSearch(hotel.hotelId)}>Get detailed <br /> information </button>
+                        </div>
+                        </div>
                     </div>
+                    
                     ))}
+                    {detailedInfo && (
+                        <div className="border p-4 rounded-lg shadow-md bg-white">
+                        {room.map((rooms) => (
+                    <div
+                        key={rooms.roomId}
+                        
+                    >
+                        <h2 className="text-xl font-semibold text-gray-800">Room Name: {rooms.roomType}</h2>
+                        <div className="flex justify-between">
+                        <div>
+                        <p className="text-yellow-500">Price: ${rooms.price}</p>
+                        <p className="text-green-600">Room Availability: {rooms.roomAvailability}</p>
+
+                        </div>
+                        <div>                        </div>
+                        </div>
+                    </div>
+                    
+                    ))}
+                        </div>
+                    )}
+                    
                 </div>
                 )}
                 <div>
-
                 </div>
             </main>
             <Footer />

@@ -15,7 +15,7 @@ export async function GET(request) {
     const email = searchParams.get('email');
 
     const user = await prisma.User.findUnique({
-      where: { email: email },
+      where: { userId: userToken.userId },
       select: { firstName: true, lastName: true, email: true, phoneNumber: true },
     });
 

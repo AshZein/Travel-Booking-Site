@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import HomeHeader from "@/components/HomeHeader"; // <-- Adjust import if path differs
+import HomeHeader from "@/components/HomeHeader";
 
 const ProfilePage: React.FC = () => {
   const router = useRouter();
@@ -33,7 +33,8 @@ const ProfilePage: React.FC = () => {
         });
         const data = await response.json();
         if (!response.ok) throw new Error(data.message || "Failed to fetch user data");
-        setUser(data);
+        // data = { user: {...} }
+        setUser(data.user);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -63,6 +64,7 @@ const ProfilePage: React.FC = () => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Update failed");
 
+      // Update local state with the new value
       setUser({ ...user, [editingField as string]: updatedValue });
       setEditingField(null);
     } catch (error) {
@@ -72,30 +74,44 @@ const ProfilePage: React.FC = () => {
 
   return (
     <>
-      {/* 1) Add Home Header at the top */}
       <HomeHeader />
 
-      {/* 2) Profile Content */}
-      <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
-        <h2 className="text-2xl font-bold mb-6">Profile</h2>
+      {/*
+        1) Use the "auth-page" class to match the teal background 
+           used in your login/register pages (per globals.css).
+      */}
+      <div className="auth-page flex flex-col items-center justify-center min-h-screen p-6">
+        {/* White text heading to contrast with teal background */}
+        <h2 className="text-2xl font-bold mb-6 text-white">Profile</h2>
+
+        {/*
+          2) White "card" in the middle for user fields, matching 
+             the style of your login form (white background, black text).
+        */}
         <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
           {Object.keys(user).map((field) => (
-            <div key={field} className="flex justify-between items-center mb-4">
-              <span className="font-medium text-gray-700">
+            <div
+              key={field}
+              className="flex justify-between items-center mb-4 text-black"
+            >
+              {/* Capitalize field name */}
+              <span className="font-medium">
                 {field.charAt(0).toUpperCase() + field.slice(1)}
               </span>
 
+              {/* Either show input for editing, or the current field value */}
               {editingField === field ? (
                 <input
                   type="text"
                   value={updatedValue}
                   onChange={(e) => setUpdatedValue(e.target.value)}
-                  className="border p-2 rounded text-gray-900"
+                  className="border p-2 rounded text-black"
                 />
               ) : (
                 <span>{user[field as keyof typeof user]}</span>
               )}
 
+              {/* Save button if editing, else edit button */}
               {editingField === field ? (
                 <button
                   className="ml-2 bg-green-500 text-white px-3 py-1 rounded"
