@@ -15,33 +15,50 @@ function isValidCreditCardNumber(number) {
     return sum % 10 === 0;
 }
 
-export async function POST(request){
-    // verify user token
-    const user = verifyToken(request);
-    if (!user) {
-        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+export async function POST(request) {
+    // Verify user token (uncomment if needed)
+    // const user = verifyToken(request);
+    // if (!user) {
+    //     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    // }
+
+    const { cardName, cardNumber, cvcNumber, expiryMonth, expiryYear } = await request.json();
+
+    // Validate required fields
+    if (!cardName || !cardNumber || !cvcNumber || !expiryMonth || !expiryYear) {
+        return NextResponse.json(
+            { message: "cardName, cardNumber, cvcNumber, expiryMonth, and expiryYear are required parameters" },
+            { status: 400 }
+        );
     }
 
-    const { cardNumber, creditCardExpiry, cvc } = await request.json();
-    if (!creditCardNumber || !creditCardExpiry || !cvc){
-        return NextResponse.json({ message: "creditCardNumber, creditCardExpiry, and creditCardCVC are required parameters" }, { status: 400 });
-    }
-    if (typeof cardNumber !== 'string' || typeof creditCardExpiry !== 'string' || typeof cvc !== 'string'){
-        return NextResponse.json({ message: "creditCardNumber, creditCardExpiry, and creditCardCVC must be strings" }, { status: 400 });
+    // Validate field types
+    if (
+        typeof cardName !== 'string' ||
+        typeof cardNumber !== 'string' ||
+        typeof cvcNumber !== 'string' ||
+        typeof expiryMonth !== 'string' ||
+        typeof expiryYear !== 'string'
+    ) {
+        return NextResponse.json(
+            { message: "cardName, cardNumber, cvcNumber, expiryMonth, and expiryYear must be strings" },
+            { status: 400 }
+        );
     }
 
-    // check if credit card expiry is greater than now
+    // Check if credit card expiry is greater than now
     const currentDate = new Date();
-    const [month, year] = creditCardExpiry.split('/').map(Number);
-    const expiryDate = new Date(year, month);
+    const expiryDate = new Date(Number(expiryYear), Number(expiryMonth) - 1); // Month is 0-indexed in JavaScript
 
     if (expiryDate <= currentDate) {
         return NextResponse.json({ message: "Credit card has expired" }, { status: 400 });
     }
 
-    // check if credit card number is valid
-    if (!isValidCreditCardNumber(creditCardNumber)){
+    // Check if credit card number is valid
+    if (!isValidCreditCardNumber(cardNumber)) {
         return NextResponse.json({ message: "Invalid credit card number" }, { status: 400 });
     }
+
+    // If all validations pass
     return NextResponse.json({ message: "Credit card is valid" }, { status: 200 });
 }
