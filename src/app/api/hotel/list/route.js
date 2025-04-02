@@ -56,22 +56,21 @@ export async function GET(request){
             where: {
             city,
             AND: [
-                {
-                starRating: {
-                    gte: minStarRating
-                }
-                },
-                {
-                starRating: {
-                    lte: maxStarRating
-                }
-                },
-                {
-                name: {
-                    contains: name,
-                    mode: 'insensitive' // optional: makes the search case-insensitive
-                }
-                },
+            {
+            starRating: {
+                gte: minStarRating
+            }
+            },
+            {
+            starRating: {
+                lte: maxStarRating
+            }
+            },
+            {
+            name: {
+                contains: name?.toLowerCase(),
+            }
+            },
             ]
             },
             select: {
