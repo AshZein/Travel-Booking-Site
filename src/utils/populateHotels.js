@@ -15,8 +15,8 @@ export async function fillHotel() {
         const hotelData = {
             name: hotel.hotelInfo.name,
             address: hotel.hotelInfo.address,
-            city: hotel.hotelInfo.city,
-            country: hotel.hotelInfo.country,
+            city: hotel.hotelInfo.city.toLowerCase(),
+            country: hotel.hotelInfo.country.toLowerCase(),
             latitude: hotel.hotelInfo.latitude,
             longitude: hotel.hotelInfo.longitude,
             starRating: hotel.hotelInfo.starRating,
