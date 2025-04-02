@@ -55,10 +55,15 @@ const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinati
             const outBoundFlight = await searchFlights(sourceLocation, destinationLocation, startDate, startDate);
             setOutboundFlights(Array.isArray(outBoundFlight) ? outBoundFlight : []);
             
-            if (tripType === 'round-trip') {
+            if (direction === "return") {
+                const inBoundFlight = await searchFlights(sourceLocation, destinationLocation, startDate, startDate);
+                setInboundFlights(Array.isArray(inBoundFlight) ? inBoundFlight : []);
+
+            } else if (tripType === 'round-trip') {
                 const inBoundFlight = await searchFlights(destinationLocation, sourceLocation, endDate, endDate);
                 setInboundFlights(Array.isArray(inBoundFlight) ? inBoundFlight : []);
             }
+
         };
 
         fetchFlights().catch((error) => {

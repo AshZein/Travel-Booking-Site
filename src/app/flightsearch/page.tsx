@@ -37,6 +37,7 @@ const Page = () => {
                     startDate={startDate}
                     endDate={endDate}
                     tType={tripType}
+                    direction={direction}
                 />
                 <FlightResults 
                     sourceLocation={sourceLocation}
