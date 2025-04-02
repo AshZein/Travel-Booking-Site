@@ -23,20 +23,10 @@ const FlightCredentials: React.FC = () => {
         dispatch({ type: 'SET_FLIGHT_CREDENTIALS', payload: updatedFlightCred });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Dispatch the flight credentials to the CheckoutContext
-        dispatch({ type: 'SET_FLIGHT_CREDENTIALS', payload: flightCred });
-        alert('Flight credentials saved to checkout!');
-    };
-
     return (
         <div>
             <h1 className="text-black bg-white">Booking Information</h1>
-            <form
-                className="flex flex-col gap-6 p-6 shadow-md bg-white"
-                onSubmit={handleSubmit}
-            >
+            <form className="flex flex-col gap-6 p-6 shadow-md bg-white">
                 <div>
                     <label htmlFor="firstName" className="block mb-1 font-medium text-black">First Name:</label>
                     <input
@@ -81,7 +71,6 @@ const FlightCredentials: React.FC = () => {
                         className="w-full p-2 border border-black rounded text-black"
                     />
                 </div>
-                <button type="submit" className="p-2 bg-blue-500 text-white rounded">Submit</button>
             </form>
         </div>
     );

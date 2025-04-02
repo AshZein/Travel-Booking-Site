@@ -20,7 +20,11 @@ const Page = () => {
 
     const handleSubmit = async () => {
         // Validate all required fields
-        if (!state.flightCredentials || !state.billingAddress || !state.creditCardInfo) {
+        if (
+            (state.selectedOutboundFlights.length > 0 && !state.flightCredentials) ||
+            !state.billingAddress ||
+            !state.creditCardInfo
+        ) {
             alert('Please fill in all required fields.');
             return;
         }
