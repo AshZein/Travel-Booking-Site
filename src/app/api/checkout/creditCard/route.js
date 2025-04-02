@@ -17,10 +17,10 @@ function isValidCreditCardNumber(number) {
 
 export async function POST(request) {
     // Verify user token (uncomment if needed)
-    // const user = verifyToken(request);
-    // if (!user) {
-    //     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-    // }
+    const user = verifyToken(request);
+    if (!user) {
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
 
     const { cardName, cardNumber, cvcNumber, expiryMonth, expiryYear } = await request.json();
 

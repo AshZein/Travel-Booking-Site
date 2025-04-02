@@ -38,7 +38,7 @@ const CreditCardInfo: React.FC = () => {
             return;
         }
 
-        const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
+        const token = localStorage.getItem('accessToken'); // Retrieve the token from localStorage
         const response = await fetch('/api/checkout/creditCard', {
             method: 'POST',
             headers: {
