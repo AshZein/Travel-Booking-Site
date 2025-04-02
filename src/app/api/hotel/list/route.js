@@ -54,32 +54,33 @@ export async function GET(request){
     try { 
         const matchHotels = await prisma.hotel.findMany({
             where: {
-                city,
-                AND: [
-                    {
-                        starRating: {
-                            gte: minStarRating
-                        }
-                    },
-                    {
-                        starRating: {
-                            lte: maxStarRating
-                        }
-                    },
-                    {
-                        name: {
-                            equals: name
-                        }
-                    },
-                ]
+            city,
+            AND: [
+                {
+                starRating: {
+                    gte: minStarRating
+                }
+                },
+                {
+                starRating: {
+                    lte: maxStarRating
+                }
+                },
+                {
+                name: {
+                    contains: name,
+                    mode: 'insensitive' // optional: makes the search case-insensitive
+                }
+                },
+            ]
             },
             select: {
-                hotelId: true,
-                name: true,
-                address: true,
-                starRating: true,
-                latitude: true,
-                longitude: true
+            hotelId: true,
+            name: true,
+            address: true,
+            starRating: true,
+            latitude: true,
+            longitude: true
             }
         });
 
