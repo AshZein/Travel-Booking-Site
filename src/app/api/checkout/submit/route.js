@@ -4,8 +4,9 @@ import { verifyToken } from "@/utils/auth";
 import { generateItineraryRef } from "@/utils/itinerary";
 
 export async function POST(request) {
+    const baseUrl = process.env.BASE_URL;
     try {
-        // verify user token
+        // Verify user token
         const user = verifyToken(request);
         if (!user) {
             return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -34,92 +35,118 @@ export async function POST(request) {
             );
         }
 
-        // Example: Log the received data (you can replace this with database logic)
+        // Extract the Authorization header from the incoming request
+        const authHeader = request.headers.get('Authorization');
+
+        // Log the received data (for debugging purposes)
         console.log('Flight Credentials:', flightCredentials);
         console.log('Billing Address:', billingAddress);
         console.log('Credit Card Info:', creditCardInfo);
         console.log('Selected Outbound Flights:', selectedOutboundFlights);
         console.log('Selected Return Flights:', selectedReturnFlights);
 
-        // Example: Save the data to a database (replace this with your database logic)
-        // await saveToDatabase({
-        //     flightCredentials,
-        //     billingAddress,
-        //     creditCardInfo,
-        //     selectedOutboundFlights,
-        //     selectedReturnFlights,
-        // });
-
         // Create a new itinerary
         const itineraryRef = await generateItineraryRef();
-        const itinerary = prisma.itinerary.create({
-            where: {
+        const itinerary = await prisma.itinerary.create({
+            data: {
                 userId: user.userId,
-                itineraryRef: itineraryRef
+                itineraryRef: itineraryRef,
             },
         });
 
-        // book outbound flight if selected
+        // Book outbound flight if selected
         if (selectedOutboundFlights.length > 0) {
-            const outboundFlight = fetch("/api/flight/booking",
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        firstName: flightCredentials.firstName,
-                        lastName: flightCredentials.lastName,
-                        email: flightCredentials.email,
-                        passportNumber: flightCredentials.passportNumber,
-                        flightIds: selectedOutboundFlights,
-                    }),
-                }
-            );
-            prisma.itinerary.update({
+            const outboundFlightIds = selectedOutboundFlights.map(flight => flight.id); // Extract flight IDs
+
+            console.log('Outbound Flight Payload:', {
+                firstName: flightCredentials.firstName,
+                lastName: flightCredentials.lastName,
+                email: billingAddress.email,
+                passportNumber: flightCredentials.passportNumber,
+                flightIds: outboundFlightIds, // Send only flight IDs
+            });
+
+            const outboundFlightResponse = await fetch(`${baseUrl}/api/flight/booking`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': authHeader, // Forward the Authorization header
+                },
+                body: JSON.stringify({
+                    firstName: flightCredentials.firstName,
+                    lastName: flightCredentials.lastName,
+                    email: billingAddress.email,
+                    passportNumber: flightCredentials.passportNumber,
+                    flightIds: outboundFlightIds, // Send only flight IDs
+                }),
+            });
+
+            if (!outboundFlightResponse.ok) {
+                const errorData = await outboundFlightResponse.json();
+                console.error('Error creating outbound flight booking:', errorData);
+                return NextResponse.json(
+                    { message: `Failed to book outbound flight: ${errorData.message}` },
+                    { status: outboundFlightResponse.status }
+                );
+            }
+
+            const outboundFlightData = await outboundFlightResponse.json();
+            await prisma.itinerary.update({
                 where: {
-                    userId: user.userId,
-                    itineraryRef: itineraryRef
+                    id: itinerary.id,
                 },
                 data: {
-                    outboundFlightBookingRef: outboundFlight.bookingReference,
-                }
+                    outboundFlightBookingRef: outboundFlightData.bookingReference,
+                },
             });
         }
 
-        // book return flight if selected
+        // Book return flight if selected
         if (selectedReturnFlights.length > 0) {
-            const returnFlight = fetch("/api/flight/booking",
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        firstName: flightCredentials.firstName,
-                        lastName: flightCredentials.lastName,
-                        email: flightCredentials.email,
-                        passportNumber: flightCredentials.passportNumber,
-                        flightIds: selectedOutboundFlights,
-                    }),
-                }
-            );
+            const returnFlightIds = selectedReturnFlights.map(flight => flight.id); // Extract flight IDs
 
-            prisma.itinerary.update({
+            console.log('Return Flight Payload:', {
+                firstName: flightCredentials.firstName,
+                lastName: flightCredentials.lastName,
+                email: billingAddress.email,
+                passportNumber: flightCredentials.passportNumber,
+                flightIds: returnFlightIds, // Send only flight IDs
+            });
+
+            const returnFlightResponse = await fetch(`${baseUrl}/api/flight/booking`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': authHeader, // Forward the Authorization header
+                },
+                body: JSON.stringify({
+                    firstName: flightCredentials.firstName,
+                    lastName: flightCredentials.lastName,
+                    email: billingAddress.email,
+                    passportNumber: flightCredentials.passportNumber,
+                    flightIds: returnFlightIds, // Send only flight IDs
+                }),
+            });
+
+            if (!returnFlightResponse.ok) {
+                const errorData = await returnFlightResponse.json();
+                console.error('Error creating return flight booking:', errorData);
+                return NextResponse.json(
+                    { message: `Failed to book return flight: ${errorData.message}` },
+                    { status: returnFlightResponse.status }
+                );
+            }
+
+            const returnFlightData = await returnFlightResponse.json();
+            await prisma.itinerary.update({
                 where: {
-                    userId: user.userId,
-                    itineraryRef: itineraryRef
+                    id: itinerary.id,
                 },
                 data: {
-                    outboundFlightBookingRef: returnFlight.bookingReference,
-                }
+                    returnFlightBookingRef: returnFlightData.bookingReference,
+                },
             });
         }
-
-
-        // book hotel if selected
-
-
 
         // Return a success response
         return new Response(
