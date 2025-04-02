@@ -24,7 +24,7 @@ const FlightBooking: React.FC<FlightBookingProps> = ({ legs, flights, outBoundFl
             const firstFlight = state.selectedOutboundFlights[0];
             const lastFlight = state.selectedOutboundFlights[state.selectedOutboundFlights.length - 1];
 
-            router.push(`/flightsearch?tripType=one-way&sourceLocation=${lastFlight.destination.city}&destinationLocation=${firstFlight.origin.city}&startDate=${firstFlight.arrivalTime}`);
+            router.push(`/flightsearch?direction=return&tripType=one-way&sourceLocation=${lastFlight.destination.city}&destinationLocation=${firstFlight.origin.city}&startDate=${firstFlight.arrivalTime}`);
         }
     }
 

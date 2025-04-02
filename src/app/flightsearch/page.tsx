@@ -15,6 +15,7 @@ const Page = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [tripType, setTripType] = useState('one-way');
+    const [direction, setDirection] = useState('outbound');
 
     useEffect(() => {
         const searchParams = new URLSearchParams(window.location.search);
@@ -23,6 +24,7 @@ const Page = () => {
         setStartDate(searchParams.get('startDate') || '');
         setEndDate(searchParams.get('endDate') || '');
         setTripType(searchParams.get('tripType') || 'one-way');
+        setDirection(searchParams.get('direction') || 'outbound');
     }, []);
 
     return (
@@ -42,6 +44,7 @@ const Page = () => {
                     startDate={startDate}
                     endDate={endDate}
                     tripType={tripType}
+                    direction={direction}
                 />
             </main>
             <Footer />
