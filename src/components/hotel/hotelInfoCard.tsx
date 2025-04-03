@@ -23,6 +23,9 @@ const HotelInfoCard: React.FC<HotelInfoCardProps> = ({ hotel, hotelImg }) => {
             <h3 className="m-0.5 text-lg font-bold">{hotel.name}</h3>
             <p className="m-0.5 text-sm">Rating: {hotel.starRating}</p>
             <p className="m-0.5 text-sm">Address: {hotel.address}</p>
+            {hotel.amenities && hotel.amenities.length > 0 && (
+                <p className="m-0.5 text-sm">Amenities: {hotel.amenities.join(', ')}</p>
+            )}
             </div>
         </div>
     );
