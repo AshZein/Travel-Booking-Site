@@ -45,7 +45,6 @@ const RoomCard: React.FC<RoomCardProps> = ({ roomId, roomType, price, roomAvaila
             <div>
                 <h3>{roomType}</h3>
                 <p>Price: ${price}</p>
-                <p>Availability: {roomAvailability}</p>
                 <button onClick={handleSelectClick}>Select Room</button>
             </div>
         </div>
