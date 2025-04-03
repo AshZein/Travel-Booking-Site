@@ -125,9 +125,9 @@ const Page = () => {
                 <div className="flex justify-center mt-6">
                     <button
                         onClick={handleCheckout}
-                        disabled={itineraryState.selectedOutboundFlights.length === 0} // Disable if no outbound flights
+                        disabled={itineraryState.selectedOutboundFlights.length === 0 && !itineraryState.selectedHotel} // Disable if no outbound flights
                         className={`px-6 py-3 rounded-lg font-semibold ${
-                            itineraryState.selectedOutboundFlights.length === 0
+                            itineraryState.selectedOutboundFlights.length === 0 && !itineraryState.selectedHotel
                                 ? 'bg-gray-400 text-gray-700 cursor-not-allowed' // Grayed out and unclickable
                                 : 'bg-blue-600 text-white hover:bg-blue-700 cursor-pointer' // Active and clickable
                         }`}
