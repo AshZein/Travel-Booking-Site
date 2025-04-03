@@ -20,14 +20,19 @@ const RoomCard: React.FC<RoomCardProps> = ({ roomId, roomType, price, roomAvaila
         console.log("Room Image Response: ", response);
         if (response.ok && Array.isArray(data.images)) {
             setImages(data.images); // Set the images array directly
+            console.log("Room Images array (inside fetch):", data.images);
         } else {
-            setImages(['/images/hotel/image-not-found.png']); // Fallback image
+            setImages(['../images/hotel/image-not-found.png']); // Fallback image
         }
     }
 
     useEffect(() => {
         fetchRoomImages();
     }, []);
+
+    useEffect(() => {
+        console.log("Room Images array (after state update):", images);
+    }, [images]);
 
     const handleSelectClick = () => {
         console.log("NO ROOM SELECT YET!!");
@@ -36,7 +41,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ roomId, roomType, price, roomAvaila
 
     return (
         <div className="hotel-room-card">
-            <img src={images[0]}></img>
+            <img src={`../${images[0]}`}></img>
             <div>
                 <h3>{roomType}</h3>
                 <p>Price: ${price}</p>
