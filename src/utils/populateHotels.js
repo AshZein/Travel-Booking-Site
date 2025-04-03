@@ -5,7 +5,7 @@ const hotels1000Path = "../../importData/hotels_1000.json";
 import fs from 'fs';
 
 const hotelsData = JSON.parse(fs.readFileSync(new URL(hotels1000Path, import.meta.url), 'utf-8'));
-
+const baseImgPath = "src/images";
 export async function fillHotel() {
     // Iterate over the keys of the hotelsData object (e.g., hotel1, hotel2, ...)
     for (let hotelKey of Object.keys(hotelsData)) {
@@ -46,6 +46,18 @@ export async function fillHotel() {
             const createdRoom = await prisma.hotelRoomType.create({
                 data: roomData,
             });
+
+            
+            // add room images
+            for (let image of room.images) {
+                const imageData = {
+                    hotelRoomTypeId: createdRoom.hotelRoomTypeId,
+                    image: baseImgPath + "/hotel/room/" + image,
+                };
+                await prisma.roomImage.create({
+                    data: imageData,
+                });
+            }
 
             // Add room amenities
             for (let amenity of room.amenities) {
