@@ -10,7 +10,7 @@ interface HotelInfoCardProps {
 
 const HotelInfoCard: React.FC<HotelInfoCardProps> = ({ hotel, hotelImg }) => {
     return(
-        <div className="flex flex-row justify-left ml-4 items-center max-h-[16.67vh] overflow-hidden">
+        <div className="hotel-info-card">
             <div>
                 <img 
                 src={hotelImg ? `/${hotelImg}` : '/images/hotel/image-not-found.png'} 

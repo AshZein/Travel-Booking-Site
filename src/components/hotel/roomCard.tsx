@@ -37,12 +37,21 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
     };
 
     return (
-        <div className="hotel-room-card">
-            <img src={images[0] ? `/${images[0]}` : '/images/hotel/image-not-found.png'} alt="Room Image" />
-            <div>
-                <h3>{room.roomType}</h3>
-                <p>Price: ${room.price}</p>
-                <button onClick={handleSelectClick}>Select Room</button>
+        <div className="hotel-room-card flex items-center p-4 border rounded-lg shadow-md">
+            <img 
+            src={images[0] ? `/${images[0]}` : '/images/hotel/image-not-found.png'} 
+            alt="Room Image" 
+            className="w-48 h-36 object-cover rounded-md" 
+            />
+            <div className="ml-4">
+            <h3 className="text-lg font-semibold">{room.roomType}</h3>
+            <p className="text-gray-600">Price: ${room.price}</p>
+            <button 
+                onClick={handleSelectClick} 
+                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+                Select Room
+            </button>
             </div>
         </div>
     );
