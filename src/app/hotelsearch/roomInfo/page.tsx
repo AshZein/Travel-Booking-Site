@@ -9,7 +9,7 @@ import  RoomCard  from '@/components/hotel/roomCard';
 import HotelInfoCard from '@/components/hotel/hotelInfoCard';
 import withItineraryProvider from '@/HOC/withItineraryProvider';
 
-const Page = () =>{
+const Page: React.FC = () =>{
     const [room, setRoom] = useState<Room[]>([]);
     const [hotel, setHotel] = useState<Hotel>({
         hotelId: 0,
