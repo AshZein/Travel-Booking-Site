@@ -53,6 +53,7 @@ const Page = () => {
                     creditCardInfo: state.creditCardInfo,
                     selectedOutboundFlights: state.selectedOutboundFlights,
                     selectedReturnFlights: state.selectedReturnFlights,
+                    
                 }),
             });
 

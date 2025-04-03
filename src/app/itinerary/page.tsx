@@ -43,11 +43,31 @@ const Page = () => {
                     payload: itineraryState.selectedReturnFlights[0], // Example: Add the first return flight
                 });
             }
-
-            //  Add hotel to checkout context HERE!!!
-
-            router.push('/checkout'); // Redirect to the checkout page
         }
+        //  Add hotel to checkout context HERE!!!
+        if (itineraryState.selectedHotel){
+            checkoutDispatch({
+                type: 'SELECT_HOTEL',
+                payload: itineraryState.selectedHotel,
+            });
+            checkoutDispatch({
+                type: 'SELECT_ROOM',
+                payload: itineraryState.selectedRoom,
+            });
+            checkoutDispatch({
+                type: 'SET_HOTEL_CHECK_IN',
+                payload: itineraryState.selectedHotelCheckIn,
+            });
+            checkoutDispatch({
+                type: 'SET_HOTEL_CHECK_OUT',
+                payload: itineraryState.selectedHotelCheckOut,
+            });
+            checkoutDispatch({
+                type: 'SET_HOTEL_PRICE',
+                payload: itineraryState.selectedRoom?.price ? itineraryState.selectedRoom.price : 0,
+            });
+        }
+        router.push('/checkout'); // Redirect to the checkout page
     };
 
     const handleRemoveHotel = () => {
