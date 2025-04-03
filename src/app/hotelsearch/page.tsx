@@ -3,23 +3,25 @@ import React, { useEffect, useState } from 'react';
 import {useRouter} from "next/navigation";
 import Footer from '@/components/Footer';
 import HomeHeader from '@/components/HomeHeader';
+import { Room } from '@/types/Room';
+import { Hotel } from '@/types/Hotel';
 
 const Page = () =>{
     const router = useRouter();
-            interface Hotel {
-                hotelId: number;
-                name: string;
-                address: string;
-                starRating: number;
-                startingPrice: number;
-              }
+            // interface Hotel {
+            //     hotelId: number;
+            //     name: string;
+            //     address: string;
+            //     starRating: number;
+            //     startingPrice: number;
+            //   }
 
-              interface Room {
-                roomId: number;
-                roomType: string;
-                price: number;
-                roomAvailability: number;
-              }
+              // interface Room {
+              //   roomId: number;
+              //   roomType: string;
+              //   price: number;
+              //   roomAvailability: number;
+              // }
 
               const [hotels, setHotels] = useState<Hotel[]>([]);
               const [hotelImgs, setHotelImgs] = useState<string[]>([]);
