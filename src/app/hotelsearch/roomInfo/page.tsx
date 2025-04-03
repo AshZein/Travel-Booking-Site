@@ -9,6 +9,7 @@ import  RoomCard  from '@/components/hotel/roomCard';
 
 const Page = () =>{
     const [room, setRoom] = useState<Room[]>([]);
+    const [Hotel, setHotel] = useState<Hotel[]>([]);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
@@ -18,6 +19,13 @@ const Page = () =>{
         setRoom(Object.values(data) || []);
     };
 
+    const fetchHotel = async (hotelId: number) => {
+        const response = await fetch(`http://localhost:3000/api/hotel/info?hotelId=${hotelId}`);
+        const data = await response.json();
+        console.log("Hotel Data: ", data);
+        setHotel(data);
+    };  
+
     useEffect (() => {
         const searchParams = new URLSearchParams(window.location.search);
         const hotelId = Number(searchParams.get('hotelId'));
@@ -25,12 +33,13 @@ const Page = () =>{
         setEndDate(searchParams.get('endDate') || '');
 
         if (hotelId) {
+            fetchHotel(hotelId);
             fetchRooms(hotelId);
         }
     }
     , []);
 
-    return(
+    return (
         <div>
             <HomeHeader />
             <main>
@@ -38,11 +47,9 @@ const Page = () =>{
                 {room.length > 0 ? (
                     room.map((roomItem) => (
                         <RoomCard
-                            key={roomItem.roomId}
-                            roomId={roomItem.roomId}
-                            roomType={roomItem.roomType}
-                            price={roomItem.price}
-                            roomAvailability={roomItem.roomAvailability}
+                            key={roomItem.roomId // Use a unique identifier as the key
+                            }
+                            room={roomItem}
                         />
                     ))
                 ) : (
