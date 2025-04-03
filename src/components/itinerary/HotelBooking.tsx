@@ -6,9 +6,10 @@ interface HotelBookingProps {
     hotel: Hotel | null;
     checkinDate: string | null;
     checkoutDate: string | null;
+    onRemove: () => void; // Callback for removing the booking
 }
 
-const HotelBooking: React.FC<HotelBookingProps> = ({ hotel, checkinDate, checkoutDate }) => {
+const HotelBooking: React.FC<HotelBookingProps> = ({ hotel, checkinDate, checkoutDate, onRemove }) => {
     const dateCache: { [key: string]: { [key: string]: string } } = {}; // Cache for dateSplitter
 
     // Process checkin and checkout dates
@@ -20,27 +21,33 @@ const HotelBooking: React.FC<HotelBookingProps> = ({ hotel, checkinDate, checkou
     }, []);
 
     return (
-        <div className="hotel-booking-card">
+        <div className="hotel-booking-card border p-4 rounded shadow-md">
             {hotel && (
-                <div className="flex flex-col justify-left">
+                <div className="flex flex-col justify-left mb-4">
                     <p><strong>Hotel Name:</strong> {hotel.name}</p>
                     <p><strong>Address:</strong> {hotel.address}</p>
                 </div>
             )}
             {checkinPieces && (
-                <div>
+                <div className="mb-2">
                     <p>
                         <strong>Check-in:</strong> {checkinPieces.day} {checkinPieces.month} {checkinPieces.year} at {checkinPieces.hour}:{checkinPieces.minute}
                     </p>
                 </div>
             )}
             {checkoutPieces && (
-                <div>
+                <div className="mb-4">
                     <p>
                         <strong>Check-out:</strong> {checkoutPieces.day} {checkoutPieces.month} {checkoutPieces.year} at {checkoutPieces.hour}:{checkoutPieces.minute}
                     </p>
                 </div>
             )}
+            <button
+                onClick={onRemove}
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+            >
+                Remove
+            </button>
         </div>
     );
 };
