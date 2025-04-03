@@ -132,6 +132,15 @@ button:hover {
   background-color: #136f6c;
 }
 
+.hotel-results{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  margin-top: 1rem;
+  background-color: #136f6c;
+}
+
 .flight-card {
   background-color: #ffffff;
   color: #000000;

@@ -109,7 +109,7 @@ const Page = () =>{
             return (
         <div className="page-container">
             <HomeHeader />
-            <main className='p-3'>
+            <main className='hotel-results p-3'>
                 <h1 className="text-3xl font-bold mb-4">Available Hotels</h1>
                 {/* Check if no hotels found */}
                 {hotels.length === 0 ? (
