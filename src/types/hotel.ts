@@ -1,4 +1,4 @@
-interface Hotel {
+export interface Hotel {
     hotelId: number;
     name: string;
     logo: string;
