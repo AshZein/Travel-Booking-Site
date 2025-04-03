@@ -6,13 +6,6 @@ import HomeHeader from '@/components/HomeHeader';
 
 const Page = () =>{
     const router = useRouter();
-
-    const handleLogoClick = () => {
-        router.push('/');
-    };
-
-    
-
             interface Hotel {
                 hotelId: number;
                 name: string;
