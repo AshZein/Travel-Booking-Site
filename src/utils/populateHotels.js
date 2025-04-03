@@ -1,6 +1,6 @@
 import { prisma } from "./db.js";
 
-const hotels1000Path = "../../importData/hotels_1000.json";
+const hotels1000Path = "../../importData/hotels_100.json";
 
 import fs from 'fs';
 
