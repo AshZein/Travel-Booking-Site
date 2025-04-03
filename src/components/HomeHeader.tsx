@@ -95,12 +95,12 @@ const HomeHeader: React.FC = () => {
       </div>
 
       {/* -- RIGHT side -- */}
-      <div className="auth-buttons flex gap-4 relative" ref={dropdownRef}>
+      <div className="auth-buttons flex gap-4 relative h-12" ref={dropdownRef}>
         {/* Itinerary Icon */}
         <img
           src="itinerarysymbol_white.png"
           alt="Itinerary"
-          className="h-8 cursor-pointer"
+          className="h-12 cursor-pointer mt-2"
           onClick={() => HomeRouter.push("/itinerary")}
         />
 
