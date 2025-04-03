@@ -29,7 +29,6 @@ const Page = () =>{
 
               const [hotels, setHotels] = useState<Hotel[]>([]);
               const [room, setRoom] = useState<Room[]>([]);
-
                 const [destinationLocation, setDestinationLocation] = useState('');
                 const [startDate, setStartDate] = useState('');
                 const [endDate, setEndDate] = useState('');
@@ -39,6 +38,7 @@ const Page = () =>{
                 const [minPrice, setMinPrice] = useState('');
                 const [maxPrice, setMaxPrice] = useState('');
                 const [detailedInfo, setDetailedInfo] = useState(false);
+                const [detailedName, setDetailedName] = useState('');
             
                 useEffect(() => {
                     const searchParams = new URLSearchParams(window.location.search);
@@ -51,7 +51,8 @@ const Page = () =>{
                     setMinPrice(searchParams.get('startPrice') || '');
                     setMaxPrice(searchParams.get('endPrice') || '');
                 }, []);
-        
+
+
             const fetchHotels = async () => {
               const response = await fetch(`http://localhost:3000/api/hotel/list?city=${destinationLocation}&checkin=${startDate}&checkout=${endDate}&minStarRating=${minRating}&maxStarRating=${maxRating}&name=${name}&startPrice=${minPrice}&endPrice=${maxPrice}`);
               const data = await response.json();
@@ -83,10 +84,11 @@ const Page = () =>{
               }, [destinationLocation, startDate, endDate]);
               console.log("Hotels array length1: " + hotels.length);
 
-              const handeHotelSearch = (hotelId: number) => {
+              const handeHotelSearch = (hotelId: number, name: string) => {
                 console.log("hello" + hotelId)
                 setDetailedInfo(!detailedInfo);
                 fetchRooms(hotelId);
+                setDetailedName(name);
             }
               
             console.log("Hotels array length: " + hotels.length);
@@ -122,15 +124,27 @@ const Page = () =>{
                         <p className="text-green-600">Starting Price: ${hotel.startingPrice}</p>
                         </div>
                         <div>
-                        <button className="tripType-button" onClick={() => handeHotelSearch(hotel.hotelId)}>Get detailed <br /> information </button>
+                        <button className="tripType-button" onClick={() => handeHotelSearch(hotel.hotelId, hotel.name)}>Get detailed <br /> information </button>
                         </div>
                         </div>
                     </div>
                     
                     ))}
+
                     {detailedInfo && (
-                        <div className="border p-4 rounded-lg shadow-md bg-white">
-                        {room.map((rooms) => (
+  <div 
+  className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50"
+  style={{
+    backdropFilter: "blur(10px)", // Blur everything behind
+  }}
+  onClick={() => setDetailedInfo(false)}
+  >
+    <div 
+      className="border p-4 pr-10 pl-10 rounded-lg shadow-md bg-white "
+      onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the popup
+    >
+        <h1 className="text-[25px] font-semibold text-gray-800 mb-5">{detailedName + " Rooms"}</h1>
+            {room.map((rooms) => (
                     <div
                         key={rooms.roomId}
                         
@@ -147,8 +161,15 @@ const Page = () =>{
                     </div>
                     
                     ))}
-                        </div>
-                    )}
+      <button 
+        className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md cursor-pointer"
+        onClick={() => setDetailedInfo(false)}
+      >
+        Close
+      </button>
+    </div>
+  </div>
+)}
                     
                 </div>
                 )}
