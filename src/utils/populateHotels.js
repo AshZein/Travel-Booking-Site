@@ -29,10 +29,7 @@ const roomImgPaths = {
 };
 
 const hotelImgPaths = [
-    "images/hotel/itself/13.png",
-    "images/hotel/itself/14.png",
     "images/hotel/itself/360_F_869975348_HXGi8LdxOP4wGZJkd4NruWYNW2IRrdVZ.jpg",
-    "images/hotel/itself/default.png",
     "images/hotel/itself/DSCN4976.jpg",
     "images/hotel/itself/images.jpeg",
     "images/hotel/itself/IMG_3679-1440x1440.jpg",

@@ -63,7 +63,10 @@ const Page = () =>{
                         [hotelId]: data.image, // Set the hotelId as the key and the image path as the value
                     }));
                 } else {
-                    console.error(`Failed to fetch image for hotelId ${hotelId}:`, data.message);
+                  setHotelImgs((prev) => ({
+                    ...prev,
+                    [hotelId]: "images/hotel/itself/image-not-found.png", // Set the hotelId as the key and the image path as the value
+                }));
                 }
               };
 
