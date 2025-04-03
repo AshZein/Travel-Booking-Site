@@ -66,7 +66,7 @@ const Page = () =>{
             <main>
                 <h1 className="ml-4 text-lg font-bold">Hotel Info</h1>
                 <HotelInfoCard hotel={hotel} hotelImg={hotelImg}/>
-                <h1>Rooms</h1>
+                <h1 className="ml-4 text-lg font-bold">Rooms</h1>
                 {room.length > 0 ? (
                     room.map((roomItem) => (
                         <RoomCard
