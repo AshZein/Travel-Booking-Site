@@ -34,6 +34,7 @@ export async function GET(request) {
     });
 
     const hotel = {
+        hotelId: hotelData.hotelId,
         name: hotelData.name,
         address: hotelData.address,
         city: hotelData.city,
