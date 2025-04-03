@@ -13,7 +13,7 @@ interface RoomCardProps {
 const RoomCard: React.FC<RoomCardProps> = ({ room, hotel, checkinDate, checkoutDate }) => {
     const { state, dispatch } = useItinerary();
     const [images, setImages] = React.useState<string[]>([]);
-    var isSelected = false;
+    const [isSelected, setIsSelected] = React.useState(false);
 
     const fetchRoomImages = async () => {
         const response = await fetch(`http://localhost:3000/api/hotel/room/images?roomId=${room.roomId}`);
@@ -37,7 +37,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, hotel, checkinDate, checkoutD
     }, [images]);
 
     const handleSelectClick = () => {
-        if (isSelected && state.selectedHotel && state.selectedHotelCheckIn && state.selectedHotelCheckOut) {
+        if (isSelected) {
             const data = {
                 hotel: state.selectedHotel,
                 room: room,
@@ -46,17 +46,30 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, hotel, checkinDate, checkoutD
                 price: room.price,
             };
             dispatch({ type: 'UNSELECT_HOTEL_ROOM', payload: data });
-        } else{
-           const data =  {
+            setIsSelected(false);
+        } else {
+            if (state.selectedHotel && state.selectedHotelCheckIn && state.selectedHotelCheckOut) {
+                const unselectData = {
+                    hotel: state.selectedHotel,
+                    room: state.selectedRoom,
+                    checkin: state.selectedHotelCheckIn,
+                    checkout: state.selectedHotelCheckOut,
+                    price: 0,
+                };
+                console.log("Unselecting Room: ", unselectData);
+                dispatch({ type: 'UNSELECT_HOTEL_ROOM', payload: unselectData });
+            }
+
+            const selectData = {
                 hotel: hotel,
                 room: room,
                 checkin: checkinDate,
                 checkout: checkoutDate,
                 price: room.price,
             };
-            dispatch({ type: 'SELECT_HOTEL_ROOM', payload: data });
-            console.log("Selected Room: ", room); 
-            isSelected = true;
+            dispatch({ type: 'SELECT_HOTEL_ROOM', payload: selectData });
+            console.log("Selected Room: ", room);
+            setIsSelected(true);
         }
     };
 
@@ -68,7 +81,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, hotel, checkinDate, checkoutD
             className="w-48 h-36 object-cover rounded-md" 
             />
             <div className="ml-4">
-            <h3 className="text-lg font-semibold">{room.roomType}</h3>
+            <h3 className="text-lg font-semibold">{room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</h3>
             <p className="text-gray-600">Price: ${room.price}</p>
             <button 
                 onClick={handleSelectClick} 

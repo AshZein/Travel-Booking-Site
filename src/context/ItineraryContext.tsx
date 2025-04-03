@@ -16,10 +16,10 @@ interface ItineraryState {
 interface ItineraryAction {
     type: 'SELECT_OUTBOUND_FLIGHT' | 'UNSELECT_OUTBOUND_FLIGHT' | 'SELECT_RETURN_FLIGHT' | 'UNSELECT_RETURN_FLIGHT' | 'SELECT_HOTEL_ROOM' | 'UNSELECT_HOTEL_ROOM';  
     payload: Flight | ({
-        hotel: Hotel;
-        room: Room;
-        checkin: string;
-        checkout: string;
+        hotel: Hotel | null;
+        room: Room | null;
+        checkin: string | null;
+        checkout: string | null;
         price: number;
     });
 }
@@ -29,8 +29,8 @@ const initialState: ItineraryState = {
     selectedReturnFlights: [],
     selectedHotel: null,
     selectedRoom: null,
-    selectedHotelCheckIn: '',
-    selectedHotelCheckOut: '',
+    selectedHotelCheckIn: null,
+    selectedHotelCheckOut: null,
     selectedHotelPrice: 0,
 };
 
