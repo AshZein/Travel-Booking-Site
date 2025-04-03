@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 import { Hotel } from '@/types/Hotel';
 
 const Page = () => {
-    const { state: itineraryState } = useItinerary(); // Access ItineraryContext state
+    const { state: itineraryState, dispatch: itineraryDispatch } = useItinerary(); // Access ItineraryContext state and dispatch
     const { state: checkoutState, dispatch: checkoutDispatch } = useCheckout(); // Access CheckoutContext state and dispatch
     const [showPopup, setShowPopup] = useState(false);
     const [selectedFlight, setSelectedFlight] = useState<Flight[] | null>(null);
@@ -50,6 +50,17 @@ const Page = () => {
         }
     };
 
+    const handleRemoveHotel = () => {
+        const data = {
+            hotel: itineraryState.selectedHotel,
+            room: itineraryState.selectedRoom,
+            checkin: itineraryState.selectedHotelCheckIn,
+            checkout: itineraryState.selectedHotelCheckOut,
+            price: itineraryState.selectedRoom?.price ? itineraryState.selectedRoom.price : 0,
+        };
+        itineraryDispatch({ type: 'UNSELECT_HOTEL_ROOM', payload: data });
+    };
+
     return (
         <div>
             <HomeHeader />
@@ -77,6 +88,7 @@ const Page = () => {
                         hotel={itineraryState.selectedHotel}
                         checkinDate={itineraryState.selectedHotelCheckIn}
                         checkoutDate={itineraryState.selectedHotelCheckOut}
+                        onRemove={handleRemoveHotel}
                     />
                 )}
 
