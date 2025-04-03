@@ -7,36 +7,36 @@ import fs from 'fs';
 const hotelsData = JSON.parse(fs.readFileSync(new URL(hotels1000Path, import.meta.url), 'utf-8'));
 const roomImgPaths = {
     double: [
-        "src/images/hotel/room/double/Altair-QQ-1-LG-1920x1281.jpg",
-        "src/images/hotel/room/double/e8c50ce285b0a5730a23db4e1459cd3b.jpg",
-        "src/images/hotel/room/double/empire-hotel-nyc-superior-room-two-double-beds-01-high-res-2020_wide.jpg",
-        "src/images/hotel/room/double/images (1).jpeg",
-        "src/images/hotel/room/double/images.jpeg"
+        "images/hotel/room/double/Altair-QQ-1-LG-1920x1281.jpg",
+        "images/hotel/room/double/e8c50ce285b0a5730a23db4e1459cd3b.jpg",
+        "images/hotel/room/double/empire-hotel-nyc-superior-room-two-double-beds-01-high-res-2020_wide.jpg",
+        "images/hotel/room/double/images (1).jpeg",
+        "images/hotel/room/double/images.jpeg"
     ],
     single: [
-        "src/images/hotel/room/single/download.jpeg",
-        "src/images/hotel/room/single/images.jpeg",
-        "src/images/hotel/room/single/king-blue-hotel-toronto-royal-suite-1-bed-02_wide.jpg",
-        "src/images/hotel/room/single/Single-bed-room-YWCA_Hotel_Vancouver.jpg"
+        "images/hotel/room/single/download.jpeg",
+        "images/hotel/room/single/images.jpeg",
+        "images/hotel/room/single/king-blue-hotel-toronto-royal-suite-1-bed-02_wide.jpg",
+        "images/hotel/room/single/Single-bed-room-YWCA_Hotel_Vancouver.jpg"
     ],
     suite: [
-        "src/images/hotel/room/suite/images (1).jpeg",
-        "src/images/hotel/room/suite/images (2).jpeg",
-        "src/images/hotel/room/suite/images (3).jpeg",
-        "src/images/hotel/room/suite/images.jpeg",
-        "src/images/hotel/room/suite/istockphoto-1452529483-612x612.jpg"
+        "images/hotel/room/suite/images (1).jpeg",
+        "images/hotel/room/suite/images (2).jpeg",
+        "images/hotel/room/suite/images (3).jpeg",
+        "images/hotel/room/suite/images.jpeg",
+        "images/hotel/room/suite/istockphoto-1452529483-612x612.jpg"
     ]
 };
 
 const hotelImgPaths = [
-    "src/images/hotel/itself/13.png",
-    "src/images/hotel/itself/14.png",
-    "src/images/hotel/itself/360_F_869975348_HXGi8LdxOP4wGZJkd4NruWYNW2IRrdVZ.jpg",
-    "src/images/hotel/itself/default.png",
-    "src/images/hotel/itself/DSCN4976.jpg",
-    "src/images/hotel/itself/images.jpeg",
-    "src/images/hotel/itself/IMG_3679-1440x1440.jpg",
-    "src/images/hotel/itself/Toronto_-_ON_-_Royal_York_Hotel.jpg"
+    "images/hotel/itself/13.png",
+    "images/hotel/itself/14.png",
+    "images/hotel/itself/360_F_869975348_HXGi8LdxOP4wGZJkd4NruWYNW2IRrdVZ.jpg",
+    "images/hotel/itself/default.png",
+    "images/hotel/itself/DSCN4976.jpg",
+    "images/hotel/itself/images.jpeg",
+    "images/hotel/itself/IMG_3679-1440x1440.jpg",
+    "images/hotel/itself/Toronto_-_ON_-_Royal_York_Hotel.jpg"
 ];
 
 export async function fillHotel() {
