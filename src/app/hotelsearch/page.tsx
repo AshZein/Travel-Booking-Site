@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import {useRouter} from "next/navigation";
 import Footer from '@/components/Footer';
+import HomeHeader from '@/components/HomeHeader';
 
 const Page = () =>{
     const router = useRouter();
@@ -107,16 +108,8 @@ const Page = () =>{
               
             return (
         <div className="page-container">
-            <header className="header flex justify-between items-center bg-blue-800 text-white p-4">
-                <div className="items-center flex gap-2">
-                    <img src="logo_no_back.png" alt="FlyNext Logo" className="h-8" onClick={handleLogoClick}/>
-                    <h1 className="text-2xl" onClick={handleLogoClick}>FlyNext</h1>
-                </div>
-            </header>
-            <main>
-                <div className="loginBox">
-                    {/* login form box goes here */}
-                </div>
+            <HomeHeader />
+            <main className='p-3'>
                 <h1 className="text-3xl font-bold mb-4">Available Hotels</h1>
                 {/* Check if no hotels found */}
                 {hotels.length === 0 ? (
