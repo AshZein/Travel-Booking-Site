@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import HomeHeader from '@/components/HomeHeader';
 import Footer from '@/components/Footer';
 import FlightBooking from '@/components/itinerary/FlightBooking';
+import HotelBooking from '@/components/itinerary/HotelBooking';
 import { useItinerary } from '@/context/ItineraryContext';
 import { useCheckout } from '@/context/CheckoutContext'; // Import CheckoutContext
 import withItineraryProvider from '@/HOC/withItineraryProvider';
@@ -10,6 +11,7 @@ import withCheckoutProvider from '@/HOC/withCheckoutProvider'; // Import Checkou
 import { Flight } from '@/types/flight';
 import FlightDetailPopUp from '@/components/flightSearch/FlightDetailPopUp';
 import { useRouter } from 'next/navigation';
+import { Hotel } from '@/types/Hotel';
 
 const Page = () => {
     const { state: itineraryState } = useItinerary(); // Access ItineraryContext state
@@ -68,6 +70,13 @@ const Page = () => {
                         legs={itineraryState.selectedReturnFlights.length}
                         outBoundFlight={false}
                         onClick={() => handleFlightClick(itineraryState.selectedReturnFlights)}
+                    />
+                )}
+                {itineraryState.selectedHotel && (
+                    <HotelBooking
+                        hotel={itineraryState.selectedHotel}
+                        checkinDate={itineraryState.selectedHotelCheckIn}
+                        checkoutDate={itineraryState.selectedHotelCheckOut}
                     />
                 )}
 

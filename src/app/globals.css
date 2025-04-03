@@ -180,6 +180,17 @@ button:hover {
   align-items: center; /* Center the content inside each card */
 }
 
+.hotel-booking-card {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 2rem;
+  border: #000000;
+  margin-bottom: 1rem; /* Add margin-bottom to create a gap between hotel cards */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Center the content inside each card */
+}
 /* Popup styles */
 .popup {
   position: fixed;
