@@ -93,7 +93,7 @@ export async function fillHotel() {
             // add room images
             for (let image of roomImgPaths[room.roomType]) {
                 const imageData = {
-                    hotelRoomTypeId: createdRoom.hotelRoomTypeId,
+                    roomId: createdRoom.roomId,
                     image: image,
                 };
                 await prisma.roomImage.create({
