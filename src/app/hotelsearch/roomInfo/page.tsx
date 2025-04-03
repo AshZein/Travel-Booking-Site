@@ -7,6 +7,7 @@ import { Room } from '@/types/Room';
 import { Hotel } from '@/types/Hotel';
 import  RoomCard  from '@/components/hotel/roomCard';
 import HotelInfoCard from '@/components/hotel/hotelInfoCard';
+import withItineraryProvider from '@/HOC/withItineraryProvider';
 
 const Page = () =>{
     const [room, setRoom] = useState<Room[]>([]);
@@ -84,4 +85,4 @@ const Page = () =>{
     );
 };
 
-export default Page;
+export default withItineraryProvider(Page);
