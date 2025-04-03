@@ -130,9 +130,6 @@ const Page = () =>{
                         <p className="text-yellow-500">⭐ {hotel.starRating} Stars</p>
                         <p className="text-green-600">Starting Price: ${hotel.startingPrice}</p>
                         </div>
-                        <div>
-                        <button className="tripType-button" onClick={() => handeHotelSearch(hotel.hotelId, hotel.name)}>Get detailed <br /> information </button>
-                        </div>
                         </div>
                     </div>
                     
