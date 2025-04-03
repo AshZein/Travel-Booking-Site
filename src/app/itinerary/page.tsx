@@ -78,12 +78,13 @@ const Page = () => {
             checkout: itineraryState.selectedHotelCheckOut,
             price: itineraryState.selectedRoom?.price ? itineraryState.selectedRoom.price : 0,
         };
-        itineraryDispatch({ type: 'UNSELECT_HOTEL_ROOM', payload: data });
+        itineraryDispatch({ type: 'UNSELECT_HOTEL_ROOM' });
     };
 
     return (
         <div>
-            <HomeHeader />
+            <header><HomeHeader /></header>
+            
 
             <main>
                 {itineraryState.selectedOutboundFlights && (

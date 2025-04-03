@@ -1,9 +1,9 @@
 "use client"
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { Flight } from '@/types/flight';
-import {Billing} from '@/types/Billing';
-import {CreditCard} from '@/types/CreditCard';
-import {FlightCred} from '@/types/FlightCred';
+import { Billing } from '@/types/Billing';
+import { CreditCard } from '@/types/CreditCard';
+import { FlightCred } from '@/types/FlightCred';
 import { Hotel } from '@/types/Hotel';
 import { Room } from '@/types/Room';
 
@@ -28,10 +28,10 @@ type CheckoutAction =
     | { type: 'SET_BILLING_ADDRESS'; payload: Billing }
     | { type: 'SET_CREDIT_CARD_INFO'; payload: CreditCard }
     | { type: 'SET_FLIGHT_CREDENTIALS'; payload: FlightCred }
-    | { type: 'SELECT_HOTEL'; payload: Hotel | null}
+    | { type: 'SELECT_HOTEL'; payload: Hotel | null }
     | { type: 'SELECT_ROOM'; payload: Room | null }
     | { type: 'SET_HOTEL_CHECK_IN'; payload: string | null }
-    | { type: 'SET_HOTEL_CHECK_OUT'; payload: string | null}
+    | { type: 'SET_HOTEL_CHECK_OUT'; payload: string | null }
     | { type: 'SET_HOTEL_PRICE'; payload: number };
 
 const initialState: CheckoutState = {
@@ -81,15 +81,15 @@ const checkoutReducer = (state: CheckoutState, action: CheckoutAction): Checkout
             return { ...state, creditCardInfo: action.payload };
         case 'SET_FLIGHT_CREDENTIALS':
             return { ...state, flightCredentials: action.payload };
-        case 'SELECT_HOTEL': // Handle selecting a hotel
+        case 'SELECT_HOTEL':
             return { ...state, selectedHotel: action.payload };
-        case 'SELECT_ROOM': // Handle selecting a room
+        case 'SELECT_ROOM':
             return { ...state, selectedRoom: action.payload };
-        case 'SET_HOTEL_CHECK_IN': // Handle setting the check-in date
+        case 'SET_HOTEL_CHECK_IN':
             return { ...state, selectedHotelCheckIn: action.payload };
-        case 'SET_HOTEL_CHECK_OUT': // Handle setting the check-out date
+        case 'SET_HOTEL_CHECK_OUT':
             return { ...state, selectedHotelCheckOut: action.payload };
-        case 'SET_HOTEL_PRICE': // Handle setting the hotel price
+        case 'SET_HOTEL_PRICE':
             return { ...state, selectedHotelPrice: action.payload };
         default:
             return state;
