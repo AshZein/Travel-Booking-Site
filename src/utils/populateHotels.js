@@ -28,6 +28,17 @@ const roomImgPaths = {
     ]
 };
 
+const hotelImgPaths = [
+    "src/images/hotel/itself/13.png",
+    "src/images/hotel/itself/14.png",
+    "src/images/hotel/itself/360_F_869975348_HXGi8LdxOP4wGZJkd4NruWYNW2IRrdVZ.jpg",
+    "src/images/hotel/itself/default.png",
+    "src/images/hotel/itself/DSCN4976.jpg",
+    "src/images/hotel/itself/images.jpeg",
+    "src/images/hotel/itself/IMG_3679-1440x1440.jpg",
+    "src/images/hotel/itself/Toronto_-_ON_-_Royal_York_Hotel.jpg"
+];
+
 export async function fillHotel() {
     // Iterate over the keys of the hotelsData object (e.g., hotel1, hotel2, ...)
     for (let hotelKey of Object.keys(hotelsData)) {
@@ -53,6 +64,15 @@ export async function fillHotel() {
 
         await prisma.hotelManager.create({
             data: managerData,
+        });
+
+        // add hotel image
+        const hotelImageData = {
+            hotelId: createdHotel.hotelId,
+            image: hotelImgPaths[Math.floor(Math.random() * hotelImgPaths.length)],
+        };
+        await prisma.hotelImage.create({
+            data: hotelImageData,
         });
 
         // Create hotel rooms
