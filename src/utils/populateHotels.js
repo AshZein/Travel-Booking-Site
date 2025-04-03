@@ -1,39 +1,42 @@
 import { prisma } from "./db.js";
 
-const hotels1000Path = "../../importData/hotels_1000.json";
+const hotels1000Path = "../../importData/hotels_100.json";
 
 import fs from 'fs';
 
 const hotelsData = JSON.parse(fs.readFileSync(new URL(hotels1000Path, import.meta.url), 'utf-8'));
 const roomImgPaths = {
     double: [
-        "images/hotel/room/double/Altair-QQ-1-LG-1920x1281.jpg",
-        "images/hotel/room/double/e8c50ce285b0a5730a23db4e1459cd3b.jpg",
-        "images/hotel/room/double/empire-hotel-nyc-superior-room-two-double-beds-01-high-res-2020_wide.jpg",
-        "images/hotel/room/double/images (1).jpeg",
-        "images/hotel/room/double/images.jpeg"
+        "images/hotel/room/double/double01.jpg",
+        "images/hotel/room/double/double02.jpg",
+        "images/hotel/room/double/double03.jpg",
+        "images/hotel/room/double/double04.jpg",
+        "images/hotel/room/double/double05.jpg"
     ],
     single: [
-        "images/hotel/room/single/download.jpeg",
-        "images/hotel/room/single/images.jpeg",
-        "images/hotel/room/single/king-blue-hotel-toronto-royal-suite-1-bed-02_wide.jpg",
-        "images/hotel/room/single/Single-bed-room-YWCA_Hotel_Vancouver.jpg"
+        "images/hotel/room/single/single01.jpg",
+        "images/hotel/room/single/single02.jpg",
+        "images/hotel/room/single/single03.jpg",
+        "images/hotel/room/single/single04.jpg"
     ],
     suite: [
-        "images/hotel/room/suite/images (1).jpeg",
-        "images/hotel/room/suite/images (2).jpeg",
-        "images/hotel/room/suite/images (3).jpeg",
-        "images/hotel/room/suite/images.jpeg",
-        "images/hotel/room/suite/istockphoto-1452529483-612x612.jpg"
+        "images/hotel/room/suite/suite01.jpg",
+        "images/hotel/room/suite/suite02.jpg",
+        "images/hotel/room/suite/suite03.jpg",
+        "images/hotel/room/suite/suite04.jpg",
+        "images/hotel/room/suite/suite05.jpg"
     ]
 };
 
 const hotelImgPaths = [
-    "images/hotel/itself/360_F_869975348_HXGi8LdxOP4wGZJkd4NruWYNW2IRrdVZ.jpg",
-    "images/hotel/itself/DSCN4976.jpg",
-    "images/hotel/itself/images.jpeg",
-    "images/hotel/itself/IMG_3679-1440x1440.jpg",
-    "images/hotel/itself/Toronto_-_ON_-_Royal_York_Hotel.jpg"
+    "images/hotel/itself/hotel01.jpg",
+    "images/hotel/itself/hotel02.jpg",
+    "images/hotel/itself/hotel03.jpg",
+    "images/hotel/itself/hotel04.jpg",
+    "images/hotel/itself/hotel05.jpg",
+    "images/hotel/itself/hotel06.jpg",
+    "images/hotel/itself/hotel07.jpg",
+    "images/hotel/itself/hotel08.jpg"
 ];
 
 export async function fillHotel() {
