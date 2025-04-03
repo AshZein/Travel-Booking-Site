@@ -2,13 +2,18 @@ import React, { useEffect } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useItinerary } from '@/context/ItineraryContext';
 import { Room } from '@/types/Room';
+import { Hotel } from '@/types/Hotel';
 interface RoomCardProps {
     room: Room;
+    hotel: Hotel;
+    checkinDate: string;
+    checkoutDate: string;
 }
 
-const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
+const RoomCard: React.FC<RoomCardProps> = ({ room, hotel, checkinDate, checkoutDate }) => {
     const { state, dispatch } = useItinerary();
     const [images, setImages] = React.useState<string[]>([]);
+    var isSelected = false;
 
     const fetchRoomImages = async () => {
         const response = await fetch(`http://localhost:3000/api/hotel/room/images?roomId=${room.roomId}`);
@@ -32,8 +37,25 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
     }, [images]);
 
     const handleSelectClick = () => {
-        console.log("NO ROOM SELECT YET!!");
-        // dispatch({ type: 'SELECT_ROOM', payload: { roomId, roomType, price, roomAvailability } });
+        if (isSelected && state.selectedHotel && state.selectedHotelCheckIn && state.selectedHotelCheckOut) {
+            const data = {
+                hotel: state.selectedHotel,
+                room: room,
+                checkin: state.selectedHotelCheckIn,
+                checkout: state.selectedHotelCheckOut,
+                price: room.price,
+            };
+            dispatch({ type: 'UNSELECT_HOTEL_ROOM', payload: data });
+        } else{
+           const data =  {
+                hotel: hotel,
+                room: room,
+                checkin: checkinDate,
+                checkout: checkoutDate,
+                price: room.price,
+            };
+            dispatch({ type: 'SELECT_HOTEL_ROOM', payload: data });
+        }
     };
 
     return (

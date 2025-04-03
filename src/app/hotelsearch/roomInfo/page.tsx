@@ -74,6 +74,9 @@ const Page = () =>{
                             key={roomItem.roomId // Use a unique identifier as the key
                             }
                             room={roomItem}
+                            hotel={hotel}
+                            checkinDate={startDate}
+                            checkoutDate={endDate}
                         />
                     ))
                 ) : (

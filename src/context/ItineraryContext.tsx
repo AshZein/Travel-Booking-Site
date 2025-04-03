@@ -15,13 +15,13 @@ interface ItineraryState {
 
 interface ItineraryAction {
     type: 'SELECT_OUTBOUND_FLIGHT' | 'UNSELECT_OUTBOUND_FLIGHT' | 'SELECT_RETURN_FLIGHT' | 'UNSELECT_RETURN_FLIGHT' | 'SELECT_HOTEL_ROOM' | 'UNSELECT_HOTEL_ROOM';  
-    payload: Flight | {
+    payload: Flight | ({
         hotel: Hotel;
         room: Room;
         checkin: string;
         checkout: string;
         price: number;
-    };
+    });
 }
 
 const initialState: ItineraryState = {
