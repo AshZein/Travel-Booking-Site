@@ -3,6 +3,7 @@ import { prisma } from "@/utils/db";
 import { NextResponse } from "next/server";
 import { numberRoomAvailable } from "@/utils/hotel";
 import { isValidDate } from "@/utils/inputValid";
+import { verifyToken } from "@/utils/auth";
 
 
 export async function GET(request){
@@ -14,12 +15,16 @@ export async function GET(request){
     if (!user) {
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
-    userId = user.userId;
-    const manager = await prisma.hotelManager.findMany({
+    const userId = user.userId;
+    const hotels = await prisma.hotelManager.findMany({
         where: {
-
-        }
-        })
+          userId: userId, // Filter by userId
+        },
+        include: {
+          hotel: true, // Include hotel details in the result
+        },
+      });
+      return NextResponse.json(hotels); 
 }
 
 export async function PATCH() {
