@@ -6,10 +6,23 @@ import HomeHeader from '@/components/HomeHeader';
 import { Room } from '@/types/Room';
 import { Hotel } from '@/types/Hotel';
 import  RoomCard  from '@/components/hotel/roomCard';
+import HotelInfoCard from '@/components/hotel/hotelInfoCard';
 
 const Page = () =>{
     const [room, setRoom] = useState<Room[]>([]);
-    const [Hotel, setHotel] = useState<Hotel[]>([]);
+    const [hotel, setHotel] = useState<Hotel>({
+        hotelId: 0,
+        name: '',
+        address: '',
+        city: '',
+        country: '',
+        latitude: 0,
+        longitude: 0,
+        starRating: 0,
+        amenities: [],
+        startingPrice: 0
+    });
+    const [hotelImg, setHotelImg] = useState<string>('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
@@ -26,6 +39,13 @@ const Page = () =>{
         setHotel(data);
     };  
 
+    const fetchHotelImg = async (hotelId: number) => {
+        const response = await fetch(`http://localhost:3000/api/hotel/images?hotelId=${hotelId}`);
+        const data = await response.json();
+        console.log("Hotel Image Data: ", data);
+        setHotelImg(data.image || '');
+    }
+
     useEffect (() => {
         const searchParams = new URLSearchParams(window.location.search);
         const hotelId = Number(searchParams.get('hotelId'));
@@ -35,6 +55,7 @@ const Page = () =>{
         if (hotelId) {
             fetchHotel(hotelId);
             fetchRooms(hotelId);
+            fetchHotelImg(hotelId);
         }
     }
     , []);
@@ -43,6 +64,8 @@ const Page = () =>{
         <div>
             <HomeHeader />
             <main>
+                <h1 className="ml-4 text-lg font-bold">Hotel Info</h1>
+                <HotelInfoCard hotel={hotel} hotelImg={hotelImg}/>
                 <h1>Room Info</h1>
                 {room.length > 0 ? (
                     room.map((roomItem) => (
