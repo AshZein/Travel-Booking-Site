@@ -38,7 +38,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
 
     return (
         <div className="hotel-room-card">
-            <img src={`../${images[0]}`}></img>
+            <img src={images[0] ? `/${images[0]}` : '/images/hotel/image-not-found.png'} alt="Room Image" />
             <div>
                 <h3>{room.roomType}</h3>
                 <p>Price: ${room.price}</p>
