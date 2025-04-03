@@ -65,8 +65,28 @@ export async function PATCH() {
   return NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
 }
 
-export async function GET() {
-  return NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
+export async function GET(request) {
+  try {
+    const { searchParams } = new URL(request.url); // Use the `request` parameter
+    const hotelId = searchParams.get("hotelId");
+    console.log("Fetching image for hotelId:", hotelId);
+
+    if (!hotelId) {
+      return NextResponse.json({ message: "Missing hotelId" }, { status: 400 });
+    }
+
+    const hotelImage = await prisma.HotelImage.findFirst({
+      where: { hotelId: Number(hotelId) },
+    });
+
+    if (!hotelImage) {
+      return NextResponse.json({ message: "Image not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ image: hotelImage.image }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: "Server error", error: error.message }, { status: 500 });
+  }
 }
 
 export async function PUT() {

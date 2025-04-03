@@ -28,6 +28,7 @@ const Page = () =>{
               }
 
               const [hotels, setHotels] = useState<Hotel[]>([]);
+              const [hotelImgs, setHotelImgs] = useState<string[]>([]);
               const [room, setRoom] = useState<Room[]>([]);
                 const [destinationLocation, setDestinationLocation] = useState('');
                 const [startDate, setStartDate] = useState('');
@@ -52,6 +53,19 @@ const Page = () =>{
                     setMaxPrice(searchParams.get('endPrice') || '');
                 }, []);
 
+              const fetchHotelImages = async (hotelId: number) => {
+                const response = await fetch(`http://localhost:3000/api/hotel/images?hotelId=${hotelId}`);
+                const data = await response.json();
+                console.log("Image API response data:", data);
+                if (response.ok && data.image) {
+                    setHotelImgs((prev) => ({
+                        ...prev,
+                        [hotelId]: data.image, // Set the hotelId as the key and the image path as the value
+                    }));
+                } else {
+                    console.error(`Failed to fetch image for hotelId ${hotelId}:`, data.message);
+                }
+              };
 
             const fetchHotels = async () => {
               const response = await fetch(`http://localhost:3000/api/hotel/list?city=${destinationLocation}&checkin=${startDate}&checkout=${endDate}&minStarRating=${minRating}&maxStarRating=${maxRating}&name=${name}&startPrice=${minPrice}&endPrice=${maxPrice}`);
@@ -59,9 +73,6 @@ const Page = () =>{
               console.log("API response data:", data);
               
               setHotels(Object.values(data) || []);
-              console.log(data.hotels);
-              console.log(data);
-              console.log(hotels.length);
             };
 
             const fetchRooms = async (hotelId: number) => {
@@ -70,7 +81,9 @@ const Page = () =>{
                 const data = await response.json();
                 console.log("API response data:", data);
                 setRoom(Object.values(data) || []);
-                        }
+            };
+
+            
 
             useEffect(() => {
                 if (
@@ -80,8 +93,18 @@ const Page = () =>{
                 ) {
                   fetchHotels();
                   console.log("Hotels array lengthq: " + hotels.length);
+
                 }
               }, [destinationLocation, startDate, endDate]);
+
+              useEffect(() => {
+                if (hotels.length > 0) {
+                    hotels.forEach((hotel) => {
+                        fetchHotelImages(hotel.hotelId);
+                    });
+                    console.log("hotelImgs: ", hotelImgs);
+                }
+            }, [hotels]);
               console.log("Hotels array length1: " + hotels.length);
 
               const handeHotelSearch = (hotelId: number, name: string) => {
@@ -116,6 +139,11 @@ const Page = () =>{
                         
                         className="border p-4 rounded-lg shadow-md bg-white"
                     >
+                        <img
+                            src={hotelImgs[hotel.hotelId]} // Use default image if not available
+                            alt={hotel.name}
+                            className="w-full h-48 object-cover rounded-lg mb-4"
+                        />
                         <h2 className="text-xl font-semibold text-gray-800">{hotel.name}</h2>
                         <div className="flex justify-between">
                         <div>
