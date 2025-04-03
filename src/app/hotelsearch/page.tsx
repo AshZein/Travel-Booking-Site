@@ -56,7 +56,6 @@ const Page = () =>{
               const fetchHotelImages = async (hotelId: number) => {
                 const response = await fetch(`http://localhost:3000/api/hotel/images?hotelId=${hotelId}`);
                 const data = await response.json();
-                console.log("Image API response data:", data);
                 if (response.ok && data.image) {
                     setHotelImgs((prev) => ({
                         ...prev,
@@ -70,16 +69,13 @@ const Page = () =>{
             const fetchHotels = async () => {
               const response = await fetch(`http://localhost:3000/api/hotel/list?city=${destinationLocation}&checkin=${startDate}&checkout=${endDate}&minStarRating=${minRating}&maxStarRating=${maxRating}&name=${name}&startPrice=${minPrice}&endPrice=${maxPrice}`);
               const data = await response.json();
-              console.log("API response data:", data);
               
               setHotels(Object.values(data) || []);
             };
 
             const fetchRooms = async (hotelId: number) => {
-                console.log(hotelId);
                 const response = await fetch(`http://localhost:3000/api/hotel/room/info?hotelId=${hotelId}&checkin=${startDate}&checkout=${endDate}`);
                 const data = await response.json();
-                console.log("API response data:", data);
                 setRoom(Object.values(data) || []);
             };
 
@@ -92,8 +88,6 @@ const Page = () =>{
                   endDate
                 ) {
                   fetchHotels();
-                  console.log("Hotels array lengthq: " + hotels.length);
-
                 }
               }, [destinationLocation, startDate, endDate]);
 
@@ -102,19 +96,15 @@ const Page = () =>{
                     hotels.forEach((hotel) => {
                         fetchHotelImages(hotel.hotelId);
                     });
-                    console.log("hotelImgs: ", hotelImgs);
                 }
             }, [hotels]);
-              console.log("Hotels array length1: " + hotels.length);
 
               const handeHotelSearch = (hotelId: number, name: string) => {
-                console.log("hello" + hotelId)
                 setDetailedInfo(!detailedInfo);
                 fetchRooms(hotelId);
                 setDetailedName(name);
             }
               
-            console.log("Hotels array length: " + hotels.length);
             return (
         <div className="page-container">
             <header className="header flex justify-between items-center bg-blue-800 text-white p-4">
