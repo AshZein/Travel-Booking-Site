@@ -77,7 +77,7 @@ const Page = () =>{
             };
 
             const handleHotelClick = (hotelId: number, name: string) => {
-                router.push(`/hotelsearch/roomInfo?hotelId=${hotelId}&name=${name}`);
+                router.push(`/hotelsearch/roomInfo?hotelId=${hotelId}&name=${name}&checkin=${startDate}&checkout=${endDate}`);
             }
             
 
