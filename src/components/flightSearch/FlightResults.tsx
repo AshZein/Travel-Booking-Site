@@ -54,7 +54,7 @@ const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinati
         const fetchFlights = async () => {
             const outBoundFlight = await searchFlights(sourceLocation, destinationLocation, startDate, startDate);
             setOutboundFlights(Array.isArray(outBoundFlight) ? outBoundFlight : []);
-            
+            console.log("outboundFlights", outBoundFlight);
             if (direction === "return") {
                 const inBoundFlight = await searchFlights(sourceLocation, destinationLocation, startDate, startDate);
                 setInboundFlights(Array.isArray(inBoundFlight) ? inBoundFlight : []);
