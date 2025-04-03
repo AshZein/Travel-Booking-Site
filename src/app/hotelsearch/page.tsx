@@ -76,6 +76,9 @@ const Page = () =>{
                 setRoom(Object.values(data) || []);
             };
 
+            const handleHotelClick = (hotelId: number, name: string) => {
+                router.push(`/hotelsearch/roomInfo?hotelId=${hotelId}&name=${name}`);
+            }
             
 
             useEffect(() => {
@@ -115,7 +118,7 @@ const Page = () =>{
                     {hotels.map((hotel) => (
                     <div
                         key={hotel.hotelId}
-                        
+                        onClick={() => handleHotelClick(hotel.hotelId, hotel.name)}
                         className="border p-4 rounded-lg shadow-md bg-white"
                     >
                         <img
