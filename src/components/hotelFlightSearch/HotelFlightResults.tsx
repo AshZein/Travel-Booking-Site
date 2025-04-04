@@ -4,6 +4,7 @@ import FlightCard from './FlightCard';
 import FlightDetailPopUp from './FlightDetailPopUp';
 import { useItinerary } from '@/context/ItineraryContext';
 import { Flight } from '@/types/flight';
+import HotelSuggestions from './HotelSuggestions';
 
 async function searchFlights(source: string, destination: string, startDate: string, endDate: string) {
     try {
@@ -36,6 +37,23 @@ const HotelFlightResults: React.FC<HotelFlightResultsProps> = ({ sourceLocation,
     const [selectedFlight, setSelectedFlight] = useState<Flight[] | null>(null); // State for selected flight
     const [showPopup, setShowPopup] = useState(false); // State for showing popup
     const [error, setError] = useState<string | null>(null);
+    const [country, setCountry] = useState<string | null>(null);
+
+    const fetchCountry = async (city: string) => {
+        try {
+            const response = await fetch(`/api/cityCountry?city=${city}`);
+            const data = await response.json();
+            console.log('Country Data:', data); // Debugging statement
+            if (Array.isArray(data) && data.length > 0) {
+                setCountry(data[0].country);
+            } else {
+                setCountry(null);
+            }
+        } catch (error) {
+            console.error('Error fetching country:', error);
+            setCountry(null);
+        }
+    };
 
     useEffect(() => {
         console.log("useEffect is running");
@@ -65,6 +83,10 @@ const HotelFlightResults: React.FC<HotelFlightResultsProps> = ({ sourceLocation,
             }
 
         };
+
+        fetchCountry(destinationLocation).catch((error) => {
+            console.error('Error fetching country:', error);
+        });
 
         fetchFlights().catch((error) => {
             console.error('Error fetching flights:', error);
@@ -134,6 +156,7 @@ const HotelFlightResults: React.FC<HotelFlightResultsProps> = ({ sourceLocation,
                     )}
                 </div>
             )}
+            <HotelSuggestions  checkInDate={startDate} checkOutDate={endDate} city={destinationLocation} country={}/>
             {showPopup && selectedFlight && (
                 <div className="popup">
                     <div className="popup-content">
