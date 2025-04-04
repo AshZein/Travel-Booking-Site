@@ -69,48 +69,60 @@ const Page = () => {
         <div>
             <CheckoutHeader />
             <div>
-                <h1>Confirmation</h1>
-                <h2>Flight Credentials</h2>
-                {confirmationData.flightCredentials && (
-                    <div>
-                        <p>Name: {confirmationData.flightCredentials.firstName} {confirmationData.flightCredentials.middleName} {confirmationData.flightCredentials.lastName}</p>
-                        <p>Email: {confirmationData.billingAddress?.email}</p>
-                        <p>Phone: {confirmationData.billingAddress?.phoneNumber}</p>
-                    </div>
-                )}
-                <h2>Billing Address</h2>
-                {confirmationData.billingAddress && (
-                    <div>
-                        <p>Street: {confirmationData.billingAddress.streetAddress}</p>
-                        <p>City: {confirmationData.billingAddress.city}</p>
-                        <p>State: {confirmationData.billingAddress.province}</p>
-                        <p>Zip: {confirmationData.billingAddress.postalCode}</p>
-                    </div>
-                )}
-                <h2>Credit Card Info</h2>
-                {confirmationData.creditCardInfo && (
-                    <div>
-                        <p>Card Number: {confirmationData.creditCardInfo.cardNumber}</p>
-                        <p>Expiry Date: {confirmationData.creditCardInfo.expiryMonth}/{confirmationData.creditCardInfo.expiryYear}</p>
-                    </div>
-                )}
-                <h2>Selected Outbound Flights</h2>
-                {confirmationData.selectedOutboundFlights.map((flight, index) => (
-                    <CheckoutFlightCard key={index} legs={confirmationData.selectedOutboundFlights.length} flights={[flight]} type="Outbound Flight" />
-                ))}
-                <h2>Selected Return Flights</h2>
-                {confirmationData.selectedReturnFlights.map((flight, index) => (
-                    <CheckoutFlightCard key={index} legs={confirmationData.selectedReturnFlights.length} flights={[flight]} type="Return Flight" />
-                ))}
-                <h2>Selected Hotel</h2>
-                {confirmationData.selectedHotel && (
-                    <div>
-                        <p>Name: {confirmationData.selectedHotel.name}</p>
-                        <p>Price: ${confirmationData.selectedHotelPrice.toFixed(2)}</p>
-                        <p>Check-in: {confirmationData.selectedHotelCheckIn}</p>
-                        <p>Check-out: {confirmationData.selectedHotelCheckOut}</p>
-                    </div>
-                )}
+                <h1 className="bg-white text-black"><strong>Order Summary</strong></h1>
+                <div className="bg-white text-black">
+                    <h2>Flight Credentials</h2>
+                    {confirmationData.flightCredentials && (
+                        <div>
+                            <p>Name: {confirmationData.flightCredentials.firstName} {confirmationData.flightCredentials.middleName} {confirmationData.flightCredentials.lastName}</p>
+                            <p>Email: {confirmationData.billingAddress?.email}</p>
+                            <p>Phone: {confirmationData.billingAddress?.phoneNumber}</p>
+                        </div>
+                    )}
+                </div>
+                <div className="bg-white text-black">
+                    <h2>Billing Address</h2>
+                    {confirmationData.billingAddress && (
+                        <div>
+                            <p>Street: {confirmationData.billingAddress.streetAddress}</p>
+                            <p>City: {confirmationData.billingAddress.city}</p>
+                            <p>State: {confirmationData.billingAddress.province}</p>
+                            <p>Zip: {confirmationData.billingAddress.postalCode}</p>
+                        </div>
+                    )}
+                </div>
+                <div className="bg-white text-black">
+                    <h2>Credit Card Info</h2>
+                    {confirmationData.creditCardInfo && (
+                        <div>
+                            <p>Card Number: {confirmationData.creditCardInfo.cardNumber}</p>
+                            <p>Expiry Date: {confirmationData.creditCardInfo.expiryMonth}/{confirmationData.creditCardInfo.expiryYear}</p>
+                        </div>
+                    )}
+                </div>
+                <div className="bg-white text-black">
+                    <h2>Selected Outbound Flights</h2>
+                    {confirmationData.selectedOutboundFlights.map((flight, index) => (
+                        <CheckoutFlightCard key={index} legs={confirmationData.selectedOutboundFlights.length} flights={[flight]} type="Outbound Flight" />
+                    ))}
+                </div>
+                <div className="bg-white text-black">
+                    <h2>Selected Return Flights</h2>
+                    {confirmationData.selectedReturnFlights.map((flight, index) => (
+                        <CheckoutFlightCard key={index} legs={confirmationData.selectedReturnFlights.length} flights={[flight]} type="Return Flight" />
+                    ))}
+                </div>
+                <div className="bg-white text-black">
+                    <h2>Selected Hotel</h2>
+                    {confirmationData.selectedHotel && (
+                        <div>
+                            <p>Name: {confirmationData.selectedHotel.name}</p>
+                            <p>Price: ${confirmationData.selectedHotelPrice.toFixed(2)}</p>
+                            <p>Check-in: {confirmationData.selectedHotelCheckIn}</p>
+                            <p>Check-out: {confirmationData.selectedHotelCheckOut}</p>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
