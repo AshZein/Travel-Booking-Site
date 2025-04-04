@@ -175,6 +175,7 @@ const HotelManage: React.FC = () => {
         }
 
     return (
+        
         <div className="relative w-72" ref={dropdownRef}>
             <button 
                 onClick={() => setIsOpen((prev) => !prev)}
@@ -202,12 +203,14 @@ const HotelManage: React.FC = () => {
                     ))}
                 </ul>
             )}
+
             {selectedHotel !== "Select Hotel" && (
                 <div className='grid grid-cols-4 gap-[190px]'>
                 <button className='tripType-button w-[160px] h-[65px]' onClick={() => handleCreateRoom()}>Create a Room</button>
                 <button className='tripType-button w-[160px] h-[65px]' onClick={() => handleBookingListClick()}>View Bookings List</button>
                 <button className='tripType-button w-[160px] h-[65px]' onClick={() => handleRoomAvailabilityClick()}>View Room Availability</button>
                 <button className='tripType-button w-[160px] h-[65px]' onClick={() => handleRoomUpdateClick()}>Update Availabile Rooms</button>
+                
 
                 </div>
             )}
@@ -389,6 +392,7 @@ const HotelManage: React.FC = () => {
             </div>
 
             )}
+            
         </div>
     );
 }
