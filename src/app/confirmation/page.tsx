@@ -2,9 +2,6 @@
 import React, { use, useEffect } from 'react';
 import CheckoutFlightCard from '@/components/checkout/checkoutFlightCard';
 import CheckoutHeader from '@/components/checkout/CheckoutHeader';
-import FlightCredentials from '@/components/checkout/Credentials';
-import BillingAddress from '@/components/checkout/BillingAddress';
-import CreditCardInfo from '@/components/checkout/CreditCardInfo';
 import withCheckoutProvider from '@/HOC/withCheckoutProvider';
 import withItineraryProvider from '@/HOC/withItineraryProvider';
 import withHotelProvider from '@/HOC/withHotelProvider';
@@ -76,4 +73,4 @@ const Page = () => {
     );
 }
 
-export default withCheckoutProvider(Page);
+export default withHotelProvider(withItineraryProvider(withCheckoutProvider(Page)));
