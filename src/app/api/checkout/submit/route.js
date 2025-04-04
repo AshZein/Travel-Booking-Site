@@ -196,6 +196,31 @@ export async function POST(request) {
             });
         }
 
+        // Create an invoice entry
+        const invoiceResponse = await fetch(`${baseUrl}/api/checkout/invoice`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': authHeader, // Forward the Authorization header
+            },
+            body: JSON.stringify({
+                userId: user.userId,
+                passportNum: flightCredentials.passportNumber,
+                billingFirstName: billingAddress.firstName,
+                billingLastName: billingAddress.lastName,
+                billingStreet: billingAddress.street,
+                billingCity: billingAddress.city,
+                billingProvince: billingAddress.province,
+                billingCountry: billingAddress.country,
+                billingPhoneNum: billingAddress.phoneNumber,
+                billingEmail: billingAddress.email,
+                itineraryRef: itinerary.itineraryRef,
+                hotelCost: selectedHotelPrice || 0,
+                departureFlightCost: selectedOutboundFlights.reduce((sum, flight) => sum + flight.price, 0),
+                returnFlightCost: selectedReturnFlights.reduce((sum, flight) => sum + flight.price, 0),
+            }),
+        });
+
         // Return a success response
         return new Response(
             JSON.stringify({ message: 'Checkout data submitted successfully' }),
