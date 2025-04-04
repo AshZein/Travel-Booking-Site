@@ -7,7 +7,7 @@ import { Room } from '@/types/Room';
 import { Hotel } from '@/types/Hotel';
 import  RoomCard  from '@/components/hotel/roomCard';
 import HotelInfoCard from '@/components/hotel/hotelInfoCard';
-import withItineraryProvider from '@/HOC/withItineraryProvider';
+import withHotelProvider from '@/HOC/withHotelProvider';
 
 const Page: React.FC = () =>{
     const [room, setRoom] = useState<Room[]>([]);
@@ -88,4 +88,4 @@ const Page: React.FC = () =>{
     );
 };
 
-export default withItineraryProvider(Page);
+export default withHotelProvider(Page);

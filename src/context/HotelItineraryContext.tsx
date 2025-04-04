@@ -9,7 +9,7 @@ interface HotelItineraryState {
     selectedRoom: Room | null;
     selectedHotelCheckIn: string | null;
     selectedHotelCheckOut: string | null;
-    selectedHotelPrice: number | null;
+    selectedHotelPrice: number;
 }
 
 type HotelItineraryAction = 

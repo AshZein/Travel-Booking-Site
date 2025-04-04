@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useItinerary } from '@/context/ItineraryContext';
+import { useHotelItinerary } from '@/context/HotelItineraryContext';
 import { Room } from '@/types/Room';
 import { Hotel } from '@/types/Hotel';
 interface RoomCardProps {
@@ -11,7 +11,7 @@ interface RoomCardProps {
 }
 
 const RoomCard: React.FC<RoomCardProps> = ({ room, hotel, checkinDate, checkoutDate }) => {
-    const { state, dispatch } = useItinerary();
+    const { state, dispatch } = useHotelItinerary();
     const [images, setImages] = React.useState<string[]>([]);
     const [isSelected, setIsSelected] = React.useState(false);
 
@@ -45,7 +45,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, hotel, checkinDate, checkoutD
                 checkout: state.selectedHotelCheckOut,
                 price: room.price,
             };
-            dispatch({ type: 'UNSELECT_HOTEL_ROOM', payload: data });
+            dispatch({ type: 'UNSELECT_HOTEL_ROOM', });
             setIsSelected(false);
         } else {
             if (state.selectedHotel && state.selectedHotelCheckIn && state.selectedHotelCheckOut) {
@@ -57,7 +57,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, hotel, checkinDate, checkoutD
                     price: 0,
                 };
                 console.log("Unselecting Room: ", unselectData);
-                dispatch({ type: 'UNSELECT_HOTEL_ROOM', payload: unselectData });
+                dispatch({ type: 'UNSELECT_HOTEL_ROOM',});
             }
 
             const selectData = {
