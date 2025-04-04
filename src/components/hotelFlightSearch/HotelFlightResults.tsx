@@ -156,7 +156,7 @@ const HotelFlightResults: React.FC<HotelFlightResultsProps> = ({ sourceLocation,
                     )}
                 </div>
             )}
-            <HotelSuggestions  checkInDate={startDate} checkOutDate={endDate} city={destinationLocation} country={}/>
+            <HotelSuggestions  checkInDate={startDate} checkOutDate={endDate} city={destinationLocation} country={country || ''}/>
             {showPopup && selectedFlight && (
                 <div className="popup">
                     <div className="popup-content">
