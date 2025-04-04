@@ -20,7 +20,8 @@ type HotelItineraryAction =
         checkout: string | null;
         price: number;
     }}  
-| { type: 'UNSELECT_HOTEL_ROOM' };
+| { type: 'UNSELECT_HOTEL_ROOM' }
+| { type: 'CLEAR_HOTEL_ITINERARY' };
 
 const initialHotelState: HotelItineraryState = {
     selectedHotel: null,
@@ -50,6 +51,15 @@ const hotelItineraryReducer = (state: HotelItineraryState, action: HotelItinerar
                 selectedHotelPrice: action.payload.price
             };
         case 'UNSELECT_HOTEL_ROOM':
+            return {
+                ...state,
+                selectedHotel: null,
+                selectedRoom: null,
+                selectedHotelCheckIn: null,
+                selectedHotelCheckOut: null,
+                selectedHotelPrice: 0
+            };
+        case 'CLEAR_HOTEL_ITINERARY':
             return {
                 ...state,
                 selectedHotel: null,
