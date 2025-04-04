@@ -121,37 +121,16 @@ const Page = () =>{
                         <div className="flex justify-between">
                         <div>
                         <p className="text-gray-600">General Availability: {rooms.roomAvailability}</p>
-                        <p className="text-yellow-500">Availability for Date Range: {roomAvailability[rooms.roomId]} </p>
+                        <p className="text-black font-bold">Availability for Date Range: {roomAvailability[rooms.roomId]} </p>
  
                         </div>
                         <div>
-                        <button className="tripType-button" onClick={() => handeHotelSearch(rooms.roomId)}>Get detailed <br /> information </button>
                         </div>
                         </div>
                     </div>
                     
                     ))}
-                    {detailedInfo && (
-                        <div className="border p-4 rounded-lg shadow-md bg-white">
-                        {room.map((rooms) => (
-                    <div
-                        key={rooms.roomId}
-                        
-                    >
-                        <h2 className="text-xl font-semibold text-gray-800">Room Name: {rooms.roomType}</h2>
-                        <div className="flex justify-between">
-                        <div>
-                        <p className="text-yellow-500">Price: ${rooms.price}</p>
-                        <p className="text-green-600">Room Availability: {roomAvailability[rooms.roomId]}</p>
 
-                        </div>
-                        <div>                        </div>
-                        </div>
-                    </div>
-                    
-                    ))}
-                        </div>
-                    )}
                     
                 </div>
                 )}

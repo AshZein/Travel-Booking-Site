@@ -282,11 +282,10 @@ const Page = () =>{
                                 <h2 className="text-xl font-semibold text-gray-800">{booking.referenceId}</h2>
                                 <div className="flex justify-between">
                                 <div>
-                                <p className="text-gray-600">{getRoomTypeById(booking.roomId)}</p>
-                                <p className="text-yellow-500">⭐ {booking.checkIn.toString()} Stars</p>
-                                <p className="text-green-600">Starting Price: ${booking.checkOut.toString()}</p>
-                                <p className="text-green-600">Starting Price: {booking.bookingCanceled.toString()}</p>
-
+                                <p className="text-gray-600">Room: {getRoomTypeById(booking.roomId)}</p>
+                                <p className="text-gray-600">Check-In Time: {booking.checkIn.toString().split('T')[0]}</p>
+                                <p className="text-gray-600">Check-Out Time: {booking.checkOut.toString().split('T')[0]}</p>
+                                <p className="text-gray-600">Cancelled: {booking.bookingCanceled ? "Cancelled" : "Not Cancelled"}</p>
                                 </div>
                                 <div>
                                 <button className=" bg-red-500 mr-3" onClick={() => handleCancelBooking(booking.referenceId)}>Cancel <br></br> Booking </button>
