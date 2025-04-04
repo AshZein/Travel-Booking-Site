@@ -27,6 +27,7 @@ model User {
   hotelManagers HotelManager[]
   notifications Notifications[]
   itineraries   Itinerary[]
+  invoices                   invoice[]
 }
 
 model Notifications {
@@ -158,6 +159,7 @@ model Itinerary {
   returnFlightBooking        FlightBooking?  @relation(name: "return", fields: [returnFlightBookingRef], references: [bookingReference])
   hotelBooking               HotelBooking?    @relation(fields: [hotelBookingRef], references: [referenceId])
   user                       User            @relation(fields: [userId], references: [userId])
+  invoices                   invoice[]
 }
 
 model invoice {
@@ -170,8 +172,8 @@ model invoice {
   billingCity         String
   billingProvince     String
   billingCountry      String    @default("Canada")
-  billingPhoneNum     string
-  billingEmail        string
+  billingPhoneNum     String
+  billingEmail        String
   itineraryRef        String    @unique
   hotelCost           Float
   departureFlightCost Float
