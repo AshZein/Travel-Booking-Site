@@ -16,7 +16,7 @@ export async function POST(request){
     // retrieve parameters
     const {  email, hotelId, roomId, price, checkIn, checkOut } = await request.json();
 
-    
+
     const checkInS = new Date(checkIn); 
     const checkOutS = new Date(checkOut);
     

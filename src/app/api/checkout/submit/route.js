@@ -19,6 +19,11 @@ export async function POST(request) {
             creditCardInfo,
             selectedOutboundFlights,
             selectedReturnFlights,
+            selectedHotel,
+            selectedRoom,
+            selectedHotelCheckIn,
+            selectedHotelCheckOut,
+            selectedHotelPrice
         } = await request.json();
 
         // Validate the received data
@@ -44,6 +49,11 @@ export async function POST(request) {
         console.log('Credit Card Info:', creditCardInfo);
         console.log('Selected Outbound Flights:', selectedOutboundFlights);
         console.log('Selected Return Flights:', selectedReturnFlights);
+        console.log('Selected Hotel:', selectedHotel);
+        console.log('Selected Room:', selectedRoom);
+        console.log('Selected Hotel Check-In:', typeof selectedHotelCheckIn);
+        console.log('Selected Hotel Check-Out:', typeof selectedHotelCheckOut);
+        console.log('Selected Hotel Price:', selectedHotelPrice);
 
         // Create a new itinerary
         const itineraryRef = await generateItineraryRef();
@@ -56,7 +66,7 @@ export async function POST(request) {
 
         // Book outbound flight if selected
         if (selectedOutboundFlights.length > 0) {
-            const outboundFlightIds = selectedOutboundFlights.map(flight => flight.id); // Extract flight IDs
+            const outboundFlightIds = [...new Set(selectedOutboundFlights.map(flight => flight.id))];
 
             console.log('Outbound Flight Payload:', {
                 firstName: flightCredentials.firstName,
@@ -93,17 +103,17 @@ export async function POST(request) {
             const outboundFlightData = await outboundFlightResponse.json();
             await prisma.itinerary.update({
                 where: {
-                    id: itinerary.id,
+                    itineraryId: itinerary.itineraryId ,
                 },
                 data: {
-                    outboundFlightBookingRef: outboundFlightData.bookingReference,
+                    forwardFlightBookingRef: outboundFlightData.bookingReference,
                 },
             });
         }
 
         // Book return flight if selected
         if (selectedReturnFlights.length > 0) {
-            const returnFlightIds = selectedReturnFlights.map(flight => flight.id); // Extract flight IDs
+            const returnFlightIds = [...new Set(selectedReturnFlights.map(flight => flight.id))]; // Extract unique flight IDs
 
             console.log('Return Flight Payload:', {
                 firstName: flightCredentials.firstName,
@@ -140,13 +150,76 @@ export async function POST(request) {
             const returnFlightData = await returnFlightResponse.json();
             await prisma.itinerary.update({
                 where: {
-                    id: itinerary.id,
+                    itineraryId: itinerary.itineraryId ,
                 },
                 data: {
                     returnFlightBookingRef: returnFlightData.bookingReference,
                 },
             });
         }
+
+        // book hotel if selected
+        if (selectedHotel){
+            const hotelBookingResponse = await fetch(`${baseUrl}/api/hotel/booking`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': authHeader, // Forward the Authorization header
+                },
+                body: JSON.stringify({
+                    email: billingAddress.email,
+                    hotelId: selectedHotel.hotelId,
+                    roomId: selectedRoom.roomId,
+                    checkIn: selectedHotelCheckIn,
+                    checkOut: selectedHotelCheckOut,
+                    price: selectedHotelPrice,
+                }),
+            });
+
+            if (!hotelBookingResponse.ok) {
+                const errorData = await hotelBookingResponse.json();
+                console.error('Error creating hotel booking:', errorData);
+                return NextResponse.json(
+                    { message: `Failed to book hotel: ${errorData.message}` },
+                    { status: hotelBookingResponse.status }
+                );
+            }
+
+            const hotelBookingData = await hotelBookingResponse.json();
+            await prisma.itinerary.update({
+                where: {
+                    itineraryId: itinerary.itineraryId ,
+                },
+                data: {
+                    hotelBookingRef: hotelBookingData.referenceId,
+                },
+            });
+        }
+
+        // Create an invoice entry
+        const invoiceResponse = await fetch(`${baseUrl}/api/checkout/invoice`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': authHeader, // Forward the Authorization header
+            },
+            body: JSON.stringify({
+                userId: user.userId,
+                passportNum: flightCredentials.passportNumber,
+                billingFirstName: billingAddress.firstName,
+                billingLastName: billingAddress.lastName,
+                billingStreet: billingAddress.streetAddress,
+                billingCity: billingAddress.city,
+                billingProvince: billingAddress.province,
+                billingCountry: billingAddress.country,
+                billingPhoneNum: billingAddress.phoneNumber,
+                billingEmail: billingAddress.email,
+                itineraryRef: itinerary.itineraryRef,
+                hotelCost: selectedHotelPrice || 0,
+                departureFlightCost: selectedOutboundFlights.reduce((sum, flight) => sum + flight.price, 0),
+                returnFlightCost: selectedReturnFlights.reduce((sum, flight) => sum + flight.price, 0),
+            }),
+        });
 
         // Return a success response
         return new Response(

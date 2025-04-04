@@ -1,16 +1,20 @@
 "use client"
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { Flight } from '@/types/flight';
+// import { Hotel } from '@/types/Hotel';
+// import { Room } from '@/types/Room';
 
 interface ItineraryState {
     selectedOutboundFlights: Flight[];
     selectedReturnFlights: Flight[];
 }
 
-interface ItineraryAction {
-    type: 'SELECT_OUTBOUND_FLIGHT' | 'UNSELECT_OUTBOUND_FLIGHT' | 'SELECT_RETURN_FLIGHT' | 'UNSELECT_RETURN_FLIGHT';
-    payload: Flight;
-}
+type ItineraryAction =
+    | { type: 'SELECT_OUTBOUND_FLIGHT'; payload: Flight }
+    | { type: 'UNSELECT_OUTBOUND_FLIGHT'; payload: Flight }
+    | { type: 'SELECT_RETURN_FLIGHT'; payload: Flight }
+    | { type: 'UNSELECT_RETURN_FLIGHT'; payload: Flight }
+    | { type: 'CLEAR_ITINERARY' };
 
 const initialState: ItineraryState = {
     selectedOutboundFlights: [],
@@ -30,11 +34,23 @@ const itineraryReducer = (state: ItineraryState, action: ItineraryAction): Itine
         case 'SELECT_OUTBOUND_FLIGHT':
             return { ...state, selectedOutboundFlights: [...state.selectedOutboundFlights, action.payload] };
         case 'UNSELECT_OUTBOUND_FLIGHT':
-            return { ...state, selectedOutboundFlights: state.selectedOutboundFlights.filter(flight => flight.id !== action.payload.id) };
+            return { 
+                ...state, 
+                selectedOutboundFlights: state.selectedOutboundFlights.filter(flight => 
+                    flight.id !== action.payload.id
+                ) 
+            };
         case 'SELECT_RETURN_FLIGHT':
             return { ...state, selectedReturnFlights: [...state.selectedReturnFlights, action.payload] };
         case 'UNSELECT_RETURN_FLIGHT':
-            return { ...state, selectedReturnFlights: state.selectedReturnFlights.filter(flight => flight.id !== action.payload.id) };
+            return { 
+                ...state, 
+                selectedReturnFlights: state.selectedReturnFlights.filter(flight => 
+                    flight.id !== action.payload.id
+                ) 
+            };
+        case 'CLEAR_ITINERARY':
+            return { ...state, selectedOutboundFlights: [], selectedReturnFlights: [] };
         default:
             return state;
     }

@@ -7,16 +7,47 @@ import FlightCredentials from '@/components/checkout/Credentials';
 import BillingAddress from '@/components/checkout/BillingAddress';
 import CreditCardInfo from '@/components/checkout/CreditCardInfo';
 import withCheckoutProvider from '@/HOC/withCheckoutProvider';
+import HotelInfoCard from '@/components/hotel/hotelInfoCard';
+import CheckoutRoomCard from '@/components/checkout/CheckoutRoom';
+import {totalFlightCost} from '@/utils/flight';
 
 const Page = () => {
     const { state } = useCheckout();
+    const [hotelImg, setHotelImg] = React.useState<string>('');
+    const [totalCost, setTotalCost] = React.useState<number>(0);
+
+    const fetchHotelImg = async (hotelId: number) => {
+        const response = await fetch(`/api/hotel/images?hotelId=${hotelId}`);
+        const data = await response.json();
+        setHotelImg(data.image || '');
+    }
+
+    const calcTotalCost = () => {
+        var currCost = 0;
+        if (state.selectedHotelPrice && state.selectedHotelCheckIn && state.selectedHotelCheckOut) {
+           currCost += state.selectedHotelPrice * Math.ceil((new Date(state.selectedHotelCheckOut).getTime() - 
+           new Date(state.selectedHotelCheckIn).getTime()) / (1000 * 60 * 60 * 24));
+        }
+
+        if (state.selectedOutboundFlights.length > 0) {
+            currCost += totalFlightCost(state.selectedOutboundFlights);
+        }
+        if (state.selectedReturnFlights.length > 0) {
+            currCost += totalFlightCost(state.selectedReturnFlights);
+        }
+        setTotalCost(currCost);
+    }
 
     useEffect(() => {
         // Redirect to itinerary page if no outbound flights are selected
         if (state.selectedOutboundFlights.length === 0) {
             window.location.href = '/itinerary';
         }
+        fetchHotelImg(state.selectedHotel?.hotelId || 0);
+        calcTotalCost();
     }, [state.selectedOutboundFlights]);
+
+
 
     const handleSubmit = async () => {
         // Validate all required fields
@@ -36,6 +67,11 @@ const Page = () => {
             creditCardInfo: state.creditCardInfo,
             selectedOutboundFlights: state.selectedOutboundFlights,
             selectedReturnFlights: state.selectedReturnFlights,
+            selectedHotel: state.selectedHotel,
+            selectedRoom: state.selectedRoom,
+            selectedHotelCheckIn: state.selectedHotelCheckIn,
+            selectedHotelCheckOut: state.selectedHotelCheckOut,
+            selectedHotelPrice: state.selectedHotelPrice,
         });
 
         const token = localStorage.getItem('accessToken'); // Retrieve the token from localStorage
@@ -53,6 +89,12 @@ const Page = () => {
                     creditCardInfo: state.creditCardInfo,
                     selectedOutboundFlights: state.selectedOutboundFlights,
                     selectedReturnFlights: state.selectedReturnFlights,
+                    selectedHotel: state.selectedHotel,
+                    selectedRoom: state.selectedRoom,
+                    selectedHotelCheckIn: state.selectedHotelCheckIn,
+                    selectedHotelCheckOut: state.selectedHotelCheckOut,
+                    selectedHotelPrice: state.selectedHotelPrice,
+                    
                 }),
             });
 
@@ -72,7 +114,21 @@ const Page = () => {
         <div>
             <CheckoutHeader />
             <h1>Order Overview</h1>
-
+            {state.selectedHotel && (
+                <div>
+                    <HotelInfoCard hotel={state.selectedHotel} hotelImg={hotelImg} />
+                    {state.selectedRoom && (
+                        <CheckoutRoomCard
+                            key={state.selectedRoom.roomId || 'defaultKey' // Use a unique identifier as the key
+                            }
+                            room={state.selectedRoom}
+                            hotel={state.selectedHotel}
+                            checkinDate={state.selectedHotelCheckIn || ''}
+                            checkoutDate={state.selectedHotelCheckOut || ''}
+                        />
+                    )}
+                </div>
+            )}
             {/* Display selected outbound flight */}
             {state.selectedOutboundFlights.length > 0 && (
                 <CheckoutFlightCard
@@ -93,6 +149,34 @@ const Page = () => {
 
             {/* Flight Credentials Form */}
             {state.selectedOutboundFlights.length > 0 && <FlightCredentials />}
+
+            {/* total breakdown */}
+            <div className="bg-white text-black">
+                {state.selectedOutboundFlights.length > 0 && (
+                    <div className="flex justify-between items-center mt-4">
+                        <p className="text-lg font-semibold">Departure Flight Cost: {totalFlightCost(state.selectedOutboundFlights)}</p>
+                        </div>
+                )}
+                {state.selectedReturnFlights.length > 0 && (
+                    <div className="flex justify-between items-center mt-4">
+                        <p className="text-lg font-semibold">Departure Flight Cost: {totalFlightCost(state.selectedReturnFlights)}</p>
+                        </div>
+                )}
+                {state.selectedHotelPrice && (
+                    <div>
+                        <p className="text-lg font-semibold">Hotel Cost: ${state.selectedHotelCheckIn && state.selectedHotelCheckOut ? 
+                            state.selectedHotelPrice * Math.ceil((new Date(state.selectedHotelCheckOut).getTime() - 
+                            new Date(state.selectedHotelCheckIn).getTime()) / (1000 * 60 * 60 * 24)) 
+                            : 'N/A'}
+                        </p>
+                    </div>
+                )}
+                <div>
+                    <hr className="border-black my-4" />
+                    <p className="text-xl font-semibold">Total Due = {totalCost}</p>
+                </div>
+
+            </div>
 
             {/* Billing Address Form */}
             <BillingAddress />

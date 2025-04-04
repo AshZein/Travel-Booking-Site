@@ -122,7 +122,7 @@ const HomeHeader: React.FC = () => {
       {/* -- LEFT: Logo + Title -- */}
       <div className="items-center flex gap-2">
         <img
-          src="logo_no_back.png"
+          src="/logo_no_back.png"
           alt="FlyNext Logo"
           className="h-8 cursor-pointer"
           onClick={handleLogoClick}
@@ -158,9 +158,9 @@ const HomeHeader: React.FC = () => {
     </div>
         {/* Show notification bell if logged in */}
         <img
-          src="itinerarysymbol_white.png"
+          src="/itinerarysymbol_white.png"
           alt="Itinerary"
-          className="h-8 cursor-pointer"
+          className="h-12 cursor-pointer mt-2"
           onClick={() => HomeRouter.push("/itinerary")}
         />
 
@@ -168,7 +168,7 @@ const HomeHeader: React.FC = () => {
         {isAuthenticated && (
           <div className="relative">
             <img
-              src="whiteNotificationBell.png"
+              src="/whiteNotificationBell.png"
               alt="NotificationBell"
               className="h-8 cursor-pointer"
               onClick={toggleNotifications}
@@ -188,7 +188,7 @@ const HomeHeader: React.FC = () => {
         {isAuthenticated ? (
           <img
             // Use a user-specific URL or a default placeholder:
-            src="default.png"
+            src="/default.png"
             alt="Profile"
             className="h-8 w-8 rounded-full cursor-pointer border border-white"
             onClick={handleAuthClick}

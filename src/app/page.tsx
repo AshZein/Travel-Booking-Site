@@ -41,6 +41,7 @@ const Page = () => {
                             </ul>
                             {selectedOption === 'flight' && (
                                 <Flight 
+                                    direction="outbound"
                                     sourceLocation="" 
                                     destinationLocation="" 
                                     startDate={new Date().toISOString()} 
@@ -52,7 +53,14 @@ const Page = () => {
                                 <Hotel />
                             )}
                             {selectedOption === 'hotel-flight' && (
-                                <HotelFlight />
+                                <HotelFlight 
+                                direction="outbound"
+                                sourceLocation="" 
+                                destinationLocation="" 
+                                startDate={new Date().toISOString()} 
+                                endDate={new Date().toISOString()} 
+                                tType=""
+                                />
                             )}
                             {selectedOption === 'create-hotel' && (
                                 <HotelCreate />

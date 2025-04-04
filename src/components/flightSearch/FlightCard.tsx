@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useItinerary } from '@/context/ItineraryContext';
 import { dateSplitter, totalFlightCost } from '@/utils/flight';
@@ -18,18 +18,29 @@ const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick, type })
     const { state, dispatch } = useItinerary();
     const firstFlightId = flights[0].id;
     const lastFlightId = flights[flights.length - 1].id;
-    var isSelected = false;
-    // a flight is selected if the state has a flight selected, and the flight id of the first leg is the same, and the flight of the last leg is the same as the one selected
-    if (type === 'outbound') {
-        isSelected = state.selectedOutboundFlights.length > 0 && 
-                            state.selectedOutboundFlights[0].id === firstFlightId && 
-                            state.selectedOutboundFlights[state.selectedOutboundFlights.length - 1].id === lastFlightId;
-    }
-    else {
-        isSelected = state.selectedReturnFlights.length > 0 &&
-                            state.selectedReturnFlights[0].id === firstFlightId &&
-                            state.selectedReturnFlights[state.selectedReturnFlights.length - 1].id === lastFlightId;
-    }
+    const [isSelected, setIsSelected] = React.useState(false);
+
+    useEffect(() => {
+        if (type === 'outbound') {
+            setIsSelected(
+                state.selectedOutboundFlights.length > 0 && 
+                state.selectedOutboundFlights[0].id === firstFlightId && 
+                state.selectedOutboundFlights[state.selectedOutboundFlights.length - 1].id === lastFlightId
+            );
+        } else {
+            setIsSelected(
+                state.selectedReturnFlights.length > 0 &&
+                state.selectedReturnFlights[0].id === firstFlightId &&
+                state.selectedReturnFlights[state.selectedReturnFlights.length - 1].id === lastFlightId
+            );
+        }
+    }, [
+        state.selectedOutboundFlights, 
+        state.selectedReturnFlights, 
+        firstFlightId, 
+        lastFlightId, 
+        type
+    ]);
 
     const handleSelectClick = (flights: Flight[]) => {
         if (isSelected) {

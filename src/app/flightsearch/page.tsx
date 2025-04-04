@@ -5,7 +5,6 @@ import Footer from '@/components/Footer';
 import Flight from '@/components/homePage/flight';
 import HomeHeader from '@/components/HomeHeader';
 import FlightResults from '@/components/flightSearch/FlightResults';
-import { ItineraryProvider } from '@/context/ItineraryContext';
 import withItineraryProvider from '@/HOC/withItineraryProvider';
 
 const Page = () => {

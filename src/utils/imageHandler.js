@@ -2,10 +2,10 @@ import fs from "fs";
 import path from "path";
 
 const IMAGE_DIRECTORIES = {
-  user: path.join(process.cwd(), "src/images/users"),
-  hotel_itself: path.join(process.cwd(), "src/images/hotel/itself"),
-  hotel_logo: path.join(process.cwd(), "src/images/hotel/logo"),
-  hotel_room: path.join(process.cwd(), "src/images/hotel/room"),
+  user: path.join(process.cwd(), "images/users"),
+  hotel_itself: path.join(process.cwd(), "images/hotel/itself"),
+  hotel_logo: path.join(process.cwd(), "images/hotel/logo"),
+  hotel_room: path.join(process.cwd(), "images/hotel/room"),
 };
 
 // Function to handle image upload (no HTTP request, just file processing)
