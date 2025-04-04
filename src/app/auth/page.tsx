@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import AuthHeader from "@/components/AuthHeader"; // <-- import the AuthHeader
+import AuthHeader from "@/components/AuthHeader";
 
 const AuthPage: React.FC = () => {
   const router = useRouter();
@@ -26,19 +26,25 @@ const AuthPage: React.FC = () => {
     setError("");
 
     if (isRegister) {
-      if (
-        !formData.firstName ||
-        !formData.lastName ||
-        !formData.email ||
-        !formData.password ||
-        !formData.confirmPassword ||
-        !formData.phoneNumber
-      ) {
+      const { firstName, lastName, email, password, confirmPassword, phoneNumber } = formData;
+
+      if (!firstName || !lastName || !email || !password || !confirmPassword || !phoneNumber) {
         setError("All fields are required");
         return;
       }
-      if (formData.password !== formData.confirmPassword) {
+
+      if (password.length < 6) {
+        setError("Password must be at least 6 characters");
+        return;
+      }
+
+      if (password !== confirmPassword) {
         setError("Passwords do not match");
+        return;
+      }
+
+      if (!/^\d{10}$/.test(phoneNumber)) {
+        setError("Phone number must be exactly 10 digits");
         return;
       }
     }
@@ -71,7 +77,6 @@ const AuthPage: React.FC = () => {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
 
-      // After login or register, push to home (or profile) page:
       router.push("/");
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -84,7 +89,6 @@ const AuthPage: React.FC = () => {
 
   return (
     <>
-      {/* Include the AuthHeader at the top */}
       <AuthHeader />
 
       <div className="auth-page flex flex-col items-center justify-center min-h-screen p-6 bg-gray-200">
@@ -196,7 +200,10 @@ const AuthPage: React.FC = () => {
           </button>
         </form>
 
-        <button className="mt-4 text-blue-700 underline" onClick={() => setIsRegister(!isRegister)}>
+        <button
+          className="mt-4 text-blue-700 underline"
+          onClick={() => setIsRegister(!isRegister)}
+        >
           {isRegister ? "Already have an account? Log in" : "Don't have an account? Register"}
         </button>
       </div>
