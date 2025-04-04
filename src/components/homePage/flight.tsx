@@ -14,10 +14,9 @@ interface FlightProps {
     startDate: string;
     endDate: string;
     tType: string;
-    direction: string;
 }
 
-const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, startDate, endDate, tType, direction }) => {
+const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, startDate, endDate, tType }) => {
     const flightRouter = useRouter();
     const [selectedOption, setSelectedOption] = useState('hotel');
     const [start, setStart] = useState<Date | null>(new Date());
@@ -73,7 +72,7 @@ const Flight: React.FC<FlightProps> = ({ sourceLocation, destinationLocation, st
         const normalizedDestination = normalizeLocationInput(destination);
 
         // Use window.location.href to force a full page refresh
-        window.location.href = `/flightsearch?direction=${direction}&tripType=${tripType}&sourceLocation=${normalizedSource}&destinationLocation=${normalizedDestination}&startDate=${start?.toISOString()}&endDate=${end?.toISOString()}`;
+        window.location.href = `/flightsearch?tripType=${tripType}&sourceLocation=${normalizedSource}&destinationLocation=${normalizedDestination}&startDate=${start?.toISOString()}&endDate=${end?.toISOString()}`;
     };
 
     useEffect(() => {
