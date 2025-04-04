@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useItinerary } from '@/context/ItineraryContext';
+import HotelSuggestCard from './HotelSuggestCard';
 
 
 interface HotelSuggestionsProps {
@@ -24,7 +25,7 @@ const HotelSuggestions: React.FC<HotelSuggestionsProps> = ({ city, country, chec
         const response = await fetch(`/api/hotel/images?hotelId=${hotelId}`);
         const data = await response.json();
         console.log('Hotel Images:', data); // Debugging statement
-        setHotelImages(data);
+        setHotelImages((prevImages) => ({ ...prevImages, [hotelId]: data.imagePath }));
     }
 
     useEffect(() => {
@@ -36,10 +37,13 @@ const HotelSuggestions: React.FC<HotelSuggestionsProps> = ({ city, country, chec
             fetchHotelImages(hotel.id);
         });
     }, [hotelSuggestions]);
-    
+
     return (
         <div>
-
+            <h2>Hotel Suggestions</h2>
+            {hotelSuggestions.map((hotel) => (
+                <HotelSuggestCard hotel={hotel} hotelImg={hotelImages[hotel.hotelId]} checkin={checkInDate} checkout={checkOutDate}/>
+            ))}
         </div>
     );
 }
