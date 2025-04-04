@@ -57,3 +57,38 @@ export async function POST(request){
         );
     }
 }
+
+export async function GET(request) {
+    try {
+        const user = verifyToken(request);
+        if (!user) {
+            return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+        }
+
+        const { searchParams } = new URL(request.url);
+        const itineraryRef = searchParams.get('itineraryRef');
+
+        if (!itineraryRef) {
+            return NextResponse.json({ message: "Missing itineraryRef" }, { status: 400 });
+        }
+
+        const invoice = await prisma.invoice.findUnique({
+            where: {
+            itineraryRef: itineraryRef
+            }
+        });
+
+        if (!invoice) {
+            return NextResponse.json({ message: "Invoice not found" }, { status: 404 });
+        }
+
+        return NextResponse.json(invoice, { status: 200 });
+    } catch (error) {
+        console.error('Error fetching invoices:', error);
+        return new Response(
+            JSON.stringify({ error: 'Internal Server Error' }),
+            { status: 500, headers: { 'Content-Type': 'application/json' } }
+        );
+    }
+}
+
