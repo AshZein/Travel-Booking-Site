@@ -208,7 +208,7 @@ export async function POST(request) {
                 passportNum: flightCredentials.passportNumber,
                 billingFirstName: billingAddress.firstName,
                 billingLastName: billingAddress.lastName,
-                billingStreet: billingAddress.street,
+                billingStreet: billingAddress.streetAddress,
                 billingCity: billingAddress.city,
                 billingProvince: billingAddress.province,
                 billingCountry: billingAddress.country,
