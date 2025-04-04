@@ -19,40 +19,55 @@ import { CreditCard } from '@/types/CreditCard';
 import { Room } from '@/types/Room';
 
 const Page = () => {
-    const [flightCredentials, setFlightCredentials] = React.useState<FlightCred | null>(null);
-    const [billingAddress, setBillingAddress] = React.useState<Billing | null>(null);
-    const [creditCardInfo, setCreditCardInfo] = React.useState<CreditCard | null>(null);
-    const [selectedOutboundFlights, setSelectedOutboundFlights] = React.useState<Flight[]>([]);
-    const [selectedReturnFlights, setSelectedReturnFlights] = React.useState<Flight[]>([]);
-    const [selectedHotel, setSelectedHotel] = React.useState<Hotel | null>(null);
-    const [selectedRoom, setSelectedRoom] = React.useState<Room | null>(null);
-    const [selectedHotelCheckIn, setSelectedHotelCheckIn] = React.useState<string | null>(null);
-    const [selectedHotelCheckOut, setSelectedHotelCheckOut] = React.useState<string | null>(null);
-    const [selectedHotelPrice, setSelectedHotelPrice] = React.useState(0);
+    const [confirmationData, setConfirmationData] = React.useState<{
+        flightCredentials: FlightCred | null;
+        billingAddress: Billing | null;
+        creditCardInfo: CreditCard | null;
+        selectedOutboundFlights: Flight[];
+        selectedReturnFlights: Flight[];
+        selectedHotel: Hotel | null;
+        selectedRoom: Room | null;
+        selectedHotelCheckIn: string | null;
+        selectedHotelCheckOut: string | null;
+        selectedHotelPrice: number;
+    }>({
+        flightCredentials: null,
+        billingAddress: null,
+        creditCardInfo: null,
+        selectedOutboundFlights: [],
+        selectedReturnFlights: [],
+        selectedHotel: null,
+        selectedRoom: null,
+        selectedHotelCheckIn: null,
+        selectedHotelCheckOut: null,
+        selectedHotelPrice: 0,
+    });
+
     const { state: itineraryState, dispatch: itineraryDispatch} = useItinerary(); // Access ItineraryContext state
     const { state: hotelState, dispatch: hotelDispatch } = useHotelItinerary(); // Access HotelItineraryContext state
     const { state: checkoutState, dispatch: checkoutDispatch} = useCheckout(); // Access CheckoutContext state
 
     useEffect(() => {
-        setFlightCredentials(checkoutState.flightCredentials);
-        setBillingAddress(checkoutState.billingAddress);
-        setCreditCardInfo(checkoutState.creditCardInfo);
-        setSelectedOutboundFlights(checkoutState.selectedOutboundFlights);
-        setSelectedReturnFlights(checkoutState.selectedReturnFlights);
-        setSelectedHotel(checkoutState.selectedHotel);
-        setSelectedRoom(checkoutState.selectedRoom);
-        setSelectedHotelCheckIn(checkoutState.selectedHotelCheckIn);
-        setSelectedHotelCheckOut(checkoutState.selectedHotelCheckOut);
-        setSelectedHotelPrice(checkoutState.selectedHotelPrice);
+        setConfirmationData({
+            flightCredentials: checkoutState.flightCredentials,
+            billingAddress: checkoutState.billingAddress,
+            creditCardInfo: checkoutState.creditCardInfo,
+            selectedOutboundFlights: checkoutState.selectedOutboundFlights,
+            selectedReturnFlights: checkoutState.selectedReturnFlights,
+            selectedHotel: checkoutState.selectedHotel,
+            selectedRoom: checkoutState.selectedRoom,
+            selectedHotelCheckIn: checkoutState.selectedHotelCheckIn,
+            selectedHotelCheckOut: checkoutState.selectedHotelCheckOut,
+            selectedHotelPrice: checkoutState.selectedHotelPrice,
+        });
+    }, [checkoutState]);
 
-        // clear the checkout state
+    useEffect(() => {
         checkoutDispatch({ type: 'CLEAR_CHECKOUT' });
-        // clear the itinerary state
         itineraryDispatch({ type: 'CLEAR_ITINERARY' });
-        // clear the hotel state
         hotelDispatch({ type: 'CLEAR_HOTEL_ITINERARY' });
-    }, [checkoutState, itineraryState, hotelState, checkoutDispatch, itineraryDispatch, hotelDispatch]);
-
+        console.log("Cleared states");
+    }, []);
 
     return (
         <div>
