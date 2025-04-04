@@ -106,7 +106,7 @@ export async function POST(request) {
                     itineraryId: itinerary.itineraryId ,
                 },
                 data: {
-                    outboundFlightBookingRef: outboundFlightData.bookingReference,
+                    forwardFlightBookingRef: outboundFlightData.bookingReference,
                 },
             });
         }
