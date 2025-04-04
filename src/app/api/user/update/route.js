@@ -6,7 +6,10 @@ const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 export async function PUT(req) {
   try {
     const authHeader = req.headers.get("Authorization");
+    //console.log("Auth Header:", authHeader);
+
     const token = authHeader?.split(" ")[1];
+    //console.log("Extracted Token:", token);
 
     if (!token) {
       return new Response(JSON.stringify({ message: "Unauthorized" }), { status: 401 });
@@ -15,11 +18,16 @@ export async function PUT(req) {
     let decoded;
     try {
       decoded = jwt.verify(token, JWT_SECRET);
+      //console.log("Decoded JWT:", decoded);
     } catch (err) {
+      console.log("TOKEN VERIFY FAILED:", err.message);
       return new Response(JSON.stringify({ message: "Invalid or expired token" }), { status: 401 });
     }
 
-    const userId = decoded.userId || decoded.id; // Update to match your token
+    const userId = decoded.userId;
+    if (!userId) {
+      return new Response(JSON.stringify({ message: "Missing userId in token" }), { status: 401 });
+    }
 
     const body = await req.json();
     const allowedFields = ["firstName", "lastName", "email", "phoneNumber"];
@@ -35,7 +43,7 @@ export async function PUT(req) {
     }
 
     await prisma.user.update({
-      where: { userId: userId }, 
+      where: { userId }, // match your schema
       data: { [field]: value },
     });
 

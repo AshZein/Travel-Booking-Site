@@ -51,6 +51,7 @@ const ProfilePage: React.FC = () => {
 
   const handleSave = async () => {
     const token = localStorage.getItem("accessToken");
+    console.log("Sending token:", token); 
     if (!token || !editingField) return;
 
     try {
@@ -71,7 +72,7 @@ const ProfilePage: React.FC = () => {
       setUpdatedValue("");
     } catch (error) {
       console.error("Error updating user data:", error);
-      alert("Update failed. Please check console for details.");
+      alert("Update failed. Check console for details.");
     }
   };
 
