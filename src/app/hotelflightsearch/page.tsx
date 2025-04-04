@@ -4,11 +4,13 @@ import { useRouter } from 'next/navigation';
 import Footer from '@/components/Footer';
 import Flight from '@/components/homePage/flight';
 import HomeHeader from '@/components/HomeHeader';
-import FlightResults from '@/components/flightSearch/FlightResults';
+import HotelFlightResults from '@/components/hotelFlightSearch/HotelFlightResults';
 import withItineraryProvider from '@/HOC/withItineraryProvider';
-
+import HotelSuggestions from '@/components/hotelFlightSearch/HotelSuggestions';
+import { useItinerary } from '@/context/ItineraryContext';
 const Page = () => {
     const router = useRouter();
+    const { state, dispatch } = useItinerary();
     const [sourceLocation, setSourceLocation] = useState('');
     const [destinationLocation, setDestinationLocation] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -38,7 +40,7 @@ const Page = () => {
                     tType={tripType}
                     direction={direction}
                 />
-                <FlightResults 
+                <HotelFlightResults 
                     sourceLocation={sourceLocation}
                     destinationLocation={destinationLocation}
                     startDate={startDate}
