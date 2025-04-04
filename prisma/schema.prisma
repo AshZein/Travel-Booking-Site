@@ -163,6 +163,15 @@ model Itinerary {
 model invoice {
   invoiceId           Int       @id @default(autoincrement())
   userId              Int
+  passportNum         String    @default("")
+  billingFirstName    String
+  billingLastName     String
+  billingStreet       String
+  billingCity         String
+  billingProvince     String
+  billingCountry      String    @default("Canada")
+  billingPhoneNum     string
+  billingEmail        string
   itineraryRef        String    @unique
   hotelCost           Float
   departureFlightCost Float
