@@ -49,6 +49,11 @@ export async function POST(request) {
         console.log('Credit Card Info:', creditCardInfo);
         console.log('Selected Outbound Flights:', selectedOutboundFlights);
         console.log('Selected Return Flights:', selectedReturnFlights);
+        console.log('Selected Hotel:', selectedHotel);
+        console.log('Selected Room:', selectedRoom);
+        console.log('Selected Hotel Check-In:', selectedHotelCheckIn);
+        console.log('Selected Hotel Check-Out:', selectedHotelCheckOut);
+        console.log('Selected Hotel Price:', selectedHotelPrice);
 
         // Create a new itinerary
         const itineraryRef = await generateItineraryRef();
@@ -98,7 +103,7 @@ export async function POST(request) {
             const outboundFlightData = await outboundFlightResponse.json();
             await prisma.itinerary.update({
                 where: {
-                    id: itinerary.itineraryId ,
+                    itineraryId: itinerary.itineraryId ,
                 },
                 data: {
                     outboundFlightBookingRef: outboundFlightData.bookingReference,
@@ -145,7 +150,7 @@ export async function POST(request) {
             const returnFlightData = await returnFlightResponse.json();
             await prisma.itinerary.update({
                 where: {
-                    id: itinerary.itineraryId ,
+                    itineraryId: itinerary.itineraryId ,
                 },
                 data: {
                     returnFlightBookingRef: returnFlightData.bookingReference,
@@ -163,8 +168,8 @@ export async function POST(request) {
                 },
                 body: JSON.stringify({
                     email: billingAddress.email,
-                    hotelId: selectedHotel.id,
-                    roomId: selectedRoom.id,
+                    hotelId: selectedHotel.hotelId,
+                    roomId: selectedRoom.roomId,
                     checkInDate: selectedHotelCheckIn,
                     checkOutDate: selectedHotelCheckOut,
                     price: selectedHotelPrice,
@@ -183,7 +188,7 @@ export async function POST(request) {
             const hotelBookingData = await hotelBookingResponse.json();
             await prisma.itinerary.update({
                 where: {
-                    id: itinerary.itineraryId ,
+                    itineraryId: itinerary.itineraryId ,
                 },
                 data: {
                     hotelBookingRef: hotelBookingData.referenceId,
