@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HomeHeader from '@/components/HomeHeader';
 import Footer from '@/components/Footer';
 import FlightBooking from '@/components/itinerary/FlightBooking';
@@ -22,6 +22,11 @@ const Page = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [selectedFlight, setSelectedFlight] = useState<Flight[] | null>(null);
     const router = useRouter();
+
+    useEffect(() => {
+        console.log('Itinerary State:', itineraryState);
+        console.log('Hotel State:', hotelState);
+    }, []);
 
     const handleFlightClick = (flights: Flight[]) => {
         setSelectedFlight(flights);

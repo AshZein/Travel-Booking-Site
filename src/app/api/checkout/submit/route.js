@@ -51,8 +51,8 @@ export async function POST(request) {
         console.log('Selected Return Flights:', selectedReturnFlights);
         console.log('Selected Hotel:', selectedHotel);
         console.log('Selected Room:', selectedRoom);
-        console.log('Selected Hotel Check-In:', selectedHotelCheckIn);
-        console.log('Selected Hotel Check-Out:', selectedHotelCheckOut);
+        console.log('Selected Hotel Check-In:', typeof selectedHotelCheckIn);
+        console.log('Selected Hotel Check-Out:', typeof selectedHotelCheckOut);
         console.log('Selected Hotel Price:', selectedHotelPrice);
 
         // Create a new itinerary
@@ -170,8 +170,8 @@ export async function POST(request) {
                     email: billingAddress.email,
                     hotelId: selectedHotel.hotelId,
                     roomId: selectedRoom.roomId,
-                    checkInDate: selectedHotelCheckIn,
-                    checkOutDate: selectedHotelCheckOut,
+                    checkIn: selectedHotelCheckIn,
+                    checkOut: selectedHotelCheckOut,
                     price: selectedHotelPrice,
                 }),
             });
