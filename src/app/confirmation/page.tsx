@@ -29,9 +29,9 @@ const Page = () => {
     const [selectedHotelCheckIn, setSelectedHotelCheckIn] = React.useState<string | null>(null);
     const [selectedHotelCheckOut, setSelectedHotelCheckOut] = React.useState<string | null>(null);
     const [selectedHotelPrice, setSelectedHotelPrice] = React.useState(0);
-    const { state: itineraryState } = useItinerary(); // Access ItineraryContext state
-    const { state: hotelState } = useHotelItinerary(); // Access HotelItineraryContext state
-    const { state: checkoutState } = useCheckout(); // Access CheckoutContext state
+    const { state: itineraryState, dispatch: itineraryDispatch} = useItinerary(); // Access ItineraryContext state
+    const { state: hotelState, dispatch: hotelDispatch } = useHotelItinerary(); // Access HotelItineraryContext state
+    const { state: checkoutState, dispatch: checkoutDispatch} = useCheckout(); // Access CheckoutContext state
 
     useEffect(() => {
         setFlightCredentials(checkoutState.flightCredentials);
@@ -46,7 +46,12 @@ const Page = () => {
         setSelectedHotelPrice(checkoutState.selectedHotelPrice);
 
         // clear the checkout state
-    });
+        checkoutDispatch({ type: 'CLEAR_CHECKOUT' });
+        // clear the itinerary state
+        itineraryDispatch({ type: 'CLEAR_ITINERARY' });
+        // clear the hotel state
+        hotelDispatch({ type: 'CLEAR_HOTEL_ITINERARY' });
+    }, [checkoutState, itineraryState, hotelState, checkoutDispatch, itineraryDispatch, hotelDispatch]);
 
 
     return (
