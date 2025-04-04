@@ -98,7 +98,7 @@ export async function POST(request) {
             const outboundFlightData = await outboundFlightResponse.json();
             await prisma.itinerary.update({
                 where: {
-                    id: itinerary.id,
+                    id: itinerary.itineraryId ,
                 },
                 data: {
                     outboundFlightBookingRef: outboundFlightData.bookingReference,
@@ -145,7 +145,7 @@ export async function POST(request) {
             const returnFlightData = await returnFlightResponse.json();
             await prisma.itinerary.update({
                 where: {
-                    id: itinerary.id,
+                    id: itinerary.itineraryId ,
                 },
                 data: {
                     returnFlightBookingRef: returnFlightData.bookingReference,
@@ -183,7 +183,7 @@ export async function POST(request) {
             const hotelBookingData = await hotelBookingResponse.json();
             await prisma.itinerary.update({
                 where: {
-                    id: itinerary.id,
+                    id: itinerary.itineraryId ,
                 },
                 data: {
                     hotelBookingRef: hotelBookingData.referenceId,
