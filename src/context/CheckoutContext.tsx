@@ -32,7 +32,8 @@ type CheckoutAction =
     | { type: 'SELECT_ROOM'; payload: Room | null }
     | { type: 'SET_HOTEL_CHECK_IN'; payload: string | null }
     | { type: 'SET_HOTEL_CHECK_OUT'; payload: string | null }
-    | { type: 'SET_HOTEL_PRICE'; payload: number };
+    | { type: 'SET_HOTEL_PRICE'; payload: number }
+    | { type: 'CLEAR_CHECKOUT' };
 
 const initialState: CheckoutState = {
     selectedOutboundFlights: [],
@@ -91,6 +92,21 @@ const checkoutReducer = (state: CheckoutState, action: CheckoutAction): Checkout
             return { ...state, selectedHotelCheckOut: action.payload };
         case 'SET_HOTEL_PRICE':
             return { ...state, selectedHotelPrice: action.payload };
+
+        case 'CLEAR_CHECKOUT':
+            return {
+                ...state,
+                selectedOutboundFlights: [],
+                selectedReturnFlights: [],
+                billingAddress: null,
+                creditCardInfo: null,
+                flightCredentials: null,
+                selectedHotel: null,
+                selectedRoom: null,
+                selectedHotelCheckIn: null,
+                selectedHotelCheckOut: null,
+                selectedHotelPrice: 0,
+            };
         default:
             return state;
     }
