@@ -45,6 +45,7 @@ const Page = () => {
     const { state: checkoutState, dispatch: checkoutDispatch} = useCheckout(); // Access CheckoutContext state
 
     useEffect(() => {
+        // Set confirmation data only once when the component mounts
         setConfirmationData({
             flightCredentials: checkoutState.flightCredentials,
             billingAddress: checkoutState.billingAddress,
@@ -57,18 +58,60 @@ const Page = () => {
             selectedHotelCheckOut: checkoutState.selectedHotelCheckOut,
             selectedHotelPrice: checkoutState.selectedHotelPrice,
         });
-    }, [checkoutState]);
 
-    useEffect(() => {
+        // Clear global states after setting confirmation data
         checkoutDispatch({ type: 'CLEAR_CHECKOUT' });
         itineraryDispatch({ type: 'CLEAR_ITINERARY' });
         hotelDispatch({ type: 'CLEAR_HOTEL_ITINERARY' });
-        console.log("Cleared states");
-    }, []);
+    }, []); // Run only once when the component mounts
 
     return (
         <div>
             <CheckoutHeader />
+            <div>
+                <h1>Confirmation</h1>
+                <h2>Flight Credentials</h2>
+                {confirmationData.flightCredentials && (
+                    <div>
+                        <p>Name: {confirmationData.flightCredentials.firstName} {confirmationData.flightCredentials.middleName} {confirmationData.flightCredentials.lastName}</p>
+                        <p>Email: {confirmationData.billingAddress?.email}</p>
+                        <p>Phone: {confirmationData.billingAddress?.phoneNumber}</p>
+                    </div>
+                )}
+                <h2>Billing Address</h2>
+                {confirmationData.billingAddress && (
+                    <div>
+                        <p>Street: {confirmationData.billingAddress.streetAddress}</p>
+                        <p>City: {confirmationData.billingAddress.city}</p>
+                        <p>State: {confirmationData.billingAddress.province}</p>
+                        <p>Zip: {confirmationData.billingAddress.postalCode}</p>
+                    </div>
+                )}
+                <h2>Credit Card Info</h2>
+                {confirmationData.creditCardInfo && (
+                    <div>
+                        <p>Card Number: {confirmationData.creditCardInfo.cardNumber}</p>
+                        <p>Expiry Date: {confirmationData.creditCardInfo.expiryMonth}/{confirmationData.creditCardInfo.expiryYear}</p>
+                    </div>
+                )}
+                <h2>Selected Outbound Flights</h2>
+                {confirmationData.selectedOutboundFlights.map((flight, index) => (
+                    <CheckoutFlightCard key={index} legs={confirmationData.selectedOutboundFlights.length} flights={[flight]} type="Outbound Flight" />
+                ))}
+                <h2>Selected Return Flights</h2>
+                {confirmationData.selectedReturnFlights.map((flight, index) => (
+                    <CheckoutFlightCard key={index} legs={confirmationData.selectedReturnFlights.length} flights={[flight]} type="Return Flight" />
+                ))}
+                <h2>Selected Hotel</h2>
+                {confirmationData.selectedHotel && (
+                    <div>
+                        <p>Name: {confirmationData.selectedHotel.name}</p>
+                        <p>Price: ${confirmationData.selectedHotelPrice.toFixed(2)}</p>
+                        <p>Check-in: {confirmationData.selectedHotelCheckIn}</p>
+                        <p>Check-out: {confirmationData.selectedHotelCheckOut}</p>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
