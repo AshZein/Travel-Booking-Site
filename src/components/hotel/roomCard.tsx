@@ -16,7 +16,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, hotel, checkinDate, checkoutD
     const [isSelected, setIsSelected] = React.useState(false);
 
     const fetchRoomImages = async () => {
-        const response = await fetch(`http://localhost:3000/api/hotel/room/images?roomId=${room.roomId}`);
+        const response = await fetch(`/api/hotel/room/images?roomId=${room.roomId}`);
         const data = await response.json();
 
         if (response.ok && Array.isArray(data.images)) {

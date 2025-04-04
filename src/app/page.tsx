@@ -32,6 +32,7 @@ const Page = () => {
                             </ul>
                             {selectedOption === 'flight' && (
                                 <Flight 
+                                    direction="outbound"
                                     sourceLocation="" 
                                     destinationLocation="" 
                                     startDate={new Date().toISOString()} 

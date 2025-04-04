@@ -7,7 +7,7 @@ import { Flight } from '@/types/flight';
 
 async function searchFlights(source: string, destination: string, startDate: string, endDate: string) {
     try {
-        const response = await fetch(`http://localhost:3000/api/flight/list?origin=${source}&destination=${destination}&startDate=${startDate}&endDate=${endDate}`);
+        const response = await fetch(`/api/flight/list?origin=${source}&destination=${destination}&startDate=${startDate}&endDate=${endDate}`);
         const data = await response.json();
         console.log('API Response:', data); // Debugging statement
 

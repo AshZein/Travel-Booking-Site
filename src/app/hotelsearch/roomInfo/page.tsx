@@ -28,19 +28,19 @@ const Page: React.FC = () =>{
     const [endDate, setEndDate] = useState('');
 
     const fetchRooms = async (hotelId: number) => {
-        const response = await fetch(`http://localhost:3000/api/hotel/room/info?hotelId=${hotelId}&checkin=${startDate}&checkout=${endDate}`);
+        const response = await fetch(`/api/hotel/room/info?hotelId=${hotelId}&checkin=${startDate}&checkout=${endDate}`);
         const data = await response.json();
         setRoom(Object.values(data) || []);
     };
 
     const fetchHotel = async (hotelId: number) => {
-        const response = await fetch(`http://localhost:3000/api/hotel/info?hotelId=${hotelId}`);
+        const response = await fetch(`/api/hotel/info?hotelId=${hotelId}`);
         const data = await response.json();
         setHotel(data);
     };  
 
     const fetchHotelImg = async (hotelId: number) => {
-        const response = await fetch(`http://localhost:3000/api/hotel/images?hotelId=${hotelId}`);
+        const response = await fetch(`/api/hotel/images?hotelId=${hotelId}`);
         const data = await response.json();
         setHotelImg(data.image || '');
     }

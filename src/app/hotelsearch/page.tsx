@@ -37,7 +37,7 @@ const Page = () =>{
       }, []);
 
     const fetchHotelImages = async (hotelId: number) => {
-      const response = await fetch(`http://localhost:3000/api/hotel/images?hotelId=${hotelId}`);
+      const response = await fetch(`/api/hotel/images?hotelId=${hotelId}`);
       const data = await response.json();
       if (response.ok && data.image) {
           setHotelImgs((prev) => ({
@@ -53,14 +53,14 @@ const Page = () =>{
     };
 
   const fetchHotels = async () => {
-    const response = await fetch(`http://localhost:3000/api/hotel/list?city=${destinationLocation}&checkin=${startDate}&checkout=${endDate}&minStarRating=${minRating}&maxStarRating=${maxRating}&name=${name}&startPrice=${minPrice}&endPrice=${maxPrice}`);
+    const response = await fetch(`/api/hotel/list?city=${destinationLocation}&checkin=${startDate}&checkout=${endDate}&minStarRating=${minRating}&maxStarRating=${maxRating}&name=${name}&startPrice=${minPrice}&endPrice=${maxPrice}`);
     const data = await response.json();
     
     setHotels(Object.values(data) || []);
   };
 
   const fetchRooms = async (hotelId: number) => {
-      const response = await fetch(`http://localhost:3000/api/hotel/room/info?hotelId=${hotelId}&checkin=${startDate}&checkout=${endDate}`);
+      const response = await fetch(`/api/hotel/room/info?hotelId=${hotelId}&checkin=${startDate}&checkout=${endDate}`);
       const data = await response.json();
       setRoom(Object.values(data) || []);
   };
