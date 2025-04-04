@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import { Hotel } from '../../types/hotel'; 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Hotel } from '@/types/Hotel';
 
 interface HotelManager {
     managerId: string;
