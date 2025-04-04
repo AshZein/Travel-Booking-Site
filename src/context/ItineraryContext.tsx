@@ -1,16 +1,24 @@
 "use client"
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { Flight } from '@/types/flight';
+// import { Hotel } from '@/types/Hotel';
+// import { Room } from '@/types/Room';
 
 interface ItineraryState {
     selectedOutboundFlights: Flight[];
     selectedReturnFlights: Flight[];
+    // selectedHotel: Hotel | null;
+    // selectedRoom: Room | null;
+    // selectedHotelCheckIn: string | null;
+    // selectedHotelCheckOut: string | null;
+    // selectedHotelPrice: number | null;
 }
 
-interface ItineraryAction {
-    type: 'SELECT_OUTBOUND_FLIGHT' | 'UNSELECT_OUTBOUND_FLIGHT' | 'SELECT_RETURN_FLIGHT' | 'UNSELECT_RETURN_FLIGHT';
-    payload: Flight;
-}
+type ItineraryAction =
+    | { type: 'SELECT_OUTBOUND_FLIGHT'; payload: Flight }
+    | { type: 'UNSELECT_OUTBOUND_FLIGHT'; payload: Flight }
+    | { type: 'SELECT_RETURN_FLIGHT'; payload: Flight }
+    | { type: 'UNSELECT_RETURN_FLIGHT'; payload: Flight };
 
 const initialState: ItineraryState = {
     selectedOutboundFlights: [],
@@ -30,11 +38,39 @@ const itineraryReducer = (state: ItineraryState, action: ItineraryAction): Itine
         case 'SELECT_OUTBOUND_FLIGHT':
             return { ...state, selectedOutboundFlights: [...state.selectedOutboundFlights, action.payload] };
         case 'UNSELECT_OUTBOUND_FLIGHT':
-            return { ...state, selectedOutboundFlights: state.selectedOutboundFlights.filter(flight => flight.id !== action.payload.id) };
+            return { 
+                ...state, 
+                selectedOutboundFlights: state.selectedOutboundFlights.filter(flight => 
+                    flight.id !== action.payload.id
+                ) 
+            };
         case 'SELECT_RETURN_FLIGHT':
             return { ...state, selectedReturnFlights: [...state.selectedReturnFlights, action.payload] };
         case 'UNSELECT_RETURN_FLIGHT':
-            return { ...state, selectedReturnFlights: state.selectedReturnFlights.filter(flight => flight.id !== action.payload.id) };
+            return { 
+                ...state, 
+                selectedReturnFlights: state.selectedReturnFlights.filter(flight => 
+                    flight.id !== action.payload.id
+                ) 
+            };
+        // case 'SELECT_HOTEL_ROOM':
+        //     return {
+        //         ...state,
+        //         selectedHotel: action.payload.hotel,
+        //         selectedRoom: action.payload.room,
+        //         selectedHotelCheckIn: action.payload.checkin,
+        //         selectedHotelCheckOut: action.payload.checkout,
+        //         selectedHotelPrice: action.payload.price,
+        //     };
+        // case 'UNSELECT_HOTEL_ROOM':
+        //     return {
+        //         ...state,
+        //         selectedHotel: null,
+        //         selectedRoom: null,
+        //         selectedHotelCheckIn: null,
+        //         selectedHotelCheckOut: null,
+        //         selectedHotelPrice: null,
+        //     };
         default:
             return state;
     }

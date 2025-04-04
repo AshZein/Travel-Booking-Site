@@ -20,7 +20,11 @@ const Page = () => {
 
     const handleSubmit = async () => {
         // Validate all required fields
-        if (!state.flightCredentials || !state.billingAddress || !state.creditCardInfo) {
+        if (
+            (state.selectedOutboundFlights.length > 0 && !state.flightCredentials) ||
+            !state.billingAddress ||
+            !state.creditCardInfo
+        ) {
             alert('Please fill in all required fields.');
             return;
         }
@@ -32,21 +36,34 @@ const Page = () => {
             creditCardInfo: state.creditCardInfo,
             selectedOutboundFlights: state.selectedOutboundFlights,
             selectedReturnFlights: state.selectedReturnFlights,
+            selectedHotel: state.selectedHotel,
+            selectedRoom: state.selectedRoom,
+            selectedHotelCheckIn: state.selectedHotelCheckIn,
+            selectedHotelCheckOut: state.selectedHotelCheckOut,
+            selectedHotelPrice: state.selectedHotelPrice,
         });
 
+        const token = localStorage.getItem('accessToken'); // Retrieve the token from localStorage
         // Example: Send the data to an API endpoint
         try {
             const response = await fetch('/api/checkout/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                },
+                    'Authorization': `Bearer ${token}`, // Add the token to the Authorization header
+                    },
                 body: JSON.stringify({
                     flightCredentials: state.flightCredentials,
                     billingAddress: state.billingAddress,
                     creditCardInfo: state.creditCardInfo,
                     selectedOutboundFlights: state.selectedOutboundFlights,
                     selectedReturnFlights: state.selectedReturnFlights,
+                    selectedHotel: state.selectedHotel,
+                    selectedRoom: state.selectedRoom,
+                    selectedHotelCheckIn: state.selectedHotelCheckIn,
+                    selectedHotelCheckOut: state.selectedHotelCheckOut,
+                    selectedHotelPrice: state.selectedHotelPrice,
+                    
                 }),
             });
 

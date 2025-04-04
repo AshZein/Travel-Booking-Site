@@ -25,9 +25,10 @@ interface FlightResultsProps {
     startDate: string;
     endDate: string;
     tripType: string;
+    direction: string;
 }
 
-const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinationLocation, startDate, endDate, tripType }) => {
+const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinationLocation, startDate, endDate, tripType, direction }) => {
     const { state, dispatch } = useItinerary();
     const [outboundFlights, setOutboundFlights] = useState<any[]>([]);
     const [inboundFlights, setInboundFlights] = useState<any[]>([]);
@@ -53,11 +54,16 @@ const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinati
         const fetchFlights = async () => {
             const outBoundFlight = await searchFlights(sourceLocation, destinationLocation, startDate, startDate);
             setOutboundFlights(Array.isArray(outBoundFlight) ? outBoundFlight : []);
-            
-            if (tripType === 'round-trip') {
+            console.log("outboundFlights", outBoundFlight);
+            if (direction === "return") {
+                const inBoundFlight = await searchFlights(sourceLocation, destinationLocation, startDate, startDate);
+                setInboundFlights(Array.isArray(inBoundFlight) ? inBoundFlight : []);
+
+            } else if (tripType === 'round-trip') {
                 const inBoundFlight = await searchFlights(destinationLocation, sourceLocation, endDate, endDate);
                 setInboundFlights(Array.isArray(inBoundFlight) ? inBoundFlight : []);
             }
+
         };
 
         fetchFlights().catch((error) => {
@@ -92,24 +98,24 @@ const FlightResults: React.FC<FlightResultsProps> = ({ sourceLocation, destinati
 
     return (
         <div className="flight-results flex flex-col md:flex-row justify-between">
-            <div className="flex-1 mr-0 md:mr-2.5 mb-4 md:mb-0">
-                <h2 className="text-xl font-bold mb-4">Outbound Flights</h2>
-                {outboundFlights && outboundFlights.length > 0 ? (
-                    outboundFlights.map((flightGroup, index) => (
-                        <FlightCard 
-                            key={index} 
-                            legs={flightGroup.legs} 
-                            flights={flightGroup.flights} 
-                            onClick={() => handleFlightClick(flightGroup.flights)} 
-                            onAddToItinerary={() => addFlightToItinerary(flightGroup.flights[0])} // Example: Add the first flight in the group
-                            type={"outbound"}
-                        />
-                    ))
-                ) : (
-                    <div className="p-4 bg-white text-black rounded">No outbound flights found for selected criteria.</div>
-                )}
-            </div>
-            {tripType === 'round-trip' && (
+                {direction !== "return" ? (<div className="flex-1 mr-0 md:mr-2.5 mb-4 md:mb-0">
+                    <h2 className="text-xl font-bold mb-4">Outbound Flights</h2>
+                    {outboundFlights && outboundFlights.length > 0 ? (
+                        outboundFlights.map((flightGroup, index) => (
+                            <FlightCard 
+                                key={index} 
+                                legs={flightGroup.legs} 
+                                flights={flightGroup.flights} 
+                                onClick={() => handleFlightClick(flightGroup.flights)} 
+                                onAddToItinerary={() => addFlightToItinerary(flightGroup.flights[0])} // Example: Add the first flight in the group
+                                type={"outbound"}
+                            />
+                        ))
+                    ) : (
+                        <div className="p-4 bg-white text-black rounded">No outbound flights found for selected criteria.</div>
+                    )}
+                </div>) : null}
+            {(tripType === 'round-trip' || direction === "return") && (
                 <div className="flex-1 ml-0 md:ml-2.5">
                     <h2 className="text-xl font-bold mb-4">Return Flights</h2>
                     {inboundFlights && inboundFlights.length > 0 ? (

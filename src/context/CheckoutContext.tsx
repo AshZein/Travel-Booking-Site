@@ -1,9 +1,11 @@
 "use client"
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { Flight } from '@/types/flight';
-import {Billing} from '@/types/Billing';
-import {CreditCard} from '@/types/CreditCard';
-import {FlightCred} from '@/types/FlightCred';
+import { Billing } from '@/types/Billing';
+import { CreditCard } from '@/types/CreditCard';
+import { FlightCred } from '@/types/FlightCred';
+import { Hotel } from '@/types/Hotel';
+import { Room } from '@/types/Room';
 
 interface CheckoutState {
     selectedOutboundFlights: Flight[];
@@ -11,6 +13,11 @@ interface CheckoutState {
     billingAddress: Billing | null;
     creditCardInfo: CreditCard | null;
     flightCredentials: FlightCred | null;
+    selectedHotel: Hotel | null;
+    selectedRoom: Room | null;
+    selectedHotelCheckIn: string | null;
+    selectedHotelCheckOut: string | null;
+    selectedHotelPrice: number;
 }
 
 type CheckoutAction =
@@ -20,7 +27,12 @@ type CheckoutAction =
     | { type: 'UNSELECT_RETURN_FLIGHT'; payload: Flight }
     | { type: 'SET_BILLING_ADDRESS'; payload: Billing }
     | { type: 'SET_CREDIT_CARD_INFO'; payload: CreditCard }
-    | { type: 'SET_FLIGHT_CREDENTIALS'; payload: FlightCred };
+    | { type: 'SET_FLIGHT_CREDENTIALS'; payload: FlightCred }
+    | { type: 'SELECT_HOTEL'; payload: Hotel | null }
+    | { type: 'SELECT_ROOM'; payload: Room | null }
+    | { type: 'SET_HOTEL_CHECK_IN'; payload: string | null }
+    | { type: 'SET_HOTEL_CHECK_OUT'; payload: string | null }
+    | { type: 'SET_HOTEL_PRICE'; payload: number };
 
 const initialState: CheckoutState = {
     selectedOutboundFlights: [],
@@ -28,6 +40,11 @@ const initialState: CheckoutState = {
     billingAddress: null,
     creditCardInfo: null,
     flightCredentials: null,
+    selectedHotel: null,
+    selectedRoom: null,
+    selectedHotelCheckIn: null,
+    selectedHotelCheckOut: null,
+    selectedHotelPrice: 0,
 };
 
 const CheckoutContext = createContext<{
@@ -64,6 +81,16 @@ const checkoutReducer = (state: CheckoutState, action: CheckoutAction): Checkout
             return { ...state, creditCardInfo: action.payload };
         case 'SET_FLIGHT_CREDENTIALS':
             return { ...state, flightCredentials: action.payload };
+        case 'SELECT_HOTEL':
+            return { ...state, selectedHotel: action.payload };
+        case 'SELECT_ROOM':
+            return { ...state, selectedRoom: action.payload };
+        case 'SET_HOTEL_CHECK_IN':
+            return { ...state, selectedHotelCheckIn: action.payload };
+        case 'SET_HOTEL_CHECK_OUT':
+            return { ...state, selectedHotelCheckOut: action.payload };
+        case 'SET_HOTEL_PRICE':
+            return { ...state, selectedHotelPrice: action.payload };
         default:
             return state;
     }

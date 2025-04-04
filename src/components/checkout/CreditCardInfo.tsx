@@ -14,6 +14,12 @@ const CreditCardInfo: React.FC = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
+
+        // Allow only numeric input for CVC and card number fields
+        if (name === 'cvcNumber' || name === 'cardNumber') {
+            if (!/^\d*$/.test(value)) return; // Prevent non-numeric input
+        }
+
         const updatedCreditCard = {
             ...creditCard,
             [name]: value,
@@ -26,12 +32,13 @@ const CreditCardInfo: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Dispatch the credit card info to the CheckoutContext
+        // Validate all fields
         if (!creditCard.cardName || !creditCard.cardNumber || !creditCard.cvcNumber || !creditCard.expiryMonth || !creditCard.expiryYear) {
             alert('Please fill in all fields');
             return;
         }
-        const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
+
+        const token = localStorage.getItem('accessToken'); // Retrieve the token from localStorage
         const response = await fetch('/api/checkout/creditCard', {
             method: 'POST',
             headers: {
@@ -39,14 +46,20 @@ const CreditCardInfo: React.FC = () => {
             'Authorization': `Bearer ${token}`, // Add the token to the Authorization header
             },
             body: JSON.stringify({
-            creditCardNumber: creditCard.cardNumber,
-            creditCardExpiry: `${creditCard.expiryMonth}/${creditCard.expiryYear}`,
-            creditCardCVC: creditCard.cvcNumber,
+            cardName: String(creditCard.cardName),
+            cardNumber: String(creditCard.cardNumber),
+            cvcNumber: String(creditCard.cvcNumber),
+            expiryMonth: String(creditCard.expiryMonth),
+            expiryYear: String(creditCard.expiryYear),
             }),
         });
+
         if (response.ok) {
             dispatch({ type: 'SET_CREDIT_CARD_INFO', payload: creditCard });
             alert('Credit card information saved to checkout!');
+        } else {
+            const errorData = await response.json();
+            alert(`Error: ${errorData.message}`);
         }
     };
 
@@ -84,7 +97,7 @@ const CreditCardInfo: React.FC = () => {
                     <input
                         type="text"
                         id="cvc"
-                        name="cvc"
+                        name="cvcNumber"
                         value={creditCard.cvcNumber}
                         onChange={handleChange}
                         className="w-full p-2 border border-black rounded text-black"

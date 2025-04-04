@@ -19,17 +19,16 @@ const HomeHeader: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   /**
-   * 1) Check local storage for tokens on mount:
-   *    If there's "token" or "accessToken", user is logged in.
+   * Check local storage for tokens on mount:
+   * If there's "accessToken", user is logged in.
    */
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
-    const refreshtoken = localStorage.getItem("refreshtoken");
-    setIsAuthenticated(!!(accessToken));
+    setIsAuthenticated(!!accessToken);
   }, []);
 
   /**
-   * 2) Close *all* dropdowns if clicking outside the dropdown area
+   * Close *all* dropdowns if clicking outside the dropdown area.
    */
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -51,7 +50,7 @@ const HomeHeader: React.FC = () => {
     HomeRouter.push("/");
   };
 
-  // Auth button click → toggle profile dropdown if logged in, else go /auth
+  // Auth button or user image click → toggle profile dropdown if logged in, else go /auth
   const handleAuthClick = () => {
     if (!isAuthenticated) {
       HomeRouter.push("/auth");
@@ -72,7 +71,7 @@ const HomeHeader: React.FC = () => {
     localStorage.removeItem("refreshToken");
     setIsAuthenticated(false);
     setShowDropdown(false);
-    HomeRouter.push("/auth");
+    HomeRouter.push("/");
   };
 
   // Notification bell click → toggle notifications
@@ -85,7 +84,7 @@ const HomeHeader: React.FC = () => {
       {/* -- LEFT: Logo + Title -- */}
       <div className="items-center flex gap-2">
         <img
-          src="logo_no_back.png"
+          src="/logo_no_back.png"
           alt="FlyNext Logo"
           className="h-8 cursor-pointer"
           onClick={handleLogoClick}
@@ -95,20 +94,21 @@ const HomeHeader: React.FC = () => {
         </h1>
       </div>
 
-
-      {/* -- RIGHT: Notification + Auth Button + Dropdowns -- */}
-      <div className="auth-buttons flex gap-4 relative" ref={dropdownRef}>
-        {/* Show notification bell if logged in */}
+      {/* -- RIGHT side -- */}
+      <div className="auth-buttons flex gap-4 relative h-12" ref={dropdownRef}>
+        {/* Itinerary Icon */}
         <img
-            src="itinerarysymbol_white.png"
-            alt="Itinerary"
-            className="h-8 cursor-pointer"
-            onClick={() => HomeRouter.push("/itinerary")}
-          />
+          src="/itinerarysymbol_white.png"
+          alt="Itinerary"
+          className="h-12 cursor-pointer mt-2"
+          onClick={() => HomeRouter.push("/itinerary")}
+        />
+
+        {/* Notification bell (only if logged in) */}
         {isAuthenticated && (
           <div className="relative">
             <img
-              src="whiteNotificationBell.png"
+              src="/whiteNotificationBell.png"
               alt="NotificationBell"
               className="h-8 cursor-pointer"
               onClick={toggleNotifications}
@@ -124,13 +124,23 @@ const HomeHeader: React.FC = () => {
           </div>
         )}
 
-        {/* Auth / Profile button */}
-        <button
-          className="auth-button text-white font-bold py-2 px-4 rounded bg-blue-500"
-          onClick={handleAuthClick}
-        >
-          {isAuthenticated ? "Profile" : "Login / Register"}
-        </button>
+        {/* Auth / Profile (round avatar) */}
+        {isAuthenticated ? (
+          <img
+            // Use a user-specific URL or a default placeholder:
+            src="/default.png"
+            alt="Profile"
+            className="h-8 w-8 rounded-full cursor-pointer border border-white"
+            onClick={handleAuthClick}
+          />
+        ) : (
+          <button
+            className="auth-button text-white font-bold py-2 px-4 rounded bg-blue-500"
+            onClick={handleAuthClick}
+          >
+            Login / Register
+          </button>
+        )}
 
         {/* Profile dropdown (Edit Profile / Logout) */}
         {isAuthenticated && showDropdown && (
