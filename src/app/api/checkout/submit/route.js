@@ -66,7 +66,7 @@ export async function POST(request) {
 
         // Book outbound flight if selected
         if (selectedOutboundFlights.length > 0) {
-            const outboundFlightIds = selectedOutboundFlights.map(flight => flight.id); // Extract flight IDs
+            const outboundFlightIds = [...new Set(selectedOutboundFlights.map(flight => flight.id))];
 
             console.log('Outbound Flight Payload:', {
                 firstName: flightCredentials.firstName,
@@ -113,7 +113,7 @@ export async function POST(request) {
 
         // Book return flight if selected
         if (selectedReturnFlights.length > 0) {
-            const returnFlightIds = selectedReturnFlights.map(flight => flight.id); // Extract flight IDs
+            const returnFlightIds = [...new Set(selectedReturnFlights.map(flight => flight.id))]; // Extract unique flight IDs
 
             console.log('Return Flight Payload:', {
                 firstName: flightCredentials.firstName,
@@ -195,6 +195,31 @@ export async function POST(request) {
                 },
             });
         }
+
+        // Create an invoice entry
+        const invoiceResponse = await fetch(`${baseUrl}/api/checkout/invoice`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': authHeader, // Forward the Authorization header
+            },
+            body: JSON.stringify({
+                userId: user.userId,
+                passportNum: flightCredentials.passportNumber,
+                billingFirstName: billingAddress.firstName,
+                billingLastName: billingAddress.lastName,
+                billingStreet: billingAddress.streetAddress,
+                billingCity: billingAddress.city,
+                billingProvince: billingAddress.province,
+                billingCountry: billingAddress.country,
+                billingPhoneNum: billingAddress.phoneNumber,
+                billingEmail: billingAddress.email,
+                itineraryRef: itinerary.itineraryRef,
+                hotelCost: selectedHotelPrice || 0,
+                departureFlightCost: selectedOutboundFlights.reduce((sum, flight) => sum + flight.price, 0),
+                returnFlightCost: selectedReturnFlights.reduce((sum, flight) => sum + flight.price, 0),
+            }),
+        });
 
         // Return a success response
         return new Response(

@@ -33,35 +33,44 @@ const HotelItineraryBooking: React.FC<HotelBookingProps> = ({ hotel, checkinDate
 
     return (
         <div className="hotel-booking-card border p-4 rounded shadow-md">
-            {hotel && (
-                <div className="flex flex-col justify-left mb-4">
-                    <p><strong>Hotel Name:</strong> {hotel.name}</p>
-                    <p><strong>Address:</strong> {hotel.address}</p>
-                </div>
-            )}
-            {checkinPieces && (
-                <div className="mb-2">
+            <div className="align-ceter">
+                {hotel && (
+                    <div className="flex flex-col justify-left mb-4">
+                        <p><strong>Hotel Name:</strong> {hotel.name}</p>
+                        <p><strong>Address:</strong> {hotel.address}</p>
+                    </div>
+                )}
+                {checkinPieces && (
+                    <div className="mb-2">
+                        <p>
+                            <strong>Check-in:</strong> {checkinPieces.day} {checkinPieces.month} {checkinPieces.year} at {checkinPieces.hour}:{checkinPieces.minute}
+                        </p>
+                    </div>
+                )}
+                {checkoutPieces && (
+                    <div className="mb-4 flex flex-col justify-left">
+                        <p>
+                            <strong>Check-out:</strong> {checkoutPieces.day} {checkoutPieces.month} {checkoutPieces.year} at {checkoutPieces.hour}:{checkoutPieces.minute}
+                        </p>
+                    </div>
+                )}
                     <p>
-                        <strong>Check-in:</strong> {checkinPieces.day} {checkinPieces.month} {checkinPieces.year} at {checkinPieces.hour}:{checkinPieces.minute}
+                        <strong>Total Cost:</strong> ${checkinDate && checkoutDate ? 
+                        (hotelState.selectedRoom?.price || 0) * Math.ceil((new Date(checkoutDate).getTime() - 
+                        new Date(checkinDate).getTime()) / (1000 * 60 * 60 * 24)) 
+                        : 'N/A'}
                     </p>
                 </div>
-            )}
-            {checkoutPieces && (
-                <div className="mb-4">
-                    <p>
-                        <strong>Check-out:</strong> {checkoutPieces.day} {checkoutPieces.month} {checkoutPieces.year} at {checkoutPieces.hour}:{checkoutPieces.minute}
-                    </p>
-                </div>
-            )}
-            <button
-                onClick={handleRemoveHotel}
-                disabled={!hotel} // Ensure this logic is consistent between server and client
-                className={`tripType-button ${
-                    !hotel ? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'
-                }`}
-            >
-                Remove
-            </button>
+                <button
+                    onClick={handleRemoveHotel}
+                    disabled={!hotel} // Ensure this logic is consistent between server and client
+                    className={`tripType-button ${
+                        !hotel ? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'
+                    }`}
+                >
+                    Remove
+                </button>
+            
         </div>
     );
 };
