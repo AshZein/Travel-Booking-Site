@@ -21,7 +21,18 @@ const HomeHeader: React.FC = () => {
   // Ref to detect outside clicks
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    // Check localStorage first
+    if (typeof window !== 'undefined') {
+      const savedMode = localStorage.getItem('darkMode');
+      if (savedMode !== null) {
+        return savedMode === 'true';
+      }
+      // Fallback to system preference if no localStorage value
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  });
   
   /**
    * 1) Check local storage for tokens on mount:
@@ -36,8 +47,10 @@ const HomeHeader: React.FC = () => {
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
+      localStorage.setItem('darkMode', 'true');
     } else {
       document.documentElement.classList.remove("dark");
+      localStorage.setItem('darkMode', 'false');
     }
   }, [darkMode]);
   

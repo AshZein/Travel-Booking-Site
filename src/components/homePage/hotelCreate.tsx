@@ -50,7 +50,7 @@ const HotelCreate: React.FC = () => {
                 name: name,
                 address: address,
                 city: city,
-                country: "Canada",
+                country: country,
                 latitude: 37.1234,
                 longitude: -122.5678,
                 starRating: 5
