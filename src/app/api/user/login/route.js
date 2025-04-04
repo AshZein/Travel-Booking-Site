@@ -38,7 +38,6 @@ export async function POST(request) {
 
     const accessToken = jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRY_TIME });
     const refreshToken = jwt.sign(payload, JWT_REFRESH_SECRET, { expiresIn: JWT_REFRESH_EXPIRY_TIME });
-
     return NextResponse.json({ accessToken, refreshToken });
   } catch (error) {
     return res.status(500).json({ message: "Server error", error: error.message });

@@ -38,6 +38,8 @@ const HotelCreate: React.FC = () => {
 
     async function handleHotelCreation() {
         const token = localStorage.getItem('accessToken');
+        console.log("yo " + localStorage.getItem('accessToken'));
+
         const response = await fetch('http://localhost:3000/api/hotel', {
           method: 'POST',
           headers: {
@@ -136,28 +138,25 @@ const HotelCreate: React.FC = () => {
                     value={address}
                 />
                 </div>
-                <div className="flex flex-col space-y-3">
-  <label htmlFor="minStarRating" className="text-white">
-    Star Rating:
-  </label>
-  <label htmlFor="minStarRating" className="text-white">
-    {starRating} stars
-  </label>
-  <input
-    type="range"
-    id="minStarRating"
-    min="1"
-    max="5"
-    onChange={(e) => setStarRating(Number(e.target.value))}
-    value={starRating}
-    className="w-50 h-3s bg-gray-200 rounded-lg appearance-none cursor-pointer"
-    style={{
-        background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${
-          ((starRating - 1) / 4) * 100
-        }%, #e5e7eb ${((starRating - 1) / 4) * 100}%, #e5e7eb 100%)`,
-      }}
-  />
-</div>
+                <div className="flex flex-col space-y-3 mt-6">
+            <label htmlFor="roomPrice" className="text-white">Star Rating:</label>
+            <input
+                type="range"
+                id="roomPrice"
+                min="1"
+                max="5"
+                onChange={(e) => setStarRating(Number(e.target.value))}
+                value={starRating}
+                className="w-50 h-3 bg-gray-200 rounded-lg cursor-pointer"
+                style={{
+                    background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(starRating - 1) / 4 * 100}%, #e5e7eb ${(starRating - 1) / 4 * 100}%, #e5e7eb 100%)`,
+                }}
+            />
+            <label htmlFor="roomPrice" className="text-white">
+                {starRating >= 1 && starRating <= 5 ? "⭐".repeat(starRating) : "No Rating"}
+            </label>
+
+        </div>
 
 <button className="tripType-button mt-10" onClick={handleHotelCreation}>Search</button>
 
