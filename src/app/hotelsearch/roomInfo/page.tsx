@@ -36,14 +36,12 @@ const Page: React.FC = () =>{
     const fetchHotel = async (hotelId: number) => {
         const response = await fetch(`http://localhost:3000/api/hotel/info?hotelId=${hotelId}`);
         const data = await response.json();
-        console.log("Hotel Data: ", data);
         setHotel(data);
     };  
 
     const fetchHotelImg = async (hotelId: number) => {
         const response = await fetch(`http://localhost:3000/api/hotel/images?hotelId=${hotelId}`);
         const data = await response.json();
-        console.log("Hotel Image Data: ", data);
         setHotelImg(data.image || '');
     }
 
