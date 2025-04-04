@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import FlightCard from './FlightCard';
 import FlightDetailPopUp from './FlightDetailPopUp';
@@ -47,13 +47,19 @@ const HotelFlightResults: React.FC<HotelFlightResultsProps> = ({ sourceLocation,
             if (Array.isArray(data) && data.length > 0) {
                 setCountry(data[0].country);
             } else {
-                setCountry(null);
+                setCountry('');
             }
         } catch (error) {
             console.error('Error fetching country:', error);
-            setCountry(null);
+            setCountry('');
         }
     };
+
+    useEffect(() => {
+        fetchCountry(destinationLocation).catch((error) => {
+            console.error('Error fetching country:', error);
+        });
+    })
 
     useEffect(() => {
         console.log("useEffect is running");
@@ -83,10 +89,6 @@ const HotelFlightResults: React.FC<HotelFlightResultsProps> = ({ sourceLocation,
             }
 
         };
-
-        fetchCountry(destinationLocation).catch((error) => {
-            console.error('Error fetching country:', error);
-        });
 
         fetchFlights().catch((error) => {
             console.error('Error fetching flights:', error);

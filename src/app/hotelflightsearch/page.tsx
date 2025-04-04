@@ -6,7 +6,6 @@ import HotelFlight from '@/components/homePage/hotelFlight';
 import HomeHeader from '@/components/HomeHeader';
 import HotelFlightResults from '@/components/hotelFlightSearch/HotelFlightResults';
 import withItineraryProvider from '@/HOC/withItineraryProvider';
-import HotelSuggestions from '@/components/hotelFlightSearch/HotelSuggestions';
 import { useItinerary } from '@/context/ItineraryContext';
 const Page = () => {
     const router = useRouter();
