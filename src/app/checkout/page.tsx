@@ -14,6 +14,7 @@ import {totalFlightCost} from '@/utils/flight';
 const Page = () => {
     const { state } = useCheckout();
     const [hotelImg, setHotelImg] = React.useState<string>('');
+    const [totalCost, setTotalCost] = React.useState<number>(0);
 
     const fetchHotelImg = async (hotelId: number) => {
         const response = await fetch(`/api/hotel/images?hotelId=${hotelId}`);
@@ -21,6 +22,21 @@ const Page = () => {
         setHotelImg(data.image || '');
     }
 
+    const calcTotalCost = () => {
+        var currCost = 0;
+        if (state.selectedHotelPrice && state.selectedHotelCheckIn && state.selectedHotelCheckOut) {
+           currCost += state.selectedHotelPrice * Math.ceil((new Date(state.selectedHotelCheckOut).getTime() - 
+           new Date(state.selectedHotelCheckIn).getTime()) / (1000 * 60 * 60 * 24));
+        }
+
+        if (state.selectedOutboundFlights.length > 0) {
+            currCost += totalFlightCost(state.selectedOutboundFlights);
+        }
+        if (state.selectedReturnFlights.length > 0) {
+            currCost += totalFlightCost(state.selectedReturnFlights);
+        }
+        setTotalCost(currCost);
+    }
 
     useEffect(() => {
         // Redirect to itinerary page if no outbound flights are selected
@@ -28,6 +44,7 @@ const Page = () => {
             window.location.href = '/itinerary';
         }
         fetchHotelImg(state.selectedHotel?.hotelId || 0);
+        calcTotalCost();
     }, [state.selectedOutboundFlights]);
 
 
@@ -154,6 +171,9 @@ const Page = () => {
                         </p>
                     </div>
                 )}
+                <div>
+                    <p>Total Due = {totalCost}</p>
+                </div>
 
             </div>
 
