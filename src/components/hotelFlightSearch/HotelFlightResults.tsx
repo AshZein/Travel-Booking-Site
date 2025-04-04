@@ -119,51 +119,57 @@ const HotelFlightResults: React.FC<HotelFlightResultsProps> = ({ sourceLocation,
     }
 
     return (
-        <div className="flight-results flex flex-col md:flex-row justify-between">
-                {direction !== "return" ? (<div className="flex-1 mr-0 md:mr-2.5 mb-4 md:mb-0">
-                    <h2 className="text-xl font-bold mb-4">Outbound Flights</h2>
+        <div className="flight-results flex flex-col items-center">
+            <div className="flex flex-row w-full justify-between items-center mb-4">
+                {direction !== "return" ? (
+                <div className="w-full mb-4">
+                    <h2 className="text-xl font-bold mb-4 text-center">Outbound Flights</h2>
                     {outboundFlights && outboundFlights.length > 0 ? (
-                        outboundFlights.map((flightGroup, index) => (
-                            <FlightCard 
-                                key={index} 
-                                legs={flightGroup.legs} 
-                                flights={flightGroup.flights} 
-                                onClick={() => handleFlightClick(flightGroup.flights)} 
-                                onAddToItinerary={() => addFlightToItinerary(flightGroup.flights[0])} // Example: Add the first flight in the group
-                                type={"outbound"}
-                            />
-                        ))
+                    outboundFlights.map((flightGroup, index) => (
+                        <FlightCard 
+                        key={index} 
+                        legs={flightGroup.legs} 
+                        flights={flightGroup.flights} 
+                        onClick={() => handleFlightClick(flightGroup.flights)} 
+                        onAddToItinerary={() => addFlightToItinerary(flightGroup.flights[0])} // Example: Add the first flight in the group
+                        type={"outbound"}
+                        />
+                    ))
                     ) : (
-                        <div className="p-4 bg-white text-black rounded">No outbound flights found for selected criteria.</div>
+                    <div className="p-4 bg-white text-black rounded text-center">No outbound flights found for selected criteria.</div>
                     )}
-                </div>) : null}
-            {(tripType === 'round-trip' || direction === "return") && (
-                <div className="flex-1 ml-0 md:ml-2.5">
-                    <h2 className="text-xl font-bold mb-4">Return Flights</h2>
+                </div>
+                ) : null}
+                {(tripType === 'round-trip' || direction === "return") && (
+                <div className="w-full mb-4">
+                    <h2 className="text-xl font-bold mb-4 text-center">Return Flights</h2>
                     {inboundFlights && inboundFlights.length > 0 ? (
-                        inboundFlights.map((flightGroup, index) => (
-                            <FlightCard 
-                                key={index} 
-                                legs={flightGroup.legs} 
-                                flights={flightGroup.flights} 
-                                onClick={() => handleFlightClick(flightGroup.flights)} 
-                                onAddToItinerary={() => addFlightToItinerary(flightGroup.flights[0])} // Example: Add the first flight in the group
-                                type={"inbound"}
-                            />
-                        ))
+                    inboundFlights.map((flightGroup, index) => (
+                        <FlightCard 
+                        key={index} 
+                        legs={flightGroup.legs} 
+                        flights={flightGroup.flights} 
+                        onClick={() => handleFlightClick(flightGroup.flights)} 
+                        onAddToItinerary={() => addFlightToItinerary(flightGroup.flights[0])} // Example: Add the first flight in the group
+                        type={"inbound"}
+                        />
+                    ))
                     ) : (
-                        <div className="p-4 bg-white text-black rounded">No return flights found for selected criteria.</div>
+                    <div className="p-4 bg-white text-black rounded text-center">No return flights found for selected criteria.</div>
                     )}
                 </div>
-            )}
-            <HotelSuggestions  checkInDate={startDate} checkOutDate={endDate} city={destinationLocation} country={country || ''}/>
+                )}
+            </div>
+            <div className="w-full mb-4">
+            <HotelSuggestions checkInDate={startDate} checkOutDate={endDate} city={destinationLocation} country={country || ''} />
+            </div>
             {showPopup && selectedFlight && (
-                <div className="popup">
-                    <div className="popup-content">
-                        <button onClick={closePopup} className="tripType-button p-2">✕</button>
-                        <FlightDetailPopUp legs={selectedFlight.length} flights={selectedFlight} />
-                    </div>
+            <div className="popup w-full">
+                <div className="popup-content">
+                <button onClick={closePopup} className="tripType-button p-2">✕</button>
+                <FlightDetailPopUp legs={selectedFlight.length} flights={selectedFlight} />
                 </div>
+            </div>
             )}
         </div>
     );

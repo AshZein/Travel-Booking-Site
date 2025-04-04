@@ -29,7 +29,15 @@ const HotelSuggestions: React.FC<HotelSuggestionsProps> = ({ city, country, chec
     }
 
     useEffect(() => {
-        fetchHotelSuggestions();
+        const fetchSuggestions = async () => {
+            await fetchHotelSuggestions();
+            console.log("Fetching hotel suggestions for city:", city);
+            console.log("Fetching hotel suggestions for country:", country);
+            console.log("Fetching hotel suggestions for check-in date:", checkInDate);
+            console.log("Fetching hotel suggestions for check-out date:", checkOutDate);
+            console.log("Hotel suggestions fetched:", hotelSuggestions);
+        };
+        fetchSuggestions();
     }, [city, country, checkInDate, checkOutDate]);
 
     useEffect(() => {
