@@ -37,7 +37,7 @@ export async function POST(request){
             billingStreet,
             billingCity,
             billingProvince,
-            billingCountry,
+            billingCountry: "Canada",
             billingPhoneNum,
             billingEmail,
             itineraryRef,
