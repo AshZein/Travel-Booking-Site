@@ -19,6 +19,11 @@ export async function POST(request) {
             creditCardInfo,
             selectedOutboundFlights,
             selectedReturnFlights,
+            selectedHotel,
+            selectedRoom,
+            selectedHotelCheckIn,
+            selectedHotelCheckOut,
+            selectedHotelPrice
         } = await request.json();
 
         // Validate the received data
@@ -144,6 +149,44 @@ export async function POST(request) {
                 },
                 data: {
                     returnFlightBookingRef: returnFlightData.bookingReference,
+                },
+            });
+        }
+
+        // book hotel if selected
+        if (selectedHotel){
+            const hotelBookingResponse = await fetch(`${baseUrl}/api/hotel/booking`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': authHeader, // Forward the Authorization header
+                },
+                body: JSON.stringify({
+                    email: billingAddress.email,
+                    hotelId: selectedHotel.id,
+                    roomId: selectedRoom.id,
+                    checkInDate: selectedHotelCheckIn,
+                    checkOutDate: selectedHotelCheckOut,
+                    price: selectedHotelPrice,
+                }),
+            });
+
+            if (!hotelBookingResponse.ok) {
+                const errorData = await hotelBookingResponse.json();
+                console.error('Error creating hotel booking:', errorData);
+                return NextResponse.json(
+                    { message: `Failed to book hotel: ${errorData.message}` },
+                    { status: hotelBookingResponse.status }
+                );
+            }
+
+            const hotelBookingData = await hotelBookingResponse.json();
+            await prisma.itinerary.update({
+                where: {
+                    id: itinerary.id,
+                },
+                data: {
+                    hotelBookingRef: hotelBookingData.referenceId,
                 },
             });
         }

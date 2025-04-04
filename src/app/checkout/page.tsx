@@ -36,6 +36,11 @@ const Page = () => {
             creditCardInfo: state.creditCardInfo,
             selectedOutboundFlights: state.selectedOutboundFlights,
             selectedReturnFlights: state.selectedReturnFlights,
+            selectedHotel: state.selectedHotel,
+            selectedRoom: state.selectedRoom,
+            selectedHotelCheckIn: state.selectedHotelCheckIn,
+            selectedHotelCheckOut: state.selectedHotelCheckOut,
+            selectedHotelPrice: state.selectedHotelPrice,
         });
 
         const token = localStorage.getItem('accessToken'); // Retrieve the token from localStorage
@@ -53,6 +58,11 @@ const Page = () => {
                     creditCardInfo: state.creditCardInfo,
                     selectedOutboundFlights: state.selectedOutboundFlights,
                     selectedReturnFlights: state.selectedReturnFlights,
+                    selectedHotel: state.selectedHotel,
+                    selectedRoom: state.selectedRoom,
+                    selectedHotelCheckIn: state.selectedHotelCheckIn,
+                    selectedHotelCheckOut: state.selectedHotelCheckOut,
+                    selectedHotelPrice: state.selectedHotelPrice,
                     
                 }),
             });
