@@ -1,20 +1,31 @@
 import React, { useEffect } from 'react';
 import { Hotel } from '@/types/Hotel';
 import { dateSplitter } from '@/utils/flight'; // Assuming dateSplitter is imported from utils
+import { useHotelItinerary } from '@/context/HotelItineraryContext'; // Import the HotelItineraryContext
 
 interface HotelBookingProps {
     hotel: Hotel | null;
     checkinDate: string | null;
     checkoutDate: string | null;
-    onRemove: () => void; // Callback for removing the booking
 }
 
-const HotelBooking: React.FC<HotelBookingProps> = ({ hotel, checkinDate, checkoutDate, onRemove }) => {
+const HotelItineraryBooking: React.FC<HotelBookingProps> = ({ hotel, checkinDate, checkoutDate }) => {
     const dateCache: { [key: string]: { [key: string]: string } } = {}; // Cache for dateSplitter
-
+    const {state: hotelState, dispatch: hotelDispatch } = useHotelItinerary();
     // Process checkin and checkout dates
     const checkinPieces = checkinDate ? dateSplitter(checkinDate, dateCache) : null;
     const checkoutPieces = checkoutDate ? dateSplitter(checkoutDate, dateCache) : null;
+
+    const handleRemoveHotel = () => {
+        const data = {
+            hotel: hotelState.selectedHotel,
+            room: hotelState.selectedRoom,
+            checkin: hotelState.selectedHotelCheckIn,
+            checkout: hotelState.selectedHotelCheckOut,
+            price: hotelState.selectedRoom?.price ? hotelState.selectedRoom.price : 0,
+        };
+        hotelDispatch({ type: 'UNSELECT_HOTEL_ROOM' });
+    };
 
     useEffect(() => {
         console.log('Hotel Booking Page');
@@ -43,8 +54,11 @@ const HotelBooking: React.FC<HotelBookingProps> = ({ hotel, checkinDate, checkou
                 </div>
             )}
             <button
-                onClick={onRemove}
-                className="tripType-button"
+                onClick={handleRemoveHotel}
+                disabled={!hotel} // Ensure this logic is consistent between server and client
+                className={`tripType-button ${
+                    !hotel ? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'
+                }`}
             >
                 Remove
             </button>
@@ -52,4 +66,4 @@ const HotelBooking: React.FC<HotelBookingProps> = ({ hotel, checkinDate, checkou
     );
 };
 
-export default HotelBooking;
+export default HotelItineraryBooking;

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import HomeHeader from '@/components/HomeHeader';
 import Footer from '@/components/Footer';
 import FlightBooking from '@/components/itinerary/FlightBooking';
-import HotelBooking from '@/components/itinerary/HotelBooking';
+import HotelItineraryBooking from '@/components/itinerary/HotelItineraryBooking';
 import { useItinerary } from '@/context/ItineraryContext';
 import { useCheckout } from '@/context/CheckoutContext'; // Import CheckoutContext
 import { useHotelItinerary } from '@/context/HotelItineraryContext';
@@ -108,11 +108,10 @@ const Page = () => {
                     />
                 )}
                 {hotelState.selectedHotel && (
-                    <HotelBooking
+                    <HotelItineraryBooking
                         hotel={hotelState.selectedHotel}
                         checkinDate={hotelState.selectedHotelCheckIn}
                         checkoutDate={hotelState.selectedHotelCheckOut}
-                        onRemove={handleRemoveHotel}
                     />
                 )}
 
