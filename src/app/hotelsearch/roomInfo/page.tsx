@@ -48,8 +48,8 @@ const Page: React.FC = () =>{
     useEffect (() => {
         const searchParams = new URLSearchParams(window.location.search);
         const hotelId = Number(searchParams.get('hotelId'));
-        setStartDate(searchParams.get('startDate') || '');
-        setEndDate(searchParams.get('endDate') || '');
+        setStartDate(searchParams.get('checkin') || '');
+        setEndDate(searchParams.get('checkout') || '');
 
         if (hotelId) {
             fetchHotel(hotelId);
