@@ -114,12 +114,9 @@ const Page = () =>{
                     <div
                         key={hotel.hotelId}
                         
-                        
                         className="border p-4 rounded-lg shadow-md bg-white"
                     >
                         <h2 className="text-xl font-semibold text-gray-800">{hotel.name}</h2>
-                        <div className="flex justify-between">
-                        <div>
                         <div className="flex justify-between">
                         <div>
                         <p className="text-gray-600">{hotel.address}</p>
