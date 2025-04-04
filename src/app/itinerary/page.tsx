@@ -6,8 +6,10 @@ import FlightBooking from '@/components/itinerary/FlightBooking';
 import HotelBooking from '@/components/itinerary/HotelBooking';
 import { useItinerary } from '@/context/ItineraryContext';
 import { useCheckout } from '@/context/CheckoutContext'; // Import CheckoutContext
+import { useHotelItinerary } from '@/context/HotelItineraryContext';
 import withItineraryProvider from '@/HOC/withItineraryProvider';
 import withCheckoutProvider from '@/HOC/withCheckoutProvider'; // Import CheckoutProvider HOC
+import withHotelProvider from '@/HOC/withHotelProvider';
 import { Flight } from '@/types/flight';
 import FlightDetailPopUp from '@/components/flightSearch/FlightDetailPopUp';
 import { useRouter } from 'next/navigation';
@@ -15,6 +17,7 @@ import { Hotel } from '@/types/Hotel';
 
 const Page = () => {
     const { state: itineraryState, dispatch: itineraryDispatch } = useItinerary(); // Access ItineraryContext state and dispatch
+    const {state: hotelState, dispatch: hotelDispatch } = useHotelItinerary();
     const { state: checkoutState, dispatch: checkoutDispatch } = useCheckout(); // Access CheckoutContext state and dispatch
     const [showPopup, setShowPopup] = useState(false);
     const [selectedFlight, setSelectedFlight] = useState<Flight[] | null>(null);
@@ -45,26 +48,26 @@ const Page = () => {
             }
         }
         //  Add hotel to checkout context HERE!!!
-        if (itineraryState.selectedHotel){
+        if (hotelState.selectedHotel){
             checkoutDispatch({
                 type: 'SELECT_HOTEL',
-                payload: itineraryState.selectedHotel,
+                payload: hotelState.selectedHotel,
             });
             checkoutDispatch({
                 type: 'SELECT_ROOM',
-                payload: itineraryState.selectedRoom,
+                payload: hotelState.selectedRoom,
             });
             checkoutDispatch({
                 type: 'SET_HOTEL_CHECK_IN',
-                payload: itineraryState.selectedHotelCheckIn,
+                payload: hotelState.selectedHotelCheckIn,
             });
             checkoutDispatch({
                 type: 'SET_HOTEL_CHECK_OUT',
-                payload: itineraryState.selectedHotelCheckOut,
+                payload: hotelState.selectedHotelCheckOut,
             });
             checkoutDispatch({
                 type: 'SET_HOTEL_PRICE',
-                payload: itineraryState.selectedRoom?.price ? itineraryState.selectedRoom.price : 0,
+                payload: hotelState.selectedRoom?.price ? hotelState.selectedRoom.price : 0,
             });
         }
         router.push('/checkout'); // Redirect to the checkout page
@@ -72,13 +75,13 @@ const Page = () => {
 
     const handleRemoveHotel = () => {
         const data = {
-            hotel: itineraryState.selectedHotel,
-            room: itineraryState.selectedRoom,
-            checkin: itineraryState.selectedHotelCheckIn,
-            checkout: itineraryState.selectedHotelCheckOut,
-            price: itineraryState.selectedRoom?.price ? itineraryState.selectedRoom.price : 0,
+            hotel: hotelState.selectedHotel,
+            room: hotelState.selectedRoom,
+            checkin: hotelState.selectedHotelCheckIn,
+            checkout: hotelState.selectedHotelCheckOut,
+            price: hotelState.selectedRoom?.price ? hotelState.selectedRoom.price : 0,
         };
-        itineraryDispatch({ type: 'UNSELECT_HOTEL_ROOM' });
+        hotelDispatch({ type: 'UNSELECT_HOTEL_ROOM' });
     };
 
     return (
@@ -104,11 +107,11 @@ const Page = () => {
                         onClick={() => handleFlightClick(itineraryState.selectedReturnFlights)}
                     />
                 )}
-                {itineraryState.selectedHotel && (
+                {hotelState.selectedHotel && (
                     <HotelBooking
-                        hotel={itineraryState.selectedHotel}
-                        checkinDate={itineraryState.selectedHotelCheckIn}
-                        checkoutDate={itineraryState.selectedHotelCheckOut}
+                        hotel={hotelState.selectedHotel}
+                        checkinDate={hotelState.selectedHotelCheckIn}
+                        checkoutDate={hotelState.selectedHotelCheckOut}
                         onRemove={handleRemoveHotel}
                     />
                 )}
@@ -126,9 +129,9 @@ const Page = () => {
                 <div className="flex justify-center mt-6">
                     <button
                         onClick={handleCheckout}
-                        disabled={itineraryState.selectedOutboundFlights.length === 0 && !itineraryState.selectedHotel} // Disable if no outbound flights
+                        disabled={itineraryState.selectedOutboundFlights.length === 0 && !hotelState.selectedHotel} // Disable if no outbound flights
                         className={`px-6 py-3 rounded-lg font-semibold ${
-                            itineraryState.selectedOutboundFlights.length === 0 && !itineraryState.selectedHotel
+                            itineraryState.selectedOutboundFlights.length === 0 && !hotelState.selectedHotel
                                 ? 'bg-gray-400 text-gray-700 cursor-not-allowed' // Grayed out and unclickable
                                 : 'bg-blue-600 text-white hover:bg-blue-700 cursor-pointer' // Active and clickable
                         }`}
@@ -143,5 +146,5 @@ const Page = () => {
     );
 };
 
-// Wrap the component with both ItineraryProvider and CheckoutProvider
-export default withItineraryProvider(withCheckoutProvider(Page));
+// Wrap the component with both ItineraryProvider, hotelProvider and CheckoutProvider
+export default withHotelProvider(withItineraryProvider(withCheckoutProvider(Page)));
