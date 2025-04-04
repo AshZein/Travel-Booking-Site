@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Footer from '@/components/Footer';
-import Flight from '@/components/homePage/flight';
+import HotelFlight from '@/components/homePage/hotelFlight';
 import HomeHeader from '@/components/HomeHeader';
 import HotelFlightResults from '@/components/hotelFlightSearch/HotelFlightResults';
 import withItineraryProvider from '@/HOC/withItineraryProvider';
@@ -32,7 +32,7 @@ const Page = () => {
         <div className="page-container">
             <HomeHeader />
             <main>
-                <Flight 
+                <HotelFlight 
                     sourceLocation={sourceLocation}
                     destinationLocation={destinationLocation}
                     startDate={startDate}
