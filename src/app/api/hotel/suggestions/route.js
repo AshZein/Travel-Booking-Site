@@ -10,7 +10,7 @@ export async function GET(request){
         return NextResponse.error("city and country are required parameters", { status: 400 });
     }
 
-    const hotelSuggestions = await prisma.Hotel.findMany({ 
+    const hotelSuggestions = await prisma.hotel.findMany({ 
         where: { 
             city, 
             country 
