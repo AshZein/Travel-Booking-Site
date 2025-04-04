@@ -7,9 +7,12 @@ import FlightCredentials from '@/components/checkout/Credentials';
 import BillingAddress from '@/components/checkout/BillingAddress';
 import CreditCardInfo from '@/components/checkout/CreditCardInfo';
 import withCheckoutProvider from '@/HOC/withCheckoutProvider';
+import HotelInfoCard from '@/components/hotel/hotelInfoCard';
+import CheckoutRoomCard from '@/components/checkout/CheckoutRoom';
 
 const Page = () => {
     const { state } = useCheckout();
+    const [hotelImg, setHotelImg] = React.useState<string>('');
 
     useEffect(() => {
         // Redirect to itinerary page if no outbound flights are selected
@@ -17,6 +20,13 @@ const Page = () => {
             window.location.href = '/itinerary';
         }
     }, [state.selectedOutboundFlights]);
+
+    const fetchHotelImg = async (hotelId: number) => {
+        const response = await fetch(`http://localhost:3000/api/hotel/images?hotelId=${hotelId}`);
+        const data = await response.json();
+        setHotelImg(data.image || '');
+    }
+
 
     const handleSubmit = async () => {
         // Validate all required fields
@@ -83,7 +93,21 @@ const Page = () => {
         <div>
             <CheckoutHeader />
             <h1>Order Overview</h1>
-
+            {state.selectedHotel && (
+                <div>
+                    <HotelInfoCard hotel={state.selectedHotel} hotelImg={hotelImg} />
+                    {state.selectedRoom && (
+                        <CheckoutRoomCard
+                            key={state.selectedRoom.roomId || 'defaultKey' // Use a unique identifier as the key
+                            }
+                            room={state.selectedRoom}
+                            hotel={state.selectedHotel}
+                            checkinDate={state.selectedHotelCheckIn || ''}
+                            checkoutDate={state.selectedHotelCheckOut || ''}
+                        />
+                    )}
+                </div>
+            )}
             {/* Display selected outbound flight */}
             {state.selectedOutboundFlights.length > 0 && (
                 <CheckoutFlightCard
