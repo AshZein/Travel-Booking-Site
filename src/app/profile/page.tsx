@@ -92,6 +92,10 @@ const ProfilePage: React.FC = () => {
         setPasswordError("Passwords do not match.");
         return;
       }
+      if (newPassword === currentPassword) {
+        setPasswordError("New password must be different from current password.");
+        return;
+      }
 
       try {
         const response = await fetch("/api/user/update-password", {
