@@ -32,7 +32,7 @@ const HotelItineraryBooking: React.FC<HotelBookingProps> = ({ hotel, checkinDate
     }, []);
 
     return (
-        <div className="border p-4 rounded shadow-md">
+        <div className="hotel-booking-card border p-4 rounded shadow-md">
             {hotel && (
                 <div className="flex flex-col justify-left mb-4">
                     <p><strong>Hotel Name:</strong> {hotel.name}</p>
