@@ -151,7 +151,7 @@ const Page = () => {
             {state.selectedOutboundFlights.length > 0 && <FlightCredentials />}
 
             {/* total breakdown */}
-            <div>
+            <div className="bg-white text-black">
                 {state.selectedOutboundFlights.length > 0 && (
                     <div className="flex justify-between items-center mt-4">
                         <p className="text-lg font-semibold">Departure Flight Cost: {totalFlightCost(state.selectedOutboundFlights)}</p>
@@ -172,7 +172,8 @@ const Page = () => {
                     </div>
                 )}
                 <div>
-                    <p>Total Due = {totalCost}</p>
+                    <hr className="border-black my-4" />
+                    <p className="text-xl font-semibold">Total Due = {totalCost}</p>
                 </div>
 
             </div>
