@@ -9,23 +9,27 @@ import CreditCardInfo from '@/components/checkout/CreditCardInfo';
 import withCheckoutProvider from '@/HOC/withCheckoutProvider';
 import HotelInfoCard from '@/components/hotel/hotelInfoCard';
 import CheckoutRoomCard from '@/components/checkout/CheckoutRoom';
+import {totalFlightCost} from '@/utils/flight';
 
 const Page = () => {
     const { state } = useCheckout();
     const [hotelImg, setHotelImg] = React.useState<string>('');
+
+    const fetchHotelImg = async (hotelId: number) => {
+        const response = await fetch(`/api/hotel/images?hotelId=${hotelId}`);
+        const data = await response.json();
+        setHotelImg(data.image || '');
+    }
+
 
     useEffect(() => {
         // Redirect to itinerary page if no outbound flights are selected
         if (state.selectedOutboundFlights.length === 0) {
             window.location.href = '/itinerary';
         }
+        fetchHotelImg(state.selectedHotel?.hotelId || 0);
     }, [state.selectedOutboundFlights]);
 
-    const fetchHotelImg = async (hotelId: number) => {
-        const response = await fetch(`http://localhost:3000/api/hotel/images?hotelId=${hotelId}`);
-        const data = await response.json();
-        setHotelImg(data.image || '');
-    }
 
 
     const handleSubmit = async () => {
@@ -128,6 +132,30 @@ const Page = () => {
 
             {/* Flight Credentials Form */}
             {state.selectedOutboundFlights.length > 0 && <FlightCredentials />}
+
+            {/* total breakdown */}
+            <div>
+                {state.selectedOutboundFlights.length > 0 && (
+                    <div className="flex justify-between items-center mt-4">
+                        <p className="text-lg font-semibold">Departure Flight Cost: {totalFlightCost(state.selectedOutboundFlights)}</p>
+                        </div>
+                )}
+                {state.selectedReturnFlights.length > 0 && (
+                    <div className="flex justify-between items-center mt-4">
+                        <p className="text-lg font-semibold">Departure Flight Cost: {totalFlightCost(state.selectedReturnFlights)}</p>
+                        </div>
+                )}
+                {state.selectedHotelPrice && (
+                    <div>
+                        <p className="text-lg font-semibold">Hotel Cost: ${state.selectedHotelCheckIn && state.selectedHotelCheckOut ? 
+                            state.selectedHotelPrice * Math.ceil((new Date(state.selectedHotelCheckOut).getTime() - 
+                            new Date(state.selectedHotelCheckIn).getTime()) / (1000 * 60 * 60 * 24)) 
+                            : 'N/A'}
+                        </p>
+                    </div>
+                )}
+
+            </div>
 
             {/* Billing Address Form */}
             <BillingAddress />
