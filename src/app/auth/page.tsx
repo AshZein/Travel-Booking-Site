@@ -265,8 +265,11 @@ const PasswordInput = ({
         <div className="mt-2">
           <div className="w-full bg-gray-200 h-2 rounded overflow-hidden">
             <div
-              className={`h-full transition-all duration-300 ${strengthColors[strength]}`}
-              style={{ width: strengthWidths[strength] }}
+              className="h-full transition-all duration-300"
+              style={{
+                backgroundColor: strengthColors[strength],
+                width: strengthWidths[strength],
+              }}
             ></div>
           </div>
           <p className="text-xs mt-1 text-gray-600">{strengthLabel}</p>
