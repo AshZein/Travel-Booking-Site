@@ -33,29 +33,7 @@ const CheckoutRoomCard: React.FC<RoomCardProps> = ({ room, hotel, checkinDate, c
     useEffect(() => {
         console.log("Room Images array (after state update):", images);
     }, [images]);
-    const handleSelectClick = () => {
-        if (isSelected) {
-            dispatch({ type: 'UNSELECT_HOTEL_ROOM' });
-            console.log("Unselected Room Data: ", room);
-            setIsSelected(false);
-        } else {
-            if (state.selectedRoom) {
-                // Deselect the currently selected room
-                dispatch({ type: 'UNSELECT_HOTEL_ROOM' });
-            }
-
-            const selectData = {
-                hotel: hotel,
-                room: room,
-                checkin: checkinDate,
-                checkout: checkoutDate,
-                price: room.price,
-            };
-            dispatch({ type: 'SELECT_HOTEL_ROOM', payload: selectData });
-            console.log("Selected Room Data: ", selectData);
-            setIsSelected(true);
-        }
-    };
+    
 
     useEffect(() => {
         // Update the selection state if the selected room changes
@@ -71,7 +49,9 @@ const CheckoutRoomCard: React.FC<RoomCardProps> = ({ room, hotel, checkinDate, c
             />
             <div className="ml-4">
             <h3 className="text-lg font-semibold">{room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</h3>
-            <p className="text-gray-600">Price: ${room.price}</p>
+            <p className="text-gray-600">Price Per Night: ${room.price}</p>
+            <p className="text-gray-600">Check-in Date: {checkinDate}</p>
+            <p className="text-gray-600">Check-out Date: {checkoutDate}</p>
             </div>
         </div>
     );
