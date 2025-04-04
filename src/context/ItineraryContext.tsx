@@ -7,11 +7,6 @@ import { Flight } from '@/types/flight';
 interface ItineraryState {
     selectedOutboundFlights: Flight[];
     selectedReturnFlights: Flight[];
-    // selectedHotel: Hotel | null;
-    // selectedRoom: Room | null;
-    // selectedHotelCheckIn: string | null;
-    // selectedHotelCheckOut: string | null;
-    // selectedHotelPrice: number | null;
 }
 
 type ItineraryAction =
@@ -53,24 +48,6 @@ const itineraryReducer = (state: ItineraryState, action: ItineraryAction): Itine
                     flight.id !== action.payload.id
                 ) 
             };
-        // case 'SELECT_HOTEL_ROOM':
-        //     return {
-        //         ...state,
-        //         selectedHotel: action.payload.hotel,
-        //         selectedRoom: action.payload.room,
-        //         selectedHotelCheckIn: action.payload.checkin,
-        //         selectedHotelCheckOut: action.payload.checkout,
-        //         selectedHotelPrice: action.payload.price,
-        //     };
-        // case 'UNSELECT_HOTEL_ROOM':
-        //     return {
-        //         ...state,
-        //         selectedHotel: null,
-        //         selectedRoom: null,
-        //         selectedHotelCheckIn: null,
-        //         selectedHotelCheckOut: null,
-        //         selectedHotelPrice: null,
-        //     };
         default:
             return state;
     }
