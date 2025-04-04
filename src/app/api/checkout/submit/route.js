@@ -66,7 +66,7 @@ export async function POST(request) {
 
         // Book outbound flight if selected
         if (selectedOutboundFlights.length > 0) {
-            const outboundFlightIds = selectedOutboundFlights.map(flight => flight.id); // Extract flight IDs
+            const outboundFlightIds = [...new Set(selectedOutboundFlights.map(flight => flight.id))];
 
             console.log('Outbound Flight Payload:', {
                 firstName: flightCredentials.firstName,
@@ -113,7 +113,7 @@ export async function POST(request) {
 
         // Book return flight if selected
         if (selectedReturnFlights.length > 0) {
-            const returnFlightIds = selectedReturnFlights.map(flight => flight.id); // Extract flight IDs
+            const returnFlightIds = [...new Set(selectedReturnFlights.map(flight => flight.id))]; // Extract unique flight IDs
 
             console.log('Return Flight Payload:', {
                 firstName: flightCredentials.firstName,
