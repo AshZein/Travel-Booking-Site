@@ -158,7 +158,7 @@ const HotelCreate: React.FC = () => {
 
         </div>
 
-<button className="tripType-button mt-10" onClick={handleHotelCreation}>Search</button>
+<button className="tripType-button mt-10" onClick={handleHotelCreation}>Create Room</button>
 
                 </div>
         </div>

@@ -331,7 +331,7 @@ const HotelManage: React.FC = () => {
                     {roomUpdate && (
         <div className="flex items-center gap-4">
 
-            <div className="relative w-72" ref={dropdownRefRoom}>
+            <div className="relative w-72 mt-5" ref={dropdownRefRoom}>
                     <button 
                         onClick={() => setIsOpenRoom((prev) => !prev)}
                         className="w-70 p-2 mb-5 border border-[#393A4B] text-left pl-3 rounded-lg placeholder-text-secondary text-[15px] focus:placeholder:opacity-0 focus:outline-none bg-#1DB4B0 focus:border-[#393A4B] caret-white focus:shadow-[0_0_0_2px_black] cursor-pointer flex justify-between items-center"
