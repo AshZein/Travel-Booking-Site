@@ -192,6 +192,8 @@ const Page: React.FC = () => {
                                             flights={itinerary.outboundFlight.flights || []}
                                             onClick={() => {}}
                                             type="outbound"
+                                            bookingReference={itinerary.outboundFlight.bookingReference}
+                                            bookingCanceled={itinerary.outboundFlight.status === "canceled"}
                                         />
                                     )}
                                 </div>
@@ -205,6 +207,8 @@ const Page: React.FC = () => {
                                             flights={itinerary.returnFlight.flights || []}
                                             onClick={() => {}}
                                             type="return"
+                                            bookingReference={itinerary.returnFlight.bookingReference}
+                                            bookingCanceled={itinerary.returnFlight.status === "canceled"}
                                         />
                                     )}
                                 </div>
