@@ -28,6 +28,7 @@ const Page = () =>{
           const searchParams = new URLSearchParams(window.location.search);
           setDestinationLocation(searchParams.get('destinationLocation')?.split(',')[0] || '');
           setStartDate(searchParams.get('startDate') || '');
+          console.log("fjiwef " + searchParams.get('startDate'));
           setEndDate(searchParams.get('endDate') || '');
           setMinRating(searchParams.get('minStarRating') || '');
           setMaxRating(searchParams.get('maxStarRating') || '');
@@ -60,13 +61,17 @@ const Page = () =>{
   };
 
   const fetchRooms = async (hotelId: number) => {
-      const response = await fetch(`/api/hotel/room/info?hotelId=${hotelId}&checkin=${startDate}&checkout=${endDate}`);
+    console.log("im here " + startDate);
+    console.log("im also here" + endDate);
+      const response = await fetch(`/api/hotel/room/info?hotelId=${hotelId}&checkIn=${startDate}&checkOut=${endDate}`);
       const data = await response.json();
       setRoom(Object.values(data) || []);
   };
 
   const handleHotelClick = (hotelId: number, name: string) => {
-      router.push(`/hotelsearch/roomInfo?hotelId=${hotelId}&name=${name}&checkin=${startDate}&checkout=${endDate}`);
+    console.log("im here " + startDate);
+    console.log("im also here" + endDate);
+      router.push(`/hotelsearch/roomInfo?hotelId=${hotelId}&name=${name}&checkIn=${startDate}&checkOut=${endDate}`);
   }
 
 
@@ -105,25 +110,31 @@ const Page = () =>{
       ) : (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {hotels.map((hotel) => (
-          <div
-              key={hotel.hotelId}
-              onClick={() => handleHotelClick(hotel.hotelId, hotel.name)}
-              className="border p-4 rounded-lg shadow-md bg-white"
-          >
-              <img
-                  src={hotelImgs[hotel.hotelId]} // Use default image if not available
-                  alt={hotel.name}
-                  className="w-full h-48 object-cover rounded-lg mb-4"
-              />
-              <h2 className="text-xl font-semibold text-gray-800">{hotel.name}</h2>
-              <div className="flex justify-between">
-              <div>
-              <p className="text-gray-600">{hotel.address}</p>
-              <p className="text-yellow-500">⭐ {hotel.starRating} Stars</p>
-              <p className="text-green-600">Starting Price: ${hotel.startingPrice}</p>
-              </div>
-              </div>
-          </div>
+            <div
+    key={hotel.hotelId}
+    onClick={() => handleHotelClick(hotel.hotelId, hotel.name)}
+    className="border p-4 rounded-lg shadow-md bg-white relative cursor-pointer group"
+>
+    <img
+        src={hotelImgs[hotel.hotelId]} // Use default image if not available
+        alt={hotel.name}
+        className="w-full h-48 object-cover rounded-lg mb-4"
+    />
+    <h2 className="text-xl font-semibold text-gray-800">{hotel.name}</h2>
+    <div className="flex justify-between">
+        <div>
+            <p className="text-gray-600">Address: {hotel.address}</p>
+            <p className="text-yellow-500">⭐ {hotel.starRating} Stars</p>
+            <p className="text-green-600">Starting Price: ${hotel.startingPrice}</p>
+        </div>
+    </div>
+    
+    {/* Text in Bottom Right Corner */}
+    <div className="absolute bottom-8 right-10 text-blue-500 text-lg group-hover:font-bold">
+        Click to see <br></br>available rooms
+    </div>
+</div>
+
           
           ))}
 

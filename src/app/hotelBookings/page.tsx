@@ -53,7 +53,7 @@ const Page = () =>{
                 const [minRating, setMinRating] = useState('');
                 const [maxRating, setMaxRating] = useState('');
                 const [name, setName] = useState('');
-                const [filterRoom, setFilterRoom] = useState('');
+                const [filterRoom, setFilterRoom] = useState("Select Room");
                 const [minPrice, setMinPrice] = useState('');
                 const [maxPrice, setMaxPrice] = useState('');
                 const [detailedInfo, setDetailedInfo] = useState(false);
@@ -102,7 +102,7 @@ const Page = () =>{
 
 
 
-                if (filterDate && (filterRoom !== '')){
+                if (filterDate && (filterRoom !== "Select Room")){
                     const formattedDate = filterDate.toISOString().split('T')[0];
 
                     const accessToken = localStorage.getItem("accessToken"); // Retrieve token
@@ -119,7 +119,7 @@ const Page = () =>{
                     console.log("API response data:", data);
                     setBookings(Object.values(data) || []);
                 }
-                 else if  (!filterDate && (filterRoom !== '')){
+                 else if  (!filterDate && (filterRoom !== "Select Room")){
                     const accessToken = localStorage.getItem("accessToken"); // Retrieve token
      
                     const response = await fetch(`/api/hotel/booking?hotelId=${hotelId}&roomType=${filterRoom}`, {
@@ -134,7 +134,7 @@ const Page = () =>{
                     console.log("API response data:", data);
                     setBookings(Object.values(data) || []);
                 }
-                 else if  (filterDate && !(filterRoom !== '')){
+                 else if  (filterDate && !(filterRoom !== "Select Room")){
                     const formattedDate = filterDate.toISOString().split('T')[0];
 
                     const accessToken = localStorage.getItem("accessToken"); // Retrieve token
@@ -231,34 +231,38 @@ const Page = () =>{
                         <div className="loginBox">
                             {/* login form box goes here */}
                         </div>
-                        <h1 className="text-3xl font-bold mb-4">Booking List For {hotelName} </h1>
-                        <h2 className="text-3xl font-bold mb-4">Filter by: </h2>
-                        <div className="flex items-center gap-4">
+                        <h1 className="text-4xl font-bold mb-4 mt-4">Booking List For {hotelName} </h1>
+                        <h2 className="text-3xl font-bold">Filter by: </h2>
+                        <div className="flex items-center gap-4 mb-20">
                <div className="search-box">
                    <label htmlFor="end-date" className="text-white">Date:</label>
                    <DatePicker
                        selected={filterDate}
+                       placeholderText='Select'
                        onChange={(date) => date && handleDateChange(date)}
                        className="text-black p-2 rounded"
                        id="end-date"
                    />
                </div>
+               <div>
+               <label htmlFor="end-date" className="text-white">Room:</label>
+
                     <div className="relative w-72" ref={dropdownRef}>
                     <button 
                         onClick={() => setIsOpen((prev) => !prev)}
-                        className="w-70 p-2 mb-5 border border-[#393A4B] text-left pl-3 rounded-lg placeholder-text-secondary text-[15px] focus:placeholder:opacity-0 focus:outline-none bg-#1DB4B0 focus:border-[#393A4B] caret-white focus:shadow-[0_0_0_2px_black] cursor-pointer flex justify-between items-center"
+                        className="w-70 p-2 mb-5 border border-[#393A4B] text-left pl-3 rounded-lg bg-[#1d6664] placeholder-text-secondary text-[15px] focus:placeholder:opacity-0 focus:outline-none bg-#1DB4B0 focus:border-[#393A4B] caret-white focus:shadow-[0_0_0_2px_black] cursor-pointer flex justify-between items-center"
                     >
-                        <span className="text-secondary">{selectedRoom}</span>
+                        <span className="text-secondary">{filterRoom}</span>
                         <ChevronDownIcon
                             className={`w-5 h-5 text-white ml-2 transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
                         />
                     </button>
                     {isOpen && (
-                        <ul className="absolute w-full mt-2 bg-[#151621] border border-[#393A4B] rounded-lg text-secondary">
+                        <ul className="absolute w-full mt-2 bg-[#24918d] border border-[#393A4B] rounded-lg text-secondary ">
                             {room.map((room) => (
                                 <li
                                     key={room.roomId}
-                                    className="p-2 hover:bg-gray-700 cursor-pointer text-secondary"
+                                    className="p-2  cursor-pointer text-secondary hover:bg-[#1d6664]"
                                     onClick={() => {
                                         handleFilterRoom(room.roomType);
                                         setIsOpen(false);
@@ -269,6 +273,7 @@ const Page = () =>{
                             ))}
                         </ul>
                     )}
+                        </div>
                         </div>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
