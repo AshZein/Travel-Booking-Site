@@ -118,14 +118,32 @@ CREATE TABLE "FlightBooking" (
 CREATE TABLE "Itinerary" (
     "itineraryId" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "userId" INTEGER NOT NULL,
-    "forwardFlightBookingRef" TEXT,
-    "returnFlightBookingRef" TEXT,
-    "hotelBookingRef" TEXT,
+    "forwardFlightBookingRef" TEXT NOT NULL DEFAULT '',
+    "returnFlightBookingRef" TEXT NOT NULL DEFAULT '',
+    "hotelBookingRef" TEXT NOT NULL DEFAULT '',
     "itineraryRef" TEXT NOT NULL,
-    CONSTRAINT "Itinerary_forwardFlightBookingRef_fkey" FOREIGN KEY ("forwardFlightBookingRef") REFERENCES "FlightBooking" ("bookingReference") ON DELETE SET NULL ON UPDATE CASCADE,
-    CONSTRAINT "Itinerary_returnFlightBookingRef_fkey" FOREIGN KEY ("returnFlightBookingRef") REFERENCES "FlightBooking" ("bookingReference") ON DELETE SET NULL ON UPDATE CASCADE,
-    CONSTRAINT "Itinerary_hotelBookingRef_fkey" FOREIGN KEY ("hotelBookingRef") REFERENCES "HotelBooking" ("referenceId") ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT "Itinerary_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("userId") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "invoice" (
+    "invoiceId" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "userId" INTEGER NOT NULL,
+    "passportNum" TEXT NOT NULL DEFAULT '',
+    "billingFirstName" TEXT NOT NULL,
+    "billingLastName" TEXT NOT NULL,
+    "billingStreet" TEXT NOT NULL,
+    "billingCity" TEXT NOT NULL,
+    "billingProvince" TEXT NOT NULL,
+    "billingCountry" TEXT NOT NULL DEFAULT 'Canada',
+    "billingPhoneNum" TEXT NOT NULL,
+    "billingEmail" TEXT NOT NULL,
+    "itineraryRef" TEXT NOT NULL,
+    "hotelCost" REAL NOT NULL,
+    "departureFlightCost" REAL NOT NULL,
+    "returnFlightCost" REAL NOT NULL,
+    CONSTRAINT "invoice_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("userId") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "invoice_itineraryRef_fkey" FOREIGN KEY ("itineraryRef") REFERENCES "Itinerary" ("itineraryRef") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -170,6 +188,9 @@ CREATE UNIQUE INDEX "FlightBooking_bookingReference_key" ON "FlightBooking"("boo
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Itinerary_itineraryRef_key" ON "Itinerary"("itineraryRef");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "invoice_itineraryRef_key" ON "invoice"("itineraryRef");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Airport_code_key" ON "Airport"("code");
