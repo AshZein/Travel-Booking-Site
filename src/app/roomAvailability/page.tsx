@@ -105,7 +105,7 @@ const Page = () =>{
                 <div className="loginBox">
                     {/* login form box goes here */}
                 </div>
-                <h1 className="text-3xl font-bold mb-4">Room Availability For {hotelName}</h1>
+                <h1 className="text-4xl font-bold mb-4 mt-4">Room Availability For {hotelName}</h1>
                 {/* Check if no hotels found */}
                 {room.length === 0 ? (
                 <p className="text-red-500">No rooms found.</p>
@@ -117,7 +117,7 @@ const Page = () =>{
                         
                         className="border p-4 rounded-lg shadow-md bg-white"
                     >
-                        <h2 className="text-xl font-semibold text-gray-800">{rooms.roomType}</h2>
+                        <h2 className="text-xl font-semibold text-gray-800">Room: {rooms.roomType}</h2>
                         <div className="flex justify-between">
                         <div>
                         <p className="text-gray-600">General Availability: {rooms.roomAvailability}</p>
