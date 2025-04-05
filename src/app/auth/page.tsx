@@ -73,10 +73,26 @@ const AuthPage: React.FC = () => {
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Something went wrong");
+      if (isRegister){
+        const res = await fetch("/api/user/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(
+            { email: formData.email, 
+            password: formData.password}), 
+        });
+        const data1 = await res.json();
 
-      localStorage.setItem("accessToken", data.accessToken);
-      localStorage.setItem("refreshToken", data.refreshToken);
-
+        localStorage.setItem("accessToken", data1.accessToken);
+        localStorage.setItem("refreshToken", data1.refreshToken);
+      }
+      if (!isRegister){
+        localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("refreshToken", data.refreshToken);
+      }
+      // After login or register, push to home (or profile) page:
       router.push("/");
     } catch (err: unknown) {
       if (err instanceof Error) {

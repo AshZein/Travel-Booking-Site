@@ -6,6 +6,9 @@ import Footer from '@/components/Footer';
 import Flight from '@/components/homePage/flight';
 import Hotel from '@/components/homePage/hotel';
 import HotelFlight from '@/components/homePage/hotelFlight';
+import HotelCreate from '@/components/homePage/hotelCreate';
+import HotelManage from '@/components/homePage/hotelManage';
+
 import { ItineraryProvider } from '@/context/ItineraryContext';
 import withItineraryProvider from '@/HOC/withItineraryProvider';
 
@@ -28,6 +31,12 @@ const Page = () => {
                                 </li>
                                 <li className={`hotel-flight-button flex items-center justify-center ${selectedOption === 'hotel-flight' ? 'selected border border-white' : ''}`} onClick={() => setSelectedOption('hotel-flight')}>
                                     <img src="hotelplane.png" className="h-8"/>Hotel + Flight
+                                </li>
+                                <li className={`hotel-flight-button flex items-center justify-center ${selectedOption === 'create-hotel' ? 'selected border border-white' : ''}`} onClick={() => setSelectedOption('create-hotel')}>
+                                    <img src="hotel.png" className="h-8"/>Create a Hotel
+                                </li>
+                                <li className={`hotel-flight-button flex items-center justify-center ${selectedOption === 'manage-hotel' ? 'selected border border-white' : ''}`} onClick={() => setSelectedOption('manage-hotel')}>
+                                    <img src="hotel.png" className="h-8"/>Manage Your Hotels
                                 </li>
                             </ul>
                             {selectedOption === 'flight' && (
@@ -52,6 +61,12 @@ const Page = () => {
                                 endDate={new Date().toISOString()} 
                                 tType=""
                                 />
+                            )}
+                            {selectedOption === 'create-hotel' && (
+                                <HotelCreate />
+                            )}
+                            {selectedOption === 'manage-hotel' && (
+                                <HotelManage />
                             )}
                         </div>
                     </div>

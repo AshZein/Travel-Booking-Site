@@ -13,13 +13,25 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --background: #24918d;
+    --foreground: #ededed;
+    --home-button-bg: #24918d;
+    --home-button-selected: #163736;
+    --home-button-selected-light: #34afad; /* Slightly lighter shade */
+  }
+}
+
+ 
+  .dark  {
     --background: #1DB4B0;
     --foreground: #ededed;
     --home-button-bg: #1DB4B0;
     --home-button-selected: #163736;
     --home-button-selected-light: #1ED5D1; /* Slightly lighter shade */
   }
-}
+
+
+
 
 body {
   color: var(--foreground);
@@ -89,6 +101,15 @@ button:hover {
 }
 
 .home-center {
+  background-color: #1dc7c4;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: left;
+  height: 100vh;
+}
+
+.dark .home-center {
   background-color: #136f6c;
   display: flex;
   flex-direction: column;

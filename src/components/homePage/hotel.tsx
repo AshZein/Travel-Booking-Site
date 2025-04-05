@@ -93,57 +93,48 @@ const Hotel: React.FC = () => {
                 />
                 </div>
             </div>
-            <div className="flex items-center gap-5 mt-4">
-                <div className="flex flex-col space-y-3">
-  <label htmlFor="minStarRating" className="text-white">
-    Minimum Star Rating:
-  </label>
-  <label htmlFor="minStarRating" className="text-white">
-    {minRating} stars
-  </label>
-  <input
-    type="range"
-    id="minStarRating"
-    min="1"
-    max="5"
-    onChange={(e) => setMinRating(Number(e.target.value))}
-    value={minRating}
-    className="w-50 h-3s bg-gray-200 rounded-lg appearance-none cursor-pointer"
-    style={{
-        background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${
-          ((minRating - 1) / 4) * 100
-        }%, #e5e7eb ${((minRating - 1) / 4) * 100}%, #e5e7eb 100%)`,
-      }}
-  />
-</div>
-<div className="flex flex-col space-y-3 pl-3">
-  <label htmlFor="maxStarRating" className="text-white">
-    Maximum Star Rating:
-  </label>
-  <label htmlFor="maxStarRating" className="text-white">
-    {maxRating} stars
-  </label>
-  <input
-    type="range"
-    id="maxStarRating"
-    min="1"
-    max="5"
-    onChange={(e) => setMaxRating(Number(e.target.value))}
-    value={maxRating}
-    className="w-50 h-3s bg-gray-200 rounded-lg appearance-none cursor-pointer"
-    style={{
-        background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${
-          ((maxRating - 1) / 4) * 100
-        }%, #e5e7eb ${((maxRating - 1) / 4) * 100}%, #e5e7eb 100%)`,
-      }}
-  />
-</div>
+            <div className="flex items-center gap-5 mt-6">
+            <div className="flex flex-col space-y-3">
+            <label htmlFor="roomPrice" className="text-white">Minimum Star Rating:</label>
+            <input
+                type="range"
+                id="roomPrice"
+                min="1"
+                max="5"
+                onChange={(e) => setMinRating(Number(e.target.value))}
+                value={minRating}
+                className="w-50 h-3 bg-gray-200 rounded-lg cursor-pointer"
+                style={{
+                    background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(minRating - 1) / 4 * 100}%, #e5e7eb ${(minRating - 1) / 4 * 100}%, #e5e7eb 100%)`,
+                }}
+            />
+            <label htmlFor="roomPrice" className="text-white">
+                {minRating >= 1 && minRating <= 5 ? "⭐".repeat(minRating) : "No Rating"}
+            </label>
+
+        </div>
+        <div className="flex flex-col space-y-3">
+            <label htmlFor="roomPrice" className="text-white">Maxiumum Star Rating:</label>
+            <input
+                type="range"
+                id="roomPrice"
+                min="1"
+                max="5"
+                onChange={(e) => setMaxRating(Number(e.target.value))}
+                value={maxRating}
+                className="w-50 h-3 bg-gray-200 rounded-lg cursor-pointer"
+                style={{
+                    background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(maxRating - 1) / 4 * 100}%, #e5e7eb ${(maxRating - 1) / 4 * 100}%, #e5e7eb 100%)`,
+                }}
+            />
+            <label htmlFor="roomPrice" className="text-white">
+                {maxRating >= 1 && maxRating <= 5 ? "⭐".repeat(maxRating) : "No Rating"}
+            </label>
+
+        </div>
 <div className="flex flex-col space-y-3 pl-3">
   <label htmlFor="minPrice" className="text-white">
     Minimum Price:
-  </label>
-  <label htmlFor="minPrice" className="text-white">
-    ${minPrice}
   </label>
   <input
     type="range"
@@ -152,20 +143,18 @@ const Hotel: React.FC = () => {
     max="10000"
     onChange={(e) => setMinPrice(Number(e.target.value))}
     value={minPrice}
-    className="w-50 h-3s bg-gray-200 rounded-lg appearance-none cursor-pointer"
+    className="w-50 h-3 bg-gray-200 rounded-lg cursor-pointer"
     style={{
-        background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${
-          ((minPrice - 1) / 9999) * 100
-        }%, #e5e7eb ${((minPrice - 9999) / 4) * 100}%, #e5e7eb 100%)`,
-      }}
-  />
+        background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(minPrice - 1) / 9999 * 100}%, #e5e7eb ${(minPrice - 1) / 9999 * 100}%, #e5e7eb 100%)`,
+    }}
+/>
+<label htmlFor="minPrice" className="text-white">
+    ${minPrice}
+  </label>
 </div>
 <div className="flex flex-col space-y-3 pl-3">
   <label htmlFor="maxPrice" className="text-white">
     Maximum Price:
-  </label>
-  <label htmlFor="maxPrice" className="text-white">
-    ${maxPrice} 
   </label>
   <input
     type="range"
@@ -174,14 +163,16 @@ const Hotel: React.FC = () => {
     max="10000"
     onChange={(e) => setMaxPrice(Number(e.target.value))}
     value={maxPrice}
-    className="w-50 h-3s bg-gray-200 rounded-lg appearance-none cursor-pointer"
+    className="w-50 h-3 bg-gray-200 rounded-lg cursor-pointer"
     style={{
-        background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${
-          ((maxPrice - 1) / 9999) * 100
-        }%, #e5e7eb ${((maxPrice - 1) / 9999) * 100}%, #e5e7eb 100%)`,
-      }}
-  />
+        background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${(maxPrice - 1) / 9999 * 100}%, #e5e7eb ${(maxPrice - 1) / 9999 * 100}%, #e5e7eb 100%)`,
+    }}
+/>
+<label htmlFor="maxPrice" className="text-white">
+    ${maxPrice} 
+  </label>
 </div>
+
 <button className="tripType-button mt-10" onClick={handleHotelSearchClick}>Search</button>
 
                 </div>
