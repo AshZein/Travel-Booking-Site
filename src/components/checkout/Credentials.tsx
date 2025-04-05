@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCheckout } from '@/context/CheckoutContext'; // Import the CheckoutContext
 import { FlightCred } from '@/types/FlightCred'; // Import the FlightCred type
 
@@ -10,6 +10,49 @@ const FlightCredentials: React.FC = () => {
         lastName: '',
         passportNumber: '',
     });
+
+    // Fetch user profile data
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const token = localStorage.getItem('accessToken');
+                if (!token) {
+                    console.error('Access token not found');
+                    return;
+                }
+
+                const response = await fetch('/api/user/profile', {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    console.error('Failed to fetch user profile');
+                    return;
+                }
+
+                const data = await response.json();
+                const { firstName, lastName } = data.user;
+
+                // Update flightCred state with fetched data
+                const updatedFlightCred = {
+                    ...flightCred,
+                    firstName: firstName || '',
+                    lastName: lastName || '',
+                };
+                setFlightCred(updatedFlightCred);
+
+                // Dispatch the updated flight credentials to the CheckoutContext
+                dispatch({ type: 'SET_FLIGHT_CREDENTIALS', payload: updatedFlightCred });
+            } catch (error) {
+                console.error('Error fetching user profile:', error);
+            }
+        };
+
+        fetchUserProfile();
+    }, []); // Empty dependency array ensures this runs only once on component mount
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
