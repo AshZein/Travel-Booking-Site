@@ -112,7 +112,7 @@ const HomeHeader: React.FC = () => {
       {/* -- LEFT: Logo + Title -- */}
       <div className="items-center flex gap-2">
         <img
-          src="/logo_no_back.png"
+          src="logo_no_back.png"
           alt="FlyNext Logo"
           className="h-8 cursor-pointer"
           onClick={handleLogoClick}
@@ -122,21 +122,41 @@ const HomeHeader: React.FC = () => {
         </h1>
       </div>
 
-      {/* -- RIGHT side -- */}
-      <div className="auth-buttons flex gap-4 relative h-12" ref={dropdownRef}>
-        {/* Itinerary Icon */}
-        <img
-          src="/itinerarysymbol_white.png"
-          alt="Itinerary"
-          className="h-12 cursor-pointer mt-2"
-          onClick={() => HomeRouter.push("/itinerary")}
-        />
 
-        {/* Notification bell (only if logged in) */}
+      {/* -- RIGHT: Notification + Auth Button + Dropdowns -- */}
+
+      <div className="auth-buttons flex gap-4 relative" ref={dropdownRef}>
+    <div className="grid grid-cols-4 gap-2">
+      <SunIcon className="w-10 h-10"></SunIcon>
+      <label className="relative inline-flex items-center cursor-pointer">
+      <input
+        type="checkbox"
+        className="sr-only"
+        checked={darkMode}
+        onChange={() => setDarkMode(!darkMode)}
+      />
+      <div className="w-11 h-6 bg-gray-300 rounded-full relative transition-all">
+        <div
+          className={`absolute top-0.5 w-5 h-5 bg-white border rounded-full transition-all ${
+            darkMode ? "left-6" : "left-0"
+          }`}
+        ></div>
+      </div>
+    </label>
+    <MoonIcon className="w-10 h-10"></MoonIcon>
+
+    </div>
+        {/* Show notification bell if logged in */}
+        <img
+            src="itinerarysymbol_white.png"
+            alt="Itinerary"
+            className="h-8 cursor-pointer"
+            onClick={() => HomeRouter.push("/itinerary")}
+          />
         {isAuthenticated && (
           <div className="relative">
             <img
-              src="/whiteNotificationBell.png"
+              src="whiteNotificationBell.png"
               alt="NotificationBell"
               className="h-8 cursor-pointer"
               onClick={toggleNotifications}
@@ -152,23 +172,13 @@ const HomeHeader: React.FC = () => {
           </div>
         )}
 
-        {/* Auth / Profile (round avatar) */}
-        {isAuthenticated ? (
-          <img
-            // Use a user-specific URL or a default placeholder:
-            src="/default.png"
-            alt="Profile"
-            className="h-8 w-8 rounded-full cursor-pointer border border-white"
-            onClick={handleAuthClick}
-          />
-        ) : (
-          <button
-            className="auth-button text-white font-bold py-2 px-4 rounded bg-blue-500"
-            onClick={handleAuthClick}
-          >
-            Login / Register
-          </button>
-        )}
+        {/* Auth / Profile button */}
+        <button
+          className="auth-button text-white font-bold py-2 px-4 rounded bg-blue-500"
+          onClick={handleAuthClick}
+        >
+          {isAuthenticated ? "Profile" : "Login / Register"}
+        </button>
 
         {/* Profile dropdown (Edit Profile / Logout) */}
         {isAuthenticated && showDropdown && (
