@@ -106,7 +106,16 @@ const HotelManage: React.FC = () => {
                 }),
             });
     
-            if (!response.ok) throw new Error("Failed to create room");
+            if (response.ok) {
+                alert("Room successfully created!");
+                setRoomName("");
+                setRoomPrice(1);
+                setRoomAvail(1);
+                setAmenities([]);
+
+            } else {
+                alert("Failed to create room. Please try again.");
+            }
             
             const data = await response.json();
             console.log(data);
@@ -179,7 +188,7 @@ const HotelManage: React.FC = () => {
         <div className="relative w-72" ref={dropdownRef}>
             <button 
                 onClick={() => setIsOpen((prev) => !prev)}
-                className="w-70 p-2 mb-5 border border-[#393A4B] text-left pl-3 rounded-lg placeholder-text-secondary text-[15px] focus:placeholder:opacity-0 focus:outline-none bg-#1DB4B0 focus:border-[#393A4B] caret-white focus:shadow-[0_0_0_2px_black] cursor-pointer flex justify-between items-center"
+                className="w-70 p-2 mb-5 border border-[#393A4B] text-left pl-3 rounded-lg placeholder-text-secondary text-[15px] focus:placeholder:opacity-0 focus:outline-none bg-#24918d focus:border-[#393A4B] caret-white focus:shadow-[0_0_0_2px_black] cursor-pointer flex justify-between items-center"
             >
                 <span className="text-secondary">{selectedHotel}</span>
                 <ChevronDownIcon
@@ -187,11 +196,11 @@ const HotelManage: React.FC = () => {
                 />
             </button>
             {isOpen && (
-                <ul className="absolute w-full mt-2 bg-[#151621] border border-[#393A4B] rounded-lg text-secondary">
+                <ul className="absolute w-full mt-2 bg-[#1DB4B0] border border-[#393A4B] rounded-lg text-secondary">
                     {hotelList.map((hotelManager) => (
                         <li
                             key={hotelManager.hotelId}
-                            className="p-2 hover:bg-gray-700 cursor-pointer text-secondary"
+                            className="p-2 hover:bg-[#24918d] rounded-lg cursor-pointer text-secondary"
                             onClick={() => {
                                 setSelectedHotel(hotelManager.hotel.name);
                                 setSelectedHotelId(hotelManager.hotel.hotelId);
@@ -288,21 +297,25 @@ const HotelManage: React.FC = () => {
     </div>
 
     {/* Amenities List with Scrollable Feature */}
-    <div className={`overflow-y-auto max-h-40 rounded p-2 ${
+<div className={`overflow-y-auto max-h-40 rounded p-2 ${
         amenities.length === 0 ? "bg-#1DB4B0" : "bg-white"
     }`}>
-        <ul className="text-black">
-            {amenities.map((amenity, index) => (
-                <li 
-                    key={index} 
-                    className="cursor-pointer " 
-                    onClick={() => setAmenities(amenities.filter((_, i) => i !== index))}
-                >
-                    {"- " + amenity}
-                </li>
-            ))}
-        </ul>
-    </div>
+    <ul className="text-black">
+        {amenities.map((amenity, index) => (
+            <li 
+                key={index} 
+                className="cursor-pointer hover:text-red-500"
+                onMouseEnter={(e) => e.currentTarget.textContent = `Remove ${amenity}`}
+                onMouseLeave={(e) => e.currentTarget.textContent = `- ${amenity}`}
+                onClick={() => setAmenities(amenities.filter((_, i) => i !== index))}
+            >
+                {"- " + amenity}
+            </li>
+        ))}
+    </ul>
+</div>
+
+
     </div>
 
             )}
@@ -337,7 +350,7 @@ const HotelManage: React.FC = () => {
             <div className="relative w-72 mt-5" ref={dropdownRefRoom}>
                     <button 
                         onClick={() => setIsOpenRoom((prev) => !prev)}
-                        className="w-70 p-2 mb-5 border border-[#393A4B] text-left pl-3 rounded-lg placeholder-text-secondary text-[15px] focus:placeholder:opacity-0 focus:outline-none bg-#1DB4B0 focus:border-[#393A4B] caret-white focus:shadow-[0_0_0_2px_black] cursor-pointer flex justify-between items-center"
+                        className="w-70 p-2 mb-5 border border-[#393A4B] text-left pl-3 rounded-lg placeholder-text-secondary text-[15px] focus:placeholder:opacity-0 focus:outline-none bg-#24918d focus:border-[#393A4B] caret-white focus:shadow-[0_0_0_2px_black] cursor-pointer flex justify-between items-center"
                     >
                         <span className="text-secondary">{selectedRoom}</span>
                         <ChevronDownIcon
@@ -349,7 +362,7 @@ const HotelManage: React.FC = () => {
                             {room.map((room) => (
                                 <li
                                     key={room.roomId}
-                                    className="p-2 hover:bg-gray-700 cursor-pointer text-secondary"
+                                    className="p-2 hover:bg-[#24918d] rounded-lg cursor-pointer text-secondary"
                                     onClick={() => {
                                         setSelectedRoom(room.roomType);
                                         setSelectedRoomAvail(room.roomAvailability);

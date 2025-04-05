@@ -232,12 +232,13 @@ const Page = () =>{
                             {/* login form box goes here */}
                         </div>
                         <h1 className="text-3xl font-bold mb-4">Booking List For {hotelName} </h1>
-                        <h2 className="text-3xl font-bold mb-4">Filter by: </h2>
-                        <div className="flex items-center gap-4">
+                        <h2 className="text-3xl font-bold">Filter by: </h2>
+                        <div className="flex items-center gap-4 mb-20">
                <div className="search-box">
                    <label htmlFor="end-date" className="text-white">Date:</label>
                    <DatePicker
                        selected={filterDate}
+                       placeholderText='Select'
                        onChange={(date) => date && handleDateChange(date)}
                        className="text-black p-2 rounded"
                        id="end-date"
@@ -254,11 +255,11 @@ const Page = () =>{
                         />
                     </button>
                     {isOpen && (
-                        <ul className="absolute w-full mt-2 bg-[#151621] border border-[#393A4B] rounded-lg text-secondary">
+                        <ul className="absolute w-full mt-2 bg-[#1DB4B0] border border-[#393A4B] rounded-lg text-secondary">
                             {room.map((room) => (
                                 <li
                                     key={room.roomId}
-                                    className="p-2 hover:bg-gray-700 cursor-pointer text-secondary"
+                                    className="p-2 hover:bg-[#24918d] cursor-pointer text-secondary"
                                     onClick={() => {
                                         handleFilterRoom(room.roomType);
                                         setIsOpen(false);
