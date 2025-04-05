@@ -8,9 +8,10 @@ interface HotelBookingProps {
     checkinDate: string | null;
     checkoutDate: string | null;
     bookingReference: string; // Add bookingReference as a prop
+    bookingCanceled: boolean; // Add bookingCanceled as a prop
 }
 
-const HotelCard: React.FC<HotelBookingProps> = ({ hotel, checkinDate, checkoutDate, bookingReference }) => {
+const HotelCard: React.FC<HotelBookingProps> = ({ hotel, checkinDate, checkoutDate, bookingReference, bookingCanceled }) => {
     const dateCache: { [key: string]: { [key: string]: string } } = {}; // Cache for dateSplitter
     const { state: hotelState, dispatch: hotelDispatch } = useHotelItinerary();
     const [isCancelling, setIsCancelling] = useState(false);
@@ -70,7 +71,11 @@ const HotelCard: React.FC<HotelBookingProps> = ({ hotel, checkinDate, checkoutDa
     }, []);
 
     return (
-        <div className="hotel-booking-card border p-4 rounded shadow-md">
+        <div
+            className={`hotel-booking-card border p-4 rounded shadow-md ${
+                bookingCanceled ? 'bg-gray-200 text-gray-500' : 'bg-white text-black'
+            }`}
+        >
             <div className="align-center">
                 {hotel && (
                     <div className="flex flex-col justify-left mb-4">
@@ -99,13 +104,15 @@ const HotelCard: React.FC<HotelBookingProps> = ({ hotel, checkinDate, checkoutDa
                     : 'N/A'}
                 </p>
                 {cancelError && <p className="text-red-500">{cancelError}</p>}
-                <button
-                    onClick={handleCancelBooking}
-                    disabled={isCancelling}
-                    className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 disabled:bg-gray-400"
-                >
-                    {isCancelling ? 'Cancelling...' : 'Cancel Booking'}
-                </button>
+                {!bookingCanceled && (
+                    <button
+                        onClick={handleCancelBooking}
+                        disabled={isCancelling}
+                        className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 disabled:bg-gray-400"
+                    >
+                        {isCancelling ? 'Cancelling...' : 'Cancel Booking'}
+                    </button>
+                )}
             </div>
         </div>
     );

@@ -218,6 +218,7 @@ const Page: React.FC = () => {
                                             checkinDate={itinerary.hotelDetails.checkIn || null} // Pass the check-in date
                                             checkoutDate={itinerary.hotelDetails.checkOut || null} // Pass the check-out date
                                             bookingReference={itinerary.hotelBookingRef}
+                                            bookingCanceled={itinerary.hotelDetails.bookingCanceled || false}
                                         />
                                     )}
                                 </div>
