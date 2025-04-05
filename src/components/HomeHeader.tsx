@@ -3,6 +3,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import NotificationDrop from "@/components/Notification/dropdown/NotificationDrop";
+import { SunIcon } from "@heroicons/react/24/solid";
+import { MoonIcon } from "@heroicons/react/16/solid";
+
 
 const HomeHeader: React.FC = () => {
   const HomeRouter = useRouter();
@@ -18,17 +21,42 @@ const HomeHeader: React.FC = () => {
   // Ref to detect outside clicks
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  const [darkMode, setDarkMode] = useState(() => {
+    // Check localStorage first
+    if (typeof window !== 'undefined') {
+      const savedMode = localStorage.getItem('darkMode');
+      if (savedMode !== null) {
+        return savedMode === 'true';
+      }
+      // Fallback to system preference if no localStorage value
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  });
+  
   /**
-   * Check local storage for tokens on mount:
-   * If there's "accessToken", user is logged in.
+   * 1) Check local storage for tokens on mount:
+   *    If there's "token" or "accessToken", user is logged in.
    */
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
-    setIsAuthenticated(!!accessToken);
+    const refreshtoken = localStorage.getItem("refreshtoken");
+    setIsAuthenticated(!!(accessToken));
   }, []);
 
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem('darkMode', 'true');
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem('darkMode', 'false');
+    }
+  }, [darkMode]);
+  
+
   /**
-   * Close *all* dropdowns if clicking outside the dropdown area.
+   * 2) Close *all* dropdowns if clicking outside the dropdown area
    */
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -50,7 +78,7 @@ const HomeHeader: React.FC = () => {
     HomeRouter.push("/");
   };
 
-  // Auth button or user image click → toggle profile dropdown if logged in, else go /auth
+  // Auth button click → toggle profile dropdown if logged in, else go /auth
   const handleAuthClick = () => {
     if (!isAuthenticated) {
       HomeRouter.push("/auth");
@@ -71,7 +99,7 @@ const HomeHeader: React.FC = () => {
     localStorage.removeItem("refreshToken");
     setIsAuthenticated(false);
     setShowDropdown(false);
-    HomeRouter.push("/");
+    HomeRouter.push("/auth");
   };
 
   // Notification bell click → toggle notifications
@@ -84,7 +112,7 @@ const HomeHeader: React.FC = () => {
       {/* -- LEFT: Logo + Title -- */}
       <div className="items-center flex gap-2">
         <img
-          src="/logo_no_back.png"
+          src="logo_no_back.png"
           alt="FlyNext Logo"
           className="h-8 cursor-pointer"
           onClick={handleLogoClick}
@@ -94,21 +122,41 @@ const HomeHeader: React.FC = () => {
         </h1>
       </div>
 
-      {/* -- RIGHT side -- */}
-      <div className="auth-buttons flex gap-4 relative h-12" ref={dropdownRef}>
-        {/* Itinerary Icon */}
-        <img
-          src="/itinerarysymbol_white.png"
-          alt="Itinerary"
-          className="h-12 cursor-pointer mt-2"
-          onClick={() => HomeRouter.push("/itinerary")}
-        />
 
-        {/* Notification bell (only if logged in) */}
+      {/* -- RIGHT: Notification + Auth Button + Dropdowns -- */}
+
+      <div className="auth-buttons flex gap-4 relative" ref={dropdownRef}>
+    <div className="grid grid-cols-4 gap-2">
+      <SunIcon className="w-10 h-10"></SunIcon>
+      <label className="relative inline-flex items-center cursor-pointer">
+      <input
+        type="checkbox"
+        className="sr-only"
+        checked={darkMode}
+        onChange={() => setDarkMode(!darkMode)}
+      />
+      <div className="w-11 h-6 bg-gray-300 rounded-full relative transition-all">
+        <div
+          className={`absolute top-0.5 w-5 h-5 bg-white border rounded-full transition-all ${
+            darkMode ? "left-6" : "left-0"
+          }`}
+        ></div>
+      </div>
+    </label>
+    <MoonIcon className="w-10 h-10"></MoonIcon>
+
+    </div>
+        {/* Show notification bell if logged in */}
+        <img
+            src="itinerarysymbol_white.png"
+            alt="Itinerary"
+            className="h-8 cursor-pointer"
+            onClick={() => HomeRouter.push("/itinerary")}
+          />
         {isAuthenticated && (
           <div className="relative">
             <img
-              src="/whiteNotificationBell.png"
+              src="whiteNotificationBell.png"
               alt="NotificationBell"
               className="h-8 cursor-pointer"
               onClick={toggleNotifications}
@@ -124,23 +172,13 @@ const HomeHeader: React.FC = () => {
           </div>
         )}
 
-        {/* Auth / Profile (round avatar) */}
-        {isAuthenticated ? (
-          <img
-            // Use a user-specific URL or a default placeholder:
-            src="/default.png"
-            alt="Profile"
-            className="h-8 w-8 rounded-full cursor-pointer border border-white"
-            onClick={handleAuthClick}
-          />
-        ) : (
-          <button
-            className="auth-button text-white font-bold py-2 px-4 rounded bg-blue-500"
-            onClick={handleAuthClick}
-          >
-            Login / Register
-          </button>
-        )}
+        {/* Auth / Profile button */}
+        <button
+          className="auth-button text-white font-bold py-2 px-4 rounded bg-blue-500"
+          onClick={handleAuthClick}
+        >
+          {isAuthenticated ? "Profile" : "Login / Register"}
+        </button>
 
         {/* Profile dropdown (Edit Profile / Logout) */}
         {isAuthenticated && showDropdown && (
