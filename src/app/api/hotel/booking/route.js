@@ -193,46 +193,46 @@ export async function GET(request){
     }
 }   
 
-export async function PATCH(request){
-    const user = verifyToken(request);
-    if (!user) {
-        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-    }
-    const bookingId = request.nextUrl.searchParams.get("referenceId");
-    const booking = await prisma.hotelBooking.findUnique({
-        where: {
-            referenceId: bookingId,
-            bookingCanceled: false
+export async function PATCH(request) {
+    try {
+        // Verify user token
+        const user = verifyToken(request);
+        if (!user) {
+            return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
         }
-    });
-    if (!booking){
-        return NextResponse.json({error: 'This booking does not exist'}, {status: 400})
-    }
-    // Check if the user is a hotel manager
-    const manager = await prisma.HotelManager.findUnique({
-        where: {  
-            userId_hotelId: {
-                userId: user.userId,
-                hotelId: booking.hotelId,
-              },
-        },
-      });
-    if (user.userId !== booking.userId && !manager){
-        return NextResponse.json({ message: "Unauthorized, you do not have access to this booking." }, { status: 401 });
-    }
-    const todayDate = new Date();
-    const updatedBooking = await prisma.hotelBooking.update({
-        where: {referenceId: booking.referenceId},
-        data:{
-            bookingCanceled: true,
-            canceledDate: todayDate
+
+        // Parse the request body to get the referenceId
+        const { referenceId } = await request.json();
+        if (!referenceId) {
+            return NextResponse.json({ message: "Booking reference is required" }, { status: 400 });
         }
-    });
-    if (manager){
-        await sendNotification(user.userId, `Hotel booking with reference ID ${booking.referenceId} cancelled`, 'HOTEL_MANAGER');
-    } 
-    await sendNotification(user.userId, `Hotel booking with reference ID ${booking.referenceId} cancelled`, 'USER');
-    return NextResponse.json(updatedBooking);
+
+        // Fetch the booking
+        const booking = await prisma.hotelBooking.findUnique({
+            where: {
+                referenceId: referenceId,
+                bookingCanceled: false,
+            },
+        });
+
+        if (!booking) {
+            return NextResponse.json({ message: "Booking not found or already canceled" }, { status: 404 });
+        }
+
+        // Update the booking to mark it as canceled
+        await prisma.hotelBooking.update({
+            where: { referenceId: referenceId },
+            data: {
+                bookingCanceled: true,
+                canceledDate: new Date(),
+            },
+        });
+
+        return NextResponse.json({ message: "Booking successfully canceled" }, { status: 200 });
+    } catch (error) {
+        console.error("Error canceling booking:", error);
+        return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+    }
 }
 
 export async function PUT() {

@@ -34,6 +34,8 @@ const Page: React.FC = () => {
     const [itineraries, setItineraries] = useState<Itinerary[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [isCancelling, setIsCancelling] = useState(false);
+    const [cancelError, setCancelError] = useState<string | null>(null);
 
     const fetchFlightDetails = async (flightRef: string): Promise<FlightDetails | null> => {
         try {
@@ -215,6 +217,7 @@ const Page: React.FC = () => {
                                             hotel={itinerary.hotelDetails.hotel || null} // Pass the hotel object
                                             checkinDate={itinerary.hotelDetails.checkIn || null} // Pass the check-in date
                                             checkoutDate={itinerary.hotelDetails.checkOut || null} // Pass the check-out date
+                                            bookingReference={itinerary.hotelBookingRef}
                                         />
                                     )}
                                 </div>
