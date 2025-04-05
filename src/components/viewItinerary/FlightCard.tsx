@@ -108,6 +108,11 @@ const FlightCard: React.FC<FlightCardProps> = ({ legs, flights, onClick, type, b
                         {isCancelling ? 'Cancelling...' : 'Cancel Booking'}
                     </button>
                 )}
+                {bookingCanceled && (
+                    <p className="mt-4 text-center text-xl font-bold text-red-600">
+                        CANCELLED
+                    </p>
+                )}
             </>
         </div>
     );
