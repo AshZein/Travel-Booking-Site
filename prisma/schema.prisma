@@ -1,63 +1,54 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev/db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  userId       Int       @id @default(autoincrement())
-  password     String
-  firstName    String
-  lastName     String
-  email        String    @unique
-  picture      String    @default("default.jpg")
-  phoneNumber  String
-  hotelBooking   HotelBooking[]
-  flightBooking  FlightBooking[]
-
+  userId        Int             @id @default(autoincrement())
+  password      String
+  firstName     String
+  lastName      String
+  email         String          @unique
+  picture       String          @default("default.jpg")
+  phoneNumber   String
+  flightBooking FlightBooking[]
+  hotelBooking  HotelBooking[]
   hotelManagers HotelManager[]
-  notifications Notifications[]
   itineraries   Itinerary[]
-  invoices                   invoice[]
+  notifications Notifications[]
+  invoices      invoice[]
 }
 
 model Notifications {
-  id        Int       @id @default(autoincrement())
-  userId    Int
-  user      User      @relation(fields: [userId], references: [userId]) // Relation field
-  message   String
-  date      DateTime  @default(now())
-  read      Boolean   @default(false)
-  cleared   Boolean   @default(false)
-  type      String    // USER or HOTEL_MANAGER notification
+  id      Int      @id @default(autoincrement())
+  userId  Int
+  message String
+  date    DateTime @default(now())
+  read    Boolean  @default(false)
+  cleared Boolean  @default(false)
+  type    String
+  user    User     @relation(fields: [userId], references: [userId])
 }
 
 model Hotel {
-  hotelId      Int     @id @default(autoincrement())
+  hotelId      Int             @id @default(autoincrement())
   name         String
-  logo         String  @default("default.jpg")
+  logo         String          @default("default.jpg")
   address      String
   city         String
-  country      String 
+  country      String
   latitude     Float
   longitude    Float
   starRating   Int
-
-  hotelBooking   HotelBooking[]
-
-  managers       HotelManager[]
-  images         HotelImage[]
-  rooms          HotelRoomType[]
-  amenities      Amenity[]
+  amenities    Amenity[]
+  hotelBooking HotelBooking[]
+  images       HotelImage[]
+  managers     HotelManager[]
+  rooms        HotelRoomType[]
 
   @@unique([name, address])
 }
@@ -66,8 +57,8 @@ model HotelManager {
   managerId Int   @id @default(autoincrement())
   userId    Int
   hotelId   Int
-  user      User  @relation(fields: [userId], references: [userId]) // Relation field
-  hotel     Hotel @relation(fields: [hotelId], references: [hotelId]) // Relation field
+  hotel     Hotel @relation(fields: [hotelId], references: [hotelId])
+  user      User  @relation(fields: [userId], references: [userId])
 
   @@unique([userId, hotelId])
 }
@@ -76,20 +67,20 @@ model HotelImage {
   imageId Int    @id @default(autoincrement())
   image   String
   hotelId Int
-  hotel   Hotel  @relation(fields: [hotelId], references: [hotelId]) // Relation field
+  hotel   Hotel  @relation(fields: [hotelId], references: [hotelId])
 }
 
 model HotelRoomType {
-  roomId          Int    @id @default(autoincrement())
+  roomId          Int            @id @default(autoincrement())
   hotelId         Int
   roomType        String
   price           Float
   numberAvailable Int
+  hotelBooking    HotelBooking[]
+  hotel           Hotel          @relation(fields: [hotelId], references: [hotelId])
+  amenities       RoomAmenity[]
+  images          RoomImage[]
 
-  hotel             Hotel   @relation(fields: [hotelId], references: [hotelId]) // Relation field
-  hotelBooking   HotelBooking[]
-  images            RoomImage[]
-  amenities      RoomAmenity[] 
   @@unique([hotelId, roomType])
 }
 
@@ -97,39 +88,38 @@ model RoomImage {
   imageId Int           @id @default(autoincrement())
   image   String
   roomId  Int
-  room    HotelRoomType @relation(fields: [roomId], references: [roomId]) // Relation field
+  room    HotelRoomType @relation(fields: [roomId], references: [roomId])
 }
 
 model Amenity {
-  id       Int           @id @default(autoincrement())
-  hotelId  Int
-  hotel    Hotel        @relation(fields: [hotelId], references: [hotelId]) // Relation field
+  id      Int    @id @default(autoincrement())
+  hotelId Int
   amenity String
+  hotel   Hotel  @relation(fields: [hotelId], references: [hotelId])
 }
 
 model RoomAmenity {
-  id       Int           @id @default(autoincrement())
+  id      Int           @id @default(autoincrement())
   roomId  Int
-  room    HotelRoomType        @relation(fields: [roomId], references: [roomId]) // Relation field
   amenity String
+  room    HotelRoomType @relation(fields: [roomId], references: [roomId])
 }
 
 model HotelBooking {
-  id              Int       @id @default(autoincrement())
+  id              Int           @id @default(autoincrement())
   userId          Int
-  referenceId     String    @unique
+  referenceId     String        @unique
   hotelId         Int
   roomId          Int
   price           Float
   checkIn         DateTime
   checkOut        DateTime
   bookingMade     DateTime
-  bookingCanceled Boolean   @default(false)
+  bookingCanceled Boolean       @default(false)
   canceledDate    DateTime?
-
-  user          User          @relation(fields: [userId], references: [userId]) // Relation field
-  hotel         Hotel         @relation(fields: [hotelId], references: [hotelId]) // Relation field
-  hotelRoomType HotelRoomType @relation(fields: [roomId], references: [roomId]) // Relation field
+  hotelRoomType   HotelRoomType @relation(fields: [roomId], references: [roomId])
+  hotel           Hotel         @relation(fields: [hotelId], references: [hotelId])
+  user            User          @relation(fields: [userId], references: [userId])
 }
 
 model FlightBooking {
@@ -139,21 +129,18 @@ model FlightBooking {
   bookingMade      DateTime
   bookingCanceled  Boolean   @default(false)
   canceledDate     DateTime?
-
-  user User @relation(fields: [userId], references: [userId]) // Relation field
-
+  user             User      @relation(fields: [userId], references: [userId])
 }
 
 model Itinerary {
-  itineraryId                Int             @id @default(autoincrement())
-  userId                     Int
-  forwardFlightBookingRef    String          @default("") 
-  returnFlightBookingRef     String          @default("")
-  hotelBookingRef            String         @default("")
-  itineraryRef               String          @unique
-
-  user                       User             @relation(fields: [userId], references: [userId])
-  invoices                   invoice[]
+  itineraryId             Int      @id @default(autoincrement())
+  userId                  Int
+  forwardFlightBookingRef String   @default("")
+  returnFlightBookingRef  String   @default("")
+  hotelBookingRef         String   @default("")
+  itineraryRef            String   @unique
+  user                    User     @relation(fields: [userId], references: [userId])
+  invoices                invoice?
 }
 
 model invoice {
@@ -172,9 +159,8 @@ model invoice {
   hotelCost           Float
   departureFlightCost Float
   returnFlightCost    Float
-
-  user                User      @relation(fields: [userId], references: [userId])
   itinerary           Itinerary @relation(fields: [itineraryRef], references: [itineraryRef])
+  user                User      @relation(fields: [userId], references: [userId])
 }
 
 model Airport {
@@ -196,6 +182,6 @@ model City {
 }
 
 model LastGeneratedId {
-  type    String    @id
-  value   Int       
+  type  String @id
+  value Int
 }
