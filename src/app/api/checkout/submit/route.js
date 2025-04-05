@@ -101,12 +101,13 @@ export async function POST(request) {
             }
 
             const outboundFlightData = await outboundFlightResponse.json();
+            console.log('Outbound Flight Data:', outboundFlightData);
             await prisma.itinerary.update({
                 where: {
-                    itineraryId: itinerary.itineraryId ,
+                    itineraryId: itinerary.itineraryId,
                 },
                 data: {
-                    forwardFlightBookingRef: outboundFlightData.bookingReference,
+                    forwardFlightBookingRef: outboundFlightData.data.bookingReference,
                 },
             });
         }
@@ -148,12 +149,13 @@ export async function POST(request) {
             }
 
             const returnFlightData = await returnFlightResponse.json();
+            console.log('Return Flight Data:', returnFlightData);
             await prisma.itinerary.update({
                 where: {
-                    itineraryId: itinerary.itineraryId ,
+                    itineraryId: itinerary.itineraryId,
                 },
                 data: {
-                    returnFlightBookingRef: returnFlightData.bookingReference,
+                    returnFlightBookingRef: returnFlightData.data.bookingReference,
                 },
             });
         }
