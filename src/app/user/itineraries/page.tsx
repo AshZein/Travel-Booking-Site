@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import FlightCard from "@/components/viewItinerary/FlightCard";
 import { Flight } from "@/types/flight";
+import HotelCard from "@/components/viewItinerary/HotelCard";
 
 interface FlightDetails {
     bookingReference: string;
@@ -24,8 +25,9 @@ interface Itinerary {
     forwardFlightBookingRef?: string;
     returnFlightBookingRef?: string;
     hotelBookingRef?: string;
-    outboundFlight?: FlightDetails; // Updated to match the flight data structure
-    returnFlight?: FlightDetails;   // Updated to match the flight data structure
+    outboundFlight?: FlightDetails;
+    returnFlight?: FlightDetails;
+    hotelDetails?: any; // Add this field for hotel details
 }
 
 const Page: React.FC = () => {
@@ -74,6 +76,39 @@ const Page: React.FC = () => {
         }
     };
 
+    const fetchHotelDetails = async (hotelBookingRef: string): Promise<any | null> => {
+        try {
+            const token = localStorage.getItem("accessToken");
+            if (!token) {
+                console.error("User is not authenticated.");
+                return null;
+            }
+
+            const response = await fetch(`/api/hotel/booking/user?bookingReference=${hotelBookingRef}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            console.log("API response:", response);
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error response from API:", errorData);
+                return null;
+            }
+
+            const hotelDetails = await response.json();
+            console.log("Hotel details:", hotelDetails);
+
+            return hotelDetails;
+        } catch (err) {
+            console.error("Error fetching hotel details:", err);
+            return null;
+        }
+    };
+
     useEffect(() => {
         const fetchItineraries = async () => {
             try {
@@ -100,7 +135,7 @@ const Page: React.FC = () => {
 
                 const data: Itinerary[] = await response.json();
 
-                // Fetch flight details for each itinerary
+                // Fetch flight and hotel details for each itinerary
                 const updatedItineraries = await Promise.all(
                     data.map(async (itinerary) => {
                         if (itinerary.forwardFlightBookingRef) {
@@ -108,6 +143,9 @@ const Page: React.FC = () => {
                         }
                         if (itinerary.returnFlightBookingRef) {
                             itinerary.returnFlight = (await fetchFlightDetails(itinerary.returnFlightBookingRef)) || undefined;
+                        }
+                        if (itinerary.hotelBookingRef) {
+                            itinerary.hotelDetails = (await fetchHotelDetails(itinerary.hotelBookingRef)) || undefined;
                         }
                         return itinerary;
                     })
@@ -170,7 +208,16 @@ const Page: React.FC = () => {
                                 </div>
                             )}
                             {itinerary.hotelBookingRef && (
-                                <p><strong>Hotel Booking Reference:</strong> {itinerary.hotelBookingRef}</p>
+                                <div>
+                                    <p><strong>Hotel Booking Reference:</strong> {itinerary.hotelBookingRef}</p>
+                                    {itinerary.hotelDetails && (
+                                        <HotelCard
+                                            hotel={itinerary.hotelDetails.hotel || null} // Pass the hotel object
+                                            checkinDate={itinerary.hotelDetails.checkIn || null} // Pass the check-in date
+                                            checkoutDate={itinerary.hotelDetails.checkOut || null} // Pass the check-out date
+                                        />
+                                    )}
+                                </div>
                             )}
                             <hr />
                         </li>
