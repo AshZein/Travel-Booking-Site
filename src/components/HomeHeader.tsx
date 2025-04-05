@@ -92,6 +92,11 @@ const HomeHeader: React.FC = () => {
     HomeRouter.push("/profile");
   };
 
+  const handleViewItineraries = () => {
+    setShowDropdown(false);
+    HomeRouter.push("/user/itineraries");
+  };
+
   const handleLogout = async () => {
     // Remove tokens from localStorage. 
     // (Optionally call /api/user/logout if you have a backend route.)
@@ -184,6 +189,9 @@ const HomeHeader: React.FC = () => {
         {isAuthenticated && showDropdown && (
           <div className="absolute right-0 mt-12 w-40 bg-white text-black rounded shadow-md">
             <ul className="py-1">
+              <li className="px-4 py-2 cursor-pointer hover:bg-gray-200" onClick={handleViewItineraries}>
+                View Itineraries
+              </li>
               <li
                 className="px-4 py-2 cursor-pointer hover:bg-gray-200"
                 onClick={handleEditProfile}

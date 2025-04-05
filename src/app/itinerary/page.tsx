@@ -13,7 +13,6 @@ import withHotelProvider from '@/HOC/withHotelProvider';
 import { Flight } from '@/types/flight';
 import FlightDetailPopUp from '@/components/flightSearch/FlightDetailPopUp';
 import { useRouter } from 'next/navigation';
-import { Hotel } from '@/types/Hotel';
 
 const Page = () => {
     const { state: itineraryState, dispatch: itineraryDispatch } = useItinerary(); // Access ItineraryContext state and dispatch

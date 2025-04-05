@@ -130,7 +130,6 @@ model HotelBooking {
   user          User          @relation(fields: [userId], references: [userId]) // Relation field
   hotel         Hotel         @relation(fields: [hotelId], references: [hotelId]) // Relation field
   hotelRoomType HotelRoomType @relation(fields: [roomId], references: [roomId]) // Relation field
-  itineraries     Itinerary[]
 }
 
 model FlightBooking {
@@ -143,22 +142,17 @@ model FlightBooking {
 
   user User @relation(fields: [userId], references: [userId]) // Relation field
 
-  forwardItineraries Itinerary[] @relation("forward")
-  returnItineraries Itinerary[] @relation("return")
 }
 
 model Itinerary {
   itineraryId                Int             @id @default(autoincrement())
   userId                     Int
-  forwardFlightBookingRef    String?          
-  returnFlightBookingRef     String?         
-  hotelBookingRef            String?          
+  forwardFlightBookingRef    String          @default("") 
+  returnFlightBookingRef     String          @default("")
+  hotelBookingRef            String         @default("")
   itineraryRef               String          @unique
 
-  forwardFlightBooking       FlightBooking?   @relation(name: "forward", fields: [forwardFlightBookingRef], references: [bookingReference])
-  returnFlightBooking        FlightBooking?  @relation(name: "return", fields: [returnFlightBookingRef], references: [bookingReference])
-  hotelBooking               HotelBooking?    @relation(fields: [hotelBookingRef], references: [referenceId])
-  user                       User            @relation(fields: [userId], references: [userId])
+  user                       User             @relation(fields: [userId], references: [userId])
   invoices                   invoice[]
 }
 

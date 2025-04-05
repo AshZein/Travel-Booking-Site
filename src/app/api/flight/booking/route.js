@@ -8,62 +8,40 @@ const AFS_API_URL = process.env.AFS_API_URL;
 const API_KEY = process.env.AFS_KEY;
 
 export async function GET(request) {
-    // verify user token
+    // Verify user token
     const user = verifyToken(request);
     if (!user) {
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
-
-    // retrieve parameters
+    console.log('User:', user);
+    // Retrieve parameters
     const { searchParams } = new URL(request.url);
-    const email = searchParams.get('email');
     const bookingReference = searchParams.get('bookingReference');
 
-    // email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(!emailRegex.test(email)){
-        return res.status(400).json({ message: "Invalid email format" });
-    }
-
-    // retrieve userRecord lastname, needed for fetching booking from afs
-    const userRecord = await prisma.User.findUnique({
-        where: {
-            email
-        },
-        select: {
-            userId: true,
-            lastName: true
-        }
-    });
-
-    // no userRecord with that email
-    if (!userRecord) {
-        return NextResponse.json({ message: "No userRecord with that email." }, { status: 404 });
-    }
-
-    if (!bookingReference) { // retrieve all bookings associated with this userRecord
+    if (!bookingReference) { 
+        // Retrieve all bookings associated with this user
         let bookings = [];
         const flightBookings = await prisma.FlightBooking.findMany({
             where: {
-                userId: userRecord.userRecordId
+                userId: user.userId,
             },
             select: {
-                bookingReference: true
-            }
+                bookingReference: true,
+            },
         });
 
-        // retrieve all bookings
+        // Retrieve all bookings from AFS
         for (const booking of flightBookings) {
-            const response = await fetch(`${AFS_API_URL}/api/bookings/retrieve?lastName=${userRecord.lastName.toLowerCase()}&bookingReference=${booking.bookingReference}`, {
+            const response = await fetch(`${AFS_API_URL}/api/bookings/retrieve?lastName=${user.lastName.toLowerCase()}&bookingReference=${booking.bookingReference}`, {
                 method: 'GET',
                 headers: {
-                    'x-api-key': API_KEY
-                }
+                    'x-api-key': API_KEY,
+                },
             });
 
-            // verify if afs fetch is ok
+            // Verify if AFS fetch is ok
             if (!response.ok) {
-                console.error(`Failed to retrieve booking for last name: ${userRecord.lastName} & booking reference: ${booking.bookingReference}`);
+                console.error(`Failed to retrieve booking for booking reference: ${booking.bookingReference}`);
                 return NextResponse.json({ message: "Failed to retrieve booking." }, { status: response.status });
             }
 
@@ -72,29 +50,28 @@ export async function GET(request) {
         }
 
         return NextResponse.json({ data: bookings }, { status: 200 });
-        
-    } else { // retrieve booking associated with this booking reference
-        const response = await fetch(`${AFS_API_URL}/api/bookings/retrieve?lastName=${userRecord.lastName.toLowerCase()}&bookingReference=${bookingReference}`, {
+    } else { 
+        // Retrieve booking associated with this booking reference
+        const response = await fetch(`${AFS_API_URL}/api/bookings/retrieve?lastName=${user.lastName.toLowerCase()}&bookingReference=${bookingReference}`, {
             method: 'GET',
             headers: {
-                'x-api-key': API_KEY
-            }
+                'x-api-key': API_KEY,
+            },
         });
 
-        // verify if afs fetch is ok
+        // Verify if AFS fetch is ok
         if (!response.ok) {
-            console.error(`Failed to retrieve booking for last name: ${userRecord.lastName} & booking reference: ${bookingReference}`);
+            console.error(`Failed to retrieve booking for booking reference: ${bookingReference}`);
             return NextResponse.json({ message: "Failed to retrieve booking." }, { status: response.status });
         }
 
         const afsBooking = await response.json();
         return NextResponse.json({ data: afsBooking }, { status: 200 });
     }
-
 }
 
 export async function POST(request){
-    // verify user token
+   // verify user token
     const user = verifyToken(request);
     if (!user) {
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -178,48 +155,69 @@ export async function POST(request){
 }
 
 export async function PUT(request) {
-    // verify user token
-    const user = verifyToken(request);
-    if (!user) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-    }
-  
-    const { bookingReference } = await request.json();
-  
-    // required input parameters
-    if (!bookingReference) {
-      return NextResponse.json({ error: 'bookingReference is a required parameter' }, { status: 400 });
-    }
-  
-    try {
-     const existingBooking = await prisma.FlightBooking.findUnique({
-        where: {
-            userId: user.userId,
-            bookingReference: bookingReference
-        }
-     });
-
-     if (!existingBooking) {
-        return NextResponse.json({ error: 'Booking does not exist' }, { status: 404 });
-    }
-
-      // Update booking status to canceled
-      const booking = await prisma.FlightBooking.update({
-        where: { bookingReference },
-        data: { bookingCanceled: true },
-      });
-  
-      await sendNotification(user.userId, `Your flight booking with reference ${bookingReference} has been canceled.`, 'USER');
-  
-      return NextResponse.json({ data: booking }, { status: 200 });
-    } catch (error) {
-      console.log('Error canceling booking:', error.stack);
-      return NextResponse.json({ error: 'Failed to cancel booking' }, { status: 500 });
-    }
+    return NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
 }
 
-export async function PATCH() {
-    return NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
+export async function PATCH(request) {
+    // Verify user token
+    const user = verifyToken(request);
+    if (!user) {
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+    
+    const { bookingReference } = await request.json();
+    
+    // Required input parameters
+    if (!bookingReference) {
+        return NextResponse.json({ error: 'bookingReference is a required parameter' }, { status: 400 });
+    }
+    
+    try {
+        // Check if the booking exists in the database
+        const existingBooking = await prisma.FlightBooking.findFirst({
+            where: {
+                userId: user.userId,
+                bookingReference: bookingReference,
+            },
+        });
+
+        if (!existingBooking) {
+            return NextResponse.json({ error: 'Booking does not exist' }, { status: 404 });
+        }
+
+        // Cancel the booking using the AFS API
+        const afsResponse = await fetch(`${AFS_API_URL}/api/bookings/cancel`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': API_KEY,
+            },
+            body: JSON.stringify({
+                lastName: user.lastName,
+                bookingReference: bookingReference,
+            }),
+        });
+
+        if (!afsResponse.ok) {
+            const afsError = await afsResponse.json();
+            console.error(`Failed to cancel booking via AFS API: ${afsError.message}`);
+            return NextResponse.json({ error: 'Failed to cancel booking via AFS API' }, { status: afsResponse.status });
+        }
+
+        // Update the booking status in the database
+        const booking = await prisma.FlightBooking.update({
+            where: { bookingReference },
+            data: { bookingCanceled: true },
+        });
+
+        // Send a notification to the user
+        await sendNotification(user.userId, `Your flight booking with reference ${bookingReference} has been canceled.`, 'USER');
+
+        return NextResponse.json({ data: booking }, { status: 200 });
+    } catch (error) {
+        console.error('Error canceling booking:', error.stack);
+        return NextResponse.json({ error: 'Failed to cancel booking' }, { status: 500 });
+    }
 }
 
 export async function DELETE() {

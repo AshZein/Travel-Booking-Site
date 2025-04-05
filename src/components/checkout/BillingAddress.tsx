@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCheckout } from '@/context/CheckoutContext'; // Import the CheckoutContext
 import { Billing } from '@/types/Billing'; // Import the Billing type
 
@@ -14,6 +14,49 @@ const BillingAddress: React.FC = () => {
         phoneNumber: '',
         email: '', // Add email to the Billing object
     });
+
+    // Fetch user profile data
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const token = localStorage.getItem('accessToken');
+                if (!token) {
+                    console.error('Access token not found');
+                    return;
+                }
+
+                const response = await fetch('/api/user/profile', {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    console.error('Failed to fetch user profile');
+                    return;
+                }
+
+                const data = await response.json();
+                const { firstName, lastName } = data.user;
+
+                // Update billingAddress state with fetched data
+                const updatedBillingAddress = {
+                    ...billingAddress,
+                    firstName: firstName || '',
+                    lastName: lastName || '',
+                };
+                setBillingAddress(updatedBillingAddress);
+
+                // Dispatch the updated billing address to the CheckoutContext
+                dispatch({ type: 'SET_BILLING_ADDRESS', payload: updatedBillingAddress });
+            } catch (error) {
+                console.error('Error fetching user profile:', error);
+            }
+        };
+
+        fetchUserProfile();
+    }, []); // Empty dependency array ensures this runs only once on component mount
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
