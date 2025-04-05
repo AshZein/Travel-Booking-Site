@@ -155,48 +155,48 @@ export async function POST(request){
 }
 
 export async function PUT(request) {
+    return NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
+}
+
+export async function PATCH() {
     // verify user token
     const user = verifyToken(request);
     if (!user) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
-  
+    
     const { bookingReference } = await request.json();
-  
+    
     // required input parameters
     if (!bookingReference) {
-      return NextResponse.json({ error: 'bookingReference is a required parameter' }, { status: 400 });
+        return NextResponse.json({ error: 'bookingReference is a required parameter' }, { status: 400 });
     }
-  
+    
     try {
-     const existingBooking = await prisma.FlightBooking.findUnique({
+        const existingBooking = await prisma.FlightBooking.findUnique({
         where: {
             userId: user.userId,
             bookingReference: bookingReference
         }
-     });
+        });
 
-     if (!existingBooking) {
+        if (!existingBooking) {
         return NextResponse.json({ error: 'Booking does not exist' }, { status: 404 });
     }
 
-      // Update booking status to canceled
-      const booking = await prisma.FlightBooking.update({
+        // Update booking status to canceled
+        const booking = await prisma.FlightBooking.update({
         where: { bookingReference },
         data: { bookingCanceled: true },
-      });
-  
-      await sendNotification(user.userId, `Your flight booking with reference ${bookingReference} has been canceled.`, 'USER');
-  
-      return NextResponse.json({ data: booking }, { status: 200 });
+        });
+    
+        await sendNotification(user.userId, `Your flight booking with reference ${bookingReference} has been canceled.`, 'USER');
+    
+        return NextResponse.json({ data: booking }, { status: 200 });
     } catch (error) {
-      console.log('Error canceling booking:', error.stack);
-      return NextResponse.json({ error: 'Failed to cancel booking' }, { status: 500 });
+        console.log('Error canceling booking:', error.stack);
+        return NextResponse.json({ error: 'Failed to cancel booking' }, { status: 500 });
     }
-}
-
-export async function PATCH() {
-    return NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
 }
 
 export async function DELETE() {
