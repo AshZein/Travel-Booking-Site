@@ -3,4 +3,5 @@ export interface Room {
     roomType: string;
     price: number;
     roomAvailability: number;
+    amenities: [];
   }

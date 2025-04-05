@@ -7,8 +7,8 @@ import { searchSuggestCities } from '@/utils/cleanSearch';
 const Hotel: React.FC = () => {
     const hotelRouter = useRouter();
 
-    const [startDate, setStartDate] = useState<Date | null>(new Date());
-    const [endDate, setEndDate] = useState<Date | null>(new Date());
+    const [startDate, setStartDate] = useState<Date>(new Date());
+    const [endDate, setEndDate] = useState<Date>(new Date());
     const [minRating, setMinRating] = useState(1);
     const [maxRating, setMaxRating] = useState(5);
     const [minPrice, setMinPrice] = useState(1);
@@ -32,8 +32,18 @@ const Hotel: React.FC = () => {
     };
 
     const handleHotelSearchClick = () => {
-        hotelRouter.push(`/hotelsearch?destinationLocation=${destinationLocation}&startDate=${startDate?.toISOString()}&endDate=${endDate?.toISOString()}&minStarRating=${minRating}&maxStarRating=${maxRating}&name=${name}&startPrice=${minPrice}&endPrice=${maxPrice}`);
+        const formattedStartDate = formatLocalDate(startDate);
+        const formattedEndDate = formatLocalDate(endDate);
+
+        hotelRouter.push(`/hotelsearch?destinationLocation=${destinationLocation}&startDate=${formattedStartDate}&endDate=${formattedEndDate}&minStarRating=${minRating}&maxStarRating=${maxRating}&name=${name}&startPrice=${minPrice}&endPrice=${maxPrice}`);
     }
+
+    const formatLocalDate = (date: Date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      };
 
 
     return (
