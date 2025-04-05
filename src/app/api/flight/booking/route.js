@@ -173,28 +173,49 @@ export async function PATCH(request) {
     }
     
     try {
+        // Check if the booking exists in the database
         const existingBooking = await prisma.FlightBooking.findFirst({
             where: {
                 userId: user.userId,
-                bookingReference: bookingReference
-            }
+                bookingReference: bookingReference,
+            },
         });
 
         if (!existingBooking) {
             return NextResponse.json({ error: 'Booking does not exist' }, { status: 404 });
         }
 
-        // Update booking status to canceled
+        // Cancel the booking using the AFS API
+        const afsResponse = await fetch(`${AFS_API_URL}/api/bookings/cancel`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': API_KEY,
+            },
+            body: JSON.stringify({
+                lastName: user.lastName,
+                bookingReference: bookingReference,
+            }),
+        });
+
+        if (!afsResponse.ok) {
+            const afsError = await afsResponse.json();
+            console.error(`Failed to cancel booking via AFS API: ${afsError.message}`);
+            return NextResponse.json({ error: 'Failed to cancel booking via AFS API' }, { status: afsResponse.status });
+        }
+
+        // Update the booking status in the database
         const booking = await prisma.FlightBooking.update({
             where: { bookingReference },
             data: { bookingCanceled: true },
         });
-    
+
+        // Send a notification to the user
         await sendNotification(user.userId, `Your flight booking with reference ${bookingReference} has been canceled.`, 'USER');
-    
+
         return NextResponse.json({ data: booking }, { status: 200 });
     } catch (error) {
-        console.log('Error canceling booking:', error.stack);
+        console.error('Error canceling booking:', error.stack);
         return NextResponse.json({ error: 'Failed to cancel booking' }, { status: 500 });
     }
 }
