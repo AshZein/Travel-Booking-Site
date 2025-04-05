@@ -28,9 +28,11 @@ const Page: React.FC = () =>{
     const [endDate, setEndDate] = useState('');
 
     const fetchRooms = async (hotelId: number) => {
-        const response = await fetch(`/api/hotel/room/info?hotelId=${hotelId}&checkin=${startDate}&checkout=${endDate}`);
+        if (startDate && endDate){
+        const response = await fetch(`/api/hotel/room/info?hotelId=${hotelId}&checkIn=${startDate}&checkOut=${endDate}`);
         const data = await response.json();
         setRoom(Object.values(data) || []);
+        }
     };
 
     const fetchHotel = async (hotelId: number) => {
@@ -45,19 +47,29 @@ const Page: React.FC = () =>{
         setHotelImg(data.image || '');
     }
 
-    useEffect (() => {
+    useEffect(() => {
         const searchParams = new URLSearchParams(window.location.search);
         const hotelId = Number(searchParams.get('hotelId'));
-        setStartDate(searchParams.get('checkin') || '');
-        setEndDate(searchParams.get('checkout') || '');
-
+        const checkin = searchParams.get('checkIn') || '';
+        const checkout = searchParams.get('checkOut') || '';
+        
+        setStartDate(checkin);
+        setEndDate(checkout);
+      
         if (hotelId) {
-            fetchHotel(hotelId);
-            fetchRooms(hotelId);
-            fetchHotelImg(hotelId);
+          fetchHotel(hotelId);
+          fetchHotelImg(hotelId);
+          // Use the directly obtained dates
+          fetchRooms(hotelId);
         }
-    }
-    , []);
+      }, []);
+      
+      // Then add another useEffect to fetch rooms when dates change
+      useEffect(() => {
+        if (hotel.hotelId && startDate && endDate) {
+          fetchRooms(hotel.hotelId);
+        }
+      }, [startDate, endDate, hotel.hotelId]);
 
     return (
         <div>
@@ -67,19 +79,21 @@ const Page: React.FC = () =>{
                 <HotelInfoCard hotel={hotel} hotelImg={hotelImg}/>
                 <h1 className="ml-4 text-lg font-bold">Rooms</h1>
                 {room.length > 0 ? (
-                    room.map((roomItem) => (
-                        <RoomCard
-                            key={roomItem.roomId // Use a unique identifier as the key
-                            }
-                            room={roomItem}
-                            hotel={hotel}
-                            checkinDate={startDate}
-                            checkoutDate={endDate}
-                        />
-                    ))
-                ) : (
-                    <p>No rooms available for the selected dates.</p>
-                )}
+  room
+    .filter(roomItem => roomItem.roomAvailability !== 0)
+    .map(roomItem => (
+      <RoomCard
+        key={roomItem.roomId}
+        room={roomItem}
+        hotel={hotel}
+        checkinDate={startDate}
+        checkoutDate={endDate}
+        roomAvailability={roomItem.roomAvailability.toString()}
+      />
+    ))
+) : (
+  <p>No rooms available for the selected dates.</p>
+)}
             </main>
             <Footer />
         </div>

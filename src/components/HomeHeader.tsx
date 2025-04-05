@@ -22,16 +22,15 @@ const HomeHeader: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const [darkMode, setDarkMode] = useState(() => {
-    // Check localStorage first
     if (typeof window !== 'undefined') {
       const savedMode = localStorage.getItem('darkMode');
       if (savedMode !== null) {
         return savedMode === 'true';
       }
-      // Fallback to system preference if no localStorage value
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      // Default to true (dark mode) if no preference is saved
+      return true;
     }
-    return false;
+    return true;
   });
   
   /**
