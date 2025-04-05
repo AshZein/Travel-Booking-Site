@@ -40,6 +40,16 @@ const hotelImgPaths = [
 ];
 
 export async function fillHotel() {
+    // Ensure the user exists
+    const user = await prisma.user.findUnique({
+        where: { userId: 1 },
+    });
+
+    if (!user) {
+        console.error("User with userId: 1 does not exist. Please create the user first.");
+        return;
+    }
+
     // Iterate over the keys of the hotelsData object (e.g., hotel1, hotel2, ...)
     for (let hotelKey of Object.keys(hotelsData)) {
         const hotel = hotelsData[hotelKey]; // Access the hotel object
@@ -59,6 +69,11 @@ export async function fillHotel() {
             data: hotelData,
         });
 
+        if (!createdHotel) {
+            console.error("Failed to create hotel:", hotelData);
+            continue;
+        }
+
         // Create manager entry
         const managerData = { userId: 1, hotelId: createdHotel.hotelId };
 
@@ -66,7 +81,7 @@ export async function fillHotel() {
             data: managerData,
         });
 
-        // add hotel image
+        // Add hotel image
         const hotelImageData = {
             hotelId: createdHotel.hotelId,
             image: hotelImgPaths[Math.floor(Math.random() * hotelImgPaths.length)],
@@ -89,8 +104,7 @@ export async function fillHotel() {
                 data: roomData,
             });
 
-            
-            // add room images
+            // Add room images
             for (let image of roomImgPaths[room.roomType]) {
                 const imageData = {
                     roomId: createdRoom.roomId,
